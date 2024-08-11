@@ -571,10 +571,6 @@ void InitScoreboard() {
 }
 
 
-// refresh data on scoreboard
-void RefreshScoreboard() { 
-}
-
 ///////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR OBJECT MANAGEMENT
 ///////////////////////////////////////////////////////////////////////////////////
@@ -686,7 +682,6 @@ void CheckObject(u8 index) {
 				}	
 			}
 			RefreshHighScore(player);
-			RefreshScoreboard();
 			nObj[index] = -1; // object not assigned
 		}
 	}
@@ -847,7 +842,6 @@ void CheckActiveTile(u8 player) {
 			}
 
 			DeleteObjectInStore();
-			RefreshScoreboard();
 		}
 	}
 
@@ -880,7 +874,6 @@ void CheckActiveTile(u8 player) {
 			}
 			DeleteObjectInStore();
 		}
-		RefreshScoreboard();
 	}
 
 }
@@ -1998,7 +1991,6 @@ void ResetData() {
 	
 	SetEnemies();
 	PrintMap();
-	RefreshScoreboard();
 	DeleteObjectInStore();
 
 	// prints level information if it is the first map load
@@ -2057,7 +2049,6 @@ void GameOver(u8 player) {
 	else { // prepare a new game
 		// puts 0 life on the scoreboard of the losing player
 		spr[player].lives_speed = 0;
-		RefreshScoreboard();
 		// print a GAME OVER in the center of the play area
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
