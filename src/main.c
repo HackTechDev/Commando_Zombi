@@ -1817,12 +1817,6 @@ void PrintStartMenu() {
 	cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
 
 	PrintText("1@@1@PLAYER@GAME", 10, 50, 0);
-	PrintText("2@@2@PLAYER@GAME", 10, 60, 0);
-    PrintText("3@@REDEFINE@CONTROLS", 10, 70, 0);
-	if (turboMode)
-		PrintText("4@@TURBO@MODE:@ON", 10, 80, 0);
-	else
-		PrintText("4@@TURBO@MODE:@OFF", 10, 80, 0);
 
 	// Sven y Erik
 	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
@@ -1830,14 +1824,7 @@ void PrintStartMenu() {
 	cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
 		cpct_getScreenPtr(CPCT_VMEM_START, 68, 187), SPR_W, SPR_H, g_maskTable);
 
-    PrintText("CODE@=@GFX", 25, 110, 0);
-    PrintText("SALVAKANTERO", 22, 120, 0);
-    PrintText("MUSIC@=@FX", 25, 135, 0);
-    PrintText("MCKLAIN", 30, 145, 0);
-    PrintText("BETA@TESTING", 22, 160, 0);
-    PrintText("BLACKMORES", 25, 170, 0);
-
-    PrintText("PLAY@ON@RETRO@2020", 13, 190, 0);
+    PrintText("NEKROFAGE", 13, 190, 0);
 }
 
 
