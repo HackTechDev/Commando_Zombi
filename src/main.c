@@ -1519,17 +1519,6 @@ void InitGame() {
 	score[0] = 0; // score
 	ResetObjData(0);
 	
-	// initial player 2 data
-	spr[1].num = 1; // sprite number
-	spr[1].ident = SORCERER2; // identity
-	spr[1].lives_speed = 3; // lives
-	score[1] = 0; // score
-	ResetObjData(1);
-
-	// initial wizard data
-	spr[6].num = 6; // sprite number
-	spr[6].ident = WIZARD; // identity
-
 	InitScoreboard();		
 	ResetData();
 }
