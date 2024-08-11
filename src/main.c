@@ -96,10 +96,6 @@ u8 lastNMap; // has been a level change?
 u8 *lName; // text to display on screen for each level
 
 // other global variables
-u16 score[2];		// score of both players
-u16 highScore;		// maximum score of the entire session
-u8 potScore[2];		// current potion score for players 1 and 2
-u8 coinScore[2];	// value of the coins collected by players 1 and 2
 u8 playerKey[5];	// player's 5 item key
 u8 storeX;			// X position of the store on the current map (to print objects on it)
 u8 storeY;			// Y position of the store on the current map
@@ -543,13 +539,7 @@ void InitScoreboard() {
 // resets the values ​​related to collecting objects
 void ResetObjData(u8 player) __z88dk_fastcall {
 	spr[player].objNum_mov = 0; // number of objects
-	potScore[player] = 0; // potion value
-	coinScore[player] = 0; // money
-	// clear the scoreboard
-	if (player == 0)
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 7, 16), cpct_px2byteM0(BG_COLOR, BG_COLOR), 20, 8);
-	else
-		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 46, 16), cpct_px2byteM0(BG_COLOR, BG_COLOR), 20, 8);
 } 
 
 
@@ -584,26 +574,6 @@ void PrintCoin(u8 nFrame, u8 index) {
 }
 
 
-// delete the object inside the store
-void DeleteObjectInStore() {
-	cpct_etm_drawTileBox2x4(storeX / 2, storeY / 4,
-							2 + (storeX & 1), 2 + (storeY & 3 ? 1 : 0),	MAP_W, 
-							cpctm_screenPtr(CPCT_VMEM_START, 0, ORIG_MAP_Y), UNPACKED_MAP_INI);	
-}
-
-
-// print the object to buy inside the store
-void PrintObjectInStore() {
-	if (coinScore[0] == 0) return;
-
-	if (coinScore[0] < 13)
-		nPObj = coinScore[0] + 3; // assign the corresponding object to the available money
-	else // left over money
-		nPObj = 15; // assign the most expensive object
-						
-	PrintObject(nPObj, storeX, storeY + ORIG_MAP_Y);
-}
-
 
 // check if any player has passed over the object
 // increase the score and update the scoreboard.
@@ -617,33 +587,6 @@ void CheckObject(u8 index) {
 		if (player >= 0)	{									
 			DeleteObject(index);
 
-			switch (nObj[index])
-			{
-				case 0:	{	// coin
-					coinScore[player]++;
-					score[player] += 5;
-					DeleteObjectInStore();
-					PrintObjectInStore();
-					break;
-				}
-				case 1: {	// coin x5
-					coinScore[player] += 5;
-					score[player] += 20;
-					DeleteObjectInStore();
-					PrintObjectInStore();
-					break;
-				}
-				case 2: {	// extra life
-					if (spr[player].lives_speed < 9)
-						spr[player].lives_speed++;
-					score[player] += 30;
-					break;
-				}	
-				case 3: {	// power up speed*2
-					spr[player].power_maxV = 255;
-					score[player] += 25;
-				}	
-			}
 			nObj[index] = -1; // object not assigned
 		}
 	}
@@ -762,27 +705,9 @@ void CheckActiveTile(u8 player) {
 	u8 currentTile = *GetTileNum(spr[player].x+3, spr[player].y+8);	
 	u8 i = 0;
 	
-	// collision with the store?
-	if (currentTile >= TILESET_STORE && currentTile <= TILESET_STORE + 5) {
-		// money to buy? Is there room to carry more objects?
-		while (coinScore[player] > 0 && spr[player].objNum_mov < 5) {
-			if (coinScore[player] < 13) // no money left
-				nPObj = coinScore[player] + 3; // assign the corresponding object to the available money
-			else // excess of money
-				nPObj = 15; // assign the most expensive object
-			spr[player].objNum_mov++; // increases the number of objects the player carries
-			potScore[player] += coinScore[player]; // increase the potion score
-			score[player] += coinScore[player] * 2; // increase the player score
-			coinScore[player] -= nPObj - 3; // decrease the coin score
-
-				playerKey[spr[player].objNum_mov-1] = nPObj; // add object to key
-
-			DeleteObjectInStore();
-		}
-	}
 
 	// collision with the well. Do we have objects or coins?
-	else if (currentTile == TILESET_WELL && (potScore[player] > 0 || coinScore[player] > 0)) {	
+	if (currentTile == TILESET_WELL ) {	
 		// it sounds like we dropped something
 		// clear P1 or P2 scoreboard
 		if (player == 0)
@@ -792,11 +717,8 @@ void CheckActiveTile(u8 player) {
 			cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 46, 16), 
 							  cpct_px2byteM0(BG_COLOR, BG_COLOR), 20, 8);
 				
-		coinScore[player] = 0; 		// throwing money
 		spr[player].objNum_mov = 0;	// throwing objects
-		potScore[player] = 0;		// potion value to zero
 		
-			DeleteObjectInStore();
 	}
 
 }
@@ -1428,28 +1350,8 @@ void ResetData() {
 	spr[0].power_maxV = 0;
 	ctInactivity[0] = 0;
 
-	spr[1].dir = D_left; 
-	spr[1].status = S_stopped;	
-	spr[1].print_minV = TRUE; // the first time must be printed on screen
-	spr[1].power_maxV = 0;
-	ctInactivity[1] = 0;
-	
 	SetEnemies();
 	PrintMap();
-	DeleteObjectInStore();
-
-	// prints level information if it is the first map load
-	if (nMap != lastNMap) {
-			PrintKey();
-			// reset player1's key only if it's a new map
-			playerKey[0] = 0;
-			playerKey[1] = 0;
-			playerKey[2] = 0;
-			playerKey[3] = 0;
-			playerKey[4] = 0;
-		PrintMap();	
-		lastNMap = nMap;
-	}
 }
 
 
@@ -1463,7 +1365,6 @@ void InitGame() {
 	spr[0].num = 0; // sprite number
 	spr[0].ident = SORCERER1; // identity
 	spr[0].lives_speed = 3; // lives
-	score[0] = 0; // score
 	ResetObjData(0);
 	
 	InitScoreboard();		
@@ -1518,7 +1419,6 @@ void main(void) {
 		// every 8 passes of the loop ...
 		if (ctMainLoop % 8 == 0) {
 			ReprintObject(); // reprint the active object
-			PrintObjectInStore(); // reprint the object into the store
 			CheckObject(0); // verify collection of object 1
 			CheckObject(1); // verify collection of object 2
 			if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
