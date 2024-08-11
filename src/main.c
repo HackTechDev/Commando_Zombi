@@ -338,7 +338,6 @@ void GameOver(u8 player);
 void PrintObject(u8 nObj, u8 objX, u8 objY);
 u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX);
 void PrintSprite(TSpr *pSpr) __z88dk_fastcall;
-void MakeDuel();
 void ResetData();
 
 
@@ -552,14 +551,6 @@ cpct_keyID RedefineKey(u8 *info) {
 }
 
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 // SCOREBOARD FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
@@ -583,15 +574,6 @@ void InitScoreboard() {
 // refresh data on scoreboard
 void RefreshScoreboard() { 
 }
-
-
-
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR OBJECT MANAGEMENT
@@ -901,11 +883,6 @@ void CheckActiveTile(u8 player) {
 		RefreshScoreboard();
 	}
 
-	// collision with the exit door and we have 5 objects?
-	else if ((currentTile == TILESET_DOOR || currentTile == 30) && 
-			spr[0].objNum_mov == 5 && CompareKeys()) {
-		MakeDuel();	
-	}
 }
 
 
@@ -1210,172 +1187,6 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 	else if (ctMainLoop % 5 == 0)
 		PrintSprite(pSpr);
 }	
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////
-// DUEL SEQUENCE BETWEEN BOTH PLAYERS
-///////////////////////////////////////////////////////////////////////////////////
-
-// Eliminate the player with an explosion inside the duel sequence
-void ExplodePlayerInDuel(u8 player) __z88dk_fastcall {
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[player].x, 122), cpct_px2byteM0(4, 4), SPR_W, SPR_H);
-	ExplodeSprite(player, FALSE);
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[player].x, 122), cpct_px2byteM0(4, 4), SPR_W, SPR_H);
-}
-
-
-// duel window animations
-void MakeDuel() {
-	u8 loser;
-	// print a frame with blue background
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 18, 80), cpct_px2byteM0(4, 4), 45, 60);
-	PrintFrame(18,80,60,134);
-	// print player 1
-	spr[0].x = 23; spr[0].y = 122;
-	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06,
-		cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
-	// print player 2 if there are two players
-	spr[1].x = 53; spr[1].y = 122;
-	if (TwoPlayers) {
-		cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
-			cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-	}
-	// print a door if there are not two players
-	else {
-		cpct_drawSpriteMaskedAlignedTable(g_door_0, 
-			cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-	}
-	Pause(400);
-
-	// print both players shooting
-	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_08, 
-		cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
-	spr[0].x += OBJ_W;
-	if (TwoPlayers) {
-		cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_08, 
-			cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-		spr[1].x -= OBJ_W;
-	}
-
-	// print/delete both magic shots on the move
-	while (spr[0].x < 50)
-	{						
-		// print
-		spr[0].x ++;
-		cpct_drawSpriteMaskedAlignedTable(g_magic_0, 
-			cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, 125), SHT_W, SHT_H, g_maskTable);
-		if (TwoPlayers) {
-			spr[1].x --;
-			cpct_drawSpriteMaskedAlignedTable(g_magic_1, 
-				cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, 125), SHT_W, SHT_H, g_maskTable);
-		}
-		Pause(12);
-		// delete
-		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[0].x, 125), 
-			cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
-		if (TwoPlayers)
-			cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[1].x, 125), 
-				cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
-	}
-	
-	// player 1 recovers the resting posture
-	spr[0].x = 23;
-	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
-		cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
-	spr[1].x = 53;
-	// player 2 recovers the posture of rest if there are two players
-	if (TwoPlayers) {
-		cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
-			cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-	}
-
-	// player 1 wins?
-	if (potScore[0] > potScore[1]) {
-		loser = 1;
-		ExplodePlayerInDuel(loser);
-		if (TwoPlayers) {
-			// print player 2 looking bad
-			cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_09, 
-				cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-			PrintText("PLAYER1", 30, 90, 0);
-			// the player who wins a duel wins a life
-			// that way they may reach the last screen
-			if (spr[0].lives_speed < 9) spr[0].lives_speed++;
-		}
-		else {
-			// print the door open
-			cpct_drawSpriteMaskedAlignedTable(g_door_1, 
-				cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-			PrintText("LEVEL", 33, 90, 0);
-		}
-	}
-	// player 2 wins?
-	else if (potScore[0] < potScore[1]) {
-		loser = 0;
-		ExplodePlayerInDuel(loser);
-		// print player 1 looking bad
-		cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_09, 
-			cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
-		PrintText("PLAYER2", 30, 90, 0);
-		// the player who wins a duel wins a life
-		// that way they may reach the last screen
-		if (spr[1].lives_speed < 9) spr[1].lives_speed++;
-	}
-	// tie
-	else {		
-		PrintText("NOBODY", 32, 90, 0);
-		loser = 2;
-	}
-	if (TwoPlayers)
-		PrintText("WINS>", 33, 101, 0);
-	else
-		PrintText("COMPLETED", 27, 101, 0);	
-	
-	Pause(1000);
-
-	if (loser < 2) // if there is no tie
-		nMap++; // go to the next screen on the map
-
-	// reset data related to object collection
-	ResetObjData(0);
-	ResetObjData(1);
-	InitScoreboard();
-
-	if (loser < 2 && TwoPlayers)
-		GameOver(loser); // the player who loses a duel loses a life
-	else
-		ResetData();
-}
-
-
-// check conditions to create a duel
-void CheckDuel() {
-	if ((spr[0].objNum_mov == 5 || spr[1].objNum_mov == 5) && 
-		SpriteCollision(spr[0].x, spr[0].y, &spr[1], 0)) {				
-		// clean the screen, deleting players, enemies and objects
-		for(u8 i=0;i<6;i++)
-			DeleteSprite(&spr[i]);
-		DeleteObject(0);
-		DeleteObject(1);
-
-		MakeDuel();
-	}
-}
-
-
-
-
-
-
-
 
 
 
@@ -2298,11 +2109,6 @@ void main(void) {
 			MakeWizardAnim(0); // activates the wizard's shot if the player 1 is inactive		
 			if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
 
-			if (TwoPlayers) {
-				CheckDuel(); // check that both players collide and have potions
-				MakeWizardAnim(1); // activates the wizard's shot if the player 2 is inactive		
-				if (spr[1].print_minV) CheckActiveTile(1); // check entry into store, door or well of player 2
-			}
 			WizardAnim(); // print the wizard if active
 		}		
 		
