@@ -112,7 +112,6 @@ u8 lastNMap; // has been a level change?
 u8 *lName; // text to display on screen for each level
 
 // other global variables
-u8 TwoPlayers; 		// if "1" or "TRUE", two players are present
 u16 score[2];		// score of both players
 u16 highScore;		// maximum score of the entire session
 u8 potScore[2];		// current potion score for players 1 and 2
@@ -611,7 +610,6 @@ void PrintCoin(u8 nFrame, u8 index) {
 
 // delete the object inside the store
 void DeleteObjectInStore() {
-	if (TwoPlayers) return;
 	cpct_etm_drawTileBox2x4(storeX / 2, storeY / 4,
 							2 + (storeX & 1), 2 + (storeY & 3 ? 1 : 0),	MAP_W, 
 							cpctm_screenPtr(CPCT_VMEM_START, 0, ORIG_MAP_Y), UNPACKED_MAP_INI);	
@@ -620,7 +618,6 @@ void DeleteObjectInStore() {
 
 // print the object to buy inside the store
 void PrintObjectInStore() {
-	if (TwoPlayers) return;
 	if (coinScore[0] == 0) return;
 
 	if (coinScore[0] < 13)
@@ -638,8 +635,8 @@ void CheckObject(u8 index) {
 	i8 player = -1;
 
 	if (nObj[index] != -1)	{
-		if (SpriteCollision(objX[index], objY[index], &spr[0], 0)) player = 0; // player 1
-		else if (TwoPlayers && SpriteCollision(objX[index], objY[index], &spr[1], 0)) player = 1; // player 2
+		if (SpriteCollision(objX[index], objY[index], &spr[0], 0)) 
+      player = 0; // player 1
 		// collision with object
 		if (player >= 0)	{									
 			DeleteObject(index);
@@ -827,9 +824,7 @@ void CheckActiveTile(u8 player) {
 			RefreshHighScore(player);
 			coinScore[player] -= nPObj - 3; // decrease the coin score
 
-			if (!TwoPlayers) {
 				playerKey[spr[player].objNum_mov-1] = nPObj; // add object to key
-			}
 
 			DeleteObjectInStore();
 		}
@@ -850,7 +845,6 @@ void CheckActiveTile(u8 player) {
 		spr[player].objNum_mov = 0;	// throwing objects
 		potScore[player] = 0;		// potion value to zero
 		
-		if (!TwoPlayers) { // search for valid objects to retrieve them (only 1 player game)			
 			while (i<5) {
 				if (playerKey[i] == doorKey[i] ) {
 					potScore[0] += playerKey[i] - 3; // increases potion value
@@ -863,7 +857,6 @@ void CheckActiveTile(u8 player) {
 						playerKey[i++] = 0;					
 			}
 			DeleteObjectInStore();
-		}
 	}
 
 }
@@ -1330,10 +1323,6 @@ void MoveEnemy(TSpr *pSpr) {
 		case M_chaser:
 			if (ctMainLoop % pSpr->lives_speed == 0) {
 				z = 0;
-				// select the closest player				
-				if (TwoPlayers)
-					z = Abs(pSpr->x - spr[1].x)*2 + Abs(pSpr->y - spr[1].y) <
-						Abs(pSpr->x - spr[0].x)*2 + Abs(pSpr->y - spr[0].y);
 				// if it's to the left of the target sprite it goes to the right
 				if (pSpr->x < spr[z].x) {
 						pSpr->x++;
@@ -1681,11 +1670,6 @@ void SetEnemies() {
 			break;
 		}		
 	}
-	// player 2's starting position is always relative to player 1's
-	if (TwoPlayers) {
-		spr[1].x = spr[1].px = spr[0].x + 6; 
-		spr[1].y = spr[1].py = spr[0].y;
-	}
 }
 
 
@@ -1717,8 +1701,6 @@ void EnemyLoop(TSpr *pSpr) __z88dk_fastcall {
 	PrintSprite(pSpr);
 	// check if any collision has occurred
 	CheckEnemyCollision(0, pSpr);
-	if (TwoPlayers)
-		CheckEnemyCollision(1, pSpr);
 }
 
 
@@ -1803,40 +1785,7 @@ void StartMenu() {
 		// get keystrokes from menu options
 		cpct_scanKeyboard_f();
 		if(cpct_isKeyPressed(Key_1)) { // 1 player
-			TwoPlayers = FALSE;	
         	break;
-    	}
-   		else if(cpct_isKeyPressed(Key_2)) {	// 2 players
-			TwoPlayers = TRUE;
-        	break;
-    	}
-   		else if(cpct_isKeyPressed(Key_3)){ // redefine keys
-			Wait4Key(Key_3);
-			randSeed = 0; page = 1;
-			PrintStartMenu();
-			// hide credits
-			cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 22, 110), cpct_px2byteM0(1, 1), 45, 70);
-
-			// player 1
-			ctlUp[0] = 		RedefineKey("@P1@UP");
-			ctlDown[0] = 	RedefineKey("P1@DOWN");
-			ctlLeft[0] = 	RedefineKey("P1@LEFT");
-			ctlRight[0] = 	RedefineKey("P1@RIGHT");
-			// player 2
-			ctlUp[1] = 		RedefineKey("@P2@UP@@");
-			ctlDown[1] = 	RedefineKey("P2@DOWN");
-			ctlLeft[1] = 	RedefineKey("P2@LEFT");
-			ctlRight[1] = 	RedefineKey("P2@RIGHT");	
-			// common
-			ctlAbort = 		RedefineKey("@ABORT@@");
-			ctlMusic = 		RedefineKey("@MUSIC");
-			ctlPause =		RedefineKey("@PAUSE");		
-			PrintStartMenu();
-    	}
-		else if(cpct_isKeyPressed(Key_4)) {	// turbo mode
-			turboMode = !turboMode;
-			randSeed = 0; page = 1;
-			PrintStartMenu();
     	}
 		Pause(3);
 	}	
@@ -1865,11 +1814,6 @@ void InitValues() {
 	ctlDown[0] = Key_S;
 	ctlLeft[0] = Key_Q;
 	ctlRight[0] = Key_D;
-	// player 2
-	ctlUp[1] = Key_F5;
-	ctlDown[1] = Key_F2;
-	ctlLeft[1] = Key_F1;
-	ctlRight[1] = Key_F3;
 	// common
 	ctlAbort = Key_X;
 	ctlMusic = Key_M;
@@ -1906,7 +1850,6 @@ void ResetData() {
 
 	// prints level information if it is the first map load
 	if (nMap != lastNMap) {
-		if (!TwoPlayers) {
 			PrintKey();
 			// reset player1's key only if it's a new map
 			playerKey[0] = 0;
@@ -1914,7 +1857,6 @@ void ResetData() {
 			playerKey[2] = 0;
 			playerKey[3] = 0;
 			playerKey[4] = 0;
-		}
 		PrintMap();	
 		lastNMap = nMap;
 	}
@@ -1964,15 +1906,7 @@ void GameOver(u8 player) {
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
 		PrintFrame(6,80,71,134);
-		if (TwoPlayers) {
-			PrintText("G@A@M@E@@O@V@E@R", 16, 91, 0);
-			if (player == 0) PrintText("PLAYER@2@WINS>", 19, 106, 0);
-			else if (player == 1) PrintText("PLAYER@1@WINS>", 19, 106, 0);
-			PrintText("HIGH@SCORE:", 16, 122, 0);
-			PrintNumber(highScore, 4, 52, 122, 0);			
-		}
-		else
-			PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
+	PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
 		Pause(500);	
 		// wait for a key press
 		while (!cpct_isAnyKeyPressed());
@@ -2026,10 +1960,6 @@ void main(void) {
 			}
 			// turn 2
 			case 1:	{			
-				if (TwoPlayers) {
-					PlayerLoop(&spr[1]); // player 2
-					if (!turboMode) cpct_waitVSYNC(); // additional wait for vertical retrace (avoid flickering)
-				}
 				EnemyLoop(&spr[3]);	 // enemy sprite 3 is always processed (fast)
 				break;
 			}			
