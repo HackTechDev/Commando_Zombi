@@ -1669,10 +1669,8 @@ void main(void) {
 			PrintObjectInStore(); // reprint the object into the store
 			CheckObject(0); // verify collection of object 1
 			CheckObject(1); // verify collection of object 2
-			MakeWizardAnim(0); // activates the wizard's shot if the player 1 is inactive		
 			if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
 
-			WizardAnim(); // print the wizard if active
 		}		
 		
 		if (!turboMode) cpct_waitVSYNC(); // wait for vertical retrace	
