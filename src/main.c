@@ -2355,9 +2355,9 @@ void StartMenu() {
 void InitValues() {	
 	// default key mapping
 	// player 1
-	ctlUp[0] = Key_W;
+	ctlUp[0] = Key_Z;
 	ctlDown[0] = Key_S;
-	ctlLeft[0] = Key_A;
+	ctlLeft[0] = Key_Q;
 	ctlRight[0] = Key_D;
 	// player 2
 	ctlUp[1] = Key_F5;
