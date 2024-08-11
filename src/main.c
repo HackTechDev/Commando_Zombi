@@ -28,15 +28,9 @@
 #include "gfx/magic.h"			// magic shots; red, blue, green and yellow (8x8 px)
 
 #include "sprites/sorcerer1.h"	// 10 frames for SVEN, the 1st player (10x12 px)
-#include "sprites/sorcerer2.h"	// 10 frames for ERIK, the 2nd player (10x12 px)
 #include "sprites/sentinel.h"	// 8 frames for the sentinel sprite (10x12 px)
-#include "sprites/knight.h"		// 8 frames for the knight sprite (10x12 px)
-#include "sprites/ghost.h"		// 8 frames for the ghost sprite (10x12 px)
-#include "sprites/bat.h"		// 2 frames for the bat sprite (10x12 px)
-#include "sprites/witch.h"		// 4 frames for the witch sprite (10x12 px)
 #include "sprites/explosion.h"	// 2 frames for the explosion effect (10x12 px)
 #include "sprites/dust.h"		// 2 frames for the dust effect (8x8 px)
-#include "sprites/coin.h"		// 3 frames for the coin animation (6x8 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
 // compressed game map (40x42 tiles / 160x168 pixels each)
@@ -208,23 +202,6 @@ TFrm* const animDown_Sorcerer1[2] = {&frmSorcerer1[2], &frmSorcerer1[3]};
 TFrm* const animLeft_Sorcerer1[2] = {&frmSorcerer1[4], &frmSorcerer1[5]};
 TFrm* const animRight_Sorcerer1[2] = {&frmSorcerer1[6], &frmSorcerer1[7]};
 
-// 8 frames of Sorcerer2 in motion
-const TFrm frmSorcerer2[8] = {
-	{g_sorcerer2_00}, // up step 1
-	{g_sorcerer2_01}, // up step 2
-	{g_sorcerer2_02}, // down step 1
-	{g_sorcerer2_03}, // down step 2
-	{g_sorcerer2_04}, // left step 1
-	{g_sorcerer2_05}, // left step 2
-	{g_sorcerer2_06}, // right step 1
-	{g_sorcerer2_07}  // right step 2	
-};
-// Sorcerer2 animation sequences
-TFrm* const animUp_Sorcerer2[2] = {&frmSorcerer2[0], &frmSorcerer2[1]};
-TFrm* const animDown_Sorcerer2[2] = {&frmSorcerer2[2], &frmSorcerer2[3]};
-TFrm* const animLeft_Sorcerer2[2] = {&frmSorcerer2[4], &frmSorcerer2[5]};
-TFrm* const animRight_Sorcerer2[2] = {&frmSorcerer2[6], &frmSorcerer2[7]};
-
 // 8 frames of Sentinel in motion
 const TFrm frmSentinel[8] = {
 	{g_sentinel_0}, // up step 1
@@ -242,55 +219,6 @@ TFrm* const animDown_Sentinel[2] = {&frmSentinel[2], &frmSentinel[3]};
 TFrm* const animLeft_Sentinel[2] = {&frmSentinel[4], &frmSentinel[5]};
 TFrm* const animRight_Sentinel[2] = {&frmSentinel[6], &frmSentinel[7]};
 
-// 8 frames of Knight in motion
-const TFrm frmKnight[8] = {
-	{g_knight_0},	// up step 1 
-	{g_knight_1}, 	// up step 2
-	{g_knight_2},	// down step 1 
-	{g_knight_3}, 	// down step 2
-	{g_knight_4}, 	// left step 1
-	{g_knight_5},	// left step 2
-	{g_knight_6},	// right step 1
-	{g_knight_7}	// right step 2
-};
-// Knight animation sequences
-TFrm* const animUp_Knight[2] = {&frmKnight[0], &frmKnight[1]};
-TFrm* const animDown_Knight[2] = {&frmKnight[2], &frmKnight[3]};
-TFrm* const animLeft_Knight[2] = {&frmKnight[4], &frmKnight[5]};
-TFrm* const animRight_Knight[2] = {&frmKnight[6], &frmKnight[7]};
-
-// 8 frames of Ghost in motion
-const TFrm frmGhost[8] = {
-	{g_ghost_0},	// up step 1 
-	{g_ghost_1}, 	// up step 2
-	{g_ghost_2},	// down step 1 
-	{g_ghost_3}, 	// down step 2
-	{g_ghost_4}, 	// left step 1
-	{g_ghost_5},	// left step 2
-	{g_ghost_6},	// right step 1
-	{g_ghost_7}		// right step 2
-};
-// Ghost animation sequences
-TFrm* const animUp_Ghost[2] = {&frmGhost[0], &frmGhost[1]};
-TFrm* const animDown_Ghost[2] = {&frmGhost[2], &frmGhost[3]};
-TFrm* const animLeft_Ghost[2] = {&frmGhost[4], &frmGhost[5]};
-TFrm* const animRight_Ghost[2] = {&frmGhost[6], &frmGhost[7]};
-
-// 2 frames of Bat in motion
-const TFrm frmBat[2] = {{g_bat_0}, {g_bat_1}};
-// Bat animation sequences
-TFrm* const anim_Bat[2] = {&frmBat[0], &frmBat[1]};
-
-// 4 frames of Witch in motion
-const TFrm frmWitch[4] = {
-	{g_witch_0}, 	// left step 1
-	{g_witch_1},	// left step 2
-	{g_witch_2},	// right step 1
-	{g_witch_3}		// right step 2
-};
-// Witch animation sequences
-TFrm* const animLeft_Witch[2] = {&frmWitch[0], &frmWitch[1]};
-TFrm* const animRight_Witch[2] = {&frmWitch[2], &frmWitch[3]};
 
 // Transparency mask table
 cpctm_createTransparentMaskTable(g_maskTable, 0x100, M0, 0);
@@ -525,10 +453,7 @@ cpct_keyID RedefineKey(u8 *info) {
 
 // print the scoreboard
 void InitScoreboard() {
-	nPObj = 0;
 	PrintFrame(0,0,77,24);	
-	// player 1
-	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, cpct_getScreenPtr(CPCT_VMEM_START,  3, 4), SPR_W, SPR_H, g_maskTable);
 }
 
 
@@ -563,14 +488,6 @@ void PrintDust(u8 nFrame, u8 index) {
 	cpct_drawSpriteMaskedAlignedTable(g_dust[nFrame], 
 									  cpct_getScreenPtr(CPCT_VMEM_START, objX[index], objY[index]), 
 									  OBJ_W, OBJ_H, g_maskTable);
-}
-
-
-// a frame of the coin rotating is printed in the XY coordinates of the object
-void PrintCoin(u8 nFrame, u8 index) {
-	cpct_drawSpriteMaskedAlignedTable(g_coin[nFrame], 
-									  cpct_getScreenPtr(CPCT_VMEM_START, objX[index], objY[index]), 
-									  3, OBJ_H, g_maskTable);
 }
 
 
@@ -627,13 +544,13 @@ void ReprintObject() {
 			// coin animation
 			case 24:
 			case 56:
-			case 88: { if (nObj[0] == 0) {DeleteObject(0); PrintCoin(0,0); break; }}
+			case 88: 
 			case 32:
 			case 64:
-			case 96: { if (nObj[0] == 0) {DeleteObject(0); PrintCoin(1,0); break; }}
+			case 96: 
 			case 40:
 			case 72:
-			case 104: { if (nObj[0] == 0) {DeleteObject(0); PrintCoin(2,0); break; }}
+			case 104: 
 
 			// delete the object
 			case 328:	{ DeleteObject(0); }
@@ -656,13 +573,13 @@ void ReprintObject() {
 			// coin animation
 			case 200:
 			case 232:
-			case 264: { if (nObj[1] == 0) {DeleteObject(1); PrintCoin(0,1); break; }}
+			case 264: 
 			case 208:
 			case 240:
-			case 272: { if (nObj[1] == 0) {DeleteObject(1); PrintCoin(1,1); break; }}
+			case 272: 
 			case 216:
 			case 248:
-			case 280: { if (nObj[1] == 0) {DeleteObject(1); PrintCoin(2,1); break; }}
+			case 280: 
 
 			// delete the object
 			case 154:	{ DeleteObject(1); }
@@ -772,16 +689,6 @@ void SelectFrame(TSpr *pSpr) __z88dk_fastcall {
 			case S_stopped:			{spr[0].frm = &frmSorcerer1[spr[0].dir*2];}		
 		}
 	}
-	// player 2
-	else if(pSpr->ident == SORCERER2) {
-		switch(pSpr->status) {
-			case S_walkingUp: 		{AssignFrame(&spr[1], animUp_Sorcerer2); break;}
-			case S_walkingDown:		{AssignFrame(&spr[1], animDown_Sorcerer2); break;}
-			case S_walkingLeft:		{AssignFrame(&spr[1], animLeft_Sorcerer2); break;}
-			case S_walkingRight:	{AssignFrame(&spr[1], animRight_Sorcerer2); break;}
-			case S_stopped:			{spr[1].frm = &frmSorcerer2[spr[1].dir*2];}	
-		}
-	}
 	// sentinel
 	else if(pSpr->ident == SENTINEL) {
 		switch(pSpr->dir) {
@@ -791,33 +698,6 @@ void SelectFrame(TSpr *pSpr) __z88dk_fastcall {
 			case D_right:			{AssignFrame(pSpr, animRight_Sentinel);}
 		}
 	}
-	// knight
-	else if(pSpr->ident == KNIGHT) {
-		switch(pSpr->dir) {
-			case D_up:				{AssignFrame(pSpr, animUp_Knight); break;}
-			case D_down:			{AssignFrame(pSpr, animDown_Knight); break;}
-			case D_left:			{AssignFrame(pSpr, animLeft_Knight); break;}
-			case D_right:			{AssignFrame(pSpr, animRight_Knight);}
-		}
-	}
-	// ghost
-	else if(pSpr->ident == GHOST) {
-		switch(pSpr->dir) {
-			case D_up:				{AssignFrame(pSpr, animUp_Ghost); break;}
-			case D_down:			{AssignFrame(pSpr, animDown_Ghost); break;}
-			case D_left:			{AssignFrame(pSpr, animLeft_Ghost); break;}
-			case D_right:			{AssignFrame(pSpr, animRight_Ghost);}
-		}
-	}
-	// witch
-	else if(pSpr->ident == WITCH) {
-		switch(pSpr->dir) {
-			case D_left:			{AssignFrame(pSpr, animLeft_Witch); break;}
-			case D_right:			{AssignFrame(pSpr, animRight_Witch);}
-		}
-	}
-	// bat
-	else if(pSpr->ident == BAT)	AssignFrame(pSpr, anim_Bat);
 }
 
 
@@ -1169,10 +1049,10 @@ void SetEnemies() {
 		// gardens #2
 		case 1: {
 						//SPR IDENTITY	MOVEMENT		DIR     SPEED   X    Y  MIN  MAX
-			SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
+			SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
 			SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  2, 114,   2,  73);						
-			SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
-			SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
+			SetEnemyParams(4, SENTINEL, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
+			SetEnemyParams(5, SENTINEL,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
 			// player 1 starting position
 			spr[0].x = spr[0].px = 58; 
 			spr[0].y = spr[0].py = 178;	
@@ -1241,8 +1121,6 @@ void PrintStartMenu() {
 	// Sven y Erik
 	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
 		cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
-	cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
-		cpct_getScreenPtr(CPCT_VMEM_START, 68, 187), SPR_W, SPR_H, g_maskTable);
 
     PrintText("NEKROFAGE", 13, 190, 0);
 }
