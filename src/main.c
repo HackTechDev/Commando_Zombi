@@ -641,14 +641,6 @@ void CheckActiveTile(u8 player) {
 }
 
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR SPRITES MANAGEMENT
 ///////////////////////////////////////////////////////////////////////////////////
@@ -739,13 +731,6 @@ u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX) {
 			return TRUE;	
 	return FALSE;
 }
-
-
-
-
-
-
-
 
 
 
@@ -909,105 +894,6 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////
-// FUNCTIONS FOR THE ENEMIES CONTROL
-///////////////////////////////////////////////////////////////////////////////////
-
-// updates the XY coordinates of the sprites based on their movement type
-void MoveEnemy(TSpr *pSpr) {
-	u8 z = 255;	// multipurpose variable
-	switch(pSpr->objNum_mov) {
-		// linear motion on the X axis
-		case M_linear_X:
-			if (pSpr->dir == D_right) {
-				// if it has not exceeded the maximum X, moves the sprite to the right
-				if (pSpr->x < pSpr->power_maxV) 
-					pSpr->x = pSpr->x + pSpr->lives_speed;
-				else // if there is no place change the direction
-					pSpr->dir = D_left;
-			}
-			else {
-				// if it has not exceeded the minimum X, moves the sprite to the left
-				if (pSpr->x > pSpr->print_minV)  
-					pSpr->x = pSpr->x - pSpr->lives_speed;
-				else // if there is no place change the direction
-					pSpr->dir = D_right; 
-			}
-			// WITCH! activates shooting when the Y position coincides with the players
-			if (pSpr->ident == WITCH) {
-				if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
-				else if (pSpr->y > (spr[1].y - SHT_H) && pSpr->y < (spr[1].y + SHT_H)) z = 1; // P2
-				if (z < 255) {
-					if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
-					else pSpr->dir = D_left;
-				}
-			}				
-			break;
-
-		// linear motion on the Y axis
-		case M_linear_Y:
-			if (pSpr->dir == D_down) {
-				// if it has not exceeded the maximum y, moves the sprite down
-				if (pSpr->y < pSpr->power_maxV)
-					pSpr->y = pSpr->y + (pSpr->lives_speed*2);
-				else // if there is no place change the direction
-					pSpr->dir = D_up;
-			}
-			else {
-				// if it has not exceeded the minimum y, moves the sprite up
-				if (pSpr->y > pSpr->print_minV) 
-					pSpr->y = pSpr->y - (pSpr->lives_speed*2);
-				else // if there is no place change the direction
-					pSpr->dir = D_down; 
-			}
-			break;
-
-		// automatic linear movement depending on the terrain
-		case M_linear_XY:		
-			// continue up (adjust y + 8)
-			if (pSpr->dir == D_up && OnBackground(pSpr->x, pSpr->y - (pSpr->lives_speed*2)-8))
-				pSpr->y = pSpr->y - (pSpr->lives_speed*2);			
-			// continue down
-			else if (pSpr->dir == D_down && OnBackground(pSpr->x, pSpr->y + (pSpr->lives_speed*2)+2))
-				pSpr->y = pSpr->y + (pSpr->lives_speed*2);
-			// continue to the left (adjust x + 3)
-			else if (pSpr->dir == D_left && OnBackground((pSpr->x - pSpr->lives_speed)-3, pSpr->y))
-				pSpr->x = pSpr->x - pSpr->lives_speed;
-			// continue to the right (adjust x - 1)
-			else if (pSpr->dir == D_right && OnBackground((pSpr->x + pSpr->lives_speed)+1, pSpr->y))
-				pSpr->x = pSpr->x + pSpr->lives_speed;
-			// search for a new random address for the next move
-			else pSpr->dir = cpct_getRandom_lcg_u8(0) / 65; // 0-1-2-3			
-			break;
-
-		// flying chaser
-		case M_chaser:
-			if (ctMainLoop % pSpr->lives_speed == 0) {
-				z = 0;
-				// if it's to the left of the target sprite it goes to the right
-				if (pSpr->x < spr[z].x) {
-						pSpr->x++;
-						pSpr->dir = D_right;
-				}
-				// if it is to the right of the target sprite it goes to the left
-				else if (pSpr->x > spr[z].x) {
-						pSpr->x--;
-						pSpr->dir = D_left;
-				}
-				// if it is above the target sprite it goes down
-				if (pSpr->y < spr[z].y) {
-					pSpr->y+=2;
-				}
-				// if it is below the target sprite it goes up
-				else if (pSpr->y > spr[z].y) {
-					pSpr->y-=2;
-				}
-			}
-			break;
-	}
-}
-
-
 // assign properties to enemy sprites
 void SetEnemyParams(u8 i, u8 ident, u8 mov, u8 dir, u8 speed, u8 x, u8 y, u8 minV, u8 maxV) {
 	spr[i].num = i;
@@ -1034,9 +920,6 @@ void SetEnemies() {
 		case 0: {			 
 						//SPR IDENTITY	MOVEMENT		DIR     SPEED   X    Y  MIN  MAX
 			SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1, 73, 158,   2,  73);						
-			SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  3, 110,   2,  73);
-			SetEnemyParams(4, SENTINEL,	M_linear_X, 	D_left,     1, 73,  62,  40,  73);
-			SetEnemyParams(5, SENTINEL,	M_linear_X, 	D_right,    1,  2,  62,   2,  35);
 			// player 1 starting position
 			spr[0].x = spr[0].px = 6; 
 			spr[0].y = spr[0].py = 178;			
@@ -1050,9 +933,6 @@ void SetEnemies() {
 		case 1: {
 						//SPR IDENTITY	MOVEMENT		DIR     SPEED   X    Y  MIN  MAX
 			SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
-			SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  2, 114,   2,  73);						
-			SetEnemyParams(4, SENTINEL, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
-			SetEnemyParams(5, SENTINEL,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
 			// player 1 starting position
 			spr[0].x = spr[0].px = 58; 
 			spr[0].y = spr[0].py = 178;	
@@ -1064,43 +944,6 @@ void SetEnemies() {
 		}
 	}
 }
-
-
-// check if there has been any collision of the players with the enemies
-void CheckEnemyCollision(u8 player, TSpr *pSpr) 
-{ 
-	if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
-		(spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
-		//an enemy has touched player 1 or 2
-		ExplodeSprite(player, pSpr->num);			
-		GameOver(player);
-	}
-}
-
-
-// logic of enemy sprites within the main loop
-void EnemyLoop(TSpr *pSpr) __z88dk_fastcall {
-	if (pSpr->ident == NOBODY) 
-		return; 
-	// update the XY coordinates of the sprite
-	MoveEnemy(pSpr);
-	// select the animation frame and apply it
-	SelectFrame(pSpr); 
-	WalkAnim(pSpr, pSpr->dir);
-	// delete the sprite from the previous position and paint in the current one
-	DeleteSprite(pSpr);
-	pSpr->px = pSpr->x; // save the current X coordinate
-	pSpr->py = pSpr->y; // save the current Y coordinate
-	PrintSprite(pSpr);
-	// check if any collision has occurred
-	CheckEnemyCollision(0, pSpr);
-}
-
-
-
-
-
-
 
 
 
@@ -1310,17 +1153,14 @@ void main(void) {
 			// turn 1
 			case 0: {							
 				PlayerLoop(&spr[0]); // player 1
-				EnemyLoop(&spr[2]);	 // enemy sprite 2 is always processed (fast)
 				break;
 			}
 			// turn 2
 			case 1:	{			
-				EnemyLoop(&spr[3]);	 // enemy sprite 3 is always processed (fast)
 				break;
 			}			
 			// turn 3			
 			case 2:	{
-				EnemyLoop(&spr[enemyTurn+4]); // enemy sprites 4 and 5 take turns processing (slow)				
 				if (++enemyTurn > 1) enemyTurn = 0;
 				
 				// decrease the powerUp value of the players
