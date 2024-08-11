@@ -538,26 +538,6 @@ void PrintSmallBlueBox() {
 }
 
 
-// print box with the number and name of the loaded level
-void PrintLevelInfo() {
-	PrintSmallBlueBox();	
-	// if two players, the record is shown in this window, not on the scoreboard
-	if (TwoPlayers) {
-		PrintText("LEVEL", 13, 95, 0);
-		PrintText(lName, 31, 95, 0);
-		PrintText("HIGH@SCORE:", 16, 118, 0);
-		PrintNumber(highScore, 4, 52, 118, 0);
-	}
-	else {
-		PrintText("LEVEL", 13, 107, 0);
-		PrintText(lName, 31, 107, 0);
-	}
-
-	Pause(1150);
-}
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 // KEYBOARD FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
@@ -2295,7 +2275,6 @@ void ResetData() {
 			playerKey[3] = 0;
 			playerKey[4] = 0;
 		}
-		PrintLevelInfo();	
 		PrintMap();	
 		lastNMap = nMap;
 	}
