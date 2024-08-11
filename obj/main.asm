@@ -5747,7 +5747,7 @@ _Stop::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:1344: void WalkAnim(TSpr *pSpr, u8 dir) {
+;src/main.c:1328: void WalkAnim(TSpr *pSpr, u8 dir) {
 ;	---------------------------------
 ; Function WalkAnim
 ; ---------------------------------
@@ -5755,9 +5755,9 @@ _WalkAnim::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/main.c:1345: u8 animPause = 2;
+;src/main.c:1329: u8 animPause = 2;
 	ld	c, #0x02
-;src/main.c:1346: if (pSpr->num > 3) animPause = 1; // slow enemies (4 and 5) have no pause in animation
+;src/main.c:1330: if (pSpr->num > 3) animPause = 1; // slow enemies (4 and 5) have no pause in animation
 	ld	e,4 (ix)
 	ld	d,5 (ix)
 	ld	a, (de)
@@ -5767,12 +5767,12 @@ _WalkAnim::
 	jr	NC,00102$
 	ld	c, #0x01
 00102$:
-;src/main.c:1347: pSpr->dir = dir;
+;src/main.c:1331: pSpr->dir = dir;
 	ld	hl, #0x0007
 	add	hl, de
 	ld	a, 6 (ix)
 	ld	(hl), a
-;src/main.c:1348: if(++pSpr->nFrm == animPause*2) pSpr->nFrm = 0;
+;src/main.c:1332: if(++pSpr->nFrm == animPause*2) pSpr->nFrm = 0;
 	ld	iy, #0x000a
 	add	iy, de
 	inc	0 (iy)
@@ -5791,7 +5791,7 @@ _WalkAnim::
 00105$:
 	pop	ix
 	ret
-;src/main.c:1353: void Walk(TSpr *pSpr) __z88dk_fastcall {
+;src/main.c:1337: void Walk(TSpr *pSpr) __z88dk_fastcall {
 ;	---------------------------------
 ; Function Walk
 ; ---------------------------------
@@ -5803,9 +5803,9 @@ _Walk::
 	push	af
 	ld	-2 (ix), l
 	ld	-1 (ix), h
-;src/main.c:1354: cpct_scanKeyboard_f(); // check the pressed keys
+;src/main.c:1338: cpct_scanKeyboard_f(); // check the pressed keys
 	call	_cpct_scanKeyboard_f
-;src/main.c:1356: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
+;src/main.c:1340: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
 	ld	de, #_ctlRight+0
 	ld	c,-2 (ix)
 	ld	b,-1 (ix)
@@ -5825,15 +5825,15 @@ _Walk::
 	pop	bc
 	ld	a, (bc)
 	ld	l, a
-;src/main.c:1357: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
+;src/main.c:1341: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
 	ld	h, #0x00
 	add	hl, hl
 	ex	(sp), hl
-;src/main.c:1356: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
+;src/main.c:1340: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
 	ld	a, e
 	or	a, a
 	jr	Z,00121$
-;src/main.c:1357: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
+;src/main.c:1341: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
 	ld	de, #_ctlUp+0
 	pop	hl
 	push	hl
@@ -5855,7 +5855,7 @@ _Walk::
 	call	_MoveUp
 	jr	00105$
 00104$:
-;src/main.c:1358: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal derecha-abajo
+;src/main.c:1342: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal derecha-abajo
 	ld	de, #_ctlDown+0
 	ld	a, (bc)
 	ld	l, a
@@ -5876,13 +5876,13 @@ _Walk::
 	push	bc
 	call	_MoveDown
 00105$:
-;src/main.c:1359: MoveRight(pSpr);
+;src/main.c:1343: MoveRight(pSpr);
 	pop	bc
 	pop	hl
 	push	hl
 	push	bc
 	call	_MoveRight
-;src/main.c:1360: WalkAnim(pSpr, D_right);
+;src/main.c:1344: WalkAnim(pSpr, D_right);
 	ld	a, #0x03
 	push	af
 	inc	sp
@@ -5894,7 +5894,7 @@ _Walk::
 	inc	sp
 	jp	00123$
 00121$:
-;src/main.c:1363: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
+;src/main.c:1347: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
 	ld	de, #_ctlLeft+0
 	pop	hl
 	push	hl
@@ -5907,18 +5907,18 @@ _Walk::
 	call	_cpct_isKeyPressed
 	ld	e, l
 	pop	bc
-;src/main.c:1356: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
+;src/main.c:1340: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
 	ld	a, (bc)
 	ld	l, a
-;src/main.c:1357: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
+;src/main.c:1341: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
 	ld	h, #0x00
 	add	hl, hl
 	ex	(sp), hl
-;src/main.c:1363: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
+;src/main.c:1347: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
 	ld	a, e
 	or	a, a
 	jr	Z,00118$
-;src/main.c:1364: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr); // diagonal izda-arriba
+;src/main.c:1348: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr); // diagonal izda-arriba
 	ld	de, #_ctlUp+0
 	pop	hl
 	push	hl
@@ -5940,7 +5940,7 @@ _Walk::
 	call	_MoveUp
 	jr	00110$
 00109$:
-;src/main.c:1365: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal izda-abajo
+;src/main.c:1349: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal izda-abajo
 	ld	a, (bc)
 	ld	l, a
 	ld	h, #0x00
@@ -5961,13 +5961,13 @@ _Walk::
 	push	bc
 	call	_MoveDown
 00110$:
-;src/main.c:1366: MoveLeft(pSpr); 
+;src/main.c:1350: MoveLeft(pSpr); 
 	pop	bc
 	pop	hl
 	push	hl
 	push	bc
 	call	_MoveLeft
-;src/main.c:1367: WalkAnim(pSpr, D_left);
+;src/main.c:1351: WalkAnim(pSpr, D_left);
 	ld	a, #0x02
 	push	af
 	inc	sp
@@ -5979,7 +5979,7 @@ _Walk::
 	inc	sp
 	jr	00123$
 00118$:
-;src/main.c:1370: else if(cpct_isKeyPressed(ctlUp[pSpr->ident])) {
+;src/main.c:1354: else if(cpct_isKeyPressed(ctlUp[pSpr->ident])) {
 	ld	de, #_ctlUp+0
 	pop	hl
 	push	hl
@@ -5994,13 +5994,13 @@ _Walk::
 	ld	a, l
 	or	a, a
 	jr	Z,00115$
-;src/main.c:1371: MoveUp(pSpr); 
+;src/main.c:1355: MoveUp(pSpr); 
 	pop	bc
 	pop	hl
 	push	hl
 	push	bc
 	call	_MoveUp
-;src/main.c:1372: WalkAnim(pSpr, D_up);
+;src/main.c:1356: WalkAnim(pSpr, D_up);
 	xor	a, a
 	push	af
 	inc	sp
@@ -6012,7 +6012,7 @@ _Walk::
 	inc	sp
 	jr	00123$
 00115$:
-;src/main.c:1375: else if(cpct_isKeyPressed(ctlDown[pSpr->ident])) {
+;src/main.c:1359: else if(cpct_isKeyPressed(ctlDown[pSpr->ident])) {
 	ld	a, (bc)
 	ld	l, a
 	ld	h, #0x00
@@ -6027,13 +6027,13 @@ _Walk::
 	ld	a, l
 	or	a, a
 	jr	Z,00112$
-;src/main.c:1376: MoveDown(pSpr); 
+;src/main.c:1360: MoveDown(pSpr); 
 	pop	bc
 	pop	hl
 	push	hl
 	push	bc
 	call	_MoveDown
-;src/main.c:1377: WalkAnim(pSpr, D_down);
+;src/main.c:1361: WalkAnim(pSpr, D_down);
 	ld	a, #0x01
 	push	af
 	inc	sp
@@ -6045,7 +6045,7 @@ _Walk::
 	inc	sp
 	jr	00123$
 00112$:
-;src/main.c:1380: pSpr->status = S_stopped;
+;src/main.c:1364: pSpr->status = S_stopped;
 	ld	a, -2 (ix)
 	add	a, #0x06
 	ld	l, a
@@ -6057,29 +6057,29 @@ _Walk::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:1385: void RunStatus(TSpr *pSpr) __z88dk_fastcall {
+;src/main.c:1369: void RunStatus(TSpr *pSpr) __z88dk_fastcall {
 ;	---------------------------------
 ; Function RunStatus
 ; ---------------------------------
 _RunStatus::
 	ld	c, l
 	ld	b, h
-;src/main.c:1386: if (pSpr->status == S_stopped)
+;src/main.c:1370: if (pSpr->status == S_stopped)
 	push	bc
 	pop	iy
 	ld	a, 6 (iy)
 	sub	a, #0x04
 	jr	NZ,00102$
-;src/main.c:1387: Stop(pSpr);
+;src/main.c:1371: Stop(pSpr);
 	ld	l, c
 	ld	h, b
 	jp  _Stop
 00102$:
-;src/main.c:1389: Walk(pSpr);	
+;src/main.c:1373: Walk(pSpr);	
 	ld	l, c
 	ld	h, b
 	jp  _Walk
-;src/main.c:1394: void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
+;src/main.c:1378: void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 ;	---------------------------------
 ; Function PlayerLoop
 ; ---------------------------------
@@ -6090,13 +6090,13 @@ _PlayerLoop::
 	push	af
 	ld	c, l
 	ld	b, h
-;src/main.c:1395: RunStatus(pSpr); // calls the appropriate function based on the status of the main sprites
+;src/main.c:1379: RunStatus(pSpr); // calls the appropriate function based on the status of the main sprites
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_RunStatus
 	pop	bc
-;src/main.c:1396: if (pSpr->print_minV) { // does the sprite have to be reprinted?
+;src/main.c:1380: if (pSpr->print_minV) { // does the sprite have to be reprinted?
 	ld	hl, #0x000d
 	add	hl,bc
 	ex	(sp), hl
@@ -6105,19 +6105,19 @@ _PlayerLoop::
 	ld	a, (hl)
 	or	a, a
 	jr	Z,00106$
-;src/main.c:1397: SelectFrame(pSpr); // we assign the next frame of the animation to the sprite
+;src/main.c:1381: SelectFrame(pSpr); // we assign the next frame of the animation to the sprite
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_SelectFrame
 	pop	bc
-;src/main.c:1398: DeleteSprite(pSpr); // delete the sprite
+;src/main.c:1382: DeleteSprite(pSpr); // delete the sprite
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_DeleteSprite
 	pop	bc
-;src/main.c:1399: pSpr->px = pSpr->x; // save the current X coordinate
+;src/main.c:1383: pSpr->px = pSpr->x; // save the current X coordinate
 	ld	hl, #0x0004
 	add	hl,bc
 	ex	de,hl
@@ -6127,7 +6127,7 @@ _PlayerLoop::
 	inc	hl
 	ld	a, (hl)
 	ld	(de), a
-;src/main.c:1400: pSpr->py = pSpr->y; // save the current Y coordinate
+;src/main.c:1384: pSpr->py = pSpr->y; // save the current Y coordinate
 	ld	hl, #0x0005
 	add	hl,bc
 	ex	de,hl
@@ -6138,32 +6138,32 @@ _PlayerLoop::
 	inc	hl
 	ld	a, (hl)
 	ld	(de), a
-;src/main.c:1401: PrintSprite(pSpr); // paint the sprite in the new XY position
+;src/main.c:1385: PrintSprite(pSpr); // paint the sprite in the new XY position
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_PrintSprite
 	pop	bc
-;src/main.c:1402: ctInactivity[pSpr->num] = 0; // on the move
+;src/main.c:1386: ctInactivity[pSpr->num] = 0; // on the move
 	ld	de, #_ctInactivity+0
 	ld	a, (bc)
 	ld	l, a
 	ld	h,#0x00
 	add	hl, de
 	ld	(hl), #0x00
-;src/main.c:1403: if (pSpr->status == S_stopped) 
+;src/main.c:1387: if (pSpr->status == S_stopped) 
 	push	bc
 	pop	iy
 	ld	a, 6 (iy)
 	sub	a, #0x04
 	jr	NZ,00108$
-;src/main.c:1404: pSpr->print_minV = FALSE; // if it is stopped it is no longer necessary to continue printing the sprite
+;src/main.c:1388: pSpr->print_minV = FALSE; // if it is stopped it is no longer necessary to continue printing the sprite
 	pop	hl
 	push	hl
 	ld	(hl), #0x00
 	jr	00108$
 00106$:
-;src/main.c:1407: else if (ctMainLoop % 5 == 0)
+;src/main.c:1391: else if (ctMainLoop % 5 == 0)
 	push	bc
 	ld	hl, #0x0005
 	push	hl
@@ -6176,7 +6176,7 @@ _PlayerLoop::
 	ld	a, h
 	or	a,l
 	jr	NZ,00108$
-;src/main.c:1408: PrintSprite(pSpr);
+;src/main.c:1392: PrintSprite(pSpr);
 	ld	l, c
 	ld	h, b
 	call	_PrintSprite
@@ -6184,7 +6184,7 @@ _PlayerLoop::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:1425: void ExplodePlayerInDuel(u8 player) __z88dk_fastcall {
+;src/main.c:1409: void ExplodePlayerInDuel(u8 player) __z88dk_fastcall {
 ;	---------------------------------
 ; Function ExplodePlayerInDuel
 ; ---------------------------------
@@ -6194,7 +6194,7 @@ _ExplodePlayerInDuel::
 	add	ix,sp
 	dec	sp
 	ld	-1 (ix), l
-;src/main.c:1426: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[player].x, 122), cpct_px2byteM0(4, 4), SPR_W, SPR_H);
+;src/main.c:1410: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[player].x, 122), cpct_px2byteM0(4, 4), SPR_W, SPR_H);
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
@@ -6254,7 +6254,7 @@ _ExplodePlayerInDuel::
 	inc	sp
 	pop	ix
 	ret
-;src/main.c:1433: void MakeDuel() {
+;src/main.c:1417: void MakeDuel() {
 ;	---------------------------------
 ; Function MakeDuel
 ; ---------------------------------
@@ -6264,7 +6264,7 @@ _MakeDuel::
 	add	ix,sp
 	push	af
 	dec	sp
-;src/main.c:1436: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 18, 80), cpct_px2byteM0(4, 4), 45, 60);
+;src/main.c:1420: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 18, 80), cpct_px2byteM0(4, 4), 45, 60);
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
@@ -6275,7 +6275,7 @@ _MakeDuel::
 	ld	hl, #0xc332
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:1437: PrintFrame(18,80,60,134);
+;src/main.c:1421: PrintFrame(18,80,60,134);
 	ld	hl, #0x863c
 	push	hl
 	ld	hl, #0x5012
@@ -6283,12 +6283,12 @@ _MakeDuel::
 	call	_PrintFrame
 	pop	af
 	pop	af
-;src/main.c:1439: spr[0].x = 23; spr[0].y = 122;
+;src/main.c:1423: spr[0].x = 23; spr[0].y = 122;
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x17
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0x7a
-;src/main.c:1441: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1425: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0003) + 0
 	ld	d, (hl)
 	ld	hl, #(_spr + 0x0002) + 0
@@ -6299,7 +6299,7 @@ _MakeDuel::
 	call	_cpct_getScreenPtr
 	ld	c, l
 	ld	b, h
-;src/main.c:1440: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06,
+;src/main.c:1424: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06,
 	ld	hl, #_g_maskTable
 	push	hl
 	ld	hl, #0x0c05
@@ -6308,28 +6308,28 @@ _MakeDuel::
 	ld	hl, #_g_sorcerer1_06
 	push	hl
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1443: spr[1].x = 53; spr[1].y = 122;
+;src/main.c:1427: spr[1].x = 53; spr[1].y = 122;
 	ld	hl, #(_spr + 0x0011)
 	ld	(hl), #0x35
 	ld	hl, #(_spr + 0x0012)
 	ld	(hl), #0x7a
-;src/main.c:1446: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1430: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 	ld	a,(#(_spr + 0x0012) + 0)
-	ld	-1 (ix), a
-	ld	a,(#(_spr + 0x0011) + 0)
 	ld	-2 (ix), a
-;src/main.c:1444: if (TwoPlayers) {
+	ld	a,(#(_spr + 0x0011) + 0)
+	ld	-1 (ix), a
+;src/main.c:1428: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00102$
-;src/main.c:1446: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-	ld	h, -1 (ix)
-	ld	l, -2 (ix)
+;src/main.c:1430: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+	ld	h, -2 (ix)
+	ld	l, -1 (ix)
 	push	hl
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1445: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
+;src/main.c:1429: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
 	ld	bc, #_g_sorcerer2_04+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6340,14 +6340,14 @@ _MakeDuel::
 	call	_cpct_drawSpriteMaskedAlignedTable
 	jr	00103$
 00102$:
-;src/main.c:1451: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-	ld	h, -1 (ix)
-	ld	l, -2 (ix)
+;src/main.c:1435: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+	ld	h, -2 (ix)
+	ld	l, -1 (ix)
 	push	hl
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1450: cpct_drawSpriteMaskedAlignedTable(g_door_0, 
+;src/main.c:1434: cpct_drawSpriteMaskedAlignedTable(g_door_0, 
 	ld	bc, #_g_door_0+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6357,10 +6357,10 @@ _MakeDuel::
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
 00103$:
-;src/main.c:1453: Pause(400);
+;src/main.c:1437: Pause(400);
 	ld	hl, #0x0190
 	call	_Pause
-;src/main.c:1457: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1441: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0003) + 0
 	ld	d, (hl)
 	ld	hl, #(_spr + 0x0002) + 0
@@ -6369,7 +6369,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1456: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_08, 
+;src/main.c:1440: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_08, 
 	ld	bc, #_g_sorcerer1_08+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6378,15 +6378,15 @@ _MakeDuel::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1458: spr[0].x += OBJ_W;
+;src/main.c:1442: spr[0].x += OBJ_W;
 	ld	a, (#(_spr + 0x0002) + 0)
 	add	a, #0x04
 	ld	(#(_spr + 0x0002)),a
-;src/main.c:1459: if (TwoPlayers) {
+;src/main.c:1443: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00148$
-;src/main.c:1461: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1445: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0012) + 0
 	ld	d, (hl)
 	ld	hl, #(_spr + 0x0011) + 0
@@ -6395,7 +6395,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1460: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_08, 
+;src/main.c:1444: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_08, 
 	ld	bc, #_g_sorcerer2_08+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6404,26 +6404,26 @@ _MakeDuel::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1462: spr[1].x -= OBJ_W;
+;src/main.c:1446: spr[1].x -= OBJ_W;
 	ld	a, (#(_spr + 0x0011) + 0)
 	add	a, #0xfc
 	ld	(#(_spr + 0x0011)),a
-;src/main.c:1466: while (spr[0].x < 50)
+;src/main.c:1450: while (spr[0].x < 50)
 00148$:
 00110$:
-;src/main.c:1441: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1425: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0002) + 0
 	ld	c, (hl)
-;src/main.c:1466: while (spr[0].x < 50)
+;src/main.c:1450: while (spr[0].x < 50)
 	ld	a, c
 	sub	a, #0x32
 	jp	NC, 00112$
-;src/main.c:1469: spr[0].x ++;
+;src/main.c:1453: spr[0].x ++;
 	ld	b, c
 	inc	b
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), b
-;src/main.c:1471: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, 125), SHT_W, SHT_H, g_maskTable);
+;src/main.c:1455: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, 125), SHT_W, SHT_H, g_maskTable);
 	ld	a, #0x7d
 	push	af
 	inc	sp
@@ -6432,7 +6432,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1470: cpct_drawSpriteMaskedAlignedTable(g_magic_0, 
+;src/main.c:1454: cpct_drawSpriteMaskedAlignedTable(g_magic_0, 
 	ld	bc, #_g_maskTable
 	push	bc
 	ld	bc, #0x0804
@@ -6441,17 +6441,17 @@ _MakeDuel::
 	ld	hl, #_g_magic_0
 	push	hl
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1472: if (TwoPlayers) {
+;src/main.c:1456: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00107$
-;src/main.c:1473: spr[1].x --;
+;src/main.c:1457: spr[1].x --;
 	ld	hl, #(_spr + 0x0011) + 0
 	ld	b, (hl)
 	dec	b
 	ld	hl, #(_spr + 0x0011)
 	ld	(hl), b
-;src/main.c:1475: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, 125), SHT_W, SHT_H, g_maskTable);
+;src/main.c:1459: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, 125), SHT_W, SHT_H, g_maskTable);
 	ld	a, #0x7d
 	push	af
 	inc	sp
@@ -6460,7 +6460,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1474: cpct_drawSpriteMaskedAlignedTable(g_magic_1, 
+;src/main.c:1458: cpct_drawSpriteMaskedAlignedTable(g_magic_1, 
 	ld	bc, #_g_maskTable
 	push	bc
 	ld	bc, #0x0804
@@ -6470,16 +6470,16 @@ _MakeDuel::
 	push	hl
 	call	_cpct_drawSpriteMaskedAlignedTable
 00107$:
-;src/main.c:1477: Pause(12);
+;src/main.c:1461: Pause(12);
 	ld	hl, #0x000c
 	call	_Pause
-;src/main.c:1480: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
+;src/main.c:1464: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
 	ld	c, l
 	ld	b, #0x00
-;src/main.c:1479: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[0].x, 125), 
+;src/main.c:1463: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[0].x, 125), 
 	ld	hl, #(_spr + 0x0002) + 0
 	ld	e, (hl)
 	ld	hl, #0xecb0
@@ -6490,17 +6490,17 @@ _MakeDuel::
 	push	bc
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:1481: if (TwoPlayers)
+;src/main.c:1465: if (TwoPlayers)
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jp	Z, 00110$
-;src/main.c:1483: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
+;src/main.c:1467: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
 	ld	c, l
 	ld	b, #0x00
-;src/main.c:1482: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[1].x, 125), 
+;src/main.c:1466: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[1].x, 125), 
 	ld	hl, #(_spr + 0x0011) + 0
 	ld	e, (hl)
 	ld	hl, #0xecb0
@@ -6513,10 +6513,10 @@ _MakeDuel::
 	call	_cpct_drawSolidBox
 	jp	00110$
 00112$:
-;src/main.c:1487: spr[0].x = 23;
+;src/main.c:1471: spr[0].x = 23;
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x17
-;src/main.c:1489: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1473: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0003) + 0
 	ld	b, (hl)
 	ld	hl, #(_spr + 0x0002) + 0
@@ -6525,7 +6525,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1488: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
+;src/main.c:1472: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
 	ld	bc, #_g_maskTable
 	push	bc
 	ld	bc, #0x0c05
@@ -6534,14 +6534,14 @@ _MakeDuel::
 	ld	hl, #_g_sorcerer1_06
 	push	hl
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1490: spr[1].x = 53;
+;src/main.c:1474: spr[1].x = 53;
 	ld	hl, #(_spr + 0x0011)
 	ld	(hl), #0x35
-;src/main.c:1492: if (TwoPlayers) {
+;src/main.c:1476: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00114$
-;src/main.c:1494: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1478: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0012) + 0
 	ld	b, (hl)
 	ld	hl, #(_spr + 0x0011) + 0
@@ -6550,7 +6550,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1493: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
+;src/main.c:1477: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
 	ld	bc, #_g_sorcerer2_04+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6560,7 +6560,7 @@ _MakeDuel::
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
 00114$:
-;src/main.c:1498: if (potScore[0] > potScore[1]) {
+;src/main.c:1482: if (potScore[0] > potScore[1]) {
 	ld	hl, #_potScore+0
 	ld	c, (hl)
 	inc	hl
@@ -6568,27 +6568,27 @@ _MakeDuel::
 	ld	a, e
 	sub	a, c
 	jp	NC, 00126$
-;src/main.c:1499: loser = 1;
+;src/main.c:1483: loser = 1;
 	ld	-3 (ix), #0x01
-;src/main.c:1500: ExplodePlayerInDuel(loser);
+;src/main.c:1484: ExplodePlayerInDuel(loser);
 	ld	l, #0x01
 	call	_ExplodePlayerInDuel
-;src/main.c:1446: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1430: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0012) + 0
 	ld	c, (hl)
 	ld	hl, #(_spr + 0x0011) + 0
 	ld	e, (hl)
-;src/main.c:1501: if (TwoPlayers) {
+;src/main.c:1485: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00118$
-;src/main.c:1504: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1488: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 	ld	d, c
 	push	de
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1503: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_09, 
+;src/main.c:1487: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_09, 
 	ld	bc, #_g_sorcerer2_09+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6597,7 +6597,7 @@ _MakeDuel::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1505: PrintText("PLAYER1", 30, 90, 0);
+;src/main.c:1489: PrintText("PLAYER1", 30, 90, 0);
 	ld	hl, #0x005a
 	push	hl
 	ld	a, #0x1e
@@ -6609,7 +6609,7 @@ _MakeDuel::
 	pop	af
 	pop	af
 	inc	sp
-;src/main.c:1508: if (spr[0].lives_speed < 9) spr[0].lives_speed++;
+;src/main.c:1492: if (spr[0].lives_speed < 9) spr[0].lives_speed++;
 	ld	bc, #_spr + 11
 	ld	a, (bc)
 	cp	a, #0x09
@@ -6618,13 +6618,13 @@ _MakeDuel::
 	ld	(bc), a
 	jp	00127$
 00118$:
-;src/main.c:1513: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1497: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 	ld	d, c
 	push	de
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1512: cpct_drawSpriteMaskedAlignedTable(g_door_1, 
+;src/main.c:1496: cpct_drawSpriteMaskedAlignedTable(g_door_1, 
 	ld	bc, #_g_door_1+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6633,7 +6633,7 @@ _MakeDuel::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1514: PrintText("LEVEL", 33, 90, 0);
+;src/main.c:1498: PrintText("LEVEL", 33, 90, 0);
 	ld	hl, #0x005a
 	push	hl
 	ld	a, #0x21
@@ -6647,16 +6647,16 @@ _MakeDuel::
 	inc	sp
 	jr	00127$
 00126$:
-;src/main.c:1518: else if (potScore[0] < potScore[1]) {
+;src/main.c:1502: else if (potScore[0] < potScore[1]) {
 	ld	a, c
 	sub	a, e
 	jr	NC,00123$
-;src/main.c:1519: loser = 0;
+;src/main.c:1503: loser = 0;
 	ld	-3 (ix), #0x00
-;src/main.c:1520: ExplodePlayerInDuel(loser);
+;src/main.c:1504: ExplodePlayerInDuel(loser);
 	ld	l, #0x00
 	call	_ExplodePlayerInDuel
-;src/main.c:1523: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+;src/main.c:1507: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #(_spr + 0x0003) + 0
 	ld	d, (hl)
 	ld	hl, #(_spr + 0x0002) + 0
@@ -6665,7 +6665,7 @@ _MakeDuel::
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:1522: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_09, 
+;src/main.c:1506: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_09, 
 	ld	bc, #_g_sorcerer1_09+0
 	ld	de, #_g_maskTable
 	push	de
@@ -6674,7 +6674,7 @@ _MakeDuel::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:1524: PrintText("PLAYER2", 30, 90, 0);
+;src/main.c:1508: PrintText("PLAYER2", 30, 90, 0);
 	ld	hl, #0x005a
 	push	hl
 	ld	a, #0x1e
@@ -6686,7 +6686,7 @@ _MakeDuel::
 	pop	af
 	pop	af
 	inc	sp
-;src/main.c:1527: if (spr[1].lives_speed < 9) spr[1].lives_speed++;
+;src/main.c:1511: if (spr[1].lives_speed < 9) spr[1].lives_speed++;
 	ld	bc, #_spr + 26
 	ld	a, (bc)
 	cp	a, #0x09
@@ -6695,7 +6695,7 @@ _MakeDuel::
 	ld	(bc), a
 	jr	00127$
 00123$:
-;src/main.c:1531: PrintText("NOBODY", 32, 90, 0);
+;src/main.c:1515: PrintText("NOBODY", 32, 90, 0);
 	ld	bc, #___str_32
 	ld	hl, #0x005a
 	push	hl
@@ -6707,14 +6707,14 @@ _MakeDuel::
 	pop	af
 	pop	af
 	inc	sp
-;src/main.c:1532: loser = 2;
+;src/main.c:1516: loser = 2;
 	ld	-3 (ix), #0x02
 00127$:
-;src/main.c:1534: if (TwoPlayers)
+;src/main.c:1518: if (TwoPlayers)
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00129$
-;src/main.c:1535: PrintText("WINS>", 33, 101, 0);
+;src/main.c:1519: PrintText("WINS>", 33, 101, 0);
 	ld	hl, #0x0065
 	push	hl
 	ld	a, #0x21
@@ -6728,7 +6728,7 @@ _MakeDuel::
 	inc	sp
 	jr	00130$
 00129$:
-;src/main.c:1537: PrintText("COMPLETED", 27, 101, 0);	
+;src/main.c:1521: PrintText("COMPLETED", 27, 101, 0);	
 	ld	hl, #0x0065
 	push	hl
 	ld	a, #0x1b
@@ -6741,54 +6741,54 @@ _MakeDuel::
 	pop	af
 	inc	sp
 00130$:
-;src/main.c:1539: Pause(1000);
+;src/main.c:1523: Pause(1000);
 	ld	hl, #0x03e8
 	call	_Pause
-;src/main.c:1541: if (loser < 2) // if there is no tie
+;src/main.c:1525: if (loser < 2) // if there is no tie
 	ld	a, -3 (ix)
 	sub	a, #0x02
 	ld	a, #0x00
 	rla
-	ld	-2 (ix), a
+	ld	-1 (ix), a
 	or	a, a
 	jr	Z,00132$
-;src/main.c:1542: nMap++; // go to the next screen on the map
+;src/main.c:1526: nMap++; // go to the next screen on the map
 	ld	hl, #_nMap+0
 	inc	(hl)
 00132$:
-;src/main.c:1544: if (nMap == 12) { // screens are over. End of the game
+;src/main.c:1528: if (nMap == 12) { // screens are over. End of the game
 	ld	a,(#_nMap + 0)
 	sub	a, #0x0c
 	jr	NZ,00137$
-;src/main.c:1545: if (loser == 0)		
+;src/main.c:1529: if (loser == 0)		
 	ld	a, -3 (ix)
 	or	a, a
 	jr	NZ,00134$
-;src/main.c:1546: PrintEndGame(1); // player 2 wins
+;src/main.c:1530: PrintEndGame(1); // player 2 wins
 	ld	l, #0x01
 	call	_PrintEndGame
 	jr	00137$
 00134$:
-;src/main.c:1548: PrintEndGame(0); // player 1 wins
+;src/main.c:1532: PrintEndGame(0); // player 1 wins
 	ld	l, #0x00
 	call	_PrintEndGame
 00137$:
-;src/main.c:1552: ResetObjData(0);
+;src/main.c:1536: ResetObjData(0);
 	ld	l, #0x00
 	call	_ResetObjData
-;src/main.c:1553: ResetObjData(1);
+;src/main.c:1537: ResetObjData(1);
 	ld	l, #0x01
 	call	_ResetObjData
-;src/main.c:1554: InitScoreboard();
+;src/main.c:1538: InitScoreboard();
 	call	_InitScoreboard
-;src/main.c:1556: if (loser < 2 && TwoPlayers)
-	ld	a, -2 (ix)
+;src/main.c:1540: if (loser < 2 && TwoPlayers)
+	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00139$
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00139$
-;src/main.c:1557: GameOver(loser); // the player who loses a duel loses a life
+;src/main.c:1541: GameOver(loser); // the player who loses a duel loses a life
 	ld	a, -3 (ix)
 	push	af
 	inc	sp
@@ -6796,7 +6796,7 @@ _MakeDuel::
 	inc	sp
 	jr	00142$
 00139$:
-;src/main.c:1559: ResetData();
+;src/main.c:1543: ResetData();
 	call	_ResetData
 00142$:
 	ld	sp, ix
@@ -6820,12 +6820,12 @@ ___str_33:
 ___str_34:
 	.ascii "COMPLETED"
 	.db 0x00
-;src/main.c:1564: void CheckDuel() {
+;src/main.c:1548: void CheckDuel() {
 ;	---------------------------------
 ; Function CheckDuel
 ; ---------------------------------
 _CheckDuel::
-;src/main.c:1565: if ((spr[0].objNum_mov == 5 || spr[1].objNum_mov == 5) && 
+;src/main.c:1549: if ((spr[0].objNum_mov == 5 || spr[1].objNum_mov == 5) && 
 	ld	a, (#_spr + 12)
 	sub	a, #0x05
 	jr	Z,00105$
@@ -6833,7 +6833,7 @@ _CheckDuel::
 	sub	a, #0x05
 	ret	NZ
 00105$:
-;src/main.c:1566: SpriteCollision(spr[0].x, spr[0].y, &spr[1], 0)) {				
+;src/main.c:1550: SpriteCollision(spr[0].x, spr[0].y, &spr[1], 0)) {				
 	ld	hl, #_spr + 3
 	ld	d, (hl)
 	ld	hl, #_spr + 2
@@ -6852,13 +6852,13 @@ _CheckDuel::
 	ld	a, l
 	or	a, a
 	ret	Z
-;src/main.c:1568: for(u8 i=0;i<6;i++)
+;src/main.c:1552: for(u8 i=0;i<6;i++)
 	ld	c, #0x00
 00107$:
 	ld	a, c
 	sub	a, #0x06
 	jr	NC,00101$
-;src/main.c:1569: DeleteSprite(&spr[i]);
+;src/main.c:1553: DeleteSprite(&spr[i]);
 	ld	b,#0x00
 	ld	l, c
 	ld	h, b
@@ -6873,39 +6873,39 @@ _CheckDuel::
 	push	bc
 	call	_DeleteSprite
 	pop	bc
-;src/main.c:1568: for(u8 i=0;i<6;i++)
+;src/main.c:1552: for(u8 i=0;i<6;i++)
 	inc	c
 	jr	00107$
 00101$:
-;src/main.c:1570: DeleteObject(0);
+;src/main.c:1554: DeleteObject(0);
 	ld	l, #0x00
 	call	_DeleteObject
-;src/main.c:1571: DeleteObject(1);
+;src/main.c:1555: DeleteObject(1);
 	ld	l, #0x01
 	call	_DeleteObject
-;src/main.c:1573: MakeDuel();
+;src/main.c:1557: MakeDuel();
 	jp  _MakeDuel
-;src/main.c:1591: void MakeShot(u8 x, u8 y, u8 dir) {	
+;src/main.c:1575: void MakeShot(u8 x, u8 y, u8 dir) {	
 ;	---------------------------------
 ; Function MakeShot
 ; ---------------------------------
 _MakeShot::
-;src/main.c:1592: if (sht.active == FALSE) { // if there is no active shot...
+;src/main.c:1576: if (sht.active == FALSE) { // if there is no active shot...
 	ld	bc, #_sht+0
 	ld	hl, #0x0004
 	add	hl, bc
 	ld	a, (hl)
 	or	a, a
 	ret	NZ
-;src/main.c:1593: sht.active = TRUE; // activate it
+;src/main.c:1577: sht.active = TRUE; // activate it
 	ld	(hl), #0x01
-;src/main.c:1594: sht.dir = dir; // the direction of the shot is that of the sprite that shoots
+;src/main.c:1578: sht.dir = dir; // the direction of the shot is that of the sprite that shoots
 	ld	hl, #(_sht + 0x0003)
 	ld	iy, #4
 	add	iy, sp
 	ld	a, 0 (iy)
 	ld	(hl), a
-;src/main.c:1595: sht.y = y + 5; // adjusts to the height of the gun (hand)
+;src/main.c:1579: sht.y = y + 5; // adjusts to the height of the gun (hand)
 	ld	e, c
 	ld	d, b
 	inc	de
@@ -6914,7 +6914,7 @@ _MakeShot::
 	ld	a, (hl)
 	add	a, #0x05
 	ld	(de), a
-;src/main.c:1597: if (sht.dir == D_right) sht.x = x + SPR_W;
+;src/main.c:1581: if (sht.dir == D_right) sht.x = x + SPR_W;
 	ld	hl, #4+0
 	add	hl, sp
 	ld	a, (hl)
@@ -6927,14 +6927,14 @@ _MakeShot::
 	ld	(bc), a
 	ret
 00102$:
-;src/main.c:1598: else sht.x = x - SHT_W;
+;src/main.c:1582: else sht.x = x - SHT_W;
 	ld	hl, #2+0
 	add	hl, sp
 	ld	a, (hl)
 	add	a, #0xfc
 	ld	(bc), a
 	ret
-;src/main.c:1604: void DeleteShot() {
+;src/main.c:1588: void DeleteShot() {
 ;	---------------------------------
 ; Function DeleteShot
 ; ---------------------------------
@@ -6944,7 +6944,7 @@ _DeleteShot::
 	add	ix,sp
 	push	af
 	dec	sp
-;src/main.c:1606: 2 + (sht.px & 1), 2 + (sht.y & 3 ? 1 : 0), 
+;src/main.c:1590: 2 + (sht.px & 1), 2 + (sht.y & 3 ? 1 : 0), 
 	ld	hl, #_sht + 1
 	ld	c, (hl)
 	ld	a, c
@@ -6963,7 +6963,7 @@ _DeleteShot::
 	and	a, #0x01
 	add	a, #0x02
 	ld	-1 (ix), a
-;src/main.c:1605: cpct_etm_drawTileBox2x4(sht.px / 2, (sht.y - ORIG_MAP_Y) / 4, 
+;src/main.c:1589: cpct_etm_drawTileBox2x4(sht.px / 2, (sht.y - ORIG_MAP_Y) / 4, 
 	ld	b, #0x00
 	ld	a, c
 	add	a, #0xe0
@@ -7002,21 +7002,21 @@ _DeleteShot::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:1611: void PrintShot(u8* magic) __z88dk_fastcall {
+;src/main.c:1595: void PrintShot(u8* magic) __z88dk_fastcall {
 ;	---------------------------------
 ; Function PrintShot
 ; ---------------------------------
 _PrintShot::
-;src/main.c:1612: DeleteShot(); // delete the previous shot
+;src/main.c:1596: DeleteShot(); // delete the previous shot
 	push	hl
 	call	_DeleteShot
 	pop	bc
-;src/main.c:1613: if (!sht.active) return; // outside the margins. no need to print
+;src/main.c:1597: if (!sht.active) return; // outside the margins. no need to print
 	ld	a, (#_sht + 4)
 	or	a, a
 	ret	Z
-;src/main.c:1615: SHT_W, SHT_H, g_maskTable);
-;src/main.c:1614: cpct_drawSpriteMaskedAlignedTable(magic, cpct_getScreenPtr(CPCT_VMEM_START, sht.x, sht.y), 
+;src/main.c:1599: SHT_W, SHT_H, g_maskTable);
+;src/main.c:1598: cpct_drawSpriteMaskedAlignedTable(magic, cpct_getScreenPtr(CPCT_VMEM_START, sht.x, sht.y), 
 	ld	hl, #_sht + 1
 	ld	d, (hl)
 	ld	a, (#_sht + 0)
@@ -7035,22 +7035,22 @@ _PrintShot::
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
 	ret
-;src/main.c:1620: void MoveShot() {
+;src/main.c:1604: void MoveShot() {
 ;	---------------------------------
 ; Function MoveShot
 ; ---------------------------------
 _MoveShot::
-;src/main.c:1621: sht.px = sht.x; // save the current X coordinate
+;src/main.c:1605: sht.px = sht.x; // save the current X coordinate
 	ld	bc, #_sht+0
 	ld	a, (bc)
 	ld	(#(_sht + 0x0002)),a
-;src/main.c:1623: if (sht.dir == D_right)	sht.x++; else sht.x--;
+;src/main.c:1607: if (sht.dir == D_right)	sht.x++; else sht.x--;
 	ld	hl, #_sht + 3
 	ld	d, (hl)
-;src/main.c:1621: sht.px = sht.x; // save the current X coordinate
+;src/main.c:1605: sht.px = sht.x; // save the current X coordinate
 	ld	a, (bc)
 	ld	e, a
-;src/main.c:1623: if (sht.dir == D_right)	sht.x++; else sht.x--;
+;src/main.c:1607: if (sht.dir == D_right)	sht.x++; else sht.x--;
 	ld	a, d
 	sub	a, #0x03
 	jr	NZ,00102$
@@ -7063,10 +7063,10 @@ _MoveShot::
 	ld	a, e
 	ld	(bc), a
 00103$:
-;src/main.c:1621: sht.px = sht.x; // save the current X coordinate
+;src/main.c:1605: sht.px = sht.x; // save the current X coordinate
 	ld	a, (bc)
 	ld	e, a
-;src/main.c:1625: if (sht.x + SHT_W >= GLOBAL_MAX_X || sht.x <= 0) {
+;src/main.c:1609: if (sht.x + SHT_W >= GLOBAL_MAX_X || sht.x <= 0) {
 	ld	l, e
 	ld	h, #0x00
 	inc	hl
@@ -7085,22 +7085,22 @@ _MoveShot::
 	or	a, a
 	ret	NZ
 00104$:
-;src/main.c:1626: sht.active = FALSE;
+;src/main.c:1610: sht.active = FALSE;
 	ld	hl, #(_sht + 0x0004)
 	ld	(hl), #0x00
-;src/main.c:1627: DeleteShot();
+;src/main.c:1611: DeleteShot();
 	jp  _DeleteShot
-;src/main.c:1644: void PrintWizard(u8 shooting) __z88dk_fastcall {
+;src/main.c:1628: void PrintWizard(u8 shooting) __z88dk_fastcall {
 ;	---------------------------------
 ; Function PrintWizard
 ; ---------------------------------
 _PrintWizard::
 	ld	c, l
-;src/main.c:1646: u8 x = 0;
+;src/main.c:1630: u8 x = 0;
 	ld	e, #0x00
-;src/main.c:1648: if (spr[6].dir == D_left) { // on the right bank facing left
+;src/main.c:1632: if (spr[6].dir == D_left) { // on the right bank facing left
 	ld	a, (#_spr + 97)
-;src/main.c:1649: if (shooting) wizard = g_wizard_1;
+;src/main.c:1633: if (shooting) wizard = g_wizard_1;
 	sub	a,#0x02
 	jr	NZ,00108$
 	or	a,c
@@ -7108,25 +7108,25 @@ _PrintWizard::
 	ld	bc, #_g_wizard_1+0
 	jr	00103$
 00102$:
-;src/main.c:1650: else wizard = g_wizard_0;
+;src/main.c:1634: else wizard = g_wizard_0;
 	ld	bc, #_g_wizard_0
 00103$:
-;src/main.c:1651: x = 75;
+;src/main.c:1635: x = 75;
 	ld	e, #0x4b
 	jr	00109$
 00108$:
-;src/main.c:1654: if (shooting) wizard = g_wizard_3; 
+;src/main.c:1638: if (shooting) wizard = g_wizard_3; 
 	ld	a, c
 	or	a, a
 	jr	Z,00105$
 	ld	bc, #_g_wizard_3
 	jr	00109$
 00105$:
-;src/main.c:1655: else wizard = g_wizard_2;
+;src/main.c:1639: else wizard = g_wizard_2;
 	ld	bc, #_g_wizard_2
 00109$:
-;src/main.c:1659: SPR_W, SPR_H, g_maskTable); 							
-;src/main.c:1658: cpct_drawSpriteMaskedAlignedTable(wizard, cpct_getScreenPtr(CPCT_VMEM_START, x, spr[6].y), 
+;src/main.c:1643: SPR_W, SPR_H, g_maskTable); 							
+;src/main.c:1642: cpct_drawSpriteMaskedAlignedTable(wizard, cpct_getScreenPtr(CPCT_VMEM_START, x, spr[6].y), 
 	ld	hl, #_spr + 93
 	ld	d, (hl)
 	push	bc
@@ -7143,17 +7143,17 @@ _PrintWizard::
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
 	ret
-;src/main.c:1664: void WizardAnim() {
+;src/main.c:1648: void WizardAnim() {
 ;	---------------------------------
 ; Function WizardAnim
 ; ---------------------------------
 _WizardAnim::
-;src/main.c:1665: if (ctWizardAnim > 0) {
+;src/main.c:1649: if (ctWizardAnim > 0) {
 	ld	iy, #_ctWizardAnim
 	ld	a, 0 (iy)
 	or	a, a
 	ret	Z
-;src/main.c:1666: switch(ctWizardAnim++) {			
+;src/main.c:1650: switch(ctWizardAnim++) {			
 	ld	c, 0 (iy)
 	inc	0 (iy)
 	ld	a, c
@@ -7191,7 +7191,7 @@ _WizardAnim::
 	sub	a, #0x20
 	jr	Z,00116$
 	jr	00117$
-;src/main.c:1669: case 29:	{ PrintExplosion(&spr[6], 0); break; }
+;src/main.c:1653: case 29:	{ PrintExplosion(&spr[6], 0); break; }
 00102$:
 	xor	a, a
 	push	af
@@ -7202,7 +7202,7 @@ _WizardAnim::
 	pop	af
 	inc	sp
 	ret
-;src/main.c:1671: case 30:	{ PrintExplosion(&spr[6], 1); break; }
+;src/main.c:1655: case 30:	{ PrintExplosion(&spr[6], 1); break; }
 00104$:
 	ld	a, #0x01
 	push	af
@@ -7213,7 +7213,7 @@ _WizardAnim::
 	pop	af
 	inc	sp
 	ret
-;src/main.c:1673: case 31:	{ DeleteSprite(&spr[6]); PrintExplosion(&spr[6], 0); break; }						
+;src/main.c:1657: case 31:	{ DeleteSprite(&spr[6]); PrintExplosion(&spr[6], 0); break; }						
 00106$:
 	ld	hl, #(_spr + 0x005a)
 	call	_DeleteSprite
@@ -7226,13 +7226,13 @@ _WizardAnim::
 	pop	af
 	inc	sp
 	ret
-;src/main.c:1675: case 4:		{ DeleteSprite(&spr[6]); PrintWizard(TRUE); break; }		
+;src/main.c:1659: case 4:		{ DeleteSprite(&spr[6]); PrintWizard(TRUE); break; }		
 00107$:
 	ld	hl, #(_spr + 0x005a)
 	call	_DeleteSprite
 	ld	l, #0x01
 	jp  _PrintWizard
-;src/main.c:1677: case 5:		{ MakeShot(spr[6].x, spr[6].y-3, spr[6].dir); break; }			
+;src/main.c:1661: case 5:		{ MakeShot(spr[6].x, spr[6].y-3, spr[6].dir); break; }			
 00108$:
 	ld	hl, #_spr + 97
 	ld	d, (hl)
@@ -7249,31 +7249,31 @@ _WizardAnim::
 	pop	af
 	inc	sp
 	ret
-;src/main.c:1686: case 12:    { DeleteSprite(&spr[6]); PrintWizard(FALSE); break;}
+;src/main.c:1670: case 12:    { DeleteSprite(&spr[6]); PrintWizard(FALSE); break;}
 00115$:
 	ld	hl, #(_spr + 0x005a)
 	call	_DeleteSprite
 	ld	l, #0x00
 	jp  _PrintWizard
-;src/main.c:1688: case 32:    { DeleteSprite(&spr[6]); ctWizardAnim = 0; return; }
+;src/main.c:1672: case 32:    { DeleteSprite(&spr[6]); ctWizardAnim = 0; return; }
 00116$:
 	ld	hl, #(_spr + 0x005a)
 	call	_DeleteSprite
 	ld	hl,#_ctWizardAnim + 0
 	ld	(hl), #0x00
 	ret
-;src/main.c:1690: default:	{ PrintWizard(FALSE); break;	}			
+;src/main.c:1674: default:	{ PrintWizard(FALSE); break;	}			
 00117$:
 	ld	l, #0x00
-;src/main.c:1691: }		
+;src/main.c:1675: }		
 	jp  _PrintWizard
-;src/main.c:1697: void MakeWizardAnim(u8 player) __z88dk_fastcall {
+;src/main.c:1681: void MakeWizardAnim(u8 player) __z88dk_fastcall {
 ;	---------------------------------
 ; Function MakeWizardAnim
 ; ---------------------------------
 _MakeWizardAnim::
 	ld	c, l
-;src/main.c:1698: if (ctInactivity[player]++ == 80 && !sht.active) {	
+;src/main.c:1682: if (ctInactivity[player]++ == 80 && !sht.active) {	
 	ld	de, #_ctInactivity+0
 	ld	l,c
 	ld	h,#0x00
@@ -7288,7 +7288,7 @@ _MakeWizardAnim::
 	ld	a, (#(_sht + 0x0004) + 0)
 	or	a, a
 	ret	NZ
-;src/main.c:1699: spr[6].y = spr[6].py = spr[player].y;
+;src/main.c:1683: spr[6].y = spr[6].py = spr[player].y;
 	ld	de, #_spr+0
 	ld	b,#0x00
 	ld	l, c
@@ -7308,42 +7308,42 @@ _MakeWizardAnim::
 	ld	a, (hl)
 	ld	(#(_spr + 0x005f)),a
 	ld	(#(_spr + 0x005d)),a
-;src/main.c:1701: if (spr[player].x < 40) {
+;src/main.c:1685: if (spr[player].x < 40) {
 	ld	l, c
 	ld	h, b
 	inc	hl
 	inc	hl
 	ld	c, (hl)
-;src/main.c:1702: spr[6].x = spr[6].px = 74;		
+;src/main.c:1686: spr[6].x = spr[6].px = 74;		
 	ld	hl, #0x005e
 	add	hl, de
-;src/main.c:1703: spr[6].dir = D_left;
-;src/main.c:1701: if (spr[player].x < 40) {
+;src/main.c:1687: spr[6].dir = D_left;
+;src/main.c:1685: if (spr[player].x < 40) {
 	ld	a, c
 	sub	a, #0x28
 	jr	NC,00102$
-;src/main.c:1702: spr[6].x = spr[6].px = 74;		
+;src/main.c:1686: spr[6].x = spr[6].px = 74;		
 	ld	(hl), #0x4a
 	ld	hl, #(_spr + 0x005c)
 	ld	(hl), #0x4a
-;src/main.c:1703: spr[6].dir = D_left;
+;src/main.c:1687: spr[6].dir = D_left;
 	ld	hl, #(_spr + 0x0061)
 	ld	(hl), #0x02
 	jr	00103$
 00102$:
-;src/main.c:1706: spr[6].x = spr[6].px = 1;
+;src/main.c:1690: spr[6].x = spr[6].px = 1;
 	ld	(hl), #0x01
 	ld	hl, #(_spr + 0x005c)
 	ld	(hl), #0x01
-;src/main.c:1707: spr[6].dir = D_right;
+;src/main.c:1691: spr[6].dir = D_right;
 	ld	hl, #(_spr + 0x0061)
 	ld	(hl), #0x03
 00103$:
-;src/main.c:1709: ctWizardAnim++; // makes the wizard shooting animation start
+;src/main.c:1693: ctWizardAnim++; // makes the wizard shooting animation start
 	ld	hl, #_ctWizardAnim+0
 	inc	(hl)
 	ret
-;src/main.c:1727: void MoveEnemy(TSpr *pSpr) {
+;src/main.c:1711: void MoveEnemy(TSpr *pSpr) {
 ;	---------------------------------
 ; Function MoveEnemy
 ; ---------------------------------
@@ -7354,9 +7354,9 @@ _MoveEnemy::
 	ld	hl, #-16
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1728: u8 z = 255;	// multipurpose variable
+;src/main.c:1712: u8 z = 255;	// multipurpose variable
 	ld	-16 (ix), #0xff
-;src/main.c:1729: switch(pSpr->objNum_mov) {
+;src/main.c:1713: switch(pSpr->objNum_mov) {
 	ld	a, 4 (ix)
 	ld	-15 (ix), a
 	ld	a, 5 (ix)
@@ -7366,129 +7366,129 @@ _MoveEnemy::
 	ld	de, #0x000c
 	add	hl, de
 	ld	a, (hl)
-	ld	-11 (ix), a
-;src/main.c:1732: if (pSpr->dir == D_right) {
+	ld	-13 (ix), a
+;src/main.c:1716: if (pSpr->dir == D_right) {
 	ld	a, -15 (ix)
 	add	a, #0x07
-	ld	-13 (ix), a
-	ld	a, -14 (ix)
-	adc	a, #0x00
-	ld	-12 (ix), a
-;src/main.c:1734: if (pSpr->x < pSpr->power_maxV) 
-	ld	a, -15 (ix)
-	add	a, #0x02
 	ld	-10 (ix), a
 	ld	a, -14 (ix)
 	adc	a, #0x00
 	ld	-9 (ix), a
+;src/main.c:1718: if (pSpr->x < pSpr->power_maxV) 
 	ld	a, -15 (ix)
-	add	a, #0x0e
-	ld	-6 (ix), a
+	add	a, #0x02
+	ld	-12 (ix), a
 	ld	a, -14 (ix)
 	adc	a, #0x00
-	ld	-5 (ix), a
-;src/main.c:1735: pSpr->x = pSpr->x + pSpr->lives_speed;
+	ld	-11 (ix), a
 	ld	a, -15 (ix)
-	add	a, #0x0b
+	add	a, #0x0e
 	ld	-8 (ix), a
 	ld	a, -14 (ix)
 	adc	a, #0x00
 	ld	-7 (ix), a
-;src/main.c:1741: if (pSpr->x > pSpr->print_minV)  
+;src/main.c:1719: pSpr->x = pSpr->x + pSpr->lives_speed;
 	ld	a, -15 (ix)
-	add	a, #0x0d
+	add	a, #0x0b
 	ld	-4 (ix), a
 	ld	a, -14 (ix)
 	adc	a, #0x00
 	ld	-3 (ix), a
-;src/main.c:1748: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
+;src/main.c:1725: if (pSpr->x > pSpr->print_minV)  
+	ld	a, -15 (ix)
+	add	a, #0x0d
+	ld	-6 (ix), a
+	ld	a, -14 (ix)
+	adc	a, #0x00
+	ld	-5 (ix), a
+;src/main.c:1732: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
 	ld	a, -15 (ix)
 	add	a, #0x03
 	ld	-2 (ix), a
 	ld	a, -14 (ix)
 	adc	a, #0x00
 	ld	-1 (ix), a
-;src/main.c:1729: switch(pSpr->objNum_mov) {
-	ld	a, -11 (ix)
+;src/main.c:1713: switch(pSpr->objNum_mov) {
+	ld	a, -13 (ix)
 	or	a, a
 	jr	Z,00101$
-	ld	a, -11 (ix)
+	ld	a, -13 (ix)
 	dec	a
 	jp	Z,00125$
-	ld	a, -11 (ix)
+	ld	a, -13 (ix)
 	sub	a, #0x02
 	jp	Z,00135$
-	ld	a, -11 (ix)
+	ld	a, -13 (ix)
 	sub	a, #0x03
 	jp	Z,00152$
 	jp	00168$
-;src/main.c:1731: case M_linear_X:
+;src/main.c:1715: case M_linear_X:
 00101$:
-;src/main.c:1732: if (pSpr->dir == D_right) {
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
-	ld	a, (hl)
-;src/main.c:1751: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
+;src/main.c:1716: if (pSpr->dir == D_right) {
 	ld	l,-10 (ix)
 	ld	h,-9 (ix)
+	ld	a, (hl)
+;src/main.c:1735: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
-;src/main.c:1732: if (pSpr->dir == D_right) {
+;src/main.c:1716: if (pSpr->dir == D_right) {
 	sub	a, #0x03
 	jr	NZ,00109$
-;src/main.c:1734: if (pSpr->x < pSpr->power_maxV) 
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/main.c:1718: if (pSpr->x < pSpr->power_maxV) 
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	b, (hl)
 	ld	a, c
 	sub	a, b
 	jr	NC,00103$
-;src/main.c:1735: pSpr->x = pSpr->x + pSpr->lives_speed;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:1719: pSpr->x = pSpr->x + pSpr->lives_speed;
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	ld	a, c
 	add	a, b
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	(hl), a
 	jr	00110$
 00103$:
-;src/main.c:1737: pSpr->dir = D_left;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1721: pSpr->dir = D_left;
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), #0x02
 	jr	00110$
 00109$:
-;src/main.c:1741: if (pSpr->x > pSpr->print_minV)  
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+;src/main.c:1725: if (pSpr->x > pSpr->print_minV)  
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	a, (hl)
 	sub	a, c
 	jr	NC,00106$
-;src/main.c:1742: pSpr->x = pSpr->x - pSpr->lives_speed;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:1726: pSpr->x = pSpr->x - pSpr->lives_speed;
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	ld	a, c
 	sub	a, b
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	(hl), a
 	jr	00110$
 00106$:
-;src/main.c:1744: pSpr->dir = D_right; 
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1728: pSpr->dir = D_right; 
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), #0x03
 00110$:
-;src/main.c:1747: if (pSpr->ident == WITCH) {
+;src/main.c:1731: if (pSpr->ident == WITCH) {
 	ld	l,-15 (ix)
 	ld	h,-14 (ix)
 	inc	hl
 	ld	a, (hl)
 	sub	a, #0x06
 	jp	NZ,00168$
-;src/main.c:1748: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
+;src/main.c:1732: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	e, (hl)
@@ -7523,7 +7523,7 @@ _MoveEnemy::
 	ld	-16 (ix), #0x00
 	jr	00116$
 00115$:
-;src/main.c:1749: else if (pSpr->y > (spr[1].y - SHT_H) && pSpr->y < (spr[1].y + SHT_H)) z = 1; // P2
+;src/main.c:1733: else if (pSpr->y > (spr[1].y - SHT_H) && pSpr->y < (spr[1].y + SHT_H)) z = 1; // P2
 	ld	hl, #_spr + 18
 	ld	c, (hl)
 	ld	b, #0x00
@@ -7553,11 +7553,11 @@ _MoveEnemy::
 	jp	P, 00116$
 	ld	-16 (ix), #0x01
 00116$:
-;src/main.c:1750: if (z < 255) {
+;src/main.c:1734: if (z < 255) {
 	ld	a, -16 (ix)
 	sub	a, #0xff
 	jp	NC, 00168$
-;src/main.c:1751: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
+;src/main.c:1735: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
 	ld	c,-16 (ix)
 	ld	b,#0x00
 	ld	l, c
@@ -7573,30 +7573,30 @@ _MoveEnemy::
 	inc	hl
 	inc	hl
 	ld	c, (hl)
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	a, (hl)
 	sub	a, c
 	jr	NC,00119$
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), #0x03
 	jr	00120$
 00119$:
-;src/main.c:1752: else pSpr->dir = D_left;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1736: else pSpr->dir = D_left;
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), #0x02
 00120$:
-;src/main.c:1753: MakeShot(pSpr->x, pSpr->y, pSpr->dir);
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1737: MakeShot(pSpr->x, pSpr->y, pSpr->dir);
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	a, (hl)
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	d, (hl)
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	b, (hl)
 	push	af
 	inc	sp
@@ -7605,30 +7605,30 @@ _MoveEnemy::
 	call	_MakeShot
 	pop	af
 	inc	sp
-;src/main.c:1756: break;
+;src/main.c:1740: break;
 	jp	00168$
-;src/main.c:1759: case M_linear_Y:
+;src/main.c:1743: case M_linear_Y:
 00125$:
-;src/main.c:1760: if (pSpr->dir == D_down) {
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1744: if (pSpr->dir == D_down) {
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	b, (hl)
-;src/main.c:1748: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
+;src/main.c:1732: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	c, (hl)
-;src/main.c:1760: if (pSpr->dir == D_down) {
+;src/main.c:1744: if (pSpr->dir == D_down) {
 	djnz	00133$
-;src/main.c:1762: if (pSpr->y < pSpr->power_maxV)
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/main.c:1746: if (pSpr->y < pSpr->power_maxV)
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
 	ld	b, (hl)
 	ld	a, c
 	sub	a, b
 	jr	NC,00127$
-;src/main.c:1763: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:1747: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	sla	b
 	ld	a, c
@@ -7638,21 +7638,21 @@ _MoveEnemy::
 	ld	(hl), a
 	jp	00168$
 00127$:
-;src/main.c:1765: pSpr->dir = D_up;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1749: pSpr->dir = D_up;
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), #0x00
 	jp	00168$
 00133$:
-;src/main.c:1769: if (pSpr->y > pSpr->print_minV) 
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+;src/main.c:1753: if (pSpr->y > pSpr->print_minV) 
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	a, (hl)
 	sub	a, c
 	jr	NC,00130$
-;src/main.c:1770: pSpr->y = pSpr->y - (pSpr->lives_speed*2);
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:1754: pSpr->y = pSpr->y - (pSpr->lives_speed*2);
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	sla	b
 	ld	a, c
@@ -7662,33 +7662,33 @@ _MoveEnemy::
 	ld	(hl), a
 	jp	00168$
 00130$:
-;src/main.c:1772: pSpr->dir = D_down; 
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1756: pSpr->dir = D_down; 
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), #0x01
-;src/main.c:1774: break;
+;src/main.c:1758: break;
 	jp	00168$
-;src/main.c:1777: case M_linear_XY:		
+;src/main.c:1761: case M_linear_XY:		
 00135$:
-;src/main.c:1779: if (pSpr->dir == D_up && OnBackground(pSpr->x, pSpr->y - (pSpr->lives_speed*2)-8))
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1763: if (pSpr->dir == D_up && OnBackground(pSpr->x, pSpr->y - (pSpr->lives_speed*2)-8))
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	a, (hl)
 	or	a, a
 	jr	NZ,00149$
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	sla	b
 	ld	a, c
 	sub	a, b
 	add	a, #0xf8
 	ld	d, a
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	e, (hl)
 	push	de
 	call	_OnBackground
@@ -7696,12 +7696,12 @@ _MoveEnemy::
 	ld	a, l
 	or	a, a
 	jr	Z,00149$
-;src/main.c:1780: pSpr->y = pSpr->y - (pSpr->lives_speed*2);			
+;src/main.c:1764: pSpr->y = pSpr->y - (pSpr->lives_speed*2);			
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	sla	b
 	ld	a, c
@@ -7711,25 +7711,25 @@ _MoveEnemy::
 	ld	(hl), a
 	jp	00168$
 00149$:
-;src/main.c:1782: else if (pSpr->dir == D_down && OnBackground(pSpr->x, pSpr->y + (pSpr->lives_speed*2)+2))
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1766: else if (pSpr->dir == D_down && OnBackground(pSpr->x, pSpr->y + (pSpr->lives_speed*2)+2))
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	c, (hl)
 	dec	c
 	jr	NZ,00145$
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	l, (hl)
 	sla	l
 	add	hl, bc
 	ld	d, l
 	inc	d
 	inc	d
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	e, (hl)
 	push	de
 	call	_OnBackground
@@ -7737,12 +7737,12 @@ _MoveEnemy::
 	ld	a, l
 	or	a, a
 	jr	Z,00145$
-;src/main.c:1783: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
+;src/main.c:1767: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	sla	b
 	ld	a, c
@@ -7752,20 +7752,20 @@ _MoveEnemy::
 	ld	(hl), a
 	jp	00168$
 00145$:
-;src/main.c:1785: else if (pSpr->dir == D_left && OnBackground((pSpr->x - pSpr->lives_speed)-3, pSpr->y))
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1769: else if (pSpr->dir == D_left && OnBackground((pSpr->x - pSpr->lives_speed)-3, pSpr->y))
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	a, (hl)
 	sub	a, #0x02
 	jr	NZ,00141$
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	d, (hl)
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	e, (hl)
 	ld	a, c
 	sub	a, e
@@ -7777,34 +7777,34 @@ _MoveEnemy::
 	ld	a, l
 	or	a, a
 	jr	Z,00141$
-;src/main.c:1786: pSpr->x = pSpr->x - pSpr->lives_speed;
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+;src/main.c:1770: pSpr->x = pSpr->x - pSpr->lives_speed;
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	ld	a, c
 	sub	a, b
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	(hl), a
 	jp	00168$
 00141$:
-;src/main.c:1788: else if (pSpr->dir == D_right && OnBackground((pSpr->x + pSpr->lives_speed)+1, pSpr->y))
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/main.c:1772: else if (pSpr->dir == D_right && OnBackground((pSpr->x + pSpr->lives_speed)+1, pSpr->y))
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	a, (hl)
 	sub	a, #0x03
 	jr	NZ,00137$
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	d, (hl)
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	l, (hl)
 	add	hl, bc
 	ld	b, l
@@ -7816,21 +7816,21 @@ _MoveEnemy::
 	ld	a, l
 	or	a, a
 	jr	Z,00137$
-;src/main.c:1789: pSpr->x = pSpr->x + pSpr->lives_speed;
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+;src/main.c:1773: pSpr->x = pSpr->x + pSpr->lives_speed;
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	b, (hl)
 	ld	a, c
 	add	a, b
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	(hl), a
 	jp	00168$
 00137$:
-;src/main.c:1791: else pSpr->dir = cpct_getRandom_lcg_u8(0) / 65; // 0-1-2-3			
+;src/main.c:1775: else pSpr->dir = cpct_getRandom_lcg_u8(0) / 65; // 0-1-2-3			
 	ld	l, #0x00
 	call	_cpct_getRandom_lcg_u8
 	ld	b, l
@@ -7842,16 +7842,16 @@ _MoveEnemy::
 	call	__divuchar
 	pop	af
 	ld	c, l
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-10 (ix)
+	ld	h,-9 (ix)
 	ld	(hl), c
-;src/main.c:1792: break;
+;src/main.c:1776: break;
 	jp	00168$
-;src/main.c:1795: case M_chaser:
+;src/main.c:1779: case M_chaser:
 00152$:
-;src/main.c:1796: if (ctMainLoop % pSpr->lives_speed == 0) {
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
+;src/main.c:1780: if (ctMainLoop % pSpr->lives_speed == 0) {
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	c, (hl)
 	ld	b, #0x00
 	push	bc
@@ -7861,17 +7861,17 @@ _MoveEnemy::
 	pop	af
 	pop	af
 	ld	a, h
-;src/main.c:1797: z = 0;
+;src/main.c:1781: z = 0;
 	or	a,l
 	jp	NZ,00168$
 	ld	c,a
-;src/main.c:1799: if (TwoPlayers)
+;src/main.c:1783: if (TwoPlayers)
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jp	Z, 00154$
-;src/main.c:1800: z = Abs(pSpr->x - spr[1].x)*2 + Abs(pSpr->y - spr[1].y) <
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+;src/main.c:1784: z = Abs(pSpr->x - spr[1].x)*2 + Abs(pSpr->y - spr[1].y) <
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
 	ld	b, #0x00
 	ld	hl, #_spr + 17
@@ -7904,11 +7904,11 @@ _MoveEnemy::
 	call	_Abs
 	pop	bc
 	add	hl,bc
-	ld	-4 (ix), l
-	ld	-3 (ix), h
-;src/main.c:1801: Abs(pSpr->x - spr[0].x)*2 + Abs(pSpr->y - spr[0].y);
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	-6 (ix), l
+	ld	-5 (ix), h
+;src/main.c:1785: Abs(pSpr->x - spr[0].x)*2 + Abs(pSpr->y - spr[0].y);
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	c, (hl)
 	ld	b, #0x00
 	ld	hl, #_spr + 2
@@ -7941,9 +7941,9 @@ _MoveEnemy::
 	call	_Abs
 	pop	bc
 	add	hl, bc
-	ld	a, -4 (ix)
+	ld	a, -6 (ix)
 	sub	a, l
-	ld	a, -3 (ix)
+	ld	a, -5 (ix)
 	sbc	a, h
 	jp	PO, 00314$
 	xor	a, #0x80
@@ -7952,9 +7952,9 @@ _MoveEnemy::
 	and	a,#0x01
 	ld	c, a
 00154$:
-;src/main.c:1803: if (pSpr->x < spr[z].x) {
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+;src/main.c:1787: if (pSpr->x < spr[z].x) {
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	ld	b, (hl)
 	ld	de, #_spr+0
 	push	de
@@ -7978,32 +7978,32 @@ _MoveEnemy::
 	ld	a, b
 	sub	a, c
 	jr	NC,00158$
-;src/main.c:1804: pSpr->x++;
+;src/main.c:1788: pSpr->x++;
 	inc	b
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	ld	(hl), b
+;src/main.c:1789: pSpr->dir = D_right;
 	ld	l,-10 (ix)
 	ld	h,-9 (ix)
-	ld	(hl), b
-;src/main.c:1805: pSpr->dir = D_right;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
 	ld	(hl), #0x03
 	jr	00159$
 00158$:
-;src/main.c:1808: else if (pSpr->x > spr[z].x) {
+;src/main.c:1792: else if (pSpr->x > spr[z].x) {
 	ld	a, c
 	sub	a, b
 	jr	NC,00159$
-;src/main.c:1809: pSpr->x--;
+;src/main.c:1793: pSpr->x--;
 	dec	b
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	ld	(hl), b
+;src/main.c:1794: pSpr->dir = D_left;
 	ld	l,-10 (ix)
 	ld	h,-9 (ix)
-	ld	(hl), b
-;src/main.c:1810: pSpr->dir = D_left;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
 	ld	(hl), #0x02
 00159$:
-;src/main.c:1813: if (pSpr->y < spr[z].y) {
+;src/main.c:1797: if (pSpr->y < spr[z].y) {
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	c, (hl)
@@ -8015,7 +8015,7 @@ _MoveEnemy::
 	ld	a, c
 	sub	a, b
 	jr	NC,00163$
-;src/main.c:1814: pSpr->y+=2;
+;src/main.c:1798: pSpr->y+=2;
 	inc	c
 	inc	c
 	ld	l,-2 (ix)
@@ -8023,22 +8023,22 @@ _MoveEnemy::
 	ld	(hl), c
 	jr	00168$
 00163$:
-;src/main.c:1817: else if (pSpr->y > spr[z].y) {
+;src/main.c:1801: else if (pSpr->y > spr[z].y) {
 	ld	a, b
 	sub	a, c
 	jr	NC,00168$
-;src/main.c:1818: pSpr->y-=2;
+;src/main.c:1802: pSpr->y-=2;
 	dec	c
 	dec	c
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	ld	(hl), c
-;src/main.c:1822: }
+;src/main.c:1806: }
 00168$:
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:1827: void SetEnemyParams(u8 i, u8 ident, u8 mov, u8 dir, u8 speed, u8 x, u8 y, u8 minV, u8 maxV) {
+;src/main.c:1811: void SetEnemyParams(u8 i, u8 ident, u8 mov, u8 dir, u8 speed, u8 x, u8 y, u8 minV, u8 maxV) {
 ;	---------------------------------
 ; Function SetEnemyParams
 ; ---------------------------------
@@ -8046,7 +8046,7 @@ _SetEnemyParams::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/main.c:1828: spr[i].num = i;
+;src/main.c:1812: spr[i].num = i;
 	ld	bc, #_spr+0
 	ld	e,4 (ix)
 	ld	d,#0x00
@@ -8063,28 +8063,28 @@ _SetEnemyParams::
 	ld	b, h
 	ld	a, 4 (ix)
 	ld	(bc), a
-;src/main.c:1829: spr[i].ident = ident; 
+;src/main.c:1813: spr[i].ident = ident; 
 	ld	e, c
 	ld	d, b
 	inc	de
 	ld	a, 5 (ix)
 	ld	(de), a
-;src/main.c:1830: spr[i].objNum_mov = mov;	 
+;src/main.c:1814: spr[i].objNum_mov = mov;	 
 	ld	hl, #0x000c
 	add	hl, bc
 	ld	a, 6 (ix)
 	ld	(hl), a
-;src/main.c:1831: spr[i].dir = dir; 
+;src/main.c:1815: spr[i].dir = dir; 
 	ld	hl, #0x0007
 	add	hl, bc
 	ld	a, 7 (ix)
 	ld	(hl), a
-;src/main.c:1832: spr[i].lives_speed = speed;
+;src/main.c:1816: spr[i].lives_speed = speed;
 	ld	hl, #0x000b
 	add	hl, bc
 	ld	a, 8 (ix)
 	ld	(hl), a
-;src/main.c:1833: spr[i].x = spr[i].px = x;
+;src/main.c:1817: spr[i].x = spr[i].px = x;
 	ld	e, c
 	ld	d, b
 	inc	de
@@ -8095,7 +8095,7 @@ _SetEnemyParams::
 	ld	(hl), a
 	ld	a, 9 (ix)
 	ld	(de), a
-;src/main.c:1834: spr[i].y = spr[i].py = y;
+;src/main.c:1818: spr[i].y = spr[i].py = y;
 	ld	e, c
 	ld	d, b
 	inc	de
@@ -8107,24 +8107,24 @@ _SetEnemyParams::
 	ld	(hl), a
 	ld	a, 10 (ix)
 	ld	(de), a
-;src/main.c:1835: spr[i].print_minV = minV;
+;src/main.c:1819: spr[i].print_minV = minV;
 	ld	hl, #0x000d
 	add	hl, bc
 	ld	a, 11 (ix)
 	ld	(hl), a
-;src/main.c:1836: spr[i].power_maxV = maxV;
+;src/main.c:1820: spr[i].power_maxV = maxV;
 	ld	hl, #0x000e
 	add	hl, bc
 	ld	a, 12 (ix)
 	ld	(hl), a
 	pop	ix
 	ret
-;src/main.c:1846: void SetEnemies() {
+;src/main.c:1830: void SetEnemies() {
 ;	---------------------------------
 ; Function SetEnemies
 ; ---------------------------------
 _SetEnemies::
-;src/main.c:1847: switch (nMap) {
+;src/main.c:1831: switch (nMap) {
 	ld	a, #0x0b
 	ld	iy, #_nMap
 	sub	a, 0 (iy)
@@ -8149,9 +8149,9 @@ _SetEnemies::
 	jp	00110$
 	jp	00111$
 	jp	00112$
-;src/main.c:1849: case 0: {			 
+;src/main.c:1833: case 0: {			 
 00101$:
-;src/main.c:1851: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1, 73, 158,   2,  73);						
+;src/main.c:1835: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1, 73, 158,   2,  73);						
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x9e49
@@ -8167,7 +8167,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1852: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  3, 110,   2,  73);
+;src/main.c:1836: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  3, 110,   2,  73);
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x6e03
@@ -8183,7 +8183,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1853: SetEnemyParams(4, SENTINEL,	M_linear_X, 	D_left,     1, 73,  62,  40,  73);
+;src/main.c:1837: SetEnemyParams(4, SENTINEL,	M_linear_X, 	D_left,     1, 73,  62,  40,  73);
 	ld	hl, #0x4928
 	push	hl
 	ld	hl, #0x3e49
@@ -8199,7 +8199,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1854: SetEnemyParams(5, SENTINEL,	M_linear_X, 	D_right,    1,  2,  62,   2,  35);
+;src/main.c:1838: SetEnemyParams(5, SENTINEL,	M_linear_X, 	D_right,    1,  2,  62,   2,  35);
 	ld	hl, #0x2302
 	push	hl
 	ld	h, #0x3e
@@ -8215,51 +8215,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1856: spr[0].x = spr[0].px = 6; 
+;src/main.c:1840: spr[0].x = spr[0].px = 6; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x06
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x06
-;src/main.c:1857: spr[0].y = spr[0].py = 178;			
+;src/main.c:1841: spr[0].y = spr[0].py = 178;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb2
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb2
-;src/main.c:1859: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
+;src/main.c:1843: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
 	ld	hl, #(_mappk0 + 0x0279)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:1861: lName = "1;1@@GARDENS";
+;src/main.c:1845: lName = "1;1@@GARDENS";
 	ld	hl, #___str_35+0
 	ld	(_lName), hl
-;src/main.c:1863: doorKey[0] = 4;	// toad snot
+;src/main.c:1847: doorKey[0] = 4;	// toad snot
 	ld	hl, #_doorKey
 	ld	(hl), #0x04
-;src/main.c:1864: doorKey[1] = 5;	// diamond dust
+;src/main.c:1848: doorKey[1] = 5;	// diamond dust
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x05
-;src/main.c:1865: doorKey[2] = 4;	// toad snot
+;src/main.c:1849: doorKey[2] = 4;	// toad snot
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x04
-;src/main.c:1866: doorKey[3] = 5;	// diamond dust
+;src/main.c:1850: doorKey[3] = 5;	// diamond dust
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x05
-;src/main.c:1867: doorKey[4] = 4; // toad snot
+;src/main.c:1851: doorKey[4] = 4; // toad snot
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x04
-;src/main.c:1869: storeX = 51;
+;src/main.c:1853: storeX = 51;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x33
-;src/main.c:1870: storeY = 11;
+;src/main.c:1854: storeY = 11;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x0b
-;src/main.c:1871: break;
+;src/main.c:1855: break;
 	jp	00113$
-;src/main.c:1874: case 1: {
+;src/main.c:1858: case 1: {
 00102$:
-;src/main.c:1876: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
+;src/main.c:1860: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	l, #0x00
@@ -8275,7 +8275,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1877: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  2, 114,   2,  73);						
+;src/main.c:1861: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  2, 114,   2,  73);						
 	ld	hl, #0x4902
 	push	hl
 	ld	h, #0x72
@@ -8291,7 +8291,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1878: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
+;src/main.c:1862: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x3e0a
@@ -8307,7 +8307,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1879: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
+;src/main.c:1863: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2602
@@ -8323,51 +8323,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1881: spr[0].x = spr[0].px = 58; 
+;src/main.c:1865: spr[0].x = spr[0].px = 58; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x3a
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x3a
-;src/main.c:1882: spr[0].y = spr[0].py = 178;	
+;src/main.c:1866: spr[0].y = spr[0].py = 178;	
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb2
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb2
-;src/main.c:1884: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
+;src/main.c:1868: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
 	ld	hl, #(_mappk1 + 0x02a0)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:1886: lName = "1;2@@GARDENS";
+;src/main.c:1870: lName = "1;2@@GARDENS";
 	ld	hl, #___str_36+0
 	ld	(_lName), hl
-;src/main.c:1888: doorKey[0] = 4;	// toad snot
+;src/main.c:1872: doorKey[0] = 4;	// toad snot
 	ld	hl, #_doorKey
 	ld	(hl), #0x04
-;src/main.c:1889: doorKey[1] = 6;	// newt eye
+;src/main.c:1873: doorKey[1] = 6;	// newt eye
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x06
-;src/main.c:1890: doorKey[2] = 5; // diamond dust
+;src/main.c:1874: doorKey[2] = 5; // diamond dust
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x05
-;src/main.c:1891: doorKey[3] = 6; // newt eye
+;src/main.c:1875: doorKey[3] = 6; // newt eye
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x06
-;src/main.c:1892: doorKey[4] = 4; // toad snot
+;src/main.c:1876: doorKey[4] = 4; // toad snot
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x04
-;src/main.c:1894: storeX = 51;
+;src/main.c:1878: storeX = 51;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x33
-;src/main.c:1895: storeY = 55;
+;src/main.c:1879: storeY = 55;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x37
-;src/main.c:1896: break;
+;src/main.c:1880: break;
 	jp	00113$
-;src/main.c:1899: case 2: {			 
+;src/main.c:1883: case 2: {			 
 00103$:
-;src/main.c:1901: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_right,    1,  3, 120,   0,   0);						
+;src/main.c:1885: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_right,    1,  3, 120,   0,   0);						
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x7803
@@ -8383,7 +8383,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1902: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_left,     1, 73,  99,   0,   0);
+;src/main.c:1886: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_left,     1, 73,  99,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x6349
@@ -8399,7 +8399,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1903: SetEnemyParams(4, BAT,	 	M_linear_X,    	D_right,    1, 22,  58,  22,  60);																		
+;src/main.c:1887: SetEnemyParams(4, BAT,	 	M_linear_X,    	D_right,    1, 22,  58,  22,  60);																		
 	ld	hl, #0x3c16
 	push	hl
 	ld	h, #0x3a
@@ -8415,7 +8415,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1904: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  78,   2,  73);
+;src/main.c:1888: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  78,   2,  73);
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x4e03
@@ -8431,51 +8431,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1906: spr[0].x = spr[0].px = 58; 
+;src/main.c:1890: spr[0].x = spr[0].px = 58; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x3a
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x3a
-;src/main.c:1907: spr[0].y = spr[0].py = 178;			
+;src/main.c:1891: spr[0].y = spr[0].py = 178;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb2
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb2
-;src/main.c:1909: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
+;src/main.c:1893: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
 	ld	hl, #(_mappk2 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:1911: lName = "2;1@CEMETERY";
+;src/main.c:1895: lName = "2;1@CEMETERY";
 	ld	hl, #___str_37+0
 	ld	(_lName), hl
-;src/main.c:1913: doorKey[0] = 4;	// toad snot
+;src/main.c:1897: doorKey[0] = 4;	// toad snot
 	ld	hl, #_doorKey
 	ld	(hl), #0x04
-;src/main.c:1914: doorKey[1] = 5;	// diamond dust
+;src/main.c:1898: doorKey[1] = 5;	// diamond dust
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x05
-;src/main.c:1915: doorKey[2] = 6; // newt eye
+;src/main.c:1899: doorKey[2] = 6; // newt eye
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x06
-;src/main.c:1916: doorKey[3] = 7;	// mammoth poop
+;src/main.c:1900: doorKey[3] = 7;	// mammoth poop
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x07
-;src/main.c:1917: doorKey[4] = 8; // kraken ink
+;src/main.c:1901: doorKey[4] = 8; // kraken ink
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x08
-;src/main.c:1919: storeX = 3;
+;src/main.c:1903: storeX = 3;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x03
-;src/main.c:1920: storeY = 11;
+;src/main.c:1904: storeY = 11;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x0b
-;src/main.c:1921: break;
+;src/main.c:1905: break;
 	jp	00113$
-;src/main.c:1924: case 3: {			 
+;src/main.c:1908: case 3: {			 
 00104$:
-;src/main.c:1926: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_left,     1,  2, 180,   0,   0);
+;src/main.c:1910: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_left,     1,  2, 180,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0xb402
@@ -8491,7 +8491,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1927: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_right,    1,  2, 136,   0,   0);
+;src/main.c:1911: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_right,    1,  2, 136,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x8802
@@ -8507,7 +8507,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1928: SetEnemyParams(4, GHOST,	M_linear_XY, 	D_left,     1, 70,  40,   0,   0);
+;src/main.c:1912: SetEnemyParams(4, GHOST,	M_linear_XY, 	D_left,     1, 70,  40,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2846
@@ -8523,7 +8523,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1929: SetEnemyParams(5, GHOST,	M_linear_XY,	D_left,     1,  2,  40,   0,   0);
+;src/main.c:1913: SetEnemyParams(5, GHOST,	M_linear_XY,	D_left,     1,  2,  40,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2802
@@ -8539,51 +8539,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1931: spr[0].x = spr[0].px = 36; 
+;src/main.c:1915: spr[0].x = spr[0].px = 36; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x24
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x24
-;src/main.c:1932: spr[0].y = spr[0].py = 178;			
+;src/main.c:1916: spr[0].y = spr[0].py = 178;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb2
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb2
-;src/main.c:1934: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
+;src/main.c:1918: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
 	ld	hl, #(_mappk3 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:1936: lName = "2;2@CEMETERY";
+;src/main.c:1920: lName = "2;2@CEMETERY";
 	ld	hl, #___str_38+0
 	ld	(_lName), hl
-;src/main.c:1938: doorKey[0] = 5;	// diamond dust
+;src/main.c:1922: doorKey[0] = 5;	// diamond dust
 	ld	hl, #_doorKey
 	ld	(hl), #0x05
-;src/main.c:1939: doorKey[1] = 7; // mammooth poop
+;src/main.c:1923: doorKey[1] = 7; // mammooth poop
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x07
-;src/main.c:1940: doorKey[2] = 6; // newt eye
+;src/main.c:1924: doorKey[2] = 6; // newt eye
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x06
-;src/main.c:1941: doorKey[3] = 7; // mammooth poop
+;src/main.c:1925: doorKey[3] = 7; // mammooth poop
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x07
-;src/main.c:1942: doorKey[4] = 5; // diamond dust
+;src/main.c:1926: doorKey[4] = 5; // diamond dust
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x05
-;src/main.c:1944: storeX = 41;
+;src/main.c:1928: storeX = 41;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x29
-;src/main.c:1945: storeY = 71;
+;src/main.c:1929: storeY = 71;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x47
-;src/main.c:1946: break;
+;src/main.c:1930: break;
 	jp	00113$
-;src/main.c:1949: case 4: {			 
+;src/main.c:1933: case 4: {			 
 00105$:
-;src/main.c:1951: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 134,  16,  73);							
+;src/main.c:1935: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 134,  16,  73);							
 	ld	hl, #0x4910
 	push	hl
 	ld	hl, #0x8649
@@ -8599,7 +8599,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1952: SetEnemyParams(3, BAT,		M_linear_X, 	D_right,    1,  3,  94,   2,  73);		
+;src/main.c:1936: SetEnemyParams(3, BAT,		M_linear_X, 	D_right,    1,  3,  94,   2,  73);		
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x5e03
@@ -8615,7 +8615,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1953: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,    	1, 17,  50,   0,   0);
+;src/main.c:1937: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,    	1, 17,  50,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x3211
@@ -8631,7 +8631,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1954: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_up,     	1, 57, 156,   0,   0);
+;src/main.c:1938: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_up,     	1, 57, 156,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x9c39
@@ -8647,51 +8647,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1956: spr[0].x = spr[0].px = 6; 
+;src/main.c:1940: spr[0].x = spr[0].px = 6; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x06
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x06
-;src/main.c:1957: spr[0].y = spr[0].py = 175;			
+;src/main.c:1941: spr[0].y = spr[0].py = 175;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xaf
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xaf
-;src/main.c:1959: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
+;src/main.c:1943: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
 	ld	hl, #(_mappk4 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:1961: lName = "3;1@@CELLARS";	
+;src/main.c:1945: lName = "3;1@@CELLARS";	
 	ld	hl, #___str_39+0
 	ld	(_lName), hl
-;src/main.c:1963: doorKey[0] = 4; // toad snot
+;src/main.c:1947: doorKey[0] = 4; // toad snot
 	ld	hl, #_doorKey
 	ld	(hl), #0x04
-;src/main.c:1964: doorKey[1] = 9; // mermaid tear
+;src/main.c:1948: doorKey[1] = 9; // mermaid tear
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x09
-;src/main.c:1965: doorKey[2] = 10;// martian mushroom
+;src/main.c:1949: doorKey[2] = 10;// martian mushroom
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x0a
-;src/main.c:1966: doorKey[3] = 9; // mermaid tear
+;src/main.c:1950: doorKey[3] = 9; // mermaid tear
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x09
-;src/main.c:1967: doorKey[4] = 4; // toad snot
+;src/main.c:1951: doorKey[4] = 4; // toad snot
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x04
-;src/main.c:1969: storeX = 5;
+;src/main.c:1953: storeX = 5;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x05
-;src/main.c:1970: storeY = 103;		
+;src/main.c:1954: storeY = 103;		
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x67
-;src/main.c:1971: break;
+;src/main.c:1955: break;
 	jp	00113$
-;src/main.c:1974: case 5: {			 
+;src/main.c:1958: case 5: {			 
 00106$:
-;src/main.c:1976: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  3, 142,   2,  73);
+;src/main.c:1960: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  3, 142,   2,  73);
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x8e03
@@ -8707,7 +8707,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1977: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1, 73, 102,   2,  73);						
+;src/main.c:1961: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1, 73, 102,   2,  73);						
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x6649
@@ -8723,7 +8723,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1978: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_down,     1, 38,  50,  50, 178);
+;src/main.c:1962: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_down,     1, 38,  50,  50, 178);
 	ld	hl, #0xb232
 	push	hl
 	ld	hl, #0x3226
@@ -8739,7 +8739,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1979: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  62,   2,  73);
+;src/main.c:1963: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  62,   2,  73);
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x3e03
@@ -8755,51 +8755,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:1981: spr[0].x = spr[0].px = 34; 
+;src/main.c:1965: spr[0].x = spr[0].px = 34; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x22
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x22
-;src/main.c:1982: spr[0].y = spr[0].py = 176;			
+;src/main.c:1966: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:1984: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk5_end);
+;src/main.c:1968: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk5_end);
 	ld	hl, #(_mappk5 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:1986: lName = "3;2@@CELLARS";
+;src/main.c:1970: lName = "3;2@@CELLARS";
 	ld	hl, #___str_40+0
 	ld	(_lName), hl
-;src/main.c:1988: doorKey[0] = 7; // mammooth poop
+;src/main.c:1972: doorKey[0] = 7; // mammooth poop
 	ld	hl, #_doorKey
 	ld	(hl), #0x07
-;src/main.c:1989: doorKey[1] = 8; // kraken ink
+;src/main.c:1973: doorKey[1] = 8; // kraken ink
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x08
-;src/main.c:1990: doorKey[2] = 9; // mermaid tear
+;src/main.c:1974: doorKey[2] = 9; // mermaid tear
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x09
-;src/main.c:1991: doorKey[3] = 6; // newt eye
+;src/main.c:1975: doorKey[3] = 6; // newt eye
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x06
-;src/main.c:1992: doorKey[4] = 5; // diamond dust
+;src/main.c:1976: doorKey[4] = 5; // diamond dust
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x05
-;src/main.c:1994: storeX = 3;
+;src/main.c:1978: storeX = 3;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x03
-;src/main.c:1995: storeY = 143;
+;src/main.c:1979: storeY = 143;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x8f
-;src/main.c:1996: break;
+;src/main.c:1980: break;
 	jp	00113$
-;src/main.c:1999: case 6: {			 
+;src/main.c:1983: case 6: {			 
 00107$:
-;src/main.c:2001: SetEnemyParams(2, KNIGHT,	M_linear_XY, 	D_up,     	1,  2, 174,   0,   0);
+;src/main.c:1985: SetEnemyParams(2, KNIGHT,	M_linear_XY, 	D_up,     	1,  2, 174,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0xae02
@@ -8815,7 +8815,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2002: SetEnemyParams(3, KNIGHT,	M_linear_XY, 	D_left,    	1, 60, 116,   0,   0);
+;src/main.c:1986: SetEnemyParams(3, KNIGHT,	M_linear_XY, 	D_left,    	1, 60, 116,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x743c
@@ -8831,7 +8831,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2003: SetEnemyParams(4, SENTINEL,	M_linear_XY, 	D_left,     1, 73,  96,   0,   0);
+;src/main.c:1987: SetEnemyParams(4, SENTINEL,	M_linear_XY, 	D_left,     1, 73,  96,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x6049
@@ -8847,7 +8847,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2004: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  60,   2,  73);
+;src/main.c:1988: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  60,   2,  73);
 	ld	hl, #0x4902
 	push	hl
 	ld	hl, #0x3c03
@@ -8863,51 +8863,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2006: spr[0].x = spr[0].px = 67; 
+;src/main.c:1990: spr[0].x = spr[0].px = 67; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x43
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x43
-;src/main.c:2007: spr[0].y = spr[0].py = 176;			
+;src/main.c:1991: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:2009: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk6_end);
+;src/main.c:1993: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk6_end);
 	ld	hl, #(_mappk6 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:2011: lName = "4;1@@@CASTLE";	
+;src/main.c:1995: lName = "4;1@@@CASTLE";	
 	ld	hl, #___str_41+0
 	ld	(_lName), hl
-;src/main.c:2013: doorKey[0] = 10; // martian mushroom
+;src/main.c:1997: doorKey[0] = 10; // martian mushroom
 	ld	hl, #_doorKey
 	ld	(hl), #0x0a
-;src/main.c:2014: doorKey[1] = 6; // newt eye
+;src/main.c:1998: doorKey[1] = 6; // newt eye
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x06
-;src/main.c:2015: doorKey[2] = 11; // dragon blood
+;src/main.c:1999: doorKey[2] = 11; // dragon blood
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x0b
-;src/main.c:2016: doorKey[3] = 6; // newt eye
+;src/main.c:2000: doorKey[3] = 6; // newt eye
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x06
-;src/main.c:2017: doorKey[4] = 10; // martian mushroom
+;src/main.c:2001: doorKey[4] = 10; // martian mushroom
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x0a
-;src/main.c:2019: storeX = 3;
+;src/main.c:2003: storeX = 3;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x03
-;src/main.c:2020: storeY = 11;		
+;src/main.c:2004: storeY = 11;		
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x0b
-;src/main.c:2021: break;
+;src/main.c:2005: break;
 	jp	00113$
-;src/main.c:2024: case 7: {			 
+;src/main.c:2008: case 7: {			 
 00108$:
-;src/main.c:2026: SetEnemyParams(2, NOBODY,	M_linear_XY, 	D_left,     1,  0,   0,   0,   0);
+;src/main.c:2010: SetEnemyParams(2, NOBODY,	M_linear_XY, 	D_left,     1,  0,   0,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	l, #0x00
@@ -8923,7 +8923,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2027: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_up,       1,  3, 176,   0,   0);
+;src/main.c:2011: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_up,       1,  3, 176,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0xb003
@@ -8939,7 +8939,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2028: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_right,    1,  3,  44,   0,   0);
+;src/main.c:2012: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_right,    1,  3,  44,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2c03
@@ -8955,7 +8955,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2029: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 73,  44,   0,   0);
+;src/main.c:2013: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 73,  44,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2c49
@@ -8971,51 +8971,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2031: spr[0].x = spr[0].px = 36; 
+;src/main.c:2015: spr[0].x = spr[0].px = 36; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x24
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x24
-;src/main.c:2032: spr[0].y = spr[0].py = 176;			
+;src/main.c:2016: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:2034: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk7_end);
+;src/main.c:2018: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk7_end);
 	ld	hl, #(_mappk7 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:2036: lName = "4;2@@@CASTLE";
+;src/main.c:2020: lName = "4;2@@@CASTLE";
 	ld	hl, #___str_42+0
 	ld	(_lName), hl
-;src/main.c:2038: doorKey[0] = 5; // diamond dust
+;src/main.c:2022: doorKey[0] = 5; // diamond dust
 	ld	hl, #_doorKey
 	ld	(hl), #0x05
-;src/main.c:2039: doorKey[1] = 11; // dragon blood
+;src/main.c:2023: doorKey[1] = 11; // dragon blood
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x0b
-;src/main.c:2040: doorKey[2] = 7; // mammooth poop
+;src/main.c:2024: doorKey[2] = 7; // mammooth poop
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x07
-;src/main.c:2041: doorKey[3] = 11; // dragon blood
+;src/main.c:2025: doorKey[3] = 11; // dragon blood
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x0b
-;src/main.c:2042: doorKey[4] = 5; // diamond dust
+;src/main.c:2026: doorKey[4] = 5; // diamond dust
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x05
-;src/main.c:2044: storeX = 33;
+;src/main.c:2028: storeX = 33;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x21
-;src/main.c:2045: storeY = 95;
+;src/main.c:2029: storeY = 95;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x5f
-;src/main.c:2046: break;
+;src/main.c:2030: break;
 	jp	00113$
-;src/main.c:2049: case 8: {			 
+;src/main.c:2033: case 8: {			 
 00109$:
-;src/main.c:2051: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
+;src/main.c:2035: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	l, #0x00
@@ -9031,7 +9031,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2052: SetEnemyParams(3, GHOST,	M_chaser,		D_right,    7,  2, 114,   0,   0);						
+;src/main.c:2036: SetEnemyParams(3, GHOST,	M_chaser,		D_right,    7,  2, 114,   0,   0);						
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x7202
@@ -9047,7 +9047,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2053: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  68,   0,   0);
+;src/main.c:2037: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  68,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x440a
@@ -9063,7 +9063,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2054: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
+;src/main.c:2038: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2602
@@ -9079,51 +9079,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2056: spr[0].x = spr[0].px = 34; 
+;src/main.c:2040: spr[0].x = spr[0].px = 34; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x22
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x22
-;src/main.c:2057: spr[0].y = spr[0].py = 176;			
+;src/main.c:2041: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:2059: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk8_end);
+;src/main.c:2043: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk8_end);
 	ld	hl, #(_mappk8 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:2061: lName = "5;1@@@TOWER";	
+;src/main.c:2045: lName = "5;1@@@TOWER";	
 	ld	hl, #___str_43+0
 	ld	(_lName), hl
-;src/main.c:2063: doorKey[0] = 8; // kraken ink
+;src/main.c:2047: doorKey[0] = 8; // kraken ink
 	ld	hl, #_doorKey
 	ld	(hl), #0x08
-;src/main.c:2064: doorKey[1] = 9; // mermaid tear
+;src/main.c:2048: doorKey[1] = 9; // mermaid tear
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x09
-;src/main.c:2065: doorKey[2] = 10; // martian mushroom
+;src/main.c:2049: doorKey[2] = 10; // martian mushroom
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x0a
-;src/main.c:2066: doorKey[3] = 11; // dragon blood
+;src/main.c:2050: doorKey[3] = 11; // dragon blood
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x0b
-;src/main.c:2067: doorKey[4] = 12; // dodo egg
+;src/main.c:2051: doorKey[4] = 12; // dodo egg
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x0c
-;src/main.c:2069: storeX = 25;
+;src/main.c:2053: storeX = 25;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x19
-;src/main.c:2070: storeY = 95;		
+;src/main.c:2054: storeY = 95;		
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x5f
-;src/main.c:2071: break;
+;src/main.c:2055: break;
 	jp	00113$
-;src/main.c:2074: case 9: {			 
+;src/main.c:2058: case 9: {			 
 00110$:
-;src/main.c:2076: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 111,  41,  73);
+;src/main.c:2060: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 111,  41,  73);
 	ld	hl, #0x4929
 	push	hl
 	ld	hl, #0x6f49
@@ -9139,7 +9139,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2077: SetEnemyParams(3, BAT,		M_linear_X,		D_right,    1,  2, 111,   2,  34);				
+;src/main.c:2061: SetEnemyParams(3, BAT,		M_linear_X,		D_right,    1,  2, 111,   2,  34);				
 	ld	hl, #0x2202
 	push	hl
 	ld	h, #0x6f
@@ -9155,7 +9155,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2078: SetEnemyParams(4, SENTINEL, M_linear_Y,    	D_down,     1, 27,  44,  44, 175);
+;src/main.c:2062: SetEnemyParams(4, SENTINEL, M_linear_Y,    	D_down,     1, 27,  44,  44, 175);
 	ld	hl, #0xaf2c
 	push	hl
 	ld	hl, #0x2c1b
@@ -9171,7 +9171,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2079: SetEnemyParams(5, SENTINEL,	M_linear_Y,		D_up,       1, 49, 160,  44, 175);
+;src/main.c:2063: SetEnemyParams(5, SENTINEL,	M_linear_Y,		D_up,       1, 49, 160,  44, 175);
 	ld	hl, #0xaf2c
 	push	hl
 	ld	hl, #0xa031
@@ -9187,51 +9187,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2081: spr[0].x = spr[0].px = 34; 
+;src/main.c:2065: spr[0].x = spr[0].px = 34; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x22
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x22
-;src/main.c:2082: spr[0].y = spr[0].py = 176;			
+;src/main.c:2066: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:2084: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk9_end);
+;src/main.c:2068: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk9_end);
 	ld	hl, #(_mappk9 - 0x0001)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:2086: lName = "5;2@@@TOWER";	
+;src/main.c:2070: lName = "5;2@@@TOWER";	
 	ld	hl, #___str_44+0
 	ld	(_lName), hl
-;src/main.c:2088: doorKey[0] = 10; // martian mushroom
+;src/main.c:2072: doorKey[0] = 10; // martian mushroom
 	ld	hl, #_doorKey
 	ld	(hl), #0x0a
-;src/main.c:2089: doorKey[1] = 5; // diamond dust
+;src/main.c:2073: doorKey[1] = 5; // diamond dust
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x05
-;src/main.c:2090: doorKey[2] = 12; // dodo egg
+;src/main.c:2074: doorKey[2] = 12; // dodo egg
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x0c
-;src/main.c:2091: doorKey[3] = 4; // toad snot
+;src/main.c:2075: doorKey[3] = 4; // toad snot
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x04
-;src/main.c:2092: doorKey[4] = 13; // unicorn blood
+;src/main.c:2076: doorKey[4] = 13; // unicorn blood
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x0d
-;src/main.c:2094: storeX = 41;
+;src/main.c:2078: storeX = 41;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x29
-;src/main.c:2095: storeY = 43;		
+;src/main.c:2079: storeY = 43;		
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x2b
-;src/main.c:2096: break;
+;src/main.c:2080: break;
 	jp	00113$
-;src/main.c:2099: case 10: {			 
+;src/main.c:2083: case 10: {			 
 00111$:
-;src/main.c:2101: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  2, 156,   2,  73);
+;src/main.c:2085: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  2, 156,   2,  73);
 	ld	hl, #0x4902
 	push	hl
 	ld	h, #0x9c
@@ -9247,7 +9247,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2102: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    4,  2, 114,   0,   0);
+;src/main.c:2086: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    4,  2, 114,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x7202
@@ -9263,7 +9263,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2103: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_right,    1, 17,  40,  40, 145);
+;src/main.c:2087: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_right,    1, 17,  40,  40, 145);
 	ld	hl, #0x9128
 	push	hl
 	ld	hl, #0x2811
@@ -9279,7 +9279,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2104: SetEnemyParams(5, KNIGHT,	M_linear_Y, 	D_left,     1, 59,  40,  40, 145);
+;src/main.c:2088: SetEnemyParams(5, KNIGHT,	M_linear_Y, 	D_left,     1, 59,  40,  40, 145);
 	ld	hl, #0x9128
 	push	hl
 	ld	hl, #0x283b
@@ -9295,51 +9295,51 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2106: spr[0].x = spr[0].px = 54; 
+;src/main.c:2090: spr[0].x = spr[0].px = 54; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x36
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x36
-;src/main.c:2107: spr[0].y = spr[0].py = 176;			
+;src/main.c:2091: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:2109: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk10_end);
+;src/main.c:2093: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk10_end);
 	ld	hl, #(_mappk10 + 0x01ad)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:2111: lName = "6;1@@LIBRARY";
+;src/main.c:2095: lName = "6;1@@LIBRARY";
 	ld	hl, #___str_45+0
 	ld	(_lName), hl
-;src/main.c:2113: doorKey[0] = 11; // dragon blood
+;src/main.c:2097: doorKey[0] = 11; // dragon blood
 	ld	hl, #_doorKey
 	ld	(hl), #0x0b
-;src/main.c:2114: doorKey[1] = 8; // kraken ink
+;src/main.c:2098: doorKey[1] = 8; // kraken ink
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x08
-;src/main.c:2115: doorKey[2] = 9; // dodo egg
+;src/main.c:2099: doorKey[2] = 9; // dodo egg
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x09
-;src/main.c:2116: doorKey[3] = 10; // martian mushroom
+;src/main.c:2100: doorKey[3] = 10; // martian mushroom
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x0a
-;src/main.c:2117: doorKey[4] = 15; // mordor lava
+;src/main.c:2101: doorKey[4] = 15; // mordor lava
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x0f
-;src/main.c:2119: storeX = 3;
+;src/main.c:2103: storeX = 3;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x03
-;src/main.c:2120: storeY = 143;
+;src/main.c:2104: storeY = 143;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x8f
-;src/main.c:2121: break;
+;src/main.c:2105: break;
 	jp	00113$
-;src/main.c:2124: case 11: {			 
+;src/main.c:2108: case 11: {			 
 00112$:
-;src/main.c:2126: SetEnemyParams(2, GHOST,	M_linear_X, 	D_left,     1,  2, 132,   2,  72);
+;src/main.c:2110: SetEnemyParams(2, GHOST,	M_linear_X, 	D_left,     1,  2, 132,   2,  72);
 	ld	hl, #0x4802
 	push	hl
 	ld	h, #0x84
@@ -9355,7 +9355,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2127: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    5,  2, 114,   0,   0);
+;src/main.c:2111: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    5,  2, 114,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x7202
@@ -9371,7 +9371,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2128: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,     1, 21,  38,   0,   0);
+;src/main.c:2112: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,     1, 21,  38,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2615
@@ -9387,7 +9387,7 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2129: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 55,  38,   0,   0);
+;src/main.c:2113: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 55,  38,   0,   0);
 	ld	hl, #0x0000
 	push	hl
 	ld	hl, #0x2637
@@ -9403,60 +9403,60 @@ _SetEnemies::
 	ld	hl, #9
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2131: spr[0].x = spr[0].px = 34; 
+;src/main.c:2115: spr[0].x = spr[0].px = 34; 
 	ld	hl, #(_spr + 0x0004)
 	ld	(hl), #0x22
 	ld	hl, #(_spr + 0x0002)
 	ld	(hl), #0x22
-;src/main.c:2132: spr[0].y = spr[0].py = 176;			
+;src/main.c:2116: spr[0].y = spr[0].py = 176;			
 	ld	hl, #(_spr + 0x0005)
 	ld	(hl), #0xb0
 	ld	hl, #(_spr + 0x0003)
 	ld	(hl), #0xb0
-;src/main.c:2134: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk11_end);
+;src/main.c:2118: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk11_end);
 	ld	hl, #(_mappk11 + 0x020b)
 	push	hl
 	ld	hl, #0x1600
 	push	hl
 	call	_cpct_zx7b_decrunch_s
-;src/main.c:2136: lName = "6;2@@LIBRARY";
+;src/main.c:2120: lName = "6;2@@LIBRARY";
 	ld	hl, #___str_46+0
 	ld	(_lName), hl
-;src/main.c:2138: doorKey[0] = 13; // unicorn blood
+;src/main.c:2122: doorKey[0] = 13; // unicorn blood
 	ld	hl, #_doorKey
 	ld	(hl), #0x0d
-;src/main.c:2139: doorKey[1] = 15; // mordor lava
+;src/main.c:2123: doorKey[1] = 15; // mordor lava
 	ld	hl, #(_doorKey + 0x0001)
 	ld	(hl), #0x0f
-;src/main.c:2140: doorKey[2] = 14; // troll fat
+;src/main.c:2124: doorKey[2] = 14; // troll fat
 	ld	hl, #(_doorKey + 0x0002)
 	ld	(hl), #0x0e
-;src/main.c:2141: doorKey[3] = 15; // mordor lava
+;src/main.c:2125: doorKey[3] = 15; // mordor lava
 	ld	hl, #(_doorKey + 0x0003)
 	ld	(hl), #0x0f
-;src/main.c:2142: doorKey[4] = 13; // unicorn blood
+;src/main.c:2126: doorKey[4] = 13; // unicorn blood
 	ld	hl, #(_doorKey + 0x0004)
 	ld	(hl), #0x0d
-;src/main.c:2144: storeX = 73;
+;src/main.c:2128: storeX = 73;
 	ld	hl,#_storeX + 0
 	ld	(hl), #0x49
-;src/main.c:2145: storeY = 11;
+;src/main.c:2129: storeY = 11;
 	ld	hl,#_storeY + 0
 	ld	(hl), #0x0b
-;src/main.c:2148: }
+;src/main.c:2132: }
 00113$:
-;src/main.c:2150: if (TwoPlayers) {
+;src/main.c:2134: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	ret	Z
-;src/main.c:2151: spr[1].x = spr[1].px = spr[0].x + 6; 
+;src/main.c:2135: spr[1].x = spr[1].px = spr[0].x + 6; 
 	ld	bc, #_spr + 17
 	ld	de, #_spr + 19
 	ld	a, (#_spr + 2)
 	add	a, #0x06
 	ld	(de), a
 	ld	(bc), a
-;src/main.c:2152: spr[1].y = spr[1].py = spr[0].y;
+;src/main.c:2136: spr[1].y = spr[1].py = spr[0].y;
 	ld	bc, #_spr + 18
 	ld	de, #_spr + 20
 	ld	a, (#_spr + 3)
@@ -9499,7 +9499,7 @@ ___str_45:
 ___str_46:
 	.ascii "6;2@@LIBRARY"
 	.db 0x00
-;src/main.c:2158: void CheckEnemyCollision(u8 player, TSpr *pSpr) 
+;src/main.c:2142: void CheckEnemyCollision(u8 player, TSpr *pSpr) 
 ;	---------------------------------
 ; Function CheckEnemyCollision
 ; ---------------------------------
@@ -9510,7 +9510,7 @@ _CheckEnemyCollision::
 	ld	hl, #-8
 	add	hl, sp
 	ld	sp, hl
-;src/main.c:2160: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
+;src/main.c:2144: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
 	ld	bc, #_spr+0
 	ld	e,4 (ix)
 	ld	d,#0x00
@@ -9531,30 +9531,30 @@ _CheckEnemyCollision::
 	ld	b, #0x00
 	ld	hl, #0x0005
 	add	hl,bc
-	ld	-2 (ix), l
-	ld	-1 (ix), h
+	ld	-6 (ix), l
+	ld	-5 (ix), h
 	ld	a, 5 (ix)
-	ld	-4 (ix), a
+	ld	-2 (ix), a
 	ld	a, 6 (ix)
-	ld	-3 (ix), a
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	-1 (ix), a
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	inc	hl
 	inc	hl
 	ld	l, (hl)
 	ld	h, #0x00
-;src/main.c:2161: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
+;src/main.c:2145: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
 	inc	de
 	inc	de
 	inc	de
 	inc	sp
 	inc	sp
 	push	de
-;src/main.c:2160: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
+;src/main.c:2144: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
 	ld	a, l
-	sub	a, -2 (ix)
+	sub	a, -6 (ix)
 	ld	a, h
-	sbc	a, -1 (ix)
+	sbc	a, -5 (ix)
 	jp	PO, 00153$
 	xor	a, #0x80
 00153$:
@@ -9569,26 +9569,26 @@ _CheckEnemyCollision::
 	xor	a, #0x80
 00154$:
 	jp	P, 00110$
-;src/main.c:2161: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
+;src/main.c:2145: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
 	pop	hl
 	push	hl
 	ld	e, (hl)
 	ld	d, #0x00
 	ld	hl, #0x000c
 	add	hl,de
-	ld	-6 (ix), l
-	ld	-5 (ix), h
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	-4 (ix), l
+	ld	-3 (ix), h
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	inc	hl
 	inc	hl
 	inc	hl
 	ld	l, (hl)
 	ld	h, #0x00
 	ld	a, l
-	sub	a, -6 (ix)
+	sub	a, -4 (ix)
 	ld	a, h
-	sbc	a, -5 (ix)
+	sbc	a, -3 (ix)
 	jp	PO, 00155$
 	xor	a, #0x80
 00155$:
@@ -9605,9 +9605,9 @@ _CheckEnemyCollision::
 	xor	a, #0x80
 00156$:
 	jp	P, 00110$
-;src/main.c:2163: ExplodeSprite(player, pSpr->num);			
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+;src/main.c:2147: ExplodeSprite(player, pSpr->num);			
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	b, (hl)
 	push	bc
 	inc	sp
@@ -9616,7 +9616,7 @@ _CheckEnemyCollision::
 	inc	sp
 	call	_ExplodeSprite
 	pop	af
-;src/main.c:2164: GameOver(player);
+;src/main.c:2148: GameOver(player);
 	ld	a, 4 (ix)
 	push	af
 	inc	sp
@@ -9624,11 +9624,11 @@ _CheckEnemyCollision::
 	inc	sp
 	jr	00115$
 00110$:
-;src/main.c:2167: else if (sht.active) {
+;src/main.c:2151: else if (sht.active) {
 	ld	a, (#_sht + 4)
 	or	a, a
 	jr	Z,00115$
-;src/main.c:2168: if ((sht.x + SHT_W) > (spr[player].x) && sht.x < (spr[player].x + SPR_W))
+;src/main.c:2152: if ((sht.x + SHT_W) > (spr[player].x) && sht.x < (spr[player].x + SPR_W))
 	ld	hl, #_sht + 0
 	ld	e, (hl)
 	ld	d, #0x00
@@ -9643,14 +9643,14 @@ _CheckEnemyCollision::
 00157$:
 	jp	P, 00115$
 	ld	a, e
-	sub	a, -2 (ix)
+	sub	a, -6 (ix)
 	ld	a, d
-	sbc	a, -1 (ix)
+	sbc	a, -5 (ix)
 	jp	PO, 00158$
 	xor	a, #0x80
 00158$:
 	jp	P, 00115$
-;src/main.c:2169: if ((sht.y + SHT_H) > (spr[player].y) && (sht.y) < (spr[player].y + SPR_H))	{
+;src/main.c:2153: if ((sht.y + SHT_H) > (spr[player].y) && (sht.y) < (spr[player].y + SPR_H))	{
 	ld	hl, #_sht + 1
 	ld	c, (hl)
 	ld	b, #0x00
@@ -9679,11 +9679,11 @@ _CheckEnemyCollision::
 	xor	a, #0x80
 00160$:
 	jp	P, 00115$
-;src/main.c:2171: DeleteShot();
+;src/main.c:2155: DeleteShot();
 	call	_DeleteShot
-;src/main.c:2172: ExplodeSprite(player, pSpr->num);			
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+;src/main.c:2156: ExplodeSprite(player, pSpr->num);			
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	b, (hl)
 	push	bc
 	inc	sp
@@ -9692,7 +9692,7 @@ _CheckEnemyCollision::
 	inc	sp
 	call	_ExplodeSprite
 	pop	af
-;src/main.c:2173: GameOver(player);
+;src/main.c:2157: GameOver(player);
 	ld	a, 4 (ix)
 	push	af
 	inc	sp
@@ -9702,34 +9702,34 @@ _CheckEnemyCollision::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/main.c:2180: void EnemyLoop(TSpr *pSpr) __z88dk_fastcall {
+;src/main.c:2164: void EnemyLoop(TSpr *pSpr) __z88dk_fastcall {
 ;	---------------------------------
 ; Function EnemyLoop
 ; ---------------------------------
 _EnemyLoop::
-;src/main.c:2181: if (pSpr->ident == NOBODY) 
+;src/main.c:2165: if (pSpr->ident == NOBODY) 
 	ld	c,l
 	ld	b,h
 	inc	hl
 	ld	a, (hl)
 	sub	a, #0x09
 	ret	Z
-;src/main.c:2182: return; 
+;src/main.c:2166: return; 
 	jr	00102$
 00102$:
-;src/main.c:2184: MoveEnemy(pSpr);
+;src/main.c:2168: MoveEnemy(pSpr);
 	push	bc
 	push	bc
 	call	_MoveEnemy
 	pop	af
 	pop	bc
-;src/main.c:2186: SelectFrame(pSpr); 
+;src/main.c:2170: SelectFrame(pSpr); 
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_SelectFrame
 	pop	bc
-;src/main.c:2187: WalkAnim(pSpr, pSpr->dir);
+;src/main.c:2171: WalkAnim(pSpr, pSpr->dir);
 	push	bc
 	pop	iy
 	ld	d, 7 (iy)
@@ -9741,13 +9741,13 @@ _EnemyLoop::
 	pop	af
 	inc	sp
 	pop	bc
-;src/main.c:2189: DeleteSprite(pSpr);
+;src/main.c:2173: DeleteSprite(pSpr);
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_DeleteSprite
 	pop	bc
-;src/main.c:2190: pSpr->px = pSpr->x; // save the current X coordinate
+;src/main.c:2174: pSpr->px = pSpr->x; // save the current X coordinate
 	ld	hl, #0x0004
 	add	hl,bc
 	ex	de,hl
@@ -9757,7 +9757,7 @@ _EnemyLoop::
 	inc	hl
 	ld	a, (hl)
 	ld	(de), a
-;src/main.c:2191: pSpr->py = pSpr->y; // save the current Y coordinate
+;src/main.c:2175: pSpr->py = pSpr->y; // save the current Y coordinate
 	ld	hl, #0x0005
 	add	hl,bc
 	ex	de,hl
@@ -9768,13 +9768,13 @@ _EnemyLoop::
 	inc	hl
 	ld	a, (hl)
 	ld	(de), a
-;src/main.c:2192: PrintSprite(pSpr);
+;src/main.c:2176: PrintSprite(pSpr);
 	push	bc
 	ld	l, c
 	ld	h, b
 	call	_PrintSprite
 	pop	bc
-;src/main.c:2194: CheckEnemyCollision(0, pSpr);
+;src/main.c:2178: CheckEnemyCollision(0, pSpr);
 	push	bc
 	push	bc
 	xor	a, a
@@ -9784,11 +9784,11 @@ _EnemyLoop::
 	pop	af
 	inc	sp
 	pop	bc
-;src/main.c:2195: if (TwoPlayers)
+;src/main.c:2179: if (TwoPlayers)
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	ret	Z
-;src/main.c:2196: CheckEnemyCollision(1, pSpr);
+;src/main.c:2180: CheckEnemyCollision(1, pSpr);
 	push	bc
 	ld	a, #0x01
 	push	af
@@ -9797,14 +9797,14 @@ _EnemyLoop::
 	pop	af
 	inc	sp
 	ret
-;src/main.c:2212: void PrintStartMenu() {
+;src/main.c:2196: void PrintStartMenu() {
 ;	---------------------------------
 ; Function PrintStartMenu
 ; ---------------------------------
 _PrintStartMenu::
-;src/main.c:2213: ClearScreen();
+;src/main.c:2197: ClearScreen();
 	call	_ClearScreen
-;src/main.c:2216: cpct_drawSprite(g_logo_0, cpctm_screenPtr(CPCT_VMEM_START, 0, 0), G_LOGO_0_W, G_LOGO_0_H);
+;src/main.c:2200: cpct_drawSprite(g_logo_0, cpctm_screenPtr(CPCT_VMEM_START, 0, 0), G_LOGO_0_W, G_LOGO_0_H);
 	ld	hl, #0x2328
 	push	hl
 	ld	hl, #0xc000
@@ -9812,7 +9812,7 @@ _PrintStartMenu::
 	ld	hl, #_g_logo_0
 	push	hl
 	call	_cpct_drawSprite
-;src/main.c:2217: cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
+;src/main.c:2201: cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
 	ld	hl, #0x2328
 	push	hl
 	ld	h, #0xc0
@@ -9820,7 +9820,7 @@ _PrintStartMenu::
 	ld	hl, #_g_logo_1
 	push	hl
 	call	_cpct_drawSprite
-;src/main.c:2219: PrintText("1@@1@PLAYER@GAME", 10, 50, 0);
+;src/main.c:2203: PrintText("1@@1@PLAYER@GAME", 10, 50, 0);
 	ld	hl, #0x0032
 	push	hl
 	ld	a, #0x0a
@@ -9830,7 +9830,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2220: PrintText("2@@2@PLAYER@GAME", 10, 60, 0);
+;src/main.c:2204: PrintText("2@@2@PLAYER@GAME", 10, 60, 0);
 	inc	sp
 	ld	hl,#0x003c
 	ex	(sp),hl
@@ -9841,7 +9841,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2221: PrintText("3@@REDEFINE@CONTROLS", 10, 70, 0);
+;src/main.c:2205: PrintText("3@@REDEFINE@CONTROLS", 10, 70, 0);
 	inc	sp
 	ld	hl,#0x0046
 	ex	(sp),hl
@@ -9854,11 +9854,11 @@ _PrintStartMenu::
 	pop	af
 	pop	af
 	inc	sp
-;src/main.c:2222: if (turboMode)
+;src/main.c:2206: if (turboMode)
 	ld	a,(#_turboMode + 0)
 	or	a, a
 	jr	Z,00102$
-;src/main.c:2223: PrintText("4@@TURBO@MODE:@ON", 10, 80, 0);
+;src/main.c:2207: PrintText("4@@TURBO@MODE:@ON", 10, 80, 0);
 	ld	hl, #0x0050
 	push	hl
 	ld	a, #0x0a
@@ -9872,7 +9872,7 @@ _PrintStartMenu::
 	inc	sp
 	jr	00103$
 00102$:
-;src/main.c:2225: PrintText("4@@TURBO@MODE:@OFF", 10, 80, 0);
+;src/main.c:2209: PrintText("4@@TURBO@MODE:@OFF", 10, 80, 0);
 	ld	hl, #0x0050
 	push	hl
 	ld	a, #0x0a
@@ -9885,13 +9885,13 @@ _PrintStartMenu::
 	pop	af
 	inc	sp
 00103$:
-;src/main.c:2229: cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
+;src/main.c:2213: cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #0xbb06
 	push	hl
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:2228: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
+;src/main.c:2212: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
 	ld	bc, #_g_sorcerer1_06+0
 	ld	de, #_g_maskTable
 	push	de
@@ -9900,13 +9900,13 @@ _PrintStartMenu::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:2231: cpct_getScreenPtr(CPCT_VMEM_START, 68, 187), SPR_W, SPR_H, g_maskTable);
+;src/main.c:2215: cpct_getScreenPtr(CPCT_VMEM_START, 68, 187), SPR_W, SPR_H, g_maskTable);
 	ld	hl, #0xbb44
 	push	hl
 	ld	hl, #0xc000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/main.c:2230: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
+;src/main.c:2214: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
 	ld	bc, #_g_sorcerer2_04+0
 	ld	de, #_g_maskTable
 	push	de
@@ -9915,7 +9915,7 @@ _PrintStartMenu::
 	push	hl
 	push	bc
 	call	_cpct_drawSpriteMaskedAlignedTable
-;src/main.c:2233: PrintText("CODE@=@GFX", 25, 110, 0);
+;src/main.c:2217: PrintText("CODE@=@GFX", 25, 110, 0);
 	ld	hl, #0x006e
 	push	hl
 	ld	a, #0x19
@@ -9925,7 +9925,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2234: PrintText("SALVAKANTERO", 22, 120, 0);
+;src/main.c:2218: PrintText("SALVAKANTERO", 22, 120, 0);
 	inc	sp
 	ld	hl,#0x0078
 	ex	(sp),hl
@@ -9936,7 +9936,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2235: PrintText("MUSIC@=@FX", 25, 135, 0);
+;src/main.c:2219: PrintText("MUSIC@=@FX", 25, 135, 0);
 	inc	sp
 	ld	hl,#0x0087
 	ex	(sp),hl
@@ -9947,7 +9947,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2236: PrintText("MCKLAIN", 30, 145, 0);
+;src/main.c:2220: PrintText("MCKLAIN", 30, 145, 0);
 	inc	sp
 	ld	hl,#0x0091
 	ex	(sp),hl
@@ -9958,7 +9958,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2237: PrintText("BETA@TESTING", 22, 160, 0);
+;src/main.c:2221: PrintText("BETA@TESTING", 22, 160, 0);
 	inc	sp
 	ld	hl,#0x00a0
 	ex	(sp),hl
@@ -9969,7 +9969,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2238: PrintText("BLACKMORES", 25, 170, 0);
+;src/main.c:2222: PrintText("BLACKMORES", 25, 170, 0);
 	inc	sp
 	ld	hl,#0x00aa
 	ex	(sp),hl
@@ -9980,7 +9980,7 @@ _PrintStartMenu::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2240: PrintText("PLAY@ON@RETRO@2020", 13, 190, 0);
+;src/main.c:2224: PrintText("PLAY@ON@RETRO@2020", 13, 190, 0);
 	inc	sp
 	ld	hl,#0x00be
 	ex	(sp),hl
@@ -10030,14 +10030,14 @@ ___str_57:
 ___str_58:
 	.ascii "PLAY@ON@RETRO@2020"
 	.db 0x00
-;src/main.c:2245: void PrintObjInfo() {
+;src/main.c:2229: void PrintObjInfo() {
 ;	---------------------------------
 ; Function PrintObjInfo
 ; ---------------------------------
 _PrintObjInfo::
-;src/main.c:2248: ClearScreen();
+;src/main.c:2232: ClearScreen();
 	call	_ClearScreen
-;src/main.c:2249: PrintText("INGREDIENT@VALUES", 13, 0, 0);
+;src/main.c:2233: PrintText("INGREDIENT@VALUES", 13, 0, 0);
 	ld	hl, #0x0000
 	push	hl
 	ld	a, #0x0d
@@ -10047,7 +10047,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2251: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 3, 12), cpct_px2byteM0(4, 4), 37, 188);
+;src/main.c:2235: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 3, 12), cpct_px2byteM0(4, 4), 37, 188);
 	inc	sp
 	ld	hl,#0x0404
 	ex	(sp),hl
@@ -10059,7 +10059,7 @@ _PrintObjInfo::
 	ld	hl, #0xe053
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:2252: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 12), cpct_px2byteM0(4, 4), 35, 188);	
+;src/main.c:2236: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 12), cpct_px2byteM0(4, 4), 35, 188);	
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
@@ -10070,7 +10070,7 @@ _PrintObjInfo::
 	ld	hl, #0xe078
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:2253: PrintFrame(3,12,72,194);
+;src/main.c:2237: PrintFrame(3,12,72,194);
 	ld	hl, #0xc248
 	push	hl
 	ld	hl, #0x0c03
@@ -10078,10 +10078,10 @@ _PrintObjInfo::
 	call	_PrintFrame
 	pop	af
 	pop	af
-;src/main.c:2255: for (obj=4; obj<16; obj++) {
+;src/main.c:2239: for (obj=4; obj<16; obj++) {
 	ld	bc,#0x1904
 00102$:
-;src/main.c:2256: PrintObject(obj, 7, yPos);
+;src/main.c:2240: PrintObject(obj, 7, yPos);
 	push	bc
 	push	bc
 	inc	sp
@@ -10091,7 +10091,7 @@ _PrintObjInfo::
 	pop	af
 	inc	sp
 	pop	bc
-;src/main.c:2257: PrintNumber(obj-3, 2, 62, yPos, 0); PrintText("<", 68, yPos, 0);
+;src/main.c:2241: PrintNumber(obj-3, 2, 62, yPos, 0); PrintText("<", 68, yPos, 0);
 	ld	e, c
 	ld	d, #0x00
 	ld	a, e
@@ -10130,16 +10130,16 @@ _PrintObjInfo::
 	pop	af
 	inc	sp
 	pop	bc
-;src/main.c:2258: yPos += 14;
+;src/main.c:2242: yPos += 14;
 	ld	a, b
 	add	a, #0x0e
 	ld	b, a
-;src/main.c:2255: for (obj=4; obj<16; obj++) {
+;src/main.c:2239: for (obj=4; obj<16; obj++) {
 	inc	c
 	ld	a, c
 	sub	a, #0x10
 	jr	C,00102$
-;src/main.c:2261: PrintText("TOAD@SNOT", 14, 25, 0);
+;src/main.c:2245: PrintText("TOAD@SNOT", 14, 25, 0);
 	ld	hl, #0x0019
 	push	hl
 	ld	a, #0x0e
@@ -10149,7 +10149,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2262: PrintText("DIAMOND@DUST", 14, 39, 0);
+;src/main.c:2246: PrintText("DIAMOND@DUST", 14, 39, 0);
 	inc	sp
 	ld	hl,#0x0027
 	ex	(sp),hl
@@ -10160,7 +10160,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2263: PrintText("NEWT@EYE", 14, 53, 0);
+;src/main.c:2247: PrintText("NEWT@EYE", 14, 53, 0);
 	inc	sp
 	ld	hl,#0x0035
 	ex	(sp),hl
@@ -10171,7 +10171,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2264: PrintText("MAMMOTH@POOP", 14, 67, 0);
+;src/main.c:2248: PrintText("MAMMOTH@POOP", 14, 67, 0);
 	inc	sp
 	ld	hl,#0x0043
 	ex	(sp),hl
@@ -10182,7 +10182,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2265: PrintText("KRAKEN@INK", 14, 81, 0); 
+;src/main.c:2249: PrintText("KRAKEN@INK", 14, 81, 0); 
 	inc	sp
 	ld	hl,#0x0051
 	ex	(sp),hl
@@ -10193,7 +10193,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2266: PrintText("MERMAID@TEAR", 14, 95, 0);
+;src/main.c:2250: PrintText("MERMAID@TEAR", 14, 95, 0);
 	inc	sp
 	ld	hl,#0x005f
 	ex	(sp),hl
@@ -10204,7 +10204,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2267: PrintText("MARTIAN@MUSHROOM", 14, 109, 0);
+;src/main.c:2251: PrintText("MARTIAN@MUSHROOM", 14, 109, 0);
 	inc	sp
 	ld	hl,#0x006d
 	ex	(sp),hl
@@ -10215,7 +10215,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2268: PrintText("DRAGON@BLOOD", 14, 123, 0);
+;src/main.c:2252: PrintText("DRAGON@BLOOD", 14, 123, 0);
 	inc	sp
 	ld	hl,#0x007b
 	ex	(sp),hl
@@ -10226,7 +10226,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2269: PrintText("DODO@EGG", 14, 137, 0); 
+;src/main.c:2253: PrintText("DODO@EGG", 14, 137, 0); 
 	inc	sp
 	ld	hl,#0x0089
 	ex	(sp),hl
@@ -10237,7 +10237,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2270: PrintText("UNICORN@BLOOD", 14, 151, 0);
+;src/main.c:2254: PrintText("UNICORN@BLOOD", 14, 151, 0);
 	inc	sp
 	ld	hl,#0x0097
 	ex	(sp),hl
@@ -10248,7 +10248,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2271: PrintText("TROLL@FAT", 14, 165, 0); 
+;src/main.c:2255: PrintText("TROLL@FAT", 14, 165, 0); 
 	inc	sp
 	ld	hl,#0x00a5
 	ex	(sp),hl
@@ -10259,7 +10259,7 @@ _PrintObjInfo::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2272: PrintText("MORDOR@LAVA", 14, 179, 0);
+;src/main.c:2256: PrintText("MORDOR@LAVA", 14, 179, 0);
 	inc	sp
 	ld	hl,#0x00b3
 	ex	(sp),hl
@@ -10315,7 +10315,7 @@ ___str_71:
 ___str_72:
 	.ascii "MORDOR@LAVA"
 	.db 0x00
-;src/main.c:2298: void StartMenu() {
+;src/main.c:2282: void StartMenu() {
 ;	---------------------------------
 ; Function StartMenu
 ; ---------------------------------
@@ -10324,83 +10324,83 @@ _StartMenu::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/main.c:2299: u8 randSeed = 254;
+;src/main.c:2283: u8 randSeed = 254;
 	ld	-2 (ix), #0xfe
-;src/main.c:2300: u8 page = 0;
+;src/main.c:2284: u8 page = 0;
 	ld	-1 (ix), #0x00
-;src/main.c:2302: while(1) {
+;src/main.c:2286: while(1) {
 00122$:
-;src/main.c:2305: if (++randSeed == 255) {					
+;src/main.c:2289: if (++randSeed == 255) {					
 	inc	-2 (ix)
 	ld	a, -2 (ix)
 	inc	a
 	jr	NZ,00109$
-;src/main.c:2306: if (page == 0) 		PrintStartMenu();	// page 1; menu
+;src/main.c:2290: if (page == 0) 		PrintStartMenu();	// page 1; menu
 	ld	a, -1 (ix)
 	or	a, a
 	jr	NZ,00104$
 	call	_PrintStartMenu
 	jr	00105$
 00104$:
-;src/main.c:2307: else if(page == 4)	PrintObjInfo();		// page 2; ingredients info
+;src/main.c:2291: else if(page == 4)	PrintObjInfo();		// page 2; ingredients info
 	ld	a, -1 (ix)
 	sub	a, #0x04
 	jr	NZ,00105$
 	call	_PrintObjInfo
 00105$:
-;src/main.c:2309: randSeed = 0;
+;src/main.c:2293: randSeed = 0;
 	ld	-2 (ix), #0x00
-;src/main.c:2310: if (++page == 8) //12
+;src/main.c:2294: if (++page == 8) //12
 	inc	-1 (ix)
 	ld	a, -1 (ix)
 	sub	a, #0x08
 	jr	NZ,00109$
-;src/main.c:2311: page = 0;		
+;src/main.c:2295: page = 0;		
 	ld	-1 (ix), #0x00
 00109$:
-;src/main.c:2314: cpct_scanKeyboard_f();
+;src/main.c:2298: cpct_scanKeyboard_f();
 	call	_cpct_scanKeyboard_f
-;src/main.c:2315: if(cpct_isKeyPressed(Key_1)) { // 1 player
+;src/main.c:2299: if(cpct_isKeyPressed(Key_1)) { // 1 player
 	ld	hl, #0x0108
 	call	_cpct_isKeyPressed
 	ld	a, l
 	or	a, a
 	jr	Z,00119$
-;src/main.c:2316: TwoPlayers = FALSE;	
+;src/main.c:2300: TwoPlayers = FALSE;	
 	ld	hl,#_TwoPlayers + 0
 	ld	(hl), #0x00
-;src/main.c:2317: break;
+;src/main.c:2301: break;
 	jp	00123$
 00119$:
-;src/main.c:2319: else if(cpct_isKeyPressed(Key_2)) {	// 2 players
+;src/main.c:2303: else if(cpct_isKeyPressed(Key_2)) {	// 2 players
 	ld	hl, #0x0208
 	call	_cpct_isKeyPressed
 	ld	a, l
 	or	a, a
 	jr	Z,00116$
-;src/main.c:2320: TwoPlayers = TRUE;
+;src/main.c:2304: TwoPlayers = TRUE;
 	ld	hl,#_TwoPlayers + 0
 	ld	(hl), #0x01
-;src/main.c:2321: break;
+;src/main.c:2305: break;
 	jp	00123$
 00116$:
-;src/main.c:2323: else if(cpct_isKeyPressed(Key_3)){ // redefine keys
+;src/main.c:2307: else if(cpct_isKeyPressed(Key_3)){ // redefine keys
 	ld	hl, #0x0207
 	call	_cpct_isKeyPressed
 	ld	a, l
 	or	a, a
 	jp	Z, 00113$
-;src/main.c:2324: Wait4Key(Key_3);
+;src/main.c:2308: Wait4Key(Key_3);
 	ld	hl, #0x0207
 	push	hl
 	call	_Wait4Key
 	pop	af
-;src/main.c:2325: randSeed = 0; page = 1;
+;src/main.c:2309: randSeed = 0; page = 1;
 	ld	-2 (ix), #0x00
 	ld	-1 (ix), #0x01
-;src/main.c:2326: PrintStartMenu();
+;src/main.c:2310: PrintStartMenu();
 	call	_PrintStartMenu
-;src/main.c:2328: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 22, 110), cpct_px2byteM0(1, 1), 45, 70);
+;src/main.c:2312: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 22, 110), cpct_px2byteM0(1, 1), 45, 70);
 	ld	hl, #0x0101
 	push	hl
 	call	_cpct_px2byteM0
@@ -10411,7 +10411,7 @@ _StartMenu::
 	ld	hl, #0xf426
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:2331: ctlUp[0] = 		RedefineKey("@P1@UP");
+;src/main.c:2315: ctlUp[0] = 		RedefineKey("@P1@UP");
 	ld	hl, #___str_73
 	push	hl
 	call	_RedefineKey
@@ -10419,7 +10419,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	(_ctlUp), bc
-;src/main.c:2332: ctlDown[0] = 	RedefineKey("P1@DOWN");
+;src/main.c:2316: ctlDown[0] = 	RedefineKey("P1@DOWN");
 	ld	hl, #___str_74
 	push	hl
 	call	_RedefineKey
@@ -10427,7 +10427,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	(_ctlDown), bc
-;src/main.c:2333: ctlLeft[0] = 	RedefineKey("P1@LEFT");
+;src/main.c:2317: ctlLeft[0] = 	RedefineKey("P1@LEFT");
 	ld	hl, #___str_75
 	push	hl
 	call	_RedefineKey
@@ -10435,7 +10435,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	(_ctlLeft), bc
-;src/main.c:2334: ctlRight[0] = 	RedefineKey("P1@RIGHT");
+;src/main.c:2318: ctlRight[0] = 	RedefineKey("P1@RIGHT");
 	ld	hl, #___str_76
 	push	hl
 	call	_RedefineKey
@@ -10443,7 +10443,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	(_ctlRight), bc
-;src/main.c:2336: ctlUp[1] = 		RedefineKey("@P2@UP@@");
+;src/main.c:2320: ctlUp[1] = 		RedefineKey("@P2@UP@@");
 	ld	hl, #___str_77
 	push	hl
 	call	_RedefineKey
@@ -10451,7 +10451,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	((_ctlUp + 0x0002)), bc
-;src/main.c:2337: ctlDown[1] = 	RedefineKey("P2@DOWN");
+;src/main.c:2321: ctlDown[1] = 	RedefineKey("P2@DOWN");
 	ld	hl, #___str_78
 	push	hl
 	call	_RedefineKey
@@ -10459,7 +10459,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	((_ctlDown + 0x0002)), bc
-;src/main.c:2338: ctlLeft[1] = 	RedefineKey("P2@LEFT");
+;src/main.c:2322: ctlLeft[1] = 	RedefineKey("P2@LEFT");
 	ld	hl, #___str_79
 	push	hl
 	call	_RedefineKey
@@ -10467,7 +10467,7 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	((_ctlLeft + 0x0002)), bc
-;src/main.c:2339: ctlRight[1] = 	RedefineKey("P2@RIGHT");	
+;src/main.c:2323: ctlRight[1] = 	RedefineKey("P2@RIGHT");	
 	ld	hl, #___str_80
 	push	hl
 	call	_RedefineKey
@@ -10475,56 +10475,56 @@ _StartMenu::
 	ld	c, l
 	ld	b, h
 	ld	((_ctlRight + 0x0002)), bc
-;src/main.c:2341: ctlAbort = 		RedefineKey("@ABORT@@");
+;src/main.c:2325: ctlAbort = 		RedefineKey("@ABORT@@");
 	ld	hl, #___str_81
 	push	hl
 	call	_RedefineKey
 	pop	af
 	ld	(_ctlAbort), hl
-;src/main.c:2342: ctlMusic = 		RedefineKey("@MUSIC");
+;src/main.c:2326: ctlMusic = 		RedefineKey("@MUSIC");
 	ld	hl, #___str_82
 	push	hl
 	call	_RedefineKey
 	pop	af
 	ld	(_ctlMusic), hl
-;src/main.c:2343: ctlPause =		RedefineKey("@PAUSE");		
+;src/main.c:2327: ctlPause =		RedefineKey("@PAUSE");		
 	ld	hl, #___str_83
 	push	hl
 	call	_RedefineKey
 	pop	af
 	ld	(_ctlPause), hl
-;src/main.c:2344: PrintStartMenu();
+;src/main.c:2328: PrintStartMenu();
 	call	_PrintStartMenu
 	jr	00120$
 00113$:
-;src/main.c:2346: else if(cpct_isKeyPressed(Key_4)) {	// turbo mode
+;src/main.c:2330: else if(cpct_isKeyPressed(Key_4)) {	// turbo mode
 	ld	hl, #0x0107
 	call	_cpct_isKeyPressed
 	ld	a, l
 	or	a, a
 	jr	Z,00120$
-;src/main.c:2347: turboMode = !turboMode;
+;src/main.c:2331: turboMode = !turboMode;
 	ld	iy, #_turboMode
 	ld	a, 0 (iy)
 	sub	a,#0x01
 	ld	a, #0x00
 	rla
 	ld	0 (iy), a
-;src/main.c:2348: randSeed = 0; page = 1;
+;src/main.c:2332: randSeed = 0; page = 1;
 	ld	-2 (ix), #0x00
 	ld	-1 (ix), #0x01
-;src/main.c:2349: PrintStartMenu();
+;src/main.c:2333: PrintStartMenu();
 	call	_PrintStartMenu
 00120$:
-;src/main.c:2351: Pause(3);
+;src/main.c:2335: Pause(3);
 	ld	hl, #0x0003
 	call	_Pause
 	jp	00122$
 00123$:
-;src/main.c:2353: cpct_setSeed_lcg_u8(randSeed); // set the seed
+;src/main.c:2337: cpct_setSeed_lcg_u8(randSeed); // set the seed
 	ld	l, -2 (ix)
 	call	_cpct_setSeed_lcg_u8
-;src/main.c:2354: ClearScreen();
+;src/main.c:2338: ClearScreen();
 	call	_ClearScreen
 	ld	sp, ix
 	pop	ix
@@ -10562,200 +10562,200 @@ ___str_82:
 ___str_83:
 	.ascii "@PAUSE"
 	.db 0x00
-;src/main.c:2371: void InitValues() {	
+;src/main.c:2355: void InitValues() {	
 ;	---------------------------------
 ; Function InitValues
 ; ---------------------------------
 _InitValues::
-;src/main.c:2374: ctlUp[0] = Key_W;
+;src/main.c:2358: ctlUp[0] = Key_W;
 	ld	hl, #0x0807
 	ld	(_ctlUp), hl
-;src/main.c:2375: ctlDown[0] = Key_S;
+;src/main.c:2359: ctlDown[0] = Key_S;
 	ld	h, #0x10
 	ld	(_ctlDown), hl
-;src/main.c:2376: ctlLeft[0] = Key_A;
+;src/main.c:2360: ctlLeft[0] = Key_A;
 	ld	hl, #0x2008
 	ld	(_ctlLeft), hl
-;src/main.c:2377: ctlRight[0] = Key_D;
+;src/main.c:2361: ctlRight[0] = Key_D;
 	ld	l, #0x07
 	ld	(_ctlRight), hl
-;src/main.c:2379: ctlUp[1] = Key_F5;
+;src/main.c:2363: ctlUp[1] = Key_F5;
 	ld	hl, #0x1001
 	ld	((_ctlUp + 0x0002)), hl
-;src/main.c:2380: ctlDown[1] = Key_F2;
+;src/main.c:2364: ctlDown[1] = Key_F2;
 	ld	h, #0x40
 	ld	((_ctlDown + 0x0002)), hl
-;src/main.c:2381: ctlLeft[1] = Key_F1;
+;src/main.c:2365: ctlLeft[1] = Key_F1;
 	ld	h, #0x20
 	ld	((_ctlLeft + 0x0002)), hl
-;src/main.c:2382: ctlRight[1] = Key_F3;
+;src/main.c:2366: ctlRight[1] = Key_F3;
 	ld	l, #0x00
 	ld	((_ctlRight + 0x0002)), hl
-;src/main.c:2384: ctlAbort = Key_X;
+;src/main.c:2368: ctlAbort = Key_X;
 	ld	hl, #0x8007
 	ld	(_ctlAbort), hl
-;src/main.c:2385: ctlMusic = Key_M;
+;src/main.c:2369: ctlMusic = Key_M;
 	ld	hl, #0x4004
 	ld	(_ctlMusic), hl
-;src/main.c:2386: ctlPause = Key_H;	
+;src/main.c:2370: ctlPause = Key_H;	
 	ld	hl, #0x1005
 	ld	(_ctlPause), hl
-;src/main.c:2388: turboMode = FALSE;
+;src/main.c:2372: turboMode = FALSE;
 	ld	hl,#_turboMode + 0
 	ld	(hl), #0x00
-;src/main.c:2389: nTip = 0;
+;src/main.c:2373: nTip = 0;
 	ld	hl,#_nTip + 0
 	ld	(hl), #0x00
 	ret
-;src/main.c:2394: void ResetData() {
+;src/main.c:2378: void ResetData() {
 ;	---------------------------------
 ; Function ResetData
 ; ---------------------------------
 _ResetData::
-;src/main.c:2395: ctMainLoop = 0;
+;src/main.c:2379: ctMainLoop = 0;
 	ld	hl, #0x0000
 	ld	(_ctMainLoop), hl
-;src/main.c:2396: nObj[0] = -1;
+;src/main.c:2380: nObj[0] = -1;
 	ld	hl, #_nObj+0
 	ld	(hl), #0xff
-;src/main.c:2397: nObj[1] = -1;
+;src/main.c:2381: nObj[1] = -1;
 	inc	hl
 	ld	(hl), #0xff
-;src/main.c:2398: sht.active = FALSE;
+;src/main.c:2382: sht.active = FALSE;
 	ld	hl, #(_sht + 0x0004)
 	ld	(hl), #0x00
-;src/main.c:2399: ctWizardAnim = 0;
+;src/main.c:2383: ctWizardAnim = 0;
 	ld	hl,#_ctWizardAnim + 0
 	ld	(hl), #0x00
-;src/main.c:2402: spr[0].dir = D_right; 
+;src/main.c:2386: spr[0].dir = D_right; 
 	ld	hl, #(_spr + 0x0007)
 	ld	(hl), #0x03
-;src/main.c:2403: spr[0].status = S_stopped;
+;src/main.c:2387: spr[0].status = S_stopped;
 	ld	hl, #(_spr + 0x0006)
 	ld	(hl), #0x04
-;src/main.c:2404: spr[0].print_minV = TRUE; // the first time must be printed on screen
+;src/main.c:2388: spr[0].print_minV = TRUE; // the first time must be printed on screen
 	ld	hl, #(_spr + 0x000d)
 	ld	(hl), #0x01
-;src/main.c:2405: spr[0].power_maxV = 0;
+;src/main.c:2389: spr[0].power_maxV = 0;
 	ld	hl, #(_spr + 0x000e)
 	ld	(hl), #0x00
-;src/main.c:2406: ctInactivity[0] = 0;
+;src/main.c:2390: ctInactivity[0] = 0;
 	ld	bc, #_ctInactivity+0
 	xor	a, a
 	ld	(bc), a
-;src/main.c:2408: spr[1].dir = D_left; 
+;src/main.c:2392: spr[1].dir = D_left; 
 	ld	hl, #(_spr + 0x0016)
 	ld	(hl), #0x02
-;src/main.c:2409: spr[1].status = S_stopped;	
+;src/main.c:2393: spr[1].status = S_stopped;	
 	ld	hl, #(_spr + 0x0015)
 	ld	(hl), #0x04
-;src/main.c:2410: spr[1].print_minV = TRUE; // the first time must be printed on screen
+;src/main.c:2394: spr[1].print_minV = TRUE; // the first time must be printed on screen
 	ld	hl, #(_spr + 0x001c)
 	ld	(hl), #0x01
-;src/main.c:2411: spr[1].power_maxV = 0;
+;src/main.c:2395: spr[1].power_maxV = 0;
 	ld	hl, #(_spr + 0x001d)
 	ld	(hl), #0x00
-;src/main.c:2412: ctInactivity[1] = 0;
+;src/main.c:2396: ctInactivity[1] = 0;
 	inc	bc
 	xor	a, a
 	ld	(bc), a
-;src/main.c:2414: SetEnemies();
+;src/main.c:2398: SetEnemies();
 	call	_SetEnemies
-;src/main.c:2415: PrintMap();
+;src/main.c:2399: PrintMap();
 	call	_PrintMap
-;src/main.c:2416: RefreshScoreboard();
+;src/main.c:2400: RefreshScoreboard();
 	call	_RefreshScoreboard
-;src/main.c:2417: DeleteObjectInStore();
+;src/main.c:2401: DeleteObjectInStore();
 	call	_DeleteObjectInStore
-;src/main.c:2420: if (nMap != lastNMap) {
+;src/main.c:2404: if (nMap != lastNMap) {
 	ld	a,(#_nMap + 0)
 	ld	iy, #_lastNMap
 	sub	a, 0 (iy)
 	ret	Z
-;src/main.c:2421: if (!TwoPlayers) {
+;src/main.c:2405: if (!TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	NZ,00102$
-;src/main.c:2422: PrintKey();
+;src/main.c:2406: PrintKey();
 	call	_PrintKey
-;src/main.c:2424: playerKey[0] = 0;
+;src/main.c:2408: playerKey[0] = 0;
 	ld	hl, #_playerKey
 	ld	(hl), #0x00
-;src/main.c:2425: playerKey[1] = 0;
+;src/main.c:2409: playerKey[1] = 0;
 	ld	hl, #(_playerKey + 0x0001)
 	ld	(hl), #0x00
-;src/main.c:2426: playerKey[2] = 0;
+;src/main.c:2410: playerKey[2] = 0;
 	ld	hl, #(_playerKey + 0x0002)
 	ld	(hl), #0x00
-;src/main.c:2427: playerKey[3] = 0;
+;src/main.c:2411: playerKey[3] = 0;
 	ld	hl, #(_playerKey + 0x0003)
 	ld	(hl), #0x00
-;src/main.c:2428: playerKey[4] = 0;
+;src/main.c:2412: playerKey[4] = 0;
 	ld	hl, #(_playerKey + 0x0004)
 	ld	(hl), #0x00
 00102$:
-;src/main.c:2430: PrintLevelInfo();	
+;src/main.c:2414: PrintLevelInfo();	
 	call	_PrintLevelInfo
-;src/main.c:2431: PrintMap();	
+;src/main.c:2415: PrintMap();	
 	call	_PrintMap
-;src/main.c:2432: lastNMap = nMap;
+;src/main.c:2416: lastNMap = nMap;
 	ld	a,(#_nMap + 0)
 	ld	(#_lastNMap + 0),a
 	ret
-;src/main.c:2438: void InitGame() {
+;src/main.c:2422: void InitGame() {
 ;	---------------------------------
 ; Function InitGame
 ; ---------------------------------
 _InitGame::
-;src/main.c:2439: StartMenu(); // run the start menu
+;src/main.c:2423: StartMenu(); // run the start menu
 	call	_StartMenu
-;src/main.c:2440: nMap = 0; // initial map number
+;src/main.c:2424: nMap = 0; // initial map number
 	ld	hl,#_nMap + 0
 	ld	(hl), #0x00
-;src/main.c:2441: lastNMap = 255;
+;src/main.c:2425: lastNMap = 255;
 	ld	hl,#_lastNMap + 0
 	ld	(hl), #0xff
-;src/main.c:2444: spr[0].num = 0; // sprite number
+;src/main.c:2428: spr[0].num = 0; // sprite number
 	ld	hl, #_spr
 	ld	(hl), #0x00
-;src/main.c:2445: spr[0].ident = SORCERER1; // identity
+;src/main.c:2429: spr[0].ident = SORCERER1; // identity
 	ld	hl, #(_spr + 0x0001)
 	ld	(hl), #0x00
-;src/main.c:2446: spr[0].lives_speed = 3; // lives
+;src/main.c:2430: spr[0].lives_speed = 3; // lives
 	ld	hl, #(_spr + 0x000b)
 	ld	(hl), #0x03
-;src/main.c:2447: score[0] = 0; // score
+;src/main.c:2431: score[0] = 0; // score
 	ld	hl, #0x0000
 	ld	(_score), hl
-;src/main.c:2448: ResetObjData(0);
+;src/main.c:2432: ResetObjData(0);
 	ld	l, #0x00
 	call	_ResetObjData
-;src/main.c:2451: spr[1].num = 1; // sprite number
+;src/main.c:2435: spr[1].num = 1; // sprite number
 	ld	hl, #(_spr + 0x000f)
 	ld	(hl), #0x01
-;src/main.c:2452: spr[1].ident = SORCERER2; // identity
+;src/main.c:2436: spr[1].ident = SORCERER2; // identity
 	ld	hl, #(_spr + 0x0010)
 	ld	(hl), #0x01
-;src/main.c:2453: spr[1].lives_speed = 3; // lives
+;src/main.c:2437: spr[1].lives_speed = 3; // lives
 	ld	hl, #(_spr + 0x001a)
 	ld	(hl), #0x03
-;src/main.c:2454: score[1] = 0; // score
+;src/main.c:2438: score[1] = 0; // score
 	ld	hl, #0x0000
 	ld	((_score + 0x0002)), hl
-;src/main.c:2455: ResetObjData(1);
+;src/main.c:2439: ResetObjData(1);
 	ld	l, #0x01
 	call	_ResetObjData
-;src/main.c:2458: spr[6].num = 6; // sprite number
+;src/main.c:2442: spr[6].num = 6; // sprite number
 	ld	hl, #(_spr + 0x005a)
 	ld	(hl), #0x06
-;src/main.c:2459: spr[6].ident = WIZARD; // identity
+;src/main.c:2443: spr[6].ident = WIZARD; // identity
 	ld	hl, #(_spr + 0x005b)
 	ld	(hl), #0x07
-;src/main.c:2461: InitScoreboard();		
+;src/main.c:2445: InitScoreboard();		
 	call	_InitScoreboard
-;src/main.c:2462: ResetData();
+;src/main.c:2446: ResetData();
 	jp  _ResetData
-;src/main.c:2467: void GameOver(u8 player) {
+;src/main.c:2451: void GameOver(u8 player) {
 ;	---------------------------------
 ; Function GameOver
 ; ---------------------------------
@@ -10764,7 +10764,7 @@ _GameOver::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/main.c:2469: if (spr[player].lives_speed > 1 && player != 2) {
+;src/main.c:2453: if (spr[player].lives_speed > 1 && player != 2) {
 	ld	bc, #_spr+0
 	ld	e,4 (ix)
 	ld	d,#0x00
@@ -10789,22 +10789,22 @@ _GameOver::
 	ld	a, 4 (ix)
 	sub	a, #0x02
 	jr	Z,00113$
-;src/main.c:2470: spr[player].lives_speed--;
+;src/main.c:2454: spr[player].lives_speed--;
 	dec	c
 	pop	hl
 	push	hl
 	ld	(hl), c
-;src/main.c:2471: ResetData();
+;src/main.c:2455: ResetData();
 	call	_ResetData
 	jp	00116$
 00113$:
-;src/main.c:2475: spr[player].lives_speed = 0;
+;src/main.c:2459: spr[player].lives_speed = 0;
 	pop	hl
 	push	hl
 	ld	(hl), #0x00
-;src/main.c:2476: RefreshScoreboard();
+;src/main.c:2460: RefreshScoreboard();
 	call	_RefreshScoreboard
-;src/main.c:2478: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
+;src/main.c:2462: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
@@ -10815,7 +10815,7 @@ _GameOver::
 	ld	hl, #0xc326
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:2479: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
+;src/main.c:2463: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
 	ld	hl, #0x0404
 	push	hl
 	call	_cpct_px2byteM0
@@ -10826,7 +10826,7 @@ _GameOver::
 	ld	hl, #0xc348
 	push	hl
 	call	_cpct_drawSolidBox
-;src/main.c:2480: PrintFrame(6,80,71,134);
+;src/main.c:2464: PrintFrame(6,80,71,134);
 	ld	hl, #0x8647
 	push	hl
 	ld	hl, #0x5006
@@ -10834,11 +10834,11 @@ _GameOver::
 	call	_PrintFrame
 	pop	af
 	pop	af
-;src/main.c:2481: if (TwoPlayers) {
+;src/main.c:2465: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00107$
-;src/main.c:2482: PrintText("G@A@M@E@@O@V@E@R", 16, 91, 0);
+;src/main.c:2466: PrintText("G@A@M@E@@O@V@E@R", 16, 91, 0);
 	ld	hl, #0x005b
 	push	hl
 	ld	a, #0x10
@@ -10850,7 +10850,7 @@ _GameOver::
 	pop	af
 	pop	af
 	inc	sp
-;src/main.c:2483: if (player == 0) PrintText("PLAYER@2@WINS>", 19, 106, 0);
+;src/main.c:2467: if (player == 0) PrintText("PLAYER@2@WINS>", 19, 106, 0);
 	ld	a, 4 (ix)
 	or	a, a
 	jr	NZ,00104$
@@ -10867,7 +10867,7 @@ _GameOver::
 	inc	sp
 	jr	00105$
 00104$:
-;src/main.c:2484: else if (player == 1) PrintText("PLAYER@1@WINS>", 19, 106, 0);
+;src/main.c:2468: else if (player == 1) PrintText("PLAYER@1@WINS>", 19, 106, 0);
 	ld	a, 4 (ix)
 	dec	a
 	jr	NZ,00105$
@@ -10883,7 +10883,7 @@ _GameOver::
 	pop	af
 	inc	sp
 00105$:
-;src/main.c:2485: PrintText("HIGH@SCORE:", 16, 122, 0);
+;src/main.c:2469: PrintText("HIGH@SCORE:", 16, 122, 0);
 	ld	hl, #0x007a
 	push	hl
 	ld	a, #0x10
@@ -10893,7 +10893,7 @@ _GameOver::
 	push	hl
 	call	_PrintText
 	pop	af
-;src/main.c:2486: PrintNumber(highScore, 4, 52, 122, 0);			
+;src/main.c:2470: PrintNumber(highScore, 4, 52, 122, 0);			
 	inc	sp
 	ld	hl,#0x007a
 	ex	(sp),hl
@@ -10907,7 +10907,7 @@ _GameOver::
 	ld	sp, hl
 	jr	00108$
 00107$:
-;src/main.c:2489: PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
+;src/main.c:2473: PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
 	ld	hl, #0x006b
 	push	hl
 	ld	a, #0x10
@@ -10920,16 +10920,16 @@ _GameOver::
 	pop	af
 	inc	sp
 00108$:
-;src/main.c:2490: Pause(500);	
+;src/main.c:2474: Pause(500);	
 	ld	hl, #0x01f4
 	call	_Pause
-;src/main.c:2492: while (!cpct_isAnyKeyPressed());
+;src/main.c:2476: while (!cpct_isAnyKeyPressed());
 00109$:
 	call	_cpct_isAnyKeyPressed
 	ld	a, l
 	or	a, a
 	jr	Z,00109$
-;src/main.c:2493: InitGame();
+;src/main.c:2477: InitGame();
 	call	_InitGame
 00116$:
 	ld	sp, ix
@@ -10947,26 +10947,26 @@ ___str_86:
 ___str_87:
 	.ascii "HIGH@SCORE:"
 	.db 0x00
-;src/main.c:2498: void main(void) {
+;src/main.c:2482: void main(void) {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:2500: cpct_disableFirmware();
+;src/main.c:2484: cpct_disableFirmware();
 	call	_cpct_disableFirmware
-;src/main.c:2503: cpct_setInterruptHandler(Interrupt); 
+;src/main.c:2487: cpct_setInterruptHandler(Interrupt); 
 	ld	hl, #_Interrupt
 	call	_cpct_setInterruptHandler
-;src/main.c:2505: cpct_setVideoMode(0);
+;src/main.c:2489: cpct_setVideoMode(0);
 	ld	l, #0x00
 	call	_cpct_setVideoMode
-;src/main.c:2507: cpct_setPalette(g_palette, 16);
+;src/main.c:2491: cpct_setPalette(g_palette, 16);
 	ld	hl, #0x0010
 	push	hl
 	ld	hl, #_g_palette
 	push	hl
 	call	_cpct_setPalette
-;src/main.c:2509: cpct_setBorder(g_palette[BG_COLOR]);
+;src/main.c:2493: cpct_setBorder(g_palette[BG_COLOR]);
 	ld	hl, #_g_palette + 1
 	ld	b, (hl)
 	push	bc
@@ -10975,16 +10975,16 @@ _main::
 	push	af
 	inc	sp
 	call	_cpct_setPALColour
-;src/main.c:2511: cpct_etm_setTileset2x4(g_tileset);	
+;src/main.c:2495: cpct_etm_setTileset2x4(g_tileset);	
 	ld	hl, #_g_tileset
 	call	_cpct_etm_setTileset2x4
-;src/main.c:2513: InitValues();
+;src/main.c:2497: InitValues();
 	call	_InitValues
-;src/main.c:2515: InitGame();
+;src/main.c:2499: InitGame();
 	call	_InitGame
-;src/main.c:2518: while (1) {
+;src/main.c:2502: while (1) {
 00140$:
-;src/main.c:2520: if (ctMainLoop % 8 == 0) {
+;src/main.c:2504: if (ctMainLoop % 8 == 0) {
 	ld	hl, #0x0008
 	push	hl
 	ld	hl, (_ctMainLoop)
@@ -10995,26 +10995,26 @@ _main::
 	ld	a, h
 	or	a,l
 	jr	NZ,00108$
-;src/main.c:2521: ReprintObject(); // reprint the active object
+;src/main.c:2505: ReprintObject(); // reprint the active object
 	call	_ReprintObject
-;src/main.c:2522: PrintObjectInStore(); // reprint the object into the store
+;src/main.c:2506: PrintObjectInStore(); // reprint the object into the store
 	call	_PrintObjectInStore
-;src/main.c:2523: CheckObject(0); // verify collection of object 1
+;src/main.c:2507: CheckObject(0); // verify collection of object 1
 	xor	a, a
 	push	af
 	inc	sp
 	call	_CheckObject
 	inc	sp
-;src/main.c:2524: CheckObject(1); // verify collection of object 2
+;src/main.c:2508: CheckObject(1); // verify collection of object 2
 	ld	a, #0x01
 	push	af
 	inc	sp
 	call	_CheckObject
 	inc	sp
-;src/main.c:2525: MakeWizardAnim(0); // activates the wizard's shot if the player 1 is inactive		
+;src/main.c:2509: MakeWizardAnim(0); // activates the wizard's shot if the player 1 is inactive		
 	ld	l, #0x00
 	call	_MakeWizardAnim
-;src/main.c:2526: if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
+;src/main.c:2510: if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
 	ld	a, (#_spr + 13)
 	or	a, a
 	jr	Z,00102$
@@ -11024,16 +11024,16 @@ _main::
 	call	_CheckActiveTile
 	inc	sp
 00102$:
-;src/main.c:2528: if (TwoPlayers) {
+;src/main.c:2512: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00106$
-;src/main.c:2529: CheckDuel(); // check that both players collide and have potions
+;src/main.c:2513: CheckDuel(); // check that both players collide and have potions
 	call	_CheckDuel
-;src/main.c:2530: MakeWizardAnim(1); // activates the wizard's shot if the player 2 is inactive		
+;src/main.c:2514: MakeWizardAnim(1); // activates the wizard's shot if the player 2 is inactive		
 	ld	l, #0x01
 	call	_MakeWizardAnim
-;src/main.c:2531: if (spr[1].print_minV) CheckActiveTile(1); // check entry into store, door or well of player 2
+;src/main.c:2515: if (spr[1].print_minV) CheckActiveTile(1); // check entry into store, door or well of player 2
 	ld	a, (#_spr + 28)
 	or	a, a
 	jr	Z,00106$
@@ -11043,16 +11043,16 @@ _main::
 	call	_CheckActiveTile
 	inc	sp
 00106$:
-;src/main.c:2533: WizardAnim(); // print the wizard if active
+;src/main.c:2517: WizardAnim(); // print the wizard if active
 	call	_WizardAnim
 00108$:
-;src/main.c:2536: if (!turboMode) cpct_waitVSYNC(); // wait for vertical retrace	
+;src/main.c:2520: if (!turboMode) cpct_waitVSYNC(); // wait for vertical retrace	
 	ld	a,(#_turboMode + 0)
 	or	a, a
 	jr	NZ,00110$
 	call	_cpct_waitVSYNC
 00110$:
-;src/main.c:2539: switch (ctMainLoop % 3) {
+;src/main.c:2523: switch (ctMainLoop % 3) {
 	ld	hl, #0x0003
 	push	hl
 	ld	hl, (_ctMainLoop)
@@ -11075,39 +11075,39 @@ _main::
 	or	a, b
 	jr	Z,00117$
 	jp	00129$
-;src/main.c:2541: case 0: {							
+;src/main.c:2525: case 0: {							
 00111$:
-;src/main.c:2542: PlayerLoop(&spr[0]); // player 1
+;src/main.c:2526: PlayerLoop(&spr[0]); // player 1
 	ld	hl, #_spr
 	call	_PlayerLoop
-;src/main.c:2543: EnemyLoop(&spr[2]);	 // enemy sprite 2 is always processed (fast)
+;src/main.c:2527: EnemyLoop(&spr[2]);	 // enemy sprite 2 is always processed (fast)
 	ld	hl, #(_spr + 0x001e)
 	call	_EnemyLoop
-;src/main.c:2544: break;
+;src/main.c:2528: break;
 	jp	00129$
-;src/main.c:2547: case 1:	{			
+;src/main.c:2531: case 1:	{			
 00112$:
-;src/main.c:2548: if (TwoPlayers) {
+;src/main.c:2532: if (TwoPlayers) {
 	ld	a,(#_TwoPlayers + 0)
 	or	a, a
 	jr	Z,00116$
-;src/main.c:2549: PlayerLoop(&spr[1]); // player 2
+;src/main.c:2533: PlayerLoop(&spr[1]); // player 2
 	ld	hl, #(_spr + 0x000f)
 	call	_PlayerLoop
-;src/main.c:2550: if (!turboMode) cpct_waitVSYNC(); // additional wait for vertical retrace (avoid flickering)
+;src/main.c:2534: if (!turboMode) cpct_waitVSYNC(); // additional wait for vertical retrace (avoid flickering)
 	ld	a,(#_turboMode + 0)
 	or	a, a
 	jr	NZ,00116$
 	call	_cpct_waitVSYNC
 00116$:
-;src/main.c:2552: EnemyLoop(&spr[3]);	 // enemy sprite 3 is always processed (fast)
+;src/main.c:2536: EnemyLoop(&spr[3]);	 // enemy sprite 3 is always processed (fast)
 	ld	hl, #(_spr + 0x002d)
 	call	_EnemyLoop
-;src/main.c:2553: break;
+;src/main.c:2537: break;
 	jr	00129$
-;src/main.c:2556: case 2:	{
+;src/main.c:2540: case 2:	{
 00117$:
-;src/main.c:2557: EnemyLoop(&spr[enemyTurn+4]); // enemy sprites 4 and 5 take turns processing (slow)				
+;src/main.c:2541: EnemyLoop(&spr[enemyTurn+4]); // enemy sprites 4 and 5 take turns processing (slow)				
 	ld	a,(#_enemyTurn + 0)
 	add	a, #0x04
 	ld	c,a
@@ -11123,7 +11123,7 @@ _main::
 	ld	de, #_spr
 	add	hl, de
 	call	_EnemyLoop
-;src/main.c:2558: if (++enemyTurn > 1) enemyTurn = 0;
+;src/main.c:2542: if (++enemyTurn > 1) enemyTurn = 0;
 	ld	iy, #_enemyTurn
 	inc	0 (iy)
 	ld	a, #0x01
@@ -11131,26 +11131,26 @@ _main::
 	jr	NC,00119$
 	ld	0 (iy), #0x00
 00119$:
-;src/main.c:2561: if (sht.active) {				
+;src/main.c:2545: if (sht.active) {				
 	ld	a, (#(_sht + 0x0004) + 0)
 	or	a, a
 	jr	Z,00124$
-;src/main.c:2562: MoveShot(); // update the shot's XY coordinates	
+;src/main.c:2546: MoveShot(); // update the shot's XY coordinates	
 	call	_MoveShot
-;src/main.c:2565: if (ctWizardAnim > 0) 	
+;src/main.c:2549: if (ctWizardAnim > 0) 	
 	ld	a,(#_ctWizardAnim + 0)
 	or	a, a
 	jr	Z,00121$
-;src/main.c:2566: PrintShot(g_magic_3);	// wizard
+;src/main.c:2550: PrintShot(g_magic_3);	// wizard
 	ld	hl, #_g_magic_3
 	call	_PrintShot
 	jr	00124$
 00121$:
-;src/main.c:2568: PrintShot(g_magic_2);	// witch
+;src/main.c:2552: PrintShot(g_magic_2);	// witch
 	ld	hl, #_g_magic_2
 	call	_PrintShot
 00124$:
-;src/main.c:2572: if (spr[0].power_maxV > 0) spr[0].power_maxV--;
+;src/main.c:2556: if (spr[0].power_maxV > 0) spr[0].power_maxV--;
 	ld	bc, #_spr + 14
 	ld	a, (bc)
 	or	a, a
@@ -11158,30 +11158,30 @@ _main::
 	add	a, #0xff
 	ld	(bc), a
 00126$:
-;src/main.c:2573: if (spr[1].power_maxV > 0) spr[1].power_maxV--;			
+;src/main.c:2557: if (spr[1].power_maxV > 0) spr[1].power_maxV--;			
 	ld	bc, #_spr + 29
 	ld	a, (bc)
 	or	a, a
 	jr	Z,00129$
 	add	a, #0xff
 	ld	(bc), a
-;src/main.c:2575: }
+;src/main.c:2559: }
 00129$:
-;src/main.c:2578: ctMainLoop++;
+;src/main.c:2562: ctMainLoop++;
 	ld	bc, (_ctMainLoop)
 	inc	bc
-;src/main.c:2577: if (ctMainLoop == 174) {
+;src/main.c:2561: if (ctMainLoop == 174) {
 	ld	iy, #_ctMainLoop
 	ld	a, 0 (iy)
 	sub	a, #0xae
 	or	a, 1 (iy)
 	jr	NZ,00137$
-;src/main.c:2578: ctMainLoop++;
+;src/main.c:2562: ctMainLoop++;
 	ld	(_ctMainLoop), bc
-;src/main.c:2579: SetObject(1); // set the second object
+;src/main.c:2563: SetObject(1); // set the second object
 	ld	l, #0x01
 	call	_SetObject
-;src/main.c:2581: if (nMap == 0 && !TwoPlayers && nTip<1) 
+;src/main.c:2565: if (nMap == 0 && !TwoPlayers && nTip<1) 
 	ld	a,(#_nMap + 0)
 	or	a, a
 	jp	NZ, 00140$
@@ -11191,11 +11191,11 @@ _main::
 	ld	a,(#_nTip + 0)
 	sub	a, #0x01
 	jp	NC, 00140$
-;src/main.c:2582: PrintTip(); // novice help
+;src/main.c:2566: PrintTip(); // novice help
 	call	_PrintTip
 	jp	00140$
 00137$:
-;src/main.c:2584: else if (ctMainLoop++ == 350) {			
+;src/main.c:2568: else if (ctMainLoop++ == 350) {			
 	ld	de, (_ctMainLoop)
 	ld	(_ctMainLoop), bc
 	ld	a, e
@@ -11203,10 +11203,10 @@ _main::
 	jp	NZ,00140$
 	dec	d
 	jp	NZ,00140$
-;src/main.c:2585: SetObject(0); // set the first object			
+;src/main.c:2569: SetObject(0); // set the first object			
 	ld	l, #0x00
 	call	_SetObject
-;src/main.c:2586: ctMainLoop = 0; // reset counter
+;src/main.c:2570: ctMainLoop = 0; // reset counter
 	ld	hl, #0x0000
 	ld	(_ctMainLoop), hl
 	jp	00140$

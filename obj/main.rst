@@ -5836,7 +5836,7 @@
    6A84 DD F9         [10] 5747 	ld	sp, ix
    6A86 DD E1         [14] 5748 	pop	ix
    6A88 C9            [10] 5749 	ret
-                           5750 ;src/main.c:1344: void WalkAnim(TSpr *pSpr, u8 dir) {
+                           5750 ;src/main.c:1328: void WalkAnim(TSpr *pSpr, u8 dir) {
                            5751 ;	---------------------------------
                            5752 ; Function WalkAnim
                            5753 ; ---------------------------------
@@ -5844,9 +5844,9 @@
    6A89 DD E5         [15] 5755 	push	ix
    6A8B DD 21 00 00   [14] 5756 	ld	ix,#0
    6A8F DD 39         [15] 5757 	add	ix,sp
-                           5758 ;src/main.c:1345: u8 animPause = 2;
+                           5758 ;src/main.c:1329: u8 animPause = 2;
    6A91 0E 02         [ 7] 5759 	ld	c, #0x02
-                           5760 ;src/main.c:1346: if (pSpr->num > 3) animPause = 1; // slow enemies (4 and 5) have no pause in animation
+                           5760 ;src/main.c:1330: if (pSpr->num > 3) animPause = 1; // slow enemies (4 and 5) have no pause in animation
    6A93 DD 5E 04      [19] 5761 	ld	e,4 (ix)
    6A96 DD 56 05      [19] 5762 	ld	d,5 (ix)
    6A99 1A            [ 7] 5763 	ld	a, (de)
@@ -5856,12 +5856,12 @@
    6A9E 30 02         [12] 5767 	jr	NC,00102$
    6AA0 0E 01         [ 7] 5768 	ld	c, #0x01
    6AA2                    5769 00102$:
-                           5770 ;src/main.c:1347: pSpr->dir = dir;
+                           5770 ;src/main.c:1331: pSpr->dir = dir;
    6AA2 21 07 00      [10] 5771 	ld	hl, #0x0007
    6AA5 19            [11] 5772 	add	hl, de
    6AA6 DD 7E 06      [19] 5773 	ld	a, 6 (ix)
    6AA9 77            [ 7] 5774 	ld	(hl), a
-                           5775 ;src/main.c:1348: if(++pSpr->nFrm == animPause*2) pSpr->nFrm = 0;
+                           5775 ;src/main.c:1332: if(++pSpr->nFrm == animPause*2) pSpr->nFrm = 0;
    6AAA FD 21 0A 00   [14] 5776 	ld	iy, #0x000a
    6AAE FD 19         [15] 5777 	add	iy, de
    6AB0 FD 34 00      [23] 5778 	inc	0 (iy)
@@ -5880,7 +5880,7 @@
    6ACA                    5791 00105$:
    6ACA DD E1         [14] 5792 	pop	ix
    6ACC C9            [10] 5793 	ret
-                           5794 ;src/main.c:1353: void Walk(TSpr *pSpr) __z88dk_fastcall {
+                           5794 ;src/main.c:1337: void Walk(TSpr *pSpr) __z88dk_fastcall {
                            5795 ;	---------------------------------
                            5796 ; Function Walk
                            5797 ; ---------------------------------
@@ -5892,9 +5892,9 @@
    6AD6 F5            [11] 5803 	push	af
    6AD7 DD 75 FE      [19] 5804 	ld	-2 (ix), l
    6ADA DD 74 FF      [19] 5805 	ld	-1 (ix), h
-                           5806 ;src/main.c:1354: cpct_scanKeyboard_f(); // check the pressed keys
+                           5806 ;src/main.c:1338: cpct_scanKeyboard_f(); // check the pressed keys
    6ADD CD E0 43      [17] 5807 	call	_cpct_scanKeyboard_f
-                           5808 ;src/main.c:1356: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
+                           5808 ;src/main.c:1340: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
    6AE0 11 E9 48      [10] 5809 	ld	de, #_ctlRight+0
    6AE3 DD 4E FE      [19] 5810 	ld	c,-2 (ix)
    6AE6 DD 46 FF      [19] 5811 	ld	b,-1 (ix)
@@ -5914,15 +5914,15 @@
    6AF9 C1            [10] 5825 	pop	bc
    6AFA 0A            [ 7] 5826 	ld	a, (bc)
    6AFB 6F            [ 4] 5827 	ld	l, a
-                           5828 ;src/main.c:1357: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
+                           5828 ;src/main.c:1341: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
    6AFC 26 00         [ 7] 5829 	ld	h, #0x00
    6AFE 29            [11] 5830 	add	hl, hl
    6AFF E3            [19] 5831 	ex	(sp), hl
-                           5832 ;src/main.c:1356: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
+                           5832 ;src/main.c:1340: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
    6B00 7B            [ 4] 5833 	ld	a, e
    6B01 B7            [ 4] 5834 	or	a, a
    6B02 28 51         [12] 5835 	jr	Z,00121$
-                           5836 ;src/main.c:1357: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
+                           5836 ;src/main.c:1341: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
    6B04 11 DD 48      [10] 5837 	ld	de, #_ctlUp+0
    6B07 E1            [10] 5838 	pop	hl
    6B08 E5            [11] 5839 	push	hl
@@ -5944,7 +5944,7 @@
    6B1B CD 40 67      [17] 5855 	call	_MoveUp
    6B1E 18 1B         [12] 5856 	jr	00105$
    6B20                    5857 00104$:
-                           5858 ;src/main.c:1358: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal derecha-abajo
+                           5858 ;src/main.c:1342: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal derecha-abajo
    6B20 11 E1 48      [10] 5859 	ld	de, #_ctlDown+0
    6B23 0A            [ 7] 5860 	ld	a, (bc)
    6B24 6F            [ 4] 5861 	ld	l, a
@@ -5965,13 +5965,13 @@
    6B37 C5            [11] 5876 	push	bc
    6B38 CD CD 67      [17] 5877 	call	_MoveDown
    6B3B                    5878 00105$:
-                           5879 ;src/main.c:1359: MoveRight(pSpr);
+                           5879 ;src/main.c:1343: MoveRight(pSpr);
    6B3B C1            [10] 5880 	pop	bc
    6B3C E1            [10] 5881 	pop	hl
    6B3D E5            [11] 5882 	push	hl
    6B3E C5            [11] 5883 	push	bc
    6B3F CD F7 68      [17] 5884 	call	_MoveRight
-                           5885 ;src/main.c:1360: WalkAnim(pSpr, D_right);
+                           5885 ;src/main.c:1344: WalkAnim(pSpr, D_right);
    6B42 3E 03         [ 7] 5886 	ld	a, #0x03
    6B44 F5            [11] 5887 	push	af
    6B45 33            [ 6] 5888 	inc	sp
@@ -5983,7 +5983,7 @@
    6B51 33            [ 6] 5894 	inc	sp
    6B52 C3 25 6C      [10] 5895 	jp	00123$
    6B55                    5896 00121$:
-                           5897 ;src/main.c:1363: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
+                           5897 ;src/main.c:1347: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
    6B55 11 E5 48      [10] 5898 	ld	de, #_ctlLeft+0
    6B58 E1            [10] 5899 	pop	hl
    6B59 E5            [11] 5900 	push	hl
@@ -5996,18 +5996,18 @@
    6B60 CD D4 43      [17] 5907 	call	_cpct_isKeyPressed
    6B63 5D            [ 4] 5908 	ld	e, l
    6B64 C1            [10] 5909 	pop	bc
-                           5910 ;src/main.c:1356: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
+                           5910 ;src/main.c:1340: if(cpct_isKeyPressed(ctlRight[pSpr->ident])) {	
    6B65 0A            [ 7] 5911 	ld	a, (bc)
    6B66 6F            [ 4] 5912 	ld	l, a
-                           5913 ;src/main.c:1357: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
+                           5913 ;src/main.c:1341: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr);  // diagonal derecha-arriba
    6B67 26 00         [ 7] 5914 	ld	h, #0x00
    6B69 29            [11] 5915 	add	hl, hl
    6B6A E3            [19] 5916 	ex	(sp), hl
-                           5917 ;src/main.c:1363: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
+                           5917 ;src/main.c:1347: else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {	
    6B6B 7B            [ 4] 5918 	ld	a, e
    6B6C B7            [ 4] 5919 	or	a, a
    6B6D 28 50         [12] 5920 	jr	Z,00118$
-                           5921 ;src/main.c:1364: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr); // diagonal izda-arriba
+                           5921 ;src/main.c:1348: if (cpct_isKeyPressed(ctlUp[pSpr->ident])) 			MoveUp(pSpr); // diagonal izda-arriba
    6B6F 11 DD 48      [10] 5922 	ld	de, #_ctlUp+0
    6B72 E1            [10] 5923 	pop	hl
    6B73 E5            [11] 5924 	push	hl
@@ -6029,7 +6029,7 @@
    6B86 CD 40 67      [17] 5940 	call	_MoveUp
    6B89 18 1B         [12] 5941 	jr	00110$
    6B8B                    5942 00109$:
-                           5943 ;src/main.c:1365: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal izda-abajo
+                           5943 ;src/main.c:1349: else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	MoveDown(pSpr); // diagonal izda-abajo
    6B8B 0A            [ 7] 5944 	ld	a, (bc)
    6B8C 6F            [ 4] 5945 	ld	l, a
    6B8D 26 00         [ 7] 5946 	ld	h, #0x00
@@ -6050,13 +6050,13 @@
    6BA2 C5            [11] 5961 	push	bc
    6BA3 CD CD 67      [17] 5962 	call	_MoveDown
    6BA6                    5963 00110$:
-                           5964 ;src/main.c:1366: MoveLeft(pSpr); 
+                           5964 ;src/main.c:1350: MoveLeft(pSpr); 
    6BA6 C1            [10] 5965 	pop	bc
    6BA7 E1            [10] 5966 	pop	hl
    6BA8 E5            [11] 5967 	push	hl
    6BA9 C5            [11] 5968 	push	bc
    6BAA CD 6D 68      [17] 5969 	call	_MoveLeft
-                           5970 ;src/main.c:1367: WalkAnim(pSpr, D_left);
+                           5970 ;src/main.c:1351: WalkAnim(pSpr, D_left);
    6BAD 3E 02         [ 7] 5971 	ld	a, #0x02
    6BAF F5            [11] 5972 	push	af
    6BB0 33            [ 6] 5973 	inc	sp
@@ -6068,7 +6068,7 @@
    6BBC 33            [ 6] 5979 	inc	sp
    6BBD 18 66         [12] 5980 	jr	00123$
    6BBF                    5981 00118$:
-                           5982 ;src/main.c:1370: else if(cpct_isKeyPressed(ctlUp[pSpr->ident])) {
+                           5982 ;src/main.c:1354: else if(cpct_isKeyPressed(ctlUp[pSpr->ident])) {
    6BBF 11 DD 48      [10] 5983 	ld	de, #_ctlUp+0
    6BC2 E1            [10] 5984 	pop	hl
    6BC3 E5            [11] 5985 	push	hl
@@ -6083,13 +6083,13 @@
    6BCE 7D            [ 4] 5994 	ld	a, l
    6BCF B7            [ 4] 5995 	or	a, a
    6BD0 28 18         [12] 5996 	jr	Z,00115$
-                           5997 ;src/main.c:1371: MoveUp(pSpr); 
+                           5997 ;src/main.c:1355: MoveUp(pSpr); 
    6BD2 C1            [10] 5998 	pop	bc
    6BD3 E1            [10] 5999 	pop	hl
    6BD4 E5            [11] 6000 	push	hl
    6BD5 C5            [11] 6001 	push	bc
    6BD6 CD 40 67      [17] 6002 	call	_MoveUp
-                           6003 ;src/main.c:1372: WalkAnim(pSpr, D_up);
+                           6003 ;src/main.c:1356: WalkAnim(pSpr, D_up);
    6BD9 AF            [ 4] 6004 	xor	a, a
    6BDA F5            [11] 6005 	push	af
    6BDB 33            [ 6] 6006 	inc	sp
@@ -6101,7 +6101,7 @@
    6BE7 33            [ 6] 6012 	inc	sp
    6BE8 18 3B         [12] 6013 	jr	00123$
    6BEA                    6014 00115$:
-                           6015 ;src/main.c:1375: else if(cpct_isKeyPressed(ctlDown[pSpr->ident])) {
+                           6015 ;src/main.c:1359: else if(cpct_isKeyPressed(ctlDown[pSpr->ident])) {
    6BEA 0A            [ 7] 6016 	ld	a, (bc)
    6BEB 6F            [ 4] 6017 	ld	l, a
    6BEC 26 00         [ 7] 6018 	ld	h, #0x00
@@ -6116,13 +6116,13 @@
    6BFA 7D            [ 4] 6027 	ld	a, l
    6BFB B7            [ 4] 6028 	or	a, a
    6BFC 28 19         [12] 6029 	jr	Z,00112$
-                           6030 ;src/main.c:1376: MoveDown(pSpr); 
+                           6030 ;src/main.c:1360: MoveDown(pSpr); 
    6BFE C1            [10] 6031 	pop	bc
    6BFF E1            [10] 6032 	pop	hl
    6C00 E5            [11] 6033 	push	hl
    6C01 C5            [11] 6034 	push	bc
    6C02 CD CD 67      [17] 6035 	call	_MoveDown
-                           6036 ;src/main.c:1377: WalkAnim(pSpr, D_down);
+                           6036 ;src/main.c:1361: WalkAnim(pSpr, D_down);
    6C05 3E 01         [ 7] 6037 	ld	a, #0x01
    6C07 F5            [11] 6038 	push	af
    6C08 33            [ 6] 6039 	inc	sp
@@ -6134,7 +6134,7 @@
    6C14 33            [ 6] 6045 	inc	sp
    6C15 18 0E         [12] 6046 	jr	00123$
    6C17                    6047 00112$:
-                           6048 ;src/main.c:1380: pSpr->status = S_stopped;
+                           6048 ;src/main.c:1364: pSpr->status = S_stopped;
    6C17 DD 7E FE      [19] 6049 	ld	a, -2 (ix)
    6C1A C6 06         [ 7] 6050 	add	a, #0x06
    6C1C 6F            [ 4] 6051 	ld	l, a
@@ -6146,29 +6146,29 @@
    6C25 DD F9         [10] 6057 	ld	sp, ix
    6C27 DD E1         [14] 6058 	pop	ix
    6C29 C9            [10] 6059 	ret
-                           6060 ;src/main.c:1385: void RunStatus(TSpr *pSpr) __z88dk_fastcall {
+                           6060 ;src/main.c:1369: void RunStatus(TSpr *pSpr) __z88dk_fastcall {
                            6061 ;	---------------------------------
                            6062 ; Function RunStatus
                            6063 ; ---------------------------------
    6C2A                    6064 _RunStatus::
    6C2A 4D            [ 4] 6065 	ld	c, l
    6C2B 44            [ 4] 6066 	ld	b, h
-                           6067 ;src/main.c:1386: if (pSpr->status == S_stopped)
+                           6067 ;src/main.c:1370: if (pSpr->status == S_stopped)
    6C2C C5            [11] 6068 	push	bc
    6C2D FD E1         [14] 6069 	pop	iy
    6C2F FD 7E 06      [19] 6070 	ld	a, 6 (iy)
    6C32 D6 04         [ 7] 6071 	sub	a, #0x04
    6C34 20 05         [12] 6072 	jr	NZ,00102$
-                           6073 ;src/main.c:1387: Stop(pSpr);
+                           6073 ;src/main.c:1371: Stop(pSpr);
    6C36 69            [ 4] 6074 	ld	l, c
    6C37 60            [ 4] 6075 	ld	h, b
    6C38 C3 A5 69      [10] 6076 	jp  _Stop
    6C3B                    6077 00102$:
-                           6078 ;src/main.c:1389: Walk(pSpr);	
+                           6078 ;src/main.c:1373: Walk(pSpr);	
    6C3B 69            [ 4] 6079 	ld	l, c
    6C3C 60            [ 4] 6080 	ld	h, b
    6C3D C3 CD 6A      [10] 6081 	jp  _Walk
-                           6082 ;src/main.c:1394: void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
+                           6082 ;src/main.c:1378: void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
                            6083 ;	---------------------------------
                            6084 ; Function PlayerLoop
                            6085 ; ---------------------------------
@@ -6179,13 +6179,13 @@
    6C48 F5            [11] 6090 	push	af
    6C49 4D            [ 4] 6091 	ld	c, l
    6C4A 44            [ 4] 6092 	ld	b, h
-                           6093 ;src/main.c:1395: RunStatus(pSpr); // calls the appropriate function based on the status of the main sprites
+                           6093 ;src/main.c:1379: RunStatus(pSpr); // calls the appropriate function based on the status of the main sprites
    6C4B C5            [11] 6094 	push	bc
    6C4C 69            [ 4] 6095 	ld	l, c
    6C4D 60            [ 4] 6096 	ld	h, b
    6C4E CD 2A 6C      [17] 6097 	call	_RunStatus
    6C51 C1            [10] 6098 	pop	bc
-                           6099 ;src/main.c:1396: if (pSpr->print_minV) { // does the sprite have to be reprinted?
+                           6099 ;src/main.c:1380: if (pSpr->print_minV) { // does the sprite have to be reprinted?
    6C52 21 0D 00      [10] 6100 	ld	hl, #0x000d
    6C55 09            [11] 6101 	add	hl,bc
    6C56 E3            [19] 6102 	ex	(sp), hl
@@ -6194,19 +6194,19 @@
    6C59 7E            [ 7] 6105 	ld	a, (hl)
    6C5A B7            [ 4] 6106 	or	a, a
    6C5B 28 46         [12] 6107 	jr	Z,00106$
-                           6108 ;src/main.c:1397: SelectFrame(pSpr); // we assign the next frame of the animation to the sprite
+                           6108 ;src/main.c:1381: SelectFrame(pSpr); // we assign the next frame of the animation to the sprite
    6C5D C5            [11] 6109 	push	bc
    6C5E 69            [ 4] 6110 	ld	l, c
    6C5F 60            [ 4] 6111 	ld	h, b
    6C60 CD EE 62      [17] 6112 	call	_SelectFrame
    6C63 C1            [10] 6113 	pop	bc
-                           6114 ;src/main.c:1398: DeleteSprite(pSpr); // delete the sprite
+                           6114 ;src/main.c:1382: DeleteSprite(pSpr); // delete the sprite
    6C64 C5            [11] 6115 	push	bc
    6C65 69            [ 4] 6116 	ld	l, c
    6C66 60            [ 4] 6117 	ld	h, b
    6C67 CD 39 62      [17] 6118 	call	_DeleteSprite
    6C6A C1            [10] 6119 	pop	bc
-                           6120 ;src/main.c:1399: pSpr->px = pSpr->x; // save the current X coordinate
+                           6120 ;src/main.c:1383: pSpr->px = pSpr->x; // save the current X coordinate
    6C6B 21 04 00      [10] 6121 	ld	hl, #0x0004
    6C6E 09            [11] 6122 	add	hl,bc
    6C6F EB            [ 4] 6123 	ex	de,hl
@@ -6216,7 +6216,7 @@
    6C73 23            [ 6] 6127 	inc	hl
    6C74 7E            [ 7] 6128 	ld	a, (hl)
    6C75 12            [ 7] 6129 	ld	(de), a
-                           6130 ;src/main.c:1400: pSpr->py = pSpr->y; // save the current Y coordinate
+                           6130 ;src/main.c:1384: pSpr->py = pSpr->y; // save the current Y coordinate
    6C76 21 05 00      [10] 6131 	ld	hl, #0x0005
    6C79 09            [11] 6132 	add	hl,bc
    6C7A EB            [ 4] 6133 	ex	de,hl
@@ -6227,32 +6227,32 @@
    6C7F 23            [ 6] 6138 	inc	hl
    6C80 7E            [ 7] 6139 	ld	a, (hl)
    6C81 12            [ 7] 6140 	ld	(de), a
-                           6141 ;src/main.c:1401: PrintSprite(pSpr); // paint the sprite in the new XY position
+                           6141 ;src/main.c:1385: PrintSprite(pSpr); // paint the sprite in the new XY position
    6C82 C5            [11] 6142 	push	bc
    6C83 69            [ 4] 6143 	ld	l, c
    6C84 60            [ 4] 6144 	ld	h, b
    6C85 CD 0A 62      [17] 6145 	call	_PrintSprite
    6C88 C1            [10] 6146 	pop	bc
-                           6147 ;src/main.c:1402: ctInactivity[pSpr->num] = 0; // on the move
+                           6147 ;src/main.c:1386: ctInactivity[pSpr->num] = 0; // on the move
    6C89 11 D6 48      [10] 6148 	ld	de, #_ctInactivity+0
    6C8C 0A            [ 7] 6149 	ld	a, (bc)
    6C8D 6F            [ 4] 6150 	ld	l, a
    6C8E 26 00         [ 7] 6151 	ld	h,#0x00
    6C90 19            [11] 6152 	add	hl, de
    6C91 36 00         [10] 6153 	ld	(hl), #0x00
-                           6154 ;src/main.c:1403: if (pSpr->status == S_stopped) 
+                           6154 ;src/main.c:1387: if (pSpr->status == S_stopped) 
    6C93 C5            [11] 6155 	push	bc
    6C94 FD E1         [14] 6156 	pop	iy
    6C96 FD 7E 06      [19] 6157 	ld	a, 6 (iy)
    6C99 D6 04         [ 7] 6158 	sub	a, #0x04
    6C9B 20 1E         [12] 6159 	jr	NZ,00108$
-                           6160 ;src/main.c:1404: pSpr->print_minV = FALSE; // if it is stopped it is no longer necessary to continue printing the sprite
+                           6160 ;src/main.c:1388: pSpr->print_minV = FALSE; // if it is stopped it is no longer necessary to continue printing the sprite
    6C9D E1            [10] 6161 	pop	hl
    6C9E E5            [11] 6162 	push	hl
    6C9F 36 00         [10] 6163 	ld	(hl), #0x00
    6CA1 18 18         [12] 6164 	jr	00108$
    6CA3                    6165 00106$:
-                           6166 ;src/main.c:1407: else if (ctMainLoop % 5 == 0)
+                           6166 ;src/main.c:1391: else if (ctMainLoop % 5 == 0)
    6CA3 C5            [11] 6167 	push	bc
    6CA4 21 05 00      [10] 6168 	ld	hl, #0x0005
    6CA7 E5            [11] 6169 	push	hl
@@ -6265,7 +6265,7 @@
    6CB2 7C            [ 4] 6176 	ld	a, h
    6CB3 B5            [ 4] 6177 	or	a,l
    6CB4 20 05         [12] 6178 	jr	NZ,00108$
-                           6179 ;src/main.c:1408: PrintSprite(pSpr);
+                           6179 ;src/main.c:1392: PrintSprite(pSpr);
    6CB6 69            [ 4] 6180 	ld	l, c
    6CB7 60            [ 4] 6181 	ld	h, b
    6CB8 CD 0A 62      [17] 6182 	call	_PrintSprite
@@ -6273,7 +6273,7 @@
    6CBB DD F9         [10] 6184 	ld	sp, ix
    6CBD DD E1         [14] 6185 	pop	ix
    6CBF C9            [10] 6186 	ret
-                           6187 ;src/main.c:1425: void ExplodePlayerInDuel(u8 player) __z88dk_fastcall {
+                           6187 ;src/main.c:1409: void ExplodePlayerInDuel(u8 player) __z88dk_fastcall {
                            6188 ;	---------------------------------
                            6189 ; Function ExplodePlayerInDuel
                            6190 ; ---------------------------------
@@ -6283,7 +6283,7 @@
    6CC6 DD 39         [15] 6194 	add	ix,sp
    6CC8 3B            [ 6] 6195 	dec	sp
    6CC9 DD 75 FF      [19] 6196 	ld	-1 (ix), l
-                           6197 ;src/main.c:1426: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[player].x, 122), cpct_px2byteM0(4, 4), SPR_W, SPR_H);
+                           6197 ;src/main.c:1410: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[player].x, 122), cpct_px2byteM0(4, 4), SPR_W, SPR_H);
    6CCC 21 04 04      [10] 6198 	ld	hl, #0x0404
    6CCF E5            [11] 6199 	push	hl
    6CD0 CD 9D 46      [17] 6200 	call	_cpct_px2byteM0
@@ -6343,7 +6343,7 @@
    6D27 33            [ 6] 6254 	inc	sp
    6D28 DD E1         [14] 6255 	pop	ix
    6D2A C9            [10] 6256 	ret
-                           6257 ;src/main.c:1433: void MakeDuel() {
+                           6257 ;src/main.c:1417: void MakeDuel() {
                            6258 ;	---------------------------------
                            6259 ; Function MakeDuel
                            6260 ; ---------------------------------
@@ -6353,7 +6353,7 @@
    6D31 DD 39         [15] 6264 	add	ix,sp
    6D33 F5            [11] 6265 	push	af
    6D34 3B            [ 6] 6266 	dec	sp
-                           6267 ;src/main.c:1436: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 18, 80), cpct_px2byteM0(4, 4), 45, 60);
+                           6267 ;src/main.c:1420: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 18, 80), cpct_px2byteM0(4, 4), 45, 60);
    6D35 21 04 04      [10] 6268 	ld	hl, #0x0404
    6D38 E5            [11] 6269 	push	hl
    6D39 CD 9D 46      [17] 6270 	call	_cpct_px2byteM0
@@ -6364,7 +6364,7 @@
    6D43 21 32 C3      [10] 6275 	ld	hl, #0xc332
    6D46 E5            [11] 6276 	push	hl
    6D47 CD D7 46      [17] 6277 	call	_cpct_drawSolidBox
-                           6278 ;src/main.c:1437: PrintFrame(18,80,60,134);
+                           6278 ;src/main.c:1421: PrintFrame(18,80,60,134);
    6D4A 21 3C 86      [10] 6279 	ld	hl, #0x863c
    6D4D E5            [11] 6280 	push	hl
    6D4E 21 12 50      [10] 6281 	ld	hl, #0x5012
@@ -6372,12 +6372,12 @@
    6D52 CD 89 4D      [17] 6283 	call	_PrintFrame
    6D55 F1            [10] 6284 	pop	af
    6D56 F1            [10] 6285 	pop	af
-                           6286 ;src/main.c:1439: spr[0].x = 23; spr[0].y = 122;
+                           6286 ;src/main.c:1423: spr[0].x = 23; spr[0].y = 122;
    6D57 21 F5 48      [10] 6287 	ld	hl, #(_spr + 0x0002)
    6D5A 36 17         [10] 6288 	ld	(hl), #0x17
    6D5C 21 F6 48      [10] 6289 	ld	hl, #(_spr + 0x0003)
    6D5F 36 7A         [10] 6290 	ld	(hl), #0x7a
-                           6291 ;src/main.c:1441: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+                           6291 ;src/main.c:1425: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
    6D61 21 F6 48      [10] 6292 	ld	hl, #(_spr + 0x0003) + 0
    6D64 56            [ 7] 6293 	ld	d, (hl)
    6D65 21 F5 48      [10] 6294 	ld	hl, #(_spr + 0x0002) + 0
@@ -6388,7 +6388,7 @@
    6D6E CD B9 47      [17] 6299 	call	_cpct_getScreenPtr
    6D71 4D            [ 4] 6300 	ld	c, l
    6D72 44            [ 4] 6301 	ld	b, h
-                           6302 ;src/main.c:1440: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06,
+                           6302 ;src/main.c:1424: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06,
    6D73 21 00 01      [10] 6303 	ld	hl, #_g_maskTable
    6D76 E5            [11] 6304 	push	hl
    6D77 21 05 0C      [10] 6305 	ld	hl, #0x0c05
@@ -6397,28 +6397,28 @@
    6D7C 21 D7 2D      [10] 6308 	ld	hl, #_g_sorcerer1_06
    6D7F E5            [11] 6309 	push	hl
    6D80 CD CF 47      [17] 6310 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6311 ;src/main.c:1443: spr[1].x = 53; spr[1].y = 122;
+                           6311 ;src/main.c:1427: spr[1].x = 53; spr[1].y = 122;
    6D83 21 04 49      [10] 6312 	ld	hl, #(_spr + 0x0011)
    6D86 36 35         [10] 6313 	ld	(hl), #0x35
    6D88 21 05 49      [10] 6314 	ld	hl, #(_spr + 0x0012)
    6D8B 36 7A         [10] 6315 	ld	(hl), #0x7a
-                           6316 ;src/main.c:1446: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+                           6316 ;src/main.c:1430: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
    6D8D 3A 05 49      [13] 6317 	ld	a,(#(_spr + 0x0012) + 0)
-   6D90 DD 77 FF      [19] 6318 	ld	-1 (ix), a
+   6D90 DD 77 FE      [19] 6318 	ld	-2 (ix), a
    6D93 3A 04 49      [13] 6319 	ld	a,(#(_spr + 0x0011) + 0)
-   6D96 DD 77 FE      [19] 6320 	ld	-2 (ix), a
-                           6321 ;src/main.c:1444: if (TwoPlayers) {
+   6D96 DD 77 FF      [19] 6320 	ld	-1 (ix), a
+                           6321 ;src/main.c:1428: if (TwoPlayers) {
    6D99 3A BE 48      [13] 6322 	ld	a,(#_TwoPlayers + 0)
    6D9C B7            [ 4] 6323 	or	a, a
    6D9D 28 20         [12] 6324 	jr	Z,00102$
-                           6325 ;src/main.c:1446: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-   6D9F DD 66 FF      [19] 6326 	ld	h, -1 (ix)
-   6DA2 DD 6E FE      [19] 6327 	ld	l, -2 (ix)
+                           6325 ;src/main.c:1430: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+   6D9F DD 66 FE      [19] 6326 	ld	h, -2 (ix)
+   6DA2 DD 6E FF      [19] 6327 	ld	l, -1 (ix)
    6DA5 E5            [11] 6328 	push	hl
    6DA6 21 00 C0      [10] 6329 	ld	hl, #0xc000
    6DA9 E5            [11] 6330 	push	hl
    6DAA CD B9 47      [17] 6331 	call	_cpct_getScreenPtr
-                           6332 ;src/main.c:1445: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
+                           6332 ;src/main.c:1429: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
    6DAD 01 07 2B      [10] 6333 	ld	bc, #_g_sorcerer2_04+0
    6DB0 11 00 01      [10] 6334 	ld	de, #_g_maskTable
    6DB3 D5            [11] 6335 	push	de
@@ -6429,14 +6429,14 @@
    6DBA CD CF 47      [17] 6340 	call	_cpct_drawSpriteMaskedAlignedTable
    6DBD 18 1E         [12] 6341 	jr	00103$
    6DBF                    6342 00102$:
-                           6343 ;src/main.c:1451: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
-   6DBF DD 66 FF      [19] 6344 	ld	h, -1 (ix)
-   6DC2 DD 6E FE      [19] 6345 	ld	l, -2 (ix)
+                           6343 ;src/main.c:1435: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+   6DBF DD 66 FE      [19] 6344 	ld	h, -2 (ix)
+   6DC2 DD 6E FF      [19] 6345 	ld	l, -1 (ix)
    6DC5 E5            [11] 6346 	push	hl
    6DC6 21 00 C0      [10] 6347 	ld	hl, #0xc000
    6DC9 E5            [11] 6348 	push	hl
    6DCA CD B9 47      [17] 6349 	call	_cpct_getScreenPtr
-                           6350 ;src/main.c:1450: cpct_drawSpriteMaskedAlignedTable(g_door_0, 
+                           6350 ;src/main.c:1434: cpct_drawSpriteMaskedAlignedTable(g_door_0, 
    6DCD 01 87 23      [10] 6351 	ld	bc, #_g_door_0+0
    6DD0 11 00 01      [10] 6352 	ld	de, #_g_maskTable
    6DD3 D5            [11] 6353 	push	de
@@ -6446,10 +6446,10 @@
    6DD9 C5            [11] 6357 	push	bc
    6DDA CD CF 47      [17] 6358 	call	_cpct_drawSpriteMaskedAlignedTable
    6DDD                    6359 00103$:
-                           6360 ;src/main.c:1453: Pause(400);
+                           6360 ;src/main.c:1437: Pause(400);
    6DDD 21 90 01      [10] 6361 	ld	hl, #0x0190
    6DE0 CD 6A 4B      [17] 6362 	call	_Pause
-                           6363 ;src/main.c:1457: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+                           6363 ;src/main.c:1441: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
    6DE3 21 F6 48      [10] 6364 	ld	hl, #(_spr + 0x0003) + 0
    6DE6 56            [ 7] 6365 	ld	d, (hl)
    6DE7 21 F5 48      [10] 6366 	ld	hl, #(_spr + 0x0002) + 0
@@ -6458,7 +6458,7 @@
    6DEC 21 00 C0      [10] 6369 	ld	hl, #0xc000
    6DEF E5            [11] 6370 	push	hl
    6DF0 CD B9 47      [17] 6371 	call	_cpct_getScreenPtr
-                           6372 ;src/main.c:1456: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_08, 
+                           6372 ;src/main.c:1440: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_08, 
    6DF3 01 4F 2E      [10] 6373 	ld	bc, #_g_sorcerer1_08+0
    6DF6 11 00 01      [10] 6374 	ld	de, #_g_maskTable
    6DF9 D5            [11] 6375 	push	de
@@ -6467,15 +6467,15 @@
    6DFE E5            [11] 6378 	push	hl
    6DFF C5            [11] 6379 	push	bc
    6E00 CD CF 47      [17] 6380 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6381 ;src/main.c:1458: spr[0].x += OBJ_W;
+                           6381 ;src/main.c:1442: spr[0].x += OBJ_W;
    6E03 3A F5 48      [13] 6382 	ld	a, (#(_spr + 0x0002) + 0)
    6E06 C6 04         [ 7] 6383 	add	a, #0x04
    6E08 32 F5 48      [13] 6384 	ld	(#(_spr + 0x0002)),a
-                           6385 ;src/main.c:1459: if (TwoPlayers) {
+                           6385 ;src/main.c:1443: if (TwoPlayers) {
    6E0B 3A BE 48      [13] 6386 	ld	a,(#_TwoPlayers + 0)
    6E0E B7            [ 4] 6387 	or	a, a
    6E0F 28 28         [12] 6388 	jr	Z,00148$
-                           6389 ;src/main.c:1461: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+                           6389 ;src/main.c:1445: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
    6E11 21 05 49      [10] 6390 	ld	hl, #(_spr + 0x0012) + 0
    6E14 56            [ 7] 6391 	ld	d, (hl)
    6E15 21 04 49      [10] 6392 	ld	hl, #(_spr + 0x0011) + 0
@@ -6484,7 +6484,7 @@
    6E1A 21 00 C0      [10] 6395 	ld	hl, #0xc000
    6E1D E5            [11] 6396 	push	hl
    6E1E CD B9 47      [17] 6397 	call	_cpct_getScreenPtr
-                           6398 ;src/main.c:1460: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_08, 
+                           6398 ;src/main.c:1444: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_08, 
    6E21 01 F7 2B      [10] 6399 	ld	bc, #_g_sorcerer2_08+0
    6E24 11 00 01      [10] 6400 	ld	de, #_g_maskTable
    6E27 D5            [11] 6401 	push	de
@@ -6493,26 +6493,26 @@
    6E2C E5            [11] 6404 	push	hl
    6E2D C5            [11] 6405 	push	bc
    6E2E CD CF 47      [17] 6406 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6407 ;src/main.c:1462: spr[1].x -= OBJ_W;
+                           6407 ;src/main.c:1446: spr[1].x -= OBJ_W;
    6E31 3A 04 49      [13] 6408 	ld	a, (#(_spr + 0x0011) + 0)
    6E34 C6 FC         [ 7] 6409 	add	a, #0xfc
    6E36 32 04 49      [13] 6410 	ld	(#(_spr + 0x0011)),a
-                           6411 ;src/main.c:1466: while (spr[0].x < 50)
+                           6411 ;src/main.c:1450: while (spr[0].x < 50)
    6E39                    6412 00148$:
    6E39                    6413 00110$:
-                           6414 ;src/main.c:1441: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+                           6414 ;src/main.c:1425: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
    6E39 21 F5 48      [10] 6415 	ld	hl, #(_spr + 0x0002) + 0
    6E3C 4E            [ 7] 6416 	ld	c, (hl)
-                           6417 ;src/main.c:1466: while (spr[0].x < 50)
+                           6417 ;src/main.c:1450: while (spr[0].x < 50)
    6E3D 79            [ 4] 6418 	ld	a, c
    6E3E D6 32         [ 7] 6419 	sub	a, #0x32
    6E40 D2 DC 6E      [10] 6420 	jp	NC, 00112$
-                           6421 ;src/main.c:1469: spr[0].x ++;
+                           6421 ;src/main.c:1453: spr[0].x ++;
    6E43 41            [ 4] 6422 	ld	b, c
    6E44 04            [ 4] 6423 	inc	b
    6E45 21 F5 48      [10] 6424 	ld	hl, #(_spr + 0x0002)
    6E48 70            [ 7] 6425 	ld	(hl), b
-                           6426 ;src/main.c:1471: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, 125), SHT_W, SHT_H, g_maskTable);
+                           6426 ;src/main.c:1455: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, 125), SHT_W, SHT_H, g_maskTable);
    6E49 3E 7D         [ 7] 6427 	ld	a, #0x7d
    6E4B F5            [11] 6428 	push	af
    6E4C 33            [ 6] 6429 	inc	sp
@@ -6521,7 +6521,7 @@
    6E4F 21 00 C0      [10] 6432 	ld	hl, #0xc000
    6E52 E5            [11] 6433 	push	hl
    6E53 CD B9 47      [17] 6434 	call	_cpct_getScreenPtr
-                           6435 ;src/main.c:1470: cpct_drawSpriteMaskedAlignedTable(g_magic_0, 
+                           6435 ;src/main.c:1454: cpct_drawSpriteMaskedAlignedTable(g_magic_0, 
    6E56 01 00 01      [10] 6436 	ld	bc, #_g_maskTable
    6E59 C5            [11] 6437 	push	bc
    6E5A 01 04 08      [10] 6438 	ld	bc, #0x0804
@@ -6530,17 +6530,17 @@
    6E5F 21 01 16      [10] 6441 	ld	hl, #_g_magic_0
    6E62 E5            [11] 6442 	push	hl
    6E63 CD CF 47      [17] 6443 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6444 ;src/main.c:1472: if (TwoPlayers) {
+                           6444 ;src/main.c:1456: if (TwoPlayers) {
    6E66 3A BE 48      [13] 6445 	ld	a,(#_TwoPlayers + 0)
    6E69 B7            [ 4] 6446 	or	a, a
    6E6A 28 26         [12] 6447 	jr	Z,00107$
-                           6448 ;src/main.c:1473: spr[1].x --;
+                           6448 ;src/main.c:1457: spr[1].x --;
    6E6C 21 04 49      [10] 6449 	ld	hl, #(_spr + 0x0011) + 0
    6E6F 46            [ 7] 6450 	ld	b, (hl)
    6E70 05            [ 4] 6451 	dec	b
    6E71 21 04 49      [10] 6452 	ld	hl, #(_spr + 0x0011)
    6E74 70            [ 7] 6453 	ld	(hl), b
-                           6454 ;src/main.c:1475: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, 125), SHT_W, SHT_H, g_maskTable);
+                           6454 ;src/main.c:1459: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, 125), SHT_W, SHT_H, g_maskTable);
    6E75 3E 7D         [ 7] 6455 	ld	a, #0x7d
    6E77 F5            [11] 6456 	push	af
    6E78 33            [ 6] 6457 	inc	sp
@@ -6549,7 +6549,7 @@
    6E7B 21 00 C0      [10] 6460 	ld	hl, #0xc000
    6E7E E5            [11] 6461 	push	hl
    6E7F CD B9 47      [17] 6462 	call	_cpct_getScreenPtr
-                           6463 ;src/main.c:1474: cpct_drawSpriteMaskedAlignedTable(g_magic_1, 
+                           6463 ;src/main.c:1458: cpct_drawSpriteMaskedAlignedTable(g_magic_1, 
    6E82 01 00 01      [10] 6464 	ld	bc, #_g_maskTable
    6E85 C5            [11] 6465 	push	bc
    6E86 01 04 08      [10] 6466 	ld	bc, #0x0804
@@ -6559,16 +6559,16 @@
    6E8E E5            [11] 6470 	push	hl
    6E8F CD CF 47      [17] 6471 	call	_cpct_drawSpriteMaskedAlignedTable
    6E92                    6472 00107$:
-                           6473 ;src/main.c:1477: Pause(12);
+                           6473 ;src/main.c:1461: Pause(12);
    6E92 21 0C 00      [10] 6474 	ld	hl, #0x000c
    6E95 CD 6A 4B      [17] 6475 	call	_Pause
-                           6476 ;src/main.c:1480: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
+                           6476 ;src/main.c:1464: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
    6E98 21 04 04      [10] 6477 	ld	hl, #0x0404
    6E9B E5            [11] 6478 	push	hl
    6E9C CD 9D 46      [17] 6479 	call	_cpct_px2byteM0
    6E9F 4D            [ 4] 6480 	ld	c, l
    6EA0 06 00         [ 7] 6481 	ld	b, #0x00
-                           6482 ;src/main.c:1479: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[0].x, 125), 
+                           6482 ;src/main.c:1463: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[0].x, 125), 
    6EA2 21 F5 48      [10] 6483 	ld	hl, #(_spr + 0x0002) + 0
    6EA5 5E            [ 7] 6484 	ld	e, (hl)
    6EA6 21 B0 EC      [10] 6485 	ld	hl, #0xecb0
@@ -6579,17 +6579,17 @@
    6EB0 C5            [11] 6490 	push	bc
    6EB1 E5            [11] 6491 	push	hl
    6EB2 CD D7 46      [17] 6492 	call	_cpct_drawSolidBox
-                           6493 ;src/main.c:1481: if (TwoPlayers)
+                           6493 ;src/main.c:1465: if (TwoPlayers)
    6EB5 3A BE 48      [13] 6494 	ld	a,(#_TwoPlayers + 0)
    6EB8 B7            [ 4] 6495 	or	a, a
    6EB9 CA 39 6E      [10] 6496 	jp	Z, 00110$
-                           6497 ;src/main.c:1483: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
+                           6497 ;src/main.c:1467: cpct_px2byteM0(4, 4), OBJ_W, OBJ_H);
    6EBC 21 04 04      [10] 6498 	ld	hl, #0x0404
    6EBF E5            [11] 6499 	push	hl
    6EC0 CD 9D 46      [17] 6500 	call	_cpct_px2byteM0
    6EC3 4D            [ 4] 6501 	ld	c, l
    6EC4 06 00         [ 7] 6502 	ld	b, #0x00
-                           6503 ;src/main.c:1482: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[1].x, 125), 
+                           6503 ;src/main.c:1466: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, spr[1].x, 125), 
    6EC6 21 04 49      [10] 6504 	ld	hl, #(_spr + 0x0011) + 0
    6EC9 5E            [ 7] 6505 	ld	e, (hl)
    6ECA 21 B0 EC      [10] 6506 	ld	hl, #0xecb0
@@ -6602,10 +6602,10 @@
    6ED6 CD D7 46      [17] 6513 	call	_cpct_drawSolidBox
    6ED9 C3 39 6E      [10] 6514 	jp	00110$
    6EDC                    6515 00112$:
-                           6516 ;src/main.c:1487: spr[0].x = 23;
+                           6516 ;src/main.c:1471: spr[0].x = 23;
    6EDC 21 F5 48      [10] 6517 	ld	hl, #(_spr + 0x0002)
    6EDF 36 17         [10] 6518 	ld	(hl), #0x17
-                           6519 ;src/main.c:1489: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+                           6519 ;src/main.c:1473: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
    6EE1 21 F6 48      [10] 6520 	ld	hl, #(_spr + 0x0003) + 0
    6EE4 46            [ 7] 6521 	ld	b, (hl)
    6EE5 21 F5 48      [10] 6522 	ld	hl, #(_spr + 0x0002) + 0
@@ -6614,7 +6614,7 @@
    6EEA 21 00 C0      [10] 6525 	ld	hl, #0xc000
    6EED E5            [11] 6526 	push	hl
    6EEE CD B9 47      [17] 6527 	call	_cpct_getScreenPtr
-                           6528 ;src/main.c:1488: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
+                           6528 ;src/main.c:1472: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
    6EF1 01 00 01      [10] 6529 	ld	bc, #_g_maskTable
    6EF4 C5            [11] 6530 	push	bc
    6EF5 01 05 0C      [10] 6531 	ld	bc, #0x0c05
@@ -6623,14 +6623,14 @@
    6EFA 21 D7 2D      [10] 6534 	ld	hl, #_g_sorcerer1_06
    6EFD E5            [11] 6535 	push	hl
    6EFE CD CF 47      [17] 6536 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6537 ;src/main.c:1490: spr[1].x = 53;
+                           6537 ;src/main.c:1474: spr[1].x = 53;
    6F01 21 04 49      [10] 6538 	ld	hl, #(_spr + 0x0011)
    6F04 36 35         [10] 6539 	ld	(hl), #0x35
-                           6540 ;src/main.c:1492: if (TwoPlayers) {
+                           6540 ;src/main.c:1476: if (TwoPlayers) {
    6F06 3A BE 48      [13] 6541 	ld	a,(#_TwoPlayers + 0)
    6F09 B7            [ 4] 6542 	or	a, a
    6F0A 28 20         [12] 6543 	jr	Z,00114$
-                           6544 ;src/main.c:1494: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+                           6544 ;src/main.c:1478: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
    6F0C 21 05 49      [10] 6545 	ld	hl, #(_spr + 0x0012) + 0
    6F0F 46            [ 7] 6546 	ld	b, (hl)
    6F10 21 04 49      [10] 6547 	ld	hl, #(_spr + 0x0011) + 0
@@ -6639,7 +6639,7 @@
    6F15 21 00 C0      [10] 6550 	ld	hl, #0xc000
    6F18 E5            [11] 6551 	push	hl
    6F19 CD B9 47      [17] 6552 	call	_cpct_getScreenPtr
-                           6553 ;src/main.c:1493: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
+                           6553 ;src/main.c:1477: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
    6F1C 01 07 2B      [10] 6554 	ld	bc, #_g_sorcerer2_04+0
    6F1F 11 00 01      [10] 6555 	ld	de, #_g_maskTable
    6F22 D5            [11] 6556 	push	de
@@ -6649,7 +6649,7 @@
    6F28 C5            [11] 6560 	push	bc
    6F29 CD CF 47      [17] 6561 	call	_cpct_drawSpriteMaskedAlignedTable
    6F2C                    6562 00114$:
-                           6563 ;src/main.c:1498: if (potScore[0] > potScore[1]) {
+                           6563 ;src/main.c:1482: if (potScore[0] > potScore[1]) {
    6F2C 21 C5 48      [10] 6564 	ld	hl, #_potScore+0
    6F2F 4E            [ 7] 6565 	ld	c, (hl)
    6F30 23            [ 6] 6566 	inc	hl
@@ -6657,27 +6657,27 @@
    6F32 7B            [ 4] 6568 	ld	a, e
    6F33 91            [ 4] 6569 	sub	a, c
    6F34 D2 B4 6F      [10] 6570 	jp	NC, 00126$
-                           6571 ;src/main.c:1499: loser = 1;
+                           6571 ;src/main.c:1483: loser = 1;
    6F37 DD 36 FD 01   [19] 6572 	ld	-3 (ix), #0x01
-                           6573 ;src/main.c:1500: ExplodePlayerInDuel(loser);
+                           6573 ;src/main.c:1484: ExplodePlayerInDuel(loser);
    6F3B 2E 01         [ 7] 6574 	ld	l, #0x01
    6F3D CD C0 6C      [17] 6575 	call	_ExplodePlayerInDuel
-                           6576 ;src/main.c:1446: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+                           6576 ;src/main.c:1430: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
    6F40 21 05 49      [10] 6577 	ld	hl, #(_spr + 0x0012) + 0
    6F43 4E            [ 7] 6578 	ld	c, (hl)
    6F44 21 04 49      [10] 6579 	ld	hl, #(_spr + 0x0011) + 0
    6F47 5E            [ 7] 6580 	ld	e, (hl)
-                           6581 ;src/main.c:1501: if (TwoPlayers) {
+                           6581 ;src/main.c:1485: if (TwoPlayers) {
    6F48 3A BE 48      [13] 6582 	ld	a,(#_TwoPlayers + 0)
    6F4B B7            [ 4] 6583 	or	a, a
    6F4C 28 39         [12] 6584 	jr	Z,00118$
-                           6585 ;src/main.c:1504: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+                           6585 ;src/main.c:1488: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
    6F4E 51            [ 4] 6586 	ld	d, c
    6F4F D5            [11] 6587 	push	de
    6F50 21 00 C0      [10] 6588 	ld	hl, #0xc000
    6F53 E5            [11] 6589 	push	hl
    6F54 CD B9 47      [17] 6590 	call	_cpct_getScreenPtr
-                           6591 ;src/main.c:1503: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_09, 
+                           6591 ;src/main.c:1487: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_09, 
    6F57 01 33 2C      [10] 6592 	ld	bc, #_g_sorcerer2_09+0
    6F5A 11 00 01      [10] 6593 	ld	de, #_g_maskTable
    6F5D D5            [11] 6594 	push	de
@@ -6686,7 +6686,7 @@
    6F62 E5            [11] 6597 	push	hl
    6F63 C5            [11] 6598 	push	bc
    6F64 CD CF 47      [17] 6599 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6600 ;src/main.c:1505: PrintText("PLAYER1", 30, 90, 0);
+                           6600 ;src/main.c:1489: PrintText("PLAYER1", 30, 90, 0);
    6F67 21 5A 00      [10] 6601 	ld	hl, #0x005a
    6F6A E5            [11] 6602 	push	hl
    6F6B 3E 1E         [ 7] 6603 	ld	a, #0x1e
@@ -6698,7 +6698,7 @@
    6F76 F1            [10] 6609 	pop	af
    6F77 F1            [10] 6610 	pop	af
    6F78 33            [ 6] 6611 	inc	sp
-                           6612 ;src/main.c:1508: if (spr[0].lives_speed < 9) spr[0].lives_speed++;
+                           6612 ;src/main.c:1492: if (spr[0].lives_speed < 9) spr[0].lives_speed++;
    6F79 01 FE 48      [10] 6613 	ld	bc, #_spr + 11
    6F7C 0A            [ 7] 6614 	ld	a, (bc)
    6F7D FE 09         [ 7] 6615 	cp	a, #0x09
@@ -6707,13 +6707,13 @@
    6F83 02            [ 7] 6618 	ld	(bc), a
    6F84 C3 15 70      [10] 6619 	jp	00127$
    6F87                    6620 00118$:
-                           6621 ;src/main.c:1513: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
+                           6621 ;src/main.c:1497: cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
    6F87 51            [ 4] 6622 	ld	d, c
    6F88 D5            [11] 6623 	push	de
    6F89 21 00 C0      [10] 6624 	ld	hl, #0xc000
    6F8C E5            [11] 6625 	push	hl
    6F8D CD B9 47      [17] 6626 	call	_cpct_getScreenPtr
-                           6627 ;src/main.c:1512: cpct_drawSpriteMaskedAlignedTable(g_door_1, 
+                           6627 ;src/main.c:1496: cpct_drawSpriteMaskedAlignedTable(g_door_1, 
    6F90 01 C3 23      [10] 6628 	ld	bc, #_g_door_1+0
    6F93 11 00 01      [10] 6629 	ld	de, #_g_maskTable
    6F96 D5            [11] 6630 	push	de
@@ -6722,7 +6722,7 @@
    6F9B E5            [11] 6633 	push	hl
    6F9C C5            [11] 6634 	push	bc
    6F9D CD CF 47      [17] 6635 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6636 ;src/main.c:1514: PrintText("LEVEL", 33, 90, 0);
+                           6636 ;src/main.c:1498: PrintText("LEVEL", 33, 90, 0);
    6FA0 21 5A 00      [10] 6637 	ld	hl, #0x005a
    6FA3 E5            [11] 6638 	push	hl
    6FA4 3E 21         [ 7] 6639 	ld	a, #0x21
@@ -6736,16 +6736,16 @@
    6FB1 33            [ 6] 6647 	inc	sp
    6FB2 18 61         [12] 6648 	jr	00127$
    6FB4                    6649 00126$:
-                           6650 ;src/main.c:1518: else if (potScore[0] < potScore[1]) {
+                           6650 ;src/main.c:1502: else if (potScore[0] < potScore[1]) {
    6FB4 79            [ 4] 6651 	ld	a, c
    6FB5 93            [ 4] 6652 	sub	a, e
    6FB6 30 47         [12] 6653 	jr	NC,00123$
-                           6654 ;src/main.c:1519: loser = 0;
+                           6654 ;src/main.c:1503: loser = 0;
    6FB8 DD 36 FD 00   [19] 6655 	ld	-3 (ix), #0x00
-                           6656 ;src/main.c:1520: ExplodePlayerInDuel(loser);
+                           6656 ;src/main.c:1504: ExplodePlayerInDuel(loser);
    6FBC 2E 00         [ 7] 6657 	ld	l, #0x00
    6FBE CD C0 6C      [17] 6658 	call	_ExplodePlayerInDuel
-                           6659 ;src/main.c:1523: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
+                           6659 ;src/main.c:1507: cpct_getScreenPtr(CPCT_VMEM_START, spr[0].x, spr[0].y), SPR_W, SPR_H, g_maskTable);
    6FC1 21 F6 48      [10] 6660 	ld	hl, #(_spr + 0x0003) + 0
    6FC4 56            [ 7] 6661 	ld	d, (hl)
    6FC5 21 F5 48      [10] 6662 	ld	hl, #(_spr + 0x0002) + 0
@@ -6754,7 +6754,7 @@
    6FCA 21 00 C0      [10] 6665 	ld	hl, #0xc000
    6FCD E5            [11] 6666 	push	hl
    6FCE CD B9 47      [17] 6667 	call	_cpct_getScreenPtr
-                           6668 ;src/main.c:1522: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_09, 
+                           6668 ;src/main.c:1506: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_09, 
    6FD1 01 8B 2E      [10] 6669 	ld	bc, #_g_sorcerer1_09+0
    6FD4 11 00 01      [10] 6670 	ld	de, #_g_maskTable
    6FD7 D5            [11] 6671 	push	de
@@ -6763,7 +6763,7 @@
    6FDC E5            [11] 6674 	push	hl
    6FDD C5            [11] 6675 	push	bc
    6FDE CD CF 47      [17] 6676 	call	_cpct_drawSpriteMaskedAlignedTable
-                           6677 ;src/main.c:1524: PrintText("PLAYER2", 30, 90, 0);
+                           6677 ;src/main.c:1508: PrintText("PLAYER2", 30, 90, 0);
    6FE1 21 5A 00      [10] 6678 	ld	hl, #0x005a
    6FE4 E5            [11] 6679 	push	hl
    6FE5 3E 1E         [ 7] 6680 	ld	a, #0x1e
@@ -6775,7 +6775,7 @@
    6FF0 F1            [10] 6686 	pop	af
    6FF1 F1            [10] 6687 	pop	af
    6FF2 33            [ 6] 6688 	inc	sp
-                           6689 ;src/main.c:1527: if (spr[1].lives_speed < 9) spr[1].lives_speed++;
+                           6689 ;src/main.c:1511: if (spr[1].lives_speed < 9) spr[1].lives_speed++;
    6FF3 01 0D 49      [10] 6690 	ld	bc, #_spr + 26
    6FF6 0A            [ 7] 6691 	ld	a, (bc)
    6FF7 FE 09         [ 7] 6692 	cp	a, #0x09
@@ -6784,7 +6784,7 @@
    6FFC 02            [ 7] 6695 	ld	(bc), a
    6FFD 18 16         [12] 6696 	jr	00127$
    6FFF                    6697 00123$:
-                           6698 ;src/main.c:1531: PrintText("NOBODY", 32, 90, 0);
+                           6698 ;src/main.c:1515: PrintText("NOBODY", 32, 90, 0);
    6FFF 01 B4 70      [10] 6699 	ld	bc, #___str_32
    7002 21 5A 00      [10] 6700 	ld	hl, #0x005a
    7005 E5            [11] 6701 	push	hl
@@ -6796,14 +6796,14 @@
    700E F1            [10] 6707 	pop	af
    700F F1            [10] 6708 	pop	af
    7010 33            [ 6] 6709 	inc	sp
-                           6710 ;src/main.c:1532: loser = 2;
+                           6710 ;src/main.c:1516: loser = 2;
    7011 DD 36 FD 02   [19] 6711 	ld	-3 (ix), #0x02
    7015                    6712 00127$:
-                           6713 ;src/main.c:1534: if (TwoPlayers)
+                           6713 ;src/main.c:1518: if (TwoPlayers)
    7015 3A BE 48      [13] 6714 	ld	a,(#_TwoPlayers + 0)
    7018 B7            [ 4] 6715 	or	a, a
    7019 28 14         [12] 6716 	jr	Z,00129$
-                           6717 ;src/main.c:1535: PrintText("WINS>", 33, 101, 0);
+                           6717 ;src/main.c:1519: PrintText("WINS>", 33, 101, 0);
    701B 21 65 00      [10] 6718 	ld	hl, #0x0065
    701E E5            [11] 6719 	push	hl
    701F 3E 21         [ 7] 6720 	ld	a, #0x21
@@ -6817,7 +6817,7 @@
    702C 33            [ 6] 6728 	inc	sp
    702D 18 12         [12] 6729 	jr	00130$
    702F                    6730 00129$:
-                           6731 ;src/main.c:1537: PrintText("COMPLETED", 27, 101, 0);	
+                           6731 ;src/main.c:1521: PrintText("COMPLETED", 27, 101, 0);	
    702F 21 65 00      [10] 6732 	ld	hl, #0x0065
    7032 E5            [11] 6733 	push	hl
    7033 3E 1B         [ 7] 6734 	ld	a, #0x1b
@@ -6830,54 +6830,54 @@
    703F F1            [10] 6741 	pop	af
    7040 33            [ 6] 6742 	inc	sp
    7041                    6743 00130$:
-                           6744 ;src/main.c:1539: Pause(1000);
+                           6744 ;src/main.c:1523: Pause(1000);
    7041 21 E8 03      [10] 6745 	ld	hl, #0x03e8
    7044 CD 6A 4B      [17] 6746 	call	_Pause
-                           6747 ;src/main.c:1541: if (loser < 2) // if there is no tie
+                           6747 ;src/main.c:1525: if (loser < 2) // if there is no tie
    7047 DD 7E FD      [19] 6748 	ld	a, -3 (ix)
    704A D6 02         [ 7] 6749 	sub	a, #0x02
    704C 3E 00         [ 7] 6750 	ld	a, #0x00
    704E 17            [ 4] 6751 	rla
-   704F DD 77 FE      [19] 6752 	ld	-2 (ix), a
+   704F DD 77 FF      [19] 6752 	ld	-1 (ix), a
    7052 B7            [ 4] 6753 	or	a, a
    7053 28 04         [12] 6754 	jr	Z,00132$
-                           6755 ;src/main.c:1542: nMap++; // go to the next screen on the map
+                           6755 ;src/main.c:1526: nMap++; // go to the next screen on the map
    7055 21 BA 48      [10] 6756 	ld	hl, #_nMap+0
    7058 34            [11] 6757 	inc	(hl)
    7059                    6758 00132$:
-                           6759 ;src/main.c:1544: if (nMap == 12) { // screens are over. End of the game
+                           6759 ;src/main.c:1528: if (nMap == 12) { // screens are over. End of the game
    7059 3A BA 48      [13] 6760 	ld	a,(#_nMap + 0)
    705C D6 0C         [ 7] 6761 	sub	a, #0x0c
    705E 20 12         [12] 6762 	jr	NZ,00137$
-                           6763 ;src/main.c:1545: if (loser == 0)		
+                           6763 ;src/main.c:1529: if (loser == 0)		
    7060 DD 7E FD      [19] 6764 	ld	a, -3 (ix)
    7063 B7            [ 4] 6765 	or	a, a
    7064 20 07         [12] 6766 	jr	NZ,00134$
-                           6767 ;src/main.c:1546: PrintEndGame(1); // player 2 wins
+                           6767 ;src/main.c:1530: PrintEndGame(1); // player 2 wins
    7066 2E 01         [ 7] 6768 	ld	l, #0x01
    7068 CD 8D 50      [17] 6769 	call	_PrintEndGame
    706B 18 05         [12] 6770 	jr	00137$
    706D                    6771 00134$:
-                           6772 ;src/main.c:1548: PrintEndGame(0); // player 1 wins
+                           6772 ;src/main.c:1532: PrintEndGame(0); // player 1 wins
    706D 2E 00         [ 7] 6773 	ld	l, #0x00
    706F CD 8D 50      [17] 6774 	call	_PrintEndGame
    7072                    6775 00137$:
-                           6776 ;src/main.c:1552: ResetObjData(0);
+                           6776 ;src/main.c:1536: ResetObjData(0);
    7072 2E 00         [ 7] 6777 	ld	l, #0x00
    7074 CD 05 57      [17] 6778 	call	_ResetObjData
-                           6779 ;src/main.c:1553: ResetObjData(1);
+                           6779 ;src/main.c:1537: ResetObjData(1);
    7077 2E 01         [ 7] 6780 	ld	l, #0x01
    7079 CD 05 57      [17] 6781 	call	_ResetObjData
-                           6782 ;src/main.c:1554: InitScoreboard();
+                           6782 ;src/main.c:1538: InitScoreboard();
    707C CD 81 54      [17] 6783 	call	_InitScoreboard
-                           6784 ;src/main.c:1556: if (loser < 2 && TwoPlayers)
-   707F DD 7E FE      [19] 6785 	ld	a, -2 (ix)
+                           6784 ;src/main.c:1540: if (loser < 2 && TwoPlayers)
+   707F DD 7E FF      [19] 6785 	ld	a, -1 (ix)
    7082 B7            [ 4] 6786 	or	a, a
    7083 28 11         [12] 6787 	jr	Z,00139$
    7085 3A BE 48      [13] 6788 	ld	a,(#_TwoPlayers + 0)
    7088 B7            [ 4] 6789 	or	a, a
    7089 28 0B         [12] 6790 	jr	Z,00139$
-                           6791 ;src/main.c:1557: GameOver(loser); // the player who loses a duel loses a life
+                           6791 ;src/main.c:1541: GameOver(loser); // the player who loses a duel loses a life
    708B DD 7E FD      [19] 6792 	ld	a, -3 (ix)
    708E F5            [11] 6793 	push	af
    708F 33            [ 6] 6794 	inc	sp
@@ -6885,7 +6885,7 @@
    7093 33            [ 6] 6796 	inc	sp
    7094 18 03         [12] 6797 	jr	00142$
    7096                    6798 00139$:
-                           6799 ;src/main.c:1559: ResetData();
+                           6799 ;src/main.c:1543: ResetData();
    7096 CD B6 89      [17] 6800 	call	_ResetData
    7099                    6801 00142$:
    7099 DD F9         [10] 6802 	ld	sp, ix
@@ -6912,12 +6912,12 @@
    70C1 43 4F 4D 50 4C 45  6821 	.ascii "COMPLETED"
         54 45 44
    70CA 00                 6822 	.db 0x00
-                           6823 ;src/main.c:1564: void CheckDuel() {
+                           6823 ;src/main.c:1548: void CheckDuel() {
                            6824 ;	---------------------------------
                            6825 ; Function CheckDuel
                            6826 ; ---------------------------------
    70CB                    6827 _CheckDuel::
-                           6828 ;src/main.c:1565: if ((spr[0].objNum_mov == 5 || spr[1].objNum_mov == 5) && 
+                           6828 ;src/main.c:1549: if ((spr[0].objNum_mov == 5 || spr[1].objNum_mov == 5) && 
    70CB 3A FF 48      [13] 6829 	ld	a, (#_spr + 12)
    70CE D6 05         [ 7] 6830 	sub	a, #0x05
    70D0 28 06         [12] 6831 	jr	Z,00105$
@@ -6925,7 +6925,7 @@
    70D5 D6 05         [ 7] 6833 	sub	a, #0x05
    70D7 C0            [11] 6834 	ret	NZ
    70D8                    6835 00105$:
-                           6836 ;src/main.c:1566: SpriteCollision(spr[0].x, spr[0].y, &spr[1], 0)) {				
+                           6836 ;src/main.c:1550: SpriteCollision(spr[0].x, spr[0].y, &spr[1], 0)) {				
    70D8 21 F6 48      [10] 6837 	ld	hl, #_spr + 3
    70DB 56            [ 7] 6838 	ld	d, (hl)
    70DC 21 F5 48      [10] 6839 	ld	hl, #_spr + 2
@@ -6944,13 +6944,13 @@
    70EF 7D            [ 4] 6852 	ld	a, l
    70F0 B7            [ 4] 6853 	or	a, a
    70F1 C8            [11] 6854 	ret	Z
-                           6855 ;src/main.c:1568: for(u8 i=0;i<6;i++)
+                           6855 ;src/main.c:1552: for(u8 i=0;i<6;i++)
    70F2 0E 00         [ 7] 6856 	ld	c, #0x00
    70F4                    6857 00107$:
    70F4 79            [ 4] 6858 	ld	a, c
    70F5 D6 06         [ 7] 6859 	sub	a, #0x06
    70F7 30 16         [12] 6860 	jr	NC,00101$
-                           6861 ;src/main.c:1569: DeleteSprite(&spr[i]);
+                           6861 ;src/main.c:1553: DeleteSprite(&spr[i]);
    70F9 06 00         [ 7] 6862 	ld	b,#0x00
    70FB 69            [ 4] 6863 	ld	l, c
    70FC 60            [ 4] 6864 	ld	h, b
@@ -6965,39 +6965,39 @@
    7107 C5            [11] 6873 	push	bc
    7108 CD 39 62      [17] 6874 	call	_DeleteSprite
    710B C1            [10] 6875 	pop	bc
-                           6876 ;src/main.c:1568: for(u8 i=0;i<6;i++)
+                           6876 ;src/main.c:1552: for(u8 i=0;i<6;i++)
    710C 0C            [ 4] 6877 	inc	c
    710D 18 E5         [12] 6878 	jr	00107$
    710F                    6879 00101$:
-                           6880 ;src/main.c:1570: DeleteObject(0);
+                           6880 ;src/main.c:1554: DeleteObject(0);
    710F 2E 00         [ 7] 6881 	ld	l, #0x00
    7111 CD 92 57      [17] 6882 	call	_DeleteObject
-                           6883 ;src/main.c:1571: DeleteObject(1);
+                           6883 ;src/main.c:1555: DeleteObject(1);
    7114 2E 01         [ 7] 6884 	ld	l, #0x01
    7116 CD 92 57      [17] 6885 	call	_DeleteObject
-                           6886 ;src/main.c:1573: MakeDuel();
+                           6886 ;src/main.c:1557: MakeDuel();
    7119 C3 2B 6D      [10] 6887 	jp  _MakeDuel
-                           6888 ;src/main.c:1591: void MakeShot(u8 x, u8 y, u8 dir) {	
+                           6888 ;src/main.c:1575: void MakeShot(u8 x, u8 y, u8 dir) {	
                            6889 ;	---------------------------------
                            6890 ; Function MakeShot
                            6891 ; ---------------------------------
    711C                    6892 _MakeShot::
-                           6893 ;src/main.c:1592: if (sht.active == FALSE) { // if there is no active shot...
+                           6893 ;src/main.c:1576: if (sht.active == FALSE) { // if there is no active shot...
    711C 01 5C 49      [10] 6894 	ld	bc, #_sht+0
    711F 21 04 00      [10] 6895 	ld	hl, #0x0004
    7122 09            [11] 6896 	add	hl, bc
    7123 7E            [ 7] 6897 	ld	a, (hl)
    7124 B7            [ 4] 6898 	or	a, a
    7125 C0            [11] 6899 	ret	NZ
-                           6900 ;src/main.c:1593: sht.active = TRUE; // activate it
+                           6900 ;src/main.c:1577: sht.active = TRUE; // activate it
    7126 36 01         [10] 6901 	ld	(hl), #0x01
-                           6902 ;src/main.c:1594: sht.dir = dir; // the direction of the shot is that of the sprite that shoots
+                           6902 ;src/main.c:1578: sht.dir = dir; // the direction of the shot is that of the sprite that shoots
    7128 21 5F 49      [10] 6903 	ld	hl, #(_sht + 0x0003)
    712B FD 21 04 00   [14] 6904 	ld	iy, #4
    712F FD 39         [15] 6905 	add	iy, sp
    7131 FD 7E 00      [19] 6906 	ld	a, 0 (iy)
    7134 77            [ 7] 6907 	ld	(hl), a
-                           6908 ;src/main.c:1595: sht.y = y + 5; // adjusts to the height of the gun (hand)
+                           6908 ;src/main.c:1579: sht.y = y + 5; // adjusts to the height of the gun (hand)
    7135 59            [ 4] 6909 	ld	e, c
    7136 50            [ 4] 6910 	ld	d, b
    7137 13            [ 6] 6911 	inc	de
@@ -7006,7 +7006,7 @@
    713C 7E            [ 7] 6914 	ld	a, (hl)
    713D C6 05         [ 7] 6915 	add	a, #0x05
    713F 12            [ 7] 6916 	ld	(de), a
-                           6917 ;src/main.c:1597: if (sht.dir == D_right) sht.x = x + SPR_W;
+                           6917 ;src/main.c:1581: if (sht.dir == D_right) sht.x = x + SPR_W;
    7140 21 04 00      [10] 6918 	ld	hl, #4+0
    7143 39            [11] 6919 	add	hl, sp
    7144 7E            [ 7] 6920 	ld	a, (hl)
@@ -7019,14 +7019,14 @@
    7150 02            [ 7] 6927 	ld	(bc), a
    7151 C9            [10] 6928 	ret
    7152                    6929 00102$:
-                           6930 ;src/main.c:1598: else sht.x = x - SHT_W;
+                           6930 ;src/main.c:1582: else sht.x = x - SHT_W;
    7152 21 02 00      [10] 6931 	ld	hl, #2+0
    7155 39            [11] 6932 	add	hl, sp
    7156 7E            [ 7] 6933 	ld	a, (hl)
    7157 C6 FC         [ 7] 6934 	add	a, #0xfc
    7159 02            [ 7] 6935 	ld	(bc), a
    715A C9            [10] 6936 	ret
-                           6937 ;src/main.c:1604: void DeleteShot() {
+                           6937 ;src/main.c:1588: void DeleteShot() {
                            6938 ;	---------------------------------
                            6939 ; Function DeleteShot
                            6940 ; ---------------------------------
@@ -7036,7 +7036,7 @@
    7161 DD 39         [15] 6944 	add	ix,sp
    7163 F5            [11] 6945 	push	af
    7164 3B            [ 6] 6946 	dec	sp
-                           6947 ;src/main.c:1606: 2 + (sht.px & 1), 2 + (sht.y & 3 ? 1 : 0), 
+                           6947 ;src/main.c:1590: 2 + (sht.px & 1), 2 + (sht.y & 3 ? 1 : 0), 
    7165 21 5D 49      [10] 6948 	ld	hl, #_sht + 1
    7168 4E            [ 7] 6949 	ld	c, (hl)
    7169 79            [ 4] 6950 	ld	a, c
@@ -7055,7 +7055,7 @@
    717B E6 01         [ 7] 6963 	and	a, #0x01
    717D C6 02         [ 7] 6964 	add	a, #0x02
    717F DD 77 FF      [19] 6965 	ld	-1 (ix), a
-                           6966 ;src/main.c:1605: cpct_etm_drawTileBox2x4(sht.px / 2, (sht.y - ORIG_MAP_Y) / 4, 
+                           6966 ;src/main.c:1589: cpct_etm_drawTileBox2x4(sht.px / 2, (sht.y - ORIG_MAP_Y) / 4, 
    7182 06 00         [ 7] 6967 	ld	b, #0x00
    7184 79            [ 4] 6968 	ld	a, c
    7185 C6 E0         [ 7] 6969 	add	a, #0xe0
@@ -7094,21 +7094,21 @@
    71BF DD F9         [10] 7002 	ld	sp, ix
    71C1 DD E1         [14] 7003 	pop	ix
    71C3 C9            [10] 7004 	ret
-                           7005 ;src/main.c:1611: void PrintShot(u8* magic) __z88dk_fastcall {
+                           7005 ;src/main.c:1595: void PrintShot(u8* magic) __z88dk_fastcall {
                            7006 ;	---------------------------------
                            7007 ; Function PrintShot
                            7008 ; ---------------------------------
    71C4                    7009 _PrintShot::
-                           7010 ;src/main.c:1612: DeleteShot(); // delete the previous shot
+                           7010 ;src/main.c:1596: DeleteShot(); // delete the previous shot
    71C4 E5            [11] 7011 	push	hl
    71C5 CD 5B 71      [17] 7012 	call	_DeleteShot
    71C8 C1            [10] 7013 	pop	bc
-                           7014 ;src/main.c:1613: if (!sht.active) return; // outside the margins. no need to print
+                           7014 ;src/main.c:1597: if (!sht.active) return; // outside the margins. no need to print
    71C9 3A 60 49      [13] 7015 	ld	a, (#_sht + 4)
    71CC B7            [ 4] 7016 	or	a, a
    71CD C8            [11] 7017 	ret	Z
-                           7018 ;src/main.c:1615: SHT_W, SHT_H, g_maskTable);
-                           7019 ;src/main.c:1614: cpct_drawSpriteMaskedAlignedTable(magic, cpct_getScreenPtr(CPCT_VMEM_START, sht.x, sht.y), 
+                           7018 ;src/main.c:1599: SHT_W, SHT_H, g_maskTable);
+                           7019 ;src/main.c:1598: cpct_drawSpriteMaskedAlignedTable(magic, cpct_getScreenPtr(CPCT_VMEM_START, sht.x, sht.y), 
    71CE 21 5D 49      [10] 7020 	ld	hl, #_sht + 1
    71D1 56            [ 7] 7021 	ld	d, (hl)
    71D2 3A 5C 49      [13] 7022 	ld	a, (#_sht + 0)
@@ -7127,22 +7127,22 @@
    71E9 C5            [11] 7035 	push	bc
    71EA CD CF 47      [17] 7036 	call	_cpct_drawSpriteMaskedAlignedTable
    71ED C9            [10] 7037 	ret
-                           7038 ;src/main.c:1620: void MoveShot() {
+                           7038 ;src/main.c:1604: void MoveShot() {
                            7039 ;	---------------------------------
                            7040 ; Function MoveShot
                            7041 ; ---------------------------------
    71EE                    7042 _MoveShot::
-                           7043 ;src/main.c:1621: sht.px = sht.x; // save the current X coordinate
+                           7043 ;src/main.c:1605: sht.px = sht.x; // save the current X coordinate
    71EE 01 5C 49      [10] 7044 	ld	bc, #_sht+0
    71F1 0A            [ 7] 7045 	ld	a, (bc)
    71F2 32 5E 49      [13] 7046 	ld	(#(_sht + 0x0002)),a
-                           7047 ;src/main.c:1623: if (sht.dir == D_right)	sht.x++; else sht.x--;
+                           7047 ;src/main.c:1607: if (sht.dir == D_right)	sht.x++; else sht.x--;
    71F5 21 5F 49      [10] 7048 	ld	hl, #_sht + 3
    71F8 56            [ 7] 7049 	ld	d, (hl)
-                           7050 ;src/main.c:1621: sht.px = sht.x; // save the current X coordinate
+                           7050 ;src/main.c:1605: sht.px = sht.x; // save the current X coordinate
    71F9 0A            [ 7] 7051 	ld	a, (bc)
    71FA 5F            [ 4] 7052 	ld	e, a
-                           7053 ;src/main.c:1623: if (sht.dir == D_right)	sht.x++; else sht.x--;
+                           7053 ;src/main.c:1607: if (sht.dir == D_right)	sht.x++; else sht.x--;
    71FB 7A            [ 4] 7054 	ld	a, d
    71FC D6 03         [ 7] 7055 	sub	a, #0x03
    71FE 20 05         [12] 7056 	jr	NZ,00102$
@@ -7155,10 +7155,10 @@
    7206 7B            [ 4] 7063 	ld	a, e
    7207 02            [ 7] 7064 	ld	(bc), a
    7208                    7065 00103$:
-                           7066 ;src/main.c:1621: sht.px = sht.x; // save the current X coordinate
+                           7066 ;src/main.c:1605: sht.px = sht.x; // save the current X coordinate
    7208 0A            [ 7] 7067 	ld	a, (bc)
    7209 5F            [ 4] 7068 	ld	e, a
-                           7069 ;src/main.c:1625: if (sht.x + SHT_W >= GLOBAL_MAX_X || sht.x <= 0) {
+                           7069 ;src/main.c:1609: if (sht.x + SHT_W >= GLOBAL_MAX_X || sht.x <= 0) {
    720A 6B            [ 4] 7070 	ld	l, e
    720B 26 00         [ 7] 7071 	ld	h, #0x00
    720D 23            [ 6] 7072 	inc	hl
@@ -7177,22 +7177,22 @@
    721D B7            [ 4] 7085 	or	a, a
    721E C0            [11] 7086 	ret	NZ
    721F                    7087 00104$:
-                           7088 ;src/main.c:1626: sht.active = FALSE;
+                           7088 ;src/main.c:1610: sht.active = FALSE;
    721F 21 60 49      [10] 7089 	ld	hl, #(_sht + 0x0004)
    7222 36 00         [10] 7090 	ld	(hl), #0x00
-                           7091 ;src/main.c:1627: DeleteShot();
+                           7091 ;src/main.c:1611: DeleteShot();
    7224 C3 5B 71      [10] 7092 	jp  _DeleteShot
-                           7093 ;src/main.c:1644: void PrintWizard(u8 shooting) __z88dk_fastcall {
+                           7093 ;src/main.c:1628: void PrintWizard(u8 shooting) __z88dk_fastcall {
                            7094 ;	---------------------------------
                            7095 ; Function PrintWizard
                            7096 ; ---------------------------------
    7227                    7097 _PrintWizard::
    7227 4D            [ 4] 7098 	ld	c, l
-                           7099 ;src/main.c:1646: u8 x = 0;
+                           7099 ;src/main.c:1630: u8 x = 0;
    7228 1E 00         [ 7] 7100 	ld	e, #0x00
-                           7101 ;src/main.c:1648: if (spr[6].dir == D_left) { // on the right bank facing left
+                           7101 ;src/main.c:1632: if (spr[6].dir == D_left) { // on the right bank facing left
    722A 3A 54 49      [13] 7102 	ld	a, (#_spr + 97)
-                           7103 ;src/main.c:1649: if (shooting) wizard = g_wizard_1;
+                           7103 ;src/main.c:1633: if (shooting) wizard = g_wizard_1;
    722D D6 02         [ 7] 7104 	sub	a,#0x02
    722F 20 0F         [12] 7105 	jr	NZ,00108$
    7231 B1            [ 4] 7106 	or	a,c
@@ -7200,25 +7200,25 @@
    7234 01 E3 21      [10] 7108 	ld	bc, #_g_wizard_1+0
    7237 18 03         [12] 7109 	jr	00103$
    7239                    7110 00102$:
-                           7111 ;src/main.c:1650: else wizard = g_wizard_0;
+                           7111 ;src/main.c:1634: else wizard = g_wizard_0;
    7239 01 A7 21      [10] 7112 	ld	bc, #_g_wizard_0
    723C                    7113 00103$:
-                           7114 ;src/main.c:1651: x = 75;
+                           7114 ;src/main.c:1635: x = 75;
    723C 1E 4B         [ 7] 7115 	ld	e, #0x4b
    723E 18 0C         [12] 7116 	jr	00109$
    7240                    7117 00108$:
-                           7118 ;src/main.c:1654: if (shooting) wizard = g_wizard_3; 
+                           7118 ;src/main.c:1638: if (shooting) wizard = g_wizard_3; 
    7240 79            [ 4] 7119 	ld	a, c
    7241 B7            [ 4] 7120 	or	a, a
    7242 28 05         [12] 7121 	jr	Z,00105$
    7244 01 5B 22      [10] 7122 	ld	bc, #_g_wizard_3
    7247 18 03         [12] 7123 	jr	00109$
    7249                    7124 00105$:
-                           7125 ;src/main.c:1655: else wizard = g_wizard_2;
+                           7125 ;src/main.c:1639: else wizard = g_wizard_2;
    7249 01 1F 22      [10] 7126 	ld	bc, #_g_wizard_2
    724C                    7127 00109$:
-                           7128 ;src/main.c:1659: SPR_W, SPR_H, g_maskTable); 							
-                           7129 ;src/main.c:1658: cpct_drawSpriteMaskedAlignedTable(wizard, cpct_getScreenPtr(CPCT_VMEM_START, x, spr[6].y), 
+                           7128 ;src/main.c:1643: SPR_W, SPR_H, g_maskTable); 							
+                           7129 ;src/main.c:1642: cpct_drawSpriteMaskedAlignedTable(wizard, cpct_getScreenPtr(CPCT_VMEM_START, x, spr[6].y), 
    724C 21 50 49      [10] 7130 	ld	hl, #_spr + 93
    724F 56            [ 7] 7131 	ld	d, (hl)
    7250 C5            [11] 7132 	push	bc
@@ -7235,17 +7235,17 @@
    7263 C5            [11] 7143 	push	bc
    7264 CD CF 47      [17] 7144 	call	_cpct_drawSpriteMaskedAlignedTable
    7267 C9            [10] 7145 	ret
-                           7146 ;src/main.c:1664: void WizardAnim() {
+                           7146 ;src/main.c:1648: void WizardAnim() {
                            7147 ;	---------------------------------
                            7148 ; Function WizardAnim
                            7149 ; ---------------------------------
    7268                    7150 _WizardAnim::
-                           7151 ;src/main.c:1665: if (ctWizardAnim > 0) {
+                           7151 ;src/main.c:1649: if (ctWizardAnim > 0) {
    7268 FD 21 DA 48   [14] 7152 	ld	iy, #_ctWizardAnim
    726C FD 7E 00      [19] 7153 	ld	a, 0 (iy)
    726F B7            [ 4] 7154 	or	a, a
    7270 C8            [11] 7155 	ret	Z
-                           7156 ;src/main.c:1666: switch(ctWizardAnim++) {			
+                           7156 ;src/main.c:1650: switch(ctWizardAnim++) {			
    7271 FD 4E 00      [19] 7157 	ld	c, 0 (iy)
    7274 FD 34 00      [23] 7158 	inc	0 (iy)
    7277 79            [ 4] 7159 	ld	a, c
@@ -7283,7 +7283,7 @@
    72AE D6 20         [ 7] 7191 	sub	a, #0x20
    72B0 28 5E         [12] 7192 	jr	Z,00116$
    72B2 18 68         [12] 7193 	jr	00117$
-                           7194 ;src/main.c:1669: case 29:	{ PrintExplosion(&spr[6], 0); break; }
+                           7194 ;src/main.c:1653: case 29:	{ PrintExplosion(&spr[6], 0); break; }
    72B4                    7195 00102$:
    72B4 AF            [ 4] 7196 	xor	a, a
    72B5 F5            [11] 7197 	push	af
@@ -7294,7 +7294,7 @@
    72BE F1            [10] 7202 	pop	af
    72BF 33            [ 6] 7203 	inc	sp
    72C0 C9            [10] 7204 	ret
-                           7205 ;src/main.c:1671: case 30:	{ PrintExplosion(&spr[6], 1); break; }
+                           7205 ;src/main.c:1655: case 30:	{ PrintExplosion(&spr[6], 1); break; }
    72C1                    7206 00104$:
    72C1 3E 01         [ 7] 7207 	ld	a, #0x01
    72C3 F5            [11] 7208 	push	af
@@ -7305,7 +7305,7 @@
    72CC F1            [10] 7213 	pop	af
    72CD 33            [ 6] 7214 	inc	sp
    72CE C9            [10] 7215 	ret
-                           7216 ;src/main.c:1673: case 31:	{ DeleteSprite(&spr[6]); PrintExplosion(&spr[6], 0); break; }						
+                           7216 ;src/main.c:1657: case 31:	{ DeleteSprite(&spr[6]); PrintExplosion(&spr[6], 0); break; }						
    72CF                    7217 00106$:
    72CF 21 4D 49      [10] 7218 	ld	hl, #(_spr + 0x005a)
    72D2 CD 39 62      [17] 7219 	call	_DeleteSprite
@@ -7318,13 +7318,13 @@
    72DF F1            [10] 7226 	pop	af
    72E0 33            [ 6] 7227 	inc	sp
    72E1 C9            [10] 7228 	ret
-                           7229 ;src/main.c:1675: case 4:		{ DeleteSprite(&spr[6]); PrintWizard(TRUE); break; }		
+                           7229 ;src/main.c:1659: case 4:		{ DeleteSprite(&spr[6]); PrintWizard(TRUE); break; }		
    72E2                    7230 00107$:
    72E2 21 4D 49      [10] 7231 	ld	hl, #(_spr + 0x005a)
    72E5 CD 39 62      [17] 7232 	call	_DeleteSprite
    72E8 2E 01         [ 7] 7233 	ld	l, #0x01
    72EA C3 27 72      [10] 7234 	jp  _PrintWizard
-                           7235 ;src/main.c:1677: case 5:		{ MakeShot(spr[6].x, spr[6].y-3, spr[6].dir); break; }			
+                           7235 ;src/main.c:1661: case 5:		{ MakeShot(spr[6].x, spr[6].y-3, spr[6].dir); break; }			
    72ED                    7236 00108$:
    72ED 21 54 49      [10] 7237 	ld	hl, #_spr + 97
    72F0 56            [ 7] 7238 	ld	d, (hl)
@@ -7341,31 +7341,31 @@
    7302 F1            [10] 7249 	pop	af
    7303 33            [ 6] 7250 	inc	sp
    7304 C9            [10] 7251 	ret
-                           7252 ;src/main.c:1686: case 12:    { DeleteSprite(&spr[6]); PrintWizard(FALSE); break;}
+                           7252 ;src/main.c:1670: case 12:    { DeleteSprite(&spr[6]); PrintWizard(FALSE); break;}
    7305                    7253 00115$:
    7305 21 4D 49      [10] 7254 	ld	hl, #(_spr + 0x005a)
    7308 CD 39 62      [17] 7255 	call	_DeleteSprite
    730B 2E 00         [ 7] 7256 	ld	l, #0x00
    730D C3 27 72      [10] 7257 	jp  _PrintWizard
-                           7258 ;src/main.c:1688: case 32:    { DeleteSprite(&spr[6]); ctWizardAnim = 0; return; }
+                           7258 ;src/main.c:1672: case 32:    { DeleteSprite(&spr[6]); ctWizardAnim = 0; return; }
    7310                    7259 00116$:
    7310 21 4D 49      [10] 7260 	ld	hl, #(_spr + 0x005a)
    7313 CD 39 62      [17] 7261 	call	_DeleteSprite
    7316 21 DA 48      [10] 7262 	ld	hl,#_ctWizardAnim + 0
    7319 36 00         [10] 7263 	ld	(hl), #0x00
    731B C9            [10] 7264 	ret
-                           7265 ;src/main.c:1690: default:	{ PrintWizard(FALSE); break;	}			
+                           7265 ;src/main.c:1674: default:	{ PrintWizard(FALSE); break;	}			
    731C                    7266 00117$:
    731C 2E 00         [ 7] 7267 	ld	l, #0x00
-                           7268 ;src/main.c:1691: }		
+                           7268 ;src/main.c:1675: }		
    731E C3 27 72      [10] 7269 	jp  _PrintWizard
-                           7270 ;src/main.c:1697: void MakeWizardAnim(u8 player) __z88dk_fastcall {
+                           7270 ;src/main.c:1681: void MakeWizardAnim(u8 player) __z88dk_fastcall {
                            7271 ;	---------------------------------
                            7272 ; Function MakeWizardAnim
                            7273 ; ---------------------------------
    7321                    7274 _MakeWizardAnim::
    7321 4D            [ 4] 7275 	ld	c, l
-                           7276 ;src/main.c:1698: if (ctInactivity[player]++ == 80 && !sht.active) {	
+                           7276 ;src/main.c:1682: if (ctInactivity[player]++ == 80 && !sht.active) {	
    7322 11 D6 48      [10] 7277 	ld	de, #_ctInactivity+0
    7325 69            [ 4] 7278 	ld	l,c
    7326 26 00         [ 7] 7279 	ld	h,#0x00
@@ -7380,7 +7380,7 @@
    7331 3A 60 49      [13] 7288 	ld	a, (#(_sht + 0x0004) + 0)
    7334 B7            [ 4] 7289 	or	a, a
    7335 C0            [11] 7290 	ret	NZ
-                           7291 ;src/main.c:1699: spr[6].y = spr[6].py = spr[player].y;
+                           7291 ;src/main.c:1683: spr[6].y = spr[6].py = spr[player].y;
    7336 11 F3 48      [10] 7292 	ld	de, #_spr+0
    7339 06 00         [ 7] 7293 	ld	b,#0x00
    733B 69            [ 4] 7294 	ld	l, c
@@ -7400,42 +7400,42 @@
    7349 7E            [ 7] 7308 	ld	a, (hl)
    734A 32 52 49      [13] 7309 	ld	(#(_spr + 0x005f)),a
    734D 32 50 49      [13] 7310 	ld	(#(_spr + 0x005d)),a
-                           7311 ;src/main.c:1701: if (spr[player].x < 40) {
+                           7311 ;src/main.c:1685: if (spr[player].x < 40) {
    7350 69            [ 4] 7312 	ld	l, c
    7351 60            [ 4] 7313 	ld	h, b
    7352 23            [ 6] 7314 	inc	hl
    7353 23            [ 6] 7315 	inc	hl
    7354 4E            [ 7] 7316 	ld	c, (hl)
-                           7317 ;src/main.c:1702: spr[6].x = spr[6].px = 74;		
+                           7317 ;src/main.c:1686: spr[6].x = spr[6].px = 74;		
    7355 21 5E 00      [10] 7318 	ld	hl, #0x005e
    7358 19            [11] 7319 	add	hl, de
-                           7320 ;src/main.c:1703: spr[6].dir = D_left;
-                           7321 ;src/main.c:1701: if (spr[player].x < 40) {
+                           7320 ;src/main.c:1687: spr[6].dir = D_left;
+                           7321 ;src/main.c:1685: if (spr[player].x < 40) {
    7359 79            [ 4] 7322 	ld	a, c
    735A D6 28         [ 7] 7323 	sub	a, #0x28
    735C 30 0E         [12] 7324 	jr	NC,00102$
-                           7325 ;src/main.c:1702: spr[6].x = spr[6].px = 74;		
+                           7325 ;src/main.c:1686: spr[6].x = spr[6].px = 74;		
    735E 36 4A         [10] 7326 	ld	(hl), #0x4a
    7360 21 4F 49      [10] 7327 	ld	hl, #(_spr + 0x005c)
    7363 36 4A         [10] 7328 	ld	(hl), #0x4a
-                           7329 ;src/main.c:1703: spr[6].dir = D_left;
+                           7329 ;src/main.c:1687: spr[6].dir = D_left;
    7365 21 54 49      [10] 7330 	ld	hl, #(_spr + 0x0061)
    7368 36 02         [10] 7331 	ld	(hl), #0x02
    736A 18 0C         [12] 7332 	jr	00103$
    736C                    7333 00102$:
-                           7334 ;src/main.c:1706: spr[6].x = spr[6].px = 1;
+                           7334 ;src/main.c:1690: spr[6].x = spr[6].px = 1;
    736C 36 01         [10] 7335 	ld	(hl), #0x01
    736E 21 4F 49      [10] 7336 	ld	hl, #(_spr + 0x005c)
    7371 36 01         [10] 7337 	ld	(hl), #0x01
-                           7338 ;src/main.c:1707: spr[6].dir = D_right;
+                           7338 ;src/main.c:1691: spr[6].dir = D_right;
    7373 21 54 49      [10] 7339 	ld	hl, #(_spr + 0x0061)
    7376 36 03         [10] 7340 	ld	(hl), #0x03
    7378                    7341 00103$:
-                           7342 ;src/main.c:1709: ctWizardAnim++; // makes the wizard shooting animation start
+                           7342 ;src/main.c:1693: ctWizardAnim++; // makes the wizard shooting animation start
    7378 21 DA 48      [10] 7343 	ld	hl, #_ctWizardAnim+0
    737B 34            [11] 7344 	inc	(hl)
    737C C9            [10] 7345 	ret
-                           7346 ;src/main.c:1727: void MoveEnemy(TSpr *pSpr) {
+                           7346 ;src/main.c:1711: void MoveEnemy(TSpr *pSpr) {
                            7347 ;	---------------------------------
                            7348 ; Function MoveEnemy
                            7349 ; ---------------------------------
@@ -7446,9 +7446,9 @@
    7385 21 F0 FF      [10] 7354 	ld	hl, #-16
    7388 39            [11] 7355 	add	hl, sp
    7389 F9            [ 6] 7356 	ld	sp, hl
-                           7357 ;src/main.c:1728: u8 z = 255;	// multipurpose variable
+                           7357 ;src/main.c:1712: u8 z = 255;	// multipurpose variable
    738A DD 36 F0 FF   [19] 7358 	ld	-16 (ix), #0xff
-                           7359 ;src/main.c:1729: switch(pSpr->objNum_mov) {
+                           7359 ;src/main.c:1713: switch(pSpr->objNum_mov) {
    738E DD 7E 04      [19] 7360 	ld	a, 4 (ix)
    7391 DD 77 F1      [19] 7361 	ld	-15 (ix), a
    7394 DD 7E 05      [19] 7362 	ld	a, 5 (ix)
@@ -7458,129 +7458,129 @@
    73A0 11 0C 00      [10] 7366 	ld	de, #0x000c
    73A3 19            [11] 7367 	add	hl, de
    73A4 7E            [ 7] 7368 	ld	a, (hl)
-   73A5 DD 77 F5      [19] 7369 	ld	-11 (ix), a
-                           7370 ;src/main.c:1732: if (pSpr->dir == D_right) {
+   73A5 DD 77 F3      [19] 7369 	ld	-13 (ix), a
+                           7370 ;src/main.c:1716: if (pSpr->dir == D_right) {
    73A8 DD 7E F1      [19] 7371 	ld	a, -15 (ix)
    73AB C6 07         [ 7] 7372 	add	a, #0x07
-   73AD DD 77 F3      [19] 7373 	ld	-13 (ix), a
+   73AD DD 77 F6      [19] 7373 	ld	-10 (ix), a
    73B0 DD 7E F2      [19] 7374 	ld	a, -14 (ix)
    73B3 CE 00         [ 7] 7375 	adc	a, #0x00
-   73B5 DD 77 F4      [19] 7376 	ld	-12 (ix), a
-                           7377 ;src/main.c:1734: if (pSpr->x < pSpr->power_maxV) 
+   73B5 DD 77 F7      [19] 7376 	ld	-9 (ix), a
+                           7377 ;src/main.c:1718: if (pSpr->x < pSpr->power_maxV) 
    73B8 DD 7E F1      [19] 7378 	ld	a, -15 (ix)
    73BB C6 02         [ 7] 7379 	add	a, #0x02
-   73BD DD 77 F6      [19] 7380 	ld	-10 (ix), a
+   73BD DD 77 F4      [19] 7380 	ld	-12 (ix), a
    73C0 DD 7E F2      [19] 7381 	ld	a, -14 (ix)
    73C3 CE 00         [ 7] 7382 	adc	a, #0x00
-   73C5 DD 77 F7      [19] 7383 	ld	-9 (ix), a
+   73C5 DD 77 F5      [19] 7383 	ld	-11 (ix), a
    73C8 DD 7E F1      [19] 7384 	ld	a, -15 (ix)
    73CB C6 0E         [ 7] 7385 	add	a, #0x0e
-   73CD DD 77 FA      [19] 7386 	ld	-6 (ix), a
+   73CD DD 77 F8      [19] 7386 	ld	-8 (ix), a
    73D0 DD 7E F2      [19] 7387 	ld	a, -14 (ix)
    73D3 CE 00         [ 7] 7388 	adc	a, #0x00
-   73D5 DD 77 FB      [19] 7389 	ld	-5 (ix), a
-                           7390 ;src/main.c:1735: pSpr->x = pSpr->x + pSpr->lives_speed;
+   73D5 DD 77 F9      [19] 7389 	ld	-7 (ix), a
+                           7390 ;src/main.c:1719: pSpr->x = pSpr->x + pSpr->lives_speed;
    73D8 DD 7E F1      [19] 7391 	ld	a, -15 (ix)
    73DB C6 0B         [ 7] 7392 	add	a, #0x0b
-   73DD DD 77 F8      [19] 7393 	ld	-8 (ix), a
+   73DD DD 77 FC      [19] 7393 	ld	-4 (ix), a
    73E0 DD 7E F2      [19] 7394 	ld	a, -14 (ix)
    73E3 CE 00         [ 7] 7395 	adc	a, #0x00
-   73E5 DD 77 F9      [19] 7396 	ld	-7 (ix), a
-                           7397 ;src/main.c:1741: if (pSpr->x > pSpr->print_minV)  
+   73E5 DD 77 FD      [19] 7396 	ld	-3 (ix), a
+                           7397 ;src/main.c:1725: if (pSpr->x > pSpr->print_minV)  
    73E8 DD 7E F1      [19] 7398 	ld	a, -15 (ix)
    73EB C6 0D         [ 7] 7399 	add	a, #0x0d
-   73ED DD 77 FC      [19] 7400 	ld	-4 (ix), a
+   73ED DD 77 FA      [19] 7400 	ld	-6 (ix), a
    73F0 DD 7E F2      [19] 7401 	ld	a, -14 (ix)
    73F3 CE 00         [ 7] 7402 	adc	a, #0x00
-   73F5 DD 77 FD      [19] 7403 	ld	-3 (ix), a
-                           7404 ;src/main.c:1748: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
+   73F5 DD 77 FB      [19] 7403 	ld	-5 (ix), a
+                           7404 ;src/main.c:1732: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
    73F8 DD 7E F1      [19] 7405 	ld	a, -15 (ix)
    73FB C6 03         [ 7] 7406 	add	a, #0x03
    73FD DD 77 FE      [19] 7407 	ld	-2 (ix), a
    7400 DD 7E F2      [19] 7408 	ld	a, -14 (ix)
    7403 CE 00         [ 7] 7409 	adc	a, #0x00
    7405 DD 77 FF      [19] 7410 	ld	-1 (ix), a
-                           7411 ;src/main.c:1729: switch(pSpr->objNum_mov) {
-   7408 DD 7E F5      [19] 7412 	ld	a, -11 (ix)
+                           7411 ;src/main.c:1713: switch(pSpr->objNum_mov) {
+   7408 DD 7E F3      [19] 7412 	ld	a, -13 (ix)
    740B B7            [ 4] 7413 	or	a, a
    740C 28 1A         [12] 7414 	jr	Z,00101$
-   740E DD 7E F5      [19] 7415 	ld	a, -11 (ix)
+   740E DD 7E F3      [19] 7415 	ld	a, -13 (ix)
    7411 3D            [ 4] 7416 	dec	a
    7412 CA 52 75      [10] 7417 	jp	Z,00125$
-   7415 DD 7E F5      [19] 7418 	ld	a, -11 (ix)
+   7415 DD 7E F3      [19] 7418 	ld	a, -13 (ix)
    7418 D6 02         [ 7] 7419 	sub	a, #0x02
    741A CA B7 75      [10] 7420 	jp	Z,00135$
-   741D DD 7E F5      [19] 7421 	ld	a, -11 (ix)
+   741D DD 7E F3      [19] 7421 	ld	a, -13 (ix)
    7420 D6 03         [ 7] 7422 	sub	a, #0x03
    7422 CA F6 76      [10] 7423 	jp	Z,00152$
    7425 C3 08 78      [10] 7424 	jp	00168$
-                           7425 ;src/main.c:1731: case M_linear_X:
+                           7425 ;src/main.c:1715: case M_linear_X:
    7428                    7426 00101$:
-                           7427 ;src/main.c:1732: if (pSpr->dir == D_right) {
-   7428 DD 6E F3      [19] 7428 	ld	l,-13 (ix)
-   742B DD 66 F4      [19] 7429 	ld	h,-12 (ix)
+                           7427 ;src/main.c:1716: if (pSpr->dir == D_right) {
+   7428 DD 6E F6      [19] 7428 	ld	l,-10 (ix)
+   742B DD 66 F7      [19] 7429 	ld	h,-9 (ix)
    742E 7E            [ 7] 7430 	ld	a, (hl)
-                           7431 ;src/main.c:1751: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
-   742F DD 6E F6      [19] 7432 	ld	l,-10 (ix)
-   7432 DD 66 F7      [19] 7433 	ld	h,-9 (ix)
+                           7431 ;src/main.c:1735: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
+   742F DD 6E F4      [19] 7432 	ld	l,-12 (ix)
+   7432 DD 66 F5      [19] 7433 	ld	h,-11 (ix)
    7435 4E            [ 7] 7434 	ld	c, (hl)
-                           7435 ;src/main.c:1732: if (pSpr->dir == D_right) {
+                           7435 ;src/main.c:1716: if (pSpr->dir == D_right) {
    7436 D6 03         [ 7] 7436 	sub	a, #0x03
    7438 20 27         [12] 7437 	jr	NZ,00109$
-                           7438 ;src/main.c:1734: if (pSpr->x < pSpr->power_maxV) 
-   743A DD 6E FA      [19] 7439 	ld	l,-6 (ix)
-   743D DD 66 FB      [19] 7440 	ld	h,-5 (ix)
+                           7438 ;src/main.c:1718: if (pSpr->x < pSpr->power_maxV) 
+   743A DD 6E F8      [19] 7439 	ld	l,-8 (ix)
+   743D DD 66 F9      [19] 7440 	ld	h,-7 (ix)
    7440 46            [ 7] 7441 	ld	b, (hl)
    7441 79            [ 4] 7442 	ld	a, c
    7442 90            [ 4] 7443 	sub	a, b
    7443 30 12         [12] 7444 	jr	NC,00103$
-                           7445 ;src/main.c:1735: pSpr->x = pSpr->x + pSpr->lives_speed;
-   7445 DD 6E F8      [19] 7446 	ld	l,-8 (ix)
-   7448 DD 66 F9      [19] 7447 	ld	h,-7 (ix)
+                           7445 ;src/main.c:1719: pSpr->x = pSpr->x + pSpr->lives_speed;
+   7445 DD 6E FC      [19] 7446 	ld	l,-4 (ix)
+   7448 DD 66 FD      [19] 7447 	ld	h,-3 (ix)
    744B 46            [ 7] 7448 	ld	b, (hl)
    744C 79            [ 4] 7449 	ld	a, c
    744D 80            [ 4] 7450 	add	a, b
-   744E DD 6E F6      [19] 7451 	ld	l,-10 (ix)
-   7451 DD 66 F7      [19] 7452 	ld	h,-9 (ix)
+   744E DD 6E F4      [19] 7451 	ld	l,-12 (ix)
+   7451 DD 66 F5      [19] 7452 	ld	h,-11 (ix)
    7454 77            [ 7] 7453 	ld	(hl), a
    7455 18 2E         [12] 7454 	jr	00110$
    7457                    7455 00103$:
-                           7456 ;src/main.c:1737: pSpr->dir = D_left;
-   7457 DD 6E F3      [19] 7457 	ld	l,-13 (ix)
-   745A DD 66 F4      [19] 7458 	ld	h,-12 (ix)
+                           7456 ;src/main.c:1721: pSpr->dir = D_left;
+   7457 DD 6E F6      [19] 7457 	ld	l,-10 (ix)
+   745A DD 66 F7      [19] 7458 	ld	h,-9 (ix)
    745D 36 02         [10] 7459 	ld	(hl), #0x02
    745F 18 24         [12] 7460 	jr	00110$
    7461                    7461 00109$:
-                           7462 ;src/main.c:1741: if (pSpr->x > pSpr->print_minV)  
-   7461 DD 6E FC      [19] 7463 	ld	l,-4 (ix)
-   7464 DD 66 FD      [19] 7464 	ld	h,-3 (ix)
+                           7462 ;src/main.c:1725: if (pSpr->x > pSpr->print_minV)  
+   7461 DD 6E FA      [19] 7463 	ld	l,-6 (ix)
+   7464 DD 66 FB      [19] 7464 	ld	h,-5 (ix)
    7467 7E            [ 7] 7465 	ld	a, (hl)
    7468 91            [ 4] 7466 	sub	a, c
    7469 30 12         [12] 7467 	jr	NC,00106$
-                           7468 ;src/main.c:1742: pSpr->x = pSpr->x - pSpr->lives_speed;
-   746B DD 6E F8      [19] 7469 	ld	l,-8 (ix)
-   746E DD 66 F9      [19] 7470 	ld	h,-7 (ix)
+                           7468 ;src/main.c:1726: pSpr->x = pSpr->x - pSpr->lives_speed;
+   746B DD 6E FC      [19] 7469 	ld	l,-4 (ix)
+   746E DD 66 FD      [19] 7470 	ld	h,-3 (ix)
    7471 46            [ 7] 7471 	ld	b, (hl)
    7472 79            [ 4] 7472 	ld	a, c
    7473 90            [ 4] 7473 	sub	a, b
-   7474 DD 6E F6      [19] 7474 	ld	l,-10 (ix)
-   7477 DD 66 F7      [19] 7475 	ld	h,-9 (ix)
+   7474 DD 6E F4      [19] 7474 	ld	l,-12 (ix)
+   7477 DD 66 F5      [19] 7475 	ld	h,-11 (ix)
    747A 77            [ 7] 7476 	ld	(hl), a
    747B 18 08         [12] 7477 	jr	00110$
    747D                    7478 00106$:
-                           7479 ;src/main.c:1744: pSpr->dir = D_right; 
-   747D DD 6E F3      [19] 7480 	ld	l,-13 (ix)
-   7480 DD 66 F4      [19] 7481 	ld	h,-12 (ix)
+                           7479 ;src/main.c:1728: pSpr->dir = D_right; 
+   747D DD 6E F6      [19] 7480 	ld	l,-10 (ix)
+   7480 DD 66 F7      [19] 7481 	ld	h,-9 (ix)
    7483 36 03         [10] 7482 	ld	(hl), #0x03
    7485                    7483 00110$:
-                           7484 ;src/main.c:1747: if (pSpr->ident == WITCH) {
+                           7484 ;src/main.c:1731: if (pSpr->ident == WITCH) {
    7485 DD 6E F1      [19] 7485 	ld	l,-15 (ix)
    7488 DD 66 F2      [19] 7486 	ld	h,-14 (ix)
    748B 23            [ 6] 7487 	inc	hl
    748C 7E            [ 7] 7488 	ld	a, (hl)
    748D D6 06         [ 7] 7489 	sub	a, #0x06
    748F C2 08 78      [10] 7490 	jp	NZ,00168$
-                           7491 ;src/main.c:1748: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
+                           7491 ;src/main.c:1732: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
    7492 DD 6E FE      [19] 7492 	ld	l,-2 (ix)
    7495 DD 66 FF      [19] 7493 	ld	h,-1 (ix)
    7498 5E            [ 7] 7494 	ld	e, (hl)
@@ -7615,7 +7615,7 @@
    74C5 DD 36 F0 00   [19] 7523 	ld	-16 (ix), #0x00
    74C9 18 2E         [12] 7524 	jr	00116$
    74CB                    7525 00115$:
-                           7526 ;src/main.c:1749: else if (pSpr->y > (spr[1].y - SHT_H) && pSpr->y < (spr[1].y + SHT_H)) z = 1; // P2
+                           7526 ;src/main.c:1733: else if (pSpr->y > (spr[1].y - SHT_H) && pSpr->y < (spr[1].y + SHT_H)) z = 1; // P2
    74CB 21 05 49      [10] 7527 	ld	hl, #_spr + 18
    74CE 4E            [ 7] 7528 	ld	c, (hl)
    74CF 06 00         [ 7] 7529 	ld	b, #0x00
@@ -7645,11 +7645,11 @@
    74F2 F2 F9 74      [10] 7553 	jp	P, 00116$
    74F5 DD 36 F0 01   [19] 7554 	ld	-16 (ix), #0x01
    74F9                    7555 00116$:
-                           7556 ;src/main.c:1750: if (z < 255) {
+                           7556 ;src/main.c:1734: if (z < 255) {
    74F9 DD 7E F0      [19] 7557 	ld	a, -16 (ix)
    74FC D6 FF         [ 7] 7558 	sub	a, #0xff
    74FE D2 08 78      [10] 7559 	jp	NC, 00168$
-                           7560 ;src/main.c:1751: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
+                           7560 ;src/main.c:1735: if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
    7501 DD 4E F0      [19] 7561 	ld	c,-16 (ix)
    7504 06 00         [ 7] 7562 	ld	b,#0x00
    7506 69            [ 4] 7563 	ld	l, c
@@ -7665,30 +7665,30 @@
    7512 23            [ 6] 7573 	inc	hl
    7513 23            [ 6] 7574 	inc	hl
    7514 4E            [ 7] 7575 	ld	c, (hl)
-   7515 DD 6E F6      [19] 7576 	ld	l,-10 (ix)
-   7518 DD 66 F7      [19] 7577 	ld	h,-9 (ix)
+   7515 DD 6E F4      [19] 7576 	ld	l,-12 (ix)
+   7518 DD 66 F5      [19] 7577 	ld	h,-11 (ix)
    751B 7E            [ 7] 7578 	ld	a, (hl)
    751C 91            [ 4] 7579 	sub	a, c
    751D 30 0A         [12] 7580 	jr	NC,00119$
-   751F DD 6E F3      [19] 7581 	ld	l,-13 (ix)
-   7522 DD 66 F4      [19] 7582 	ld	h,-12 (ix)
+   751F DD 6E F6      [19] 7581 	ld	l,-10 (ix)
+   7522 DD 66 F7      [19] 7582 	ld	h,-9 (ix)
    7525 36 03         [10] 7583 	ld	(hl), #0x03
    7527 18 08         [12] 7584 	jr	00120$
    7529                    7585 00119$:
-                           7586 ;src/main.c:1752: else pSpr->dir = D_left;
-   7529 DD 6E F3      [19] 7587 	ld	l,-13 (ix)
-   752C DD 66 F4      [19] 7588 	ld	h,-12 (ix)
+                           7586 ;src/main.c:1736: else pSpr->dir = D_left;
+   7529 DD 6E F6      [19] 7587 	ld	l,-10 (ix)
+   752C DD 66 F7      [19] 7588 	ld	h,-9 (ix)
    752F 36 02         [10] 7589 	ld	(hl), #0x02
    7531                    7590 00120$:
-                           7591 ;src/main.c:1753: MakeShot(pSpr->x, pSpr->y, pSpr->dir);
-   7531 DD 6E F3      [19] 7592 	ld	l,-13 (ix)
-   7534 DD 66 F4      [19] 7593 	ld	h,-12 (ix)
+                           7591 ;src/main.c:1737: MakeShot(pSpr->x, pSpr->y, pSpr->dir);
+   7531 DD 6E F6      [19] 7592 	ld	l,-10 (ix)
+   7534 DD 66 F7      [19] 7593 	ld	h,-9 (ix)
    7537 7E            [ 7] 7594 	ld	a, (hl)
    7538 DD 6E FE      [19] 7595 	ld	l,-2 (ix)
    753B DD 66 FF      [19] 7596 	ld	h,-1 (ix)
    753E 56            [ 7] 7597 	ld	d, (hl)
-   753F DD 6E F6      [19] 7598 	ld	l,-10 (ix)
-   7542 DD 66 F7      [19] 7599 	ld	h,-9 (ix)
+   753F DD 6E F4      [19] 7598 	ld	l,-12 (ix)
+   7542 DD 66 F5      [19] 7599 	ld	h,-11 (ix)
    7545 46            [ 7] 7600 	ld	b, (hl)
    7546 F5            [11] 7601 	push	af
    7547 33            [ 6] 7602 	inc	sp
@@ -7697,30 +7697,30 @@
    754A CD 1C 71      [17] 7605 	call	_MakeShot
    754D F1            [10] 7606 	pop	af
    754E 33            [ 6] 7607 	inc	sp
-                           7608 ;src/main.c:1756: break;
+                           7608 ;src/main.c:1740: break;
    754F C3 08 78      [10] 7609 	jp	00168$
-                           7610 ;src/main.c:1759: case M_linear_Y:
+                           7610 ;src/main.c:1743: case M_linear_Y:
    7552                    7611 00125$:
-                           7612 ;src/main.c:1760: if (pSpr->dir == D_down) {
-   7552 DD 6E F3      [19] 7613 	ld	l,-13 (ix)
-   7555 DD 66 F4      [19] 7614 	ld	h,-12 (ix)
+                           7612 ;src/main.c:1744: if (pSpr->dir == D_down) {
+   7552 DD 6E F6      [19] 7613 	ld	l,-10 (ix)
+   7555 DD 66 F7      [19] 7614 	ld	h,-9 (ix)
    7558 46            [ 7] 7615 	ld	b, (hl)
-                           7616 ;src/main.c:1748: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
+                           7616 ;src/main.c:1732: if (pSpr->y > (spr[0].y - SHT_H) && pSpr->y < (spr[0].y + SHT_H)) z = 0; // P1
    7559 DD 6E FE      [19] 7617 	ld	l,-2 (ix)
    755C DD 66 FF      [19] 7618 	ld	h,-1 (ix)
    755F 4E            [ 7] 7619 	ld	c, (hl)
-                           7620 ;src/main.c:1760: if (pSpr->dir == D_down) {
+                           7620 ;src/main.c:1744: if (pSpr->dir == D_down) {
    7560 10 2B         [13] 7621 	djnz	00133$
-                           7622 ;src/main.c:1762: if (pSpr->y < pSpr->power_maxV)
-   7562 DD 6E FA      [19] 7623 	ld	l,-6 (ix)
-   7565 DD 66 FB      [19] 7624 	ld	h,-5 (ix)
+                           7622 ;src/main.c:1746: if (pSpr->y < pSpr->power_maxV)
+   7562 DD 6E F8      [19] 7623 	ld	l,-8 (ix)
+   7565 DD 66 F9      [19] 7624 	ld	h,-7 (ix)
    7568 46            [ 7] 7625 	ld	b, (hl)
    7569 79            [ 4] 7626 	ld	a, c
    756A 90            [ 4] 7627 	sub	a, b
    756B 30 15         [12] 7628 	jr	NC,00127$
-                           7629 ;src/main.c:1763: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
-   756D DD 6E F8      [19] 7630 	ld	l,-8 (ix)
-   7570 DD 66 F9      [19] 7631 	ld	h,-7 (ix)
+                           7629 ;src/main.c:1747: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
+   756D DD 6E FC      [19] 7630 	ld	l,-4 (ix)
+   7570 DD 66 FD      [19] 7631 	ld	h,-3 (ix)
    7573 46            [ 7] 7632 	ld	b, (hl)
    7574 CB 20         [ 8] 7633 	sla	b
    7576 79            [ 4] 7634 	ld	a, c
@@ -7730,21 +7730,21 @@
    757E 77            [ 7] 7638 	ld	(hl), a
    757F C3 08 78      [10] 7639 	jp	00168$
    7582                    7640 00127$:
-                           7641 ;src/main.c:1765: pSpr->dir = D_up;
-   7582 DD 6E F3      [19] 7642 	ld	l,-13 (ix)
-   7585 DD 66 F4      [19] 7643 	ld	h,-12 (ix)
+                           7641 ;src/main.c:1749: pSpr->dir = D_up;
+   7582 DD 6E F6      [19] 7642 	ld	l,-10 (ix)
+   7585 DD 66 F7      [19] 7643 	ld	h,-9 (ix)
    7588 36 00         [10] 7644 	ld	(hl), #0x00
    758A C3 08 78      [10] 7645 	jp	00168$
    758D                    7646 00133$:
-                           7647 ;src/main.c:1769: if (pSpr->y > pSpr->print_minV) 
-   758D DD 6E FC      [19] 7648 	ld	l,-4 (ix)
-   7590 DD 66 FD      [19] 7649 	ld	h,-3 (ix)
+                           7647 ;src/main.c:1753: if (pSpr->y > pSpr->print_minV) 
+   758D DD 6E FA      [19] 7648 	ld	l,-6 (ix)
+   7590 DD 66 FB      [19] 7649 	ld	h,-5 (ix)
    7593 7E            [ 7] 7650 	ld	a, (hl)
    7594 91            [ 4] 7651 	sub	a, c
    7595 30 15         [12] 7652 	jr	NC,00130$
-                           7653 ;src/main.c:1770: pSpr->y = pSpr->y - (pSpr->lives_speed*2);
-   7597 DD 6E F8      [19] 7654 	ld	l,-8 (ix)
-   759A DD 66 F9      [19] 7655 	ld	h,-7 (ix)
+                           7653 ;src/main.c:1754: pSpr->y = pSpr->y - (pSpr->lives_speed*2);
+   7597 DD 6E FC      [19] 7654 	ld	l,-4 (ix)
+   759A DD 66 FD      [19] 7655 	ld	h,-3 (ix)
    759D 46            [ 7] 7656 	ld	b, (hl)
    759E CB 20         [ 8] 7657 	sla	b
    75A0 79            [ 4] 7658 	ld	a, c
@@ -7754,33 +7754,33 @@
    75A8 77            [ 7] 7662 	ld	(hl), a
    75A9 C3 08 78      [10] 7663 	jp	00168$
    75AC                    7664 00130$:
-                           7665 ;src/main.c:1772: pSpr->dir = D_down; 
-   75AC DD 6E F3      [19] 7666 	ld	l,-13 (ix)
-   75AF DD 66 F4      [19] 7667 	ld	h,-12 (ix)
+                           7665 ;src/main.c:1756: pSpr->dir = D_down; 
+   75AC DD 6E F6      [19] 7666 	ld	l,-10 (ix)
+   75AF DD 66 F7      [19] 7667 	ld	h,-9 (ix)
    75B2 36 01         [10] 7668 	ld	(hl), #0x01
-                           7669 ;src/main.c:1774: break;
+                           7669 ;src/main.c:1758: break;
    75B4 C3 08 78      [10] 7670 	jp	00168$
-                           7671 ;src/main.c:1777: case M_linear_XY:		
+                           7671 ;src/main.c:1761: case M_linear_XY:		
    75B7                    7672 00135$:
-                           7673 ;src/main.c:1779: if (pSpr->dir == D_up && OnBackground(pSpr->x, pSpr->y - (pSpr->lives_speed*2)-8))
-   75B7 DD 6E F3      [19] 7674 	ld	l,-13 (ix)
-   75BA DD 66 F4      [19] 7675 	ld	h,-12 (ix)
+                           7673 ;src/main.c:1763: if (pSpr->dir == D_up && OnBackground(pSpr->x, pSpr->y - (pSpr->lives_speed*2)-8))
+   75B7 DD 6E F6      [19] 7674 	ld	l,-10 (ix)
+   75BA DD 66 F7      [19] 7675 	ld	h,-9 (ix)
    75BD 7E            [ 7] 7676 	ld	a, (hl)
    75BE B7            [ 4] 7677 	or	a, a
    75BF 20 41         [12] 7678 	jr	NZ,00149$
    75C1 DD 6E FE      [19] 7679 	ld	l,-2 (ix)
    75C4 DD 66 FF      [19] 7680 	ld	h,-1 (ix)
    75C7 4E            [ 7] 7681 	ld	c, (hl)
-   75C8 DD 6E F8      [19] 7682 	ld	l,-8 (ix)
-   75CB DD 66 F9      [19] 7683 	ld	h,-7 (ix)
+   75C8 DD 6E FC      [19] 7682 	ld	l,-4 (ix)
+   75CB DD 66 FD      [19] 7683 	ld	h,-3 (ix)
    75CE 46            [ 7] 7684 	ld	b, (hl)
    75CF CB 20         [ 8] 7685 	sla	b
    75D1 79            [ 4] 7686 	ld	a, c
    75D2 90            [ 4] 7687 	sub	a, b
    75D3 C6 F8         [ 7] 7688 	add	a, #0xf8
    75D5 57            [ 4] 7689 	ld	d, a
-   75D6 DD 6E F6      [19] 7690 	ld	l,-10 (ix)
-   75D9 DD 66 F7      [19] 7691 	ld	h,-9 (ix)
+   75D6 DD 6E F4      [19] 7690 	ld	l,-12 (ix)
+   75D9 DD 66 F5      [19] 7691 	ld	h,-11 (ix)
    75DC 5E            [ 7] 7692 	ld	e, (hl)
    75DD D5            [11] 7693 	push	de
    75DE CD E0 4B      [17] 7694 	call	_OnBackground
@@ -7788,12 +7788,12 @@
    75E2 7D            [ 4] 7696 	ld	a, l
    75E3 B7            [ 4] 7697 	or	a, a
    75E4 28 1C         [12] 7698 	jr	Z,00149$
-                           7699 ;src/main.c:1780: pSpr->y = pSpr->y - (pSpr->lives_speed*2);			
+                           7699 ;src/main.c:1764: pSpr->y = pSpr->y - (pSpr->lives_speed*2);			
    75E6 DD 6E FE      [19] 7700 	ld	l,-2 (ix)
    75E9 DD 66 FF      [19] 7701 	ld	h,-1 (ix)
    75EC 4E            [ 7] 7702 	ld	c, (hl)
-   75ED DD 6E F8      [19] 7703 	ld	l,-8 (ix)
-   75F0 DD 66 F9      [19] 7704 	ld	h,-7 (ix)
+   75ED DD 6E FC      [19] 7703 	ld	l,-4 (ix)
+   75F0 DD 66 FD      [19] 7704 	ld	h,-3 (ix)
    75F3 46            [ 7] 7705 	ld	b, (hl)
    75F4 CB 20         [ 8] 7706 	sla	b
    75F6 79            [ 4] 7707 	ld	a, c
@@ -7803,25 +7803,25 @@
    75FE 77            [ 7] 7711 	ld	(hl), a
    75FF C3 08 78      [10] 7712 	jp	00168$
    7602                    7713 00149$:
-                           7714 ;src/main.c:1782: else if (pSpr->dir == D_down && OnBackground(pSpr->x, pSpr->y + (pSpr->lives_speed*2)+2))
-   7602 DD 6E F3      [19] 7715 	ld	l,-13 (ix)
-   7605 DD 66 F4      [19] 7716 	ld	h,-12 (ix)
+                           7714 ;src/main.c:1766: else if (pSpr->dir == D_down && OnBackground(pSpr->x, pSpr->y + (pSpr->lives_speed*2)+2))
+   7602 DD 6E F6      [19] 7715 	ld	l,-10 (ix)
+   7605 DD 66 F7      [19] 7716 	ld	h,-9 (ix)
    7608 4E            [ 7] 7717 	ld	c, (hl)
    7609 0D            [ 4] 7718 	dec	c
    760A 20 40         [12] 7719 	jr	NZ,00145$
    760C DD 6E FE      [19] 7720 	ld	l,-2 (ix)
    760F DD 66 FF      [19] 7721 	ld	h,-1 (ix)
    7612 4E            [ 7] 7722 	ld	c, (hl)
-   7613 DD 6E F8      [19] 7723 	ld	l,-8 (ix)
-   7616 DD 66 F9      [19] 7724 	ld	h,-7 (ix)
+   7613 DD 6E FC      [19] 7723 	ld	l,-4 (ix)
+   7616 DD 66 FD      [19] 7724 	ld	h,-3 (ix)
    7619 6E            [ 7] 7725 	ld	l, (hl)
    761A CB 25         [ 8] 7726 	sla	l
    761C 09            [11] 7727 	add	hl, bc
    761D 55            [ 4] 7728 	ld	d, l
    761E 14            [ 4] 7729 	inc	d
    761F 14            [ 4] 7730 	inc	d
-   7620 DD 6E F6      [19] 7731 	ld	l,-10 (ix)
-   7623 DD 66 F7      [19] 7732 	ld	h,-9 (ix)
+   7620 DD 6E F4      [19] 7731 	ld	l,-12 (ix)
+   7623 DD 66 F5      [19] 7732 	ld	h,-11 (ix)
    7626 5E            [ 7] 7733 	ld	e, (hl)
    7627 D5            [11] 7734 	push	de
    7628 CD E0 4B      [17] 7735 	call	_OnBackground
@@ -7829,12 +7829,12 @@
    762C 7D            [ 4] 7737 	ld	a, l
    762D B7            [ 4] 7738 	or	a, a
    762E 28 1C         [12] 7739 	jr	Z,00145$
-                           7740 ;src/main.c:1783: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
+                           7740 ;src/main.c:1767: pSpr->y = pSpr->y + (pSpr->lives_speed*2);
    7630 DD 6E FE      [19] 7741 	ld	l,-2 (ix)
    7633 DD 66 FF      [19] 7742 	ld	h,-1 (ix)
    7636 4E            [ 7] 7743 	ld	c, (hl)
-   7637 DD 6E F8      [19] 7744 	ld	l,-8 (ix)
-   763A DD 66 F9      [19] 7745 	ld	h,-7 (ix)
+   7637 DD 6E FC      [19] 7744 	ld	l,-4 (ix)
+   763A DD 66 FD      [19] 7745 	ld	h,-3 (ix)
    763D 46            [ 7] 7746 	ld	b, (hl)
    763E CB 20         [ 8] 7747 	sla	b
    7640 79            [ 4] 7748 	ld	a, c
@@ -7844,20 +7844,20 @@
    7648 77            [ 7] 7752 	ld	(hl), a
    7649 C3 08 78      [10] 7753 	jp	00168$
    764C                    7754 00145$:
-                           7755 ;src/main.c:1785: else if (pSpr->dir == D_left && OnBackground((pSpr->x - pSpr->lives_speed)-3, pSpr->y))
-   764C DD 6E F3      [19] 7756 	ld	l,-13 (ix)
-   764F DD 66 F4      [19] 7757 	ld	h,-12 (ix)
+                           7755 ;src/main.c:1769: else if (pSpr->dir == D_left && OnBackground((pSpr->x - pSpr->lives_speed)-3, pSpr->y))
+   764C DD 6E F6      [19] 7756 	ld	l,-10 (ix)
+   764F DD 66 F7      [19] 7757 	ld	h,-9 (ix)
    7652 7E            [ 7] 7758 	ld	a, (hl)
    7653 D6 02         [ 7] 7759 	sub	a, #0x02
    7655 20 3D         [12] 7760 	jr	NZ,00141$
    7657 DD 6E FE      [19] 7761 	ld	l,-2 (ix)
    765A DD 66 FF      [19] 7762 	ld	h,-1 (ix)
    765D 56            [ 7] 7763 	ld	d, (hl)
-   765E DD 6E F6      [19] 7764 	ld	l,-10 (ix)
-   7661 DD 66 F7      [19] 7765 	ld	h,-9 (ix)
+   765E DD 6E F4      [19] 7764 	ld	l,-12 (ix)
+   7661 DD 66 F5      [19] 7765 	ld	h,-11 (ix)
    7664 4E            [ 7] 7766 	ld	c, (hl)
-   7665 DD 6E F8      [19] 7767 	ld	l,-8 (ix)
-   7668 DD 66 F9      [19] 7768 	ld	h,-7 (ix)
+   7665 DD 6E FC      [19] 7767 	ld	l,-4 (ix)
+   7668 DD 66 FD      [19] 7768 	ld	h,-3 (ix)
    766B 5E            [ 7] 7769 	ld	e, (hl)
    766C 79            [ 4] 7770 	ld	a, c
    766D 93            [ 4] 7771 	sub	a, e
@@ -7869,34 +7869,34 @@
    7676 7D            [ 4] 7777 	ld	a, l
    7677 B7            [ 4] 7778 	or	a, a
    7678 28 1A         [12] 7779 	jr	Z,00141$
-                           7780 ;src/main.c:1786: pSpr->x = pSpr->x - pSpr->lives_speed;
-   767A DD 6E F6      [19] 7781 	ld	l,-10 (ix)
-   767D DD 66 F7      [19] 7782 	ld	h,-9 (ix)
+                           7780 ;src/main.c:1770: pSpr->x = pSpr->x - pSpr->lives_speed;
+   767A DD 6E F4      [19] 7781 	ld	l,-12 (ix)
+   767D DD 66 F5      [19] 7782 	ld	h,-11 (ix)
    7680 4E            [ 7] 7783 	ld	c, (hl)
-   7681 DD 6E F8      [19] 7784 	ld	l,-8 (ix)
-   7684 DD 66 F9      [19] 7785 	ld	h,-7 (ix)
+   7681 DD 6E FC      [19] 7784 	ld	l,-4 (ix)
+   7684 DD 66 FD      [19] 7785 	ld	h,-3 (ix)
    7687 46            [ 7] 7786 	ld	b, (hl)
    7688 79            [ 4] 7787 	ld	a, c
    7689 90            [ 4] 7788 	sub	a, b
-   768A DD 6E F6      [19] 7789 	ld	l,-10 (ix)
-   768D DD 66 F7      [19] 7790 	ld	h,-9 (ix)
+   768A DD 6E F4      [19] 7789 	ld	l,-12 (ix)
+   768D DD 66 F5      [19] 7790 	ld	h,-11 (ix)
    7690 77            [ 7] 7791 	ld	(hl), a
    7691 C3 08 78      [10] 7792 	jp	00168$
    7694                    7793 00141$:
-                           7794 ;src/main.c:1788: else if (pSpr->dir == D_right && OnBackground((pSpr->x + pSpr->lives_speed)+1, pSpr->y))
-   7694 DD 6E F3      [19] 7795 	ld	l,-13 (ix)
-   7697 DD 66 F4      [19] 7796 	ld	h,-12 (ix)
+                           7794 ;src/main.c:1772: else if (pSpr->dir == D_right && OnBackground((pSpr->x + pSpr->lives_speed)+1, pSpr->y))
+   7694 DD 6E F6      [19] 7795 	ld	l,-10 (ix)
+   7697 DD 66 F7      [19] 7796 	ld	h,-9 (ix)
    769A 7E            [ 7] 7797 	ld	a, (hl)
    769B D6 03         [ 7] 7798 	sub	a, #0x03
    769D 20 3C         [12] 7799 	jr	NZ,00137$
    769F DD 6E FE      [19] 7800 	ld	l,-2 (ix)
    76A2 DD 66 FF      [19] 7801 	ld	h,-1 (ix)
    76A5 56            [ 7] 7802 	ld	d, (hl)
-   76A6 DD 6E F6      [19] 7803 	ld	l,-10 (ix)
-   76A9 DD 66 F7      [19] 7804 	ld	h,-9 (ix)
+   76A6 DD 6E F4      [19] 7803 	ld	l,-12 (ix)
+   76A9 DD 66 F5      [19] 7804 	ld	h,-11 (ix)
    76AC 4E            [ 7] 7805 	ld	c, (hl)
-   76AD DD 6E F8      [19] 7806 	ld	l,-8 (ix)
-   76B0 DD 66 F9      [19] 7807 	ld	h,-7 (ix)
+   76AD DD 6E FC      [19] 7806 	ld	l,-4 (ix)
+   76B0 DD 66 FD      [19] 7807 	ld	h,-3 (ix)
    76B3 6E            [ 7] 7808 	ld	l, (hl)
    76B4 09            [11] 7809 	add	hl, bc
    76B5 45            [ 4] 7810 	ld	b, l
@@ -7908,21 +7908,21 @@
    76BD 7D            [ 4] 7816 	ld	a, l
    76BE B7            [ 4] 7817 	or	a, a
    76BF 28 1A         [12] 7818 	jr	Z,00137$
-                           7819 ;src/main.c:1789: pSpr->x = pSpr->x + pSpr->lives_speed;
-   76C1 DD 6E F6      [19] 7820 	ld	l,-10 (ix)
-   76C4 DD 66 F7      [19] 7821 	ld	h,-9 (ix)
+                           7819 ;src/main.c:1773: pSpr->x = pSpr->x + pSpr->lives_speed;
+   76C1 DD 6E F4      [19] 7820 	ld	l,-12 (ix)
+   76C4 DD 66 F5      [19] 7821 	ld	h,-11 (ix)
    76C7 4E            [ 7] 7822 	ld	c, (hl)
-   76C8 DD 6E F8      [19] 7823 	ld	l,-8 (ix)
-   76CB DD 66 F9      [19] 7824 	ld	h,-7 (ix)
+   76C8 DD 6E FC      [19] 7823 	ld	l,-4 (ix)
+   76CB DD 66 FD      [19] 7824 	ld	h,-3 (ix)
    76CE 46            [ 7] 7825 	ld	b, (hl)
    76CF 79            [ 4] 7826 	ld	a, c
    76D0 80            [ 4] 7827 	add	a, b
-   76D1 DD 6E F6      [19] 7828 	ld	l,-10 (ix)
-   76D4 DD 66 F7      [19] 7829 	ld	h,-9 (ix)
+   76D1 DD 6E F4      [19] 7828 	ld	l,-12 (ix)
+   76D4 DD 66 F5      [19] 7829 	ld	h,-11 (ix)
    76D7 77            [ 7] 7830 	ld	(hl), a
    76D8 C3 08 78      [10] 7831 	jp	00168$
    76DB                    7832 00137$:
-                           7833 ;src/main.c:1791: else pSpr->dir = cpct_getRandom_lcg_u8(0) / 65; // 0-1-2-3			
+                           7833 ;src/main.c:1775: else pSpr->dir = cpct_getRandom_lcg_u8(0) / 65; // 0-1-2-3			
    76DB 2E 00         [ 7] 7834 	ld	l, #0x00
    76DD CD BE 45      [17] 7835 	call	_cpct_getRandom_lcg_u8
    76E0 45            [ 4] 7836 	ld	b, l
@@ -7934,16 +7934,16 @@
    76E7 CD 84 43      [17] 7842 	call	__divuchar
    76EA F1            [10] 7843 	pop	af
    76EB 4D            [ 4] 7844 	ld	c, l
-   76EC DD 6E F3      [19] 7845 	ld	l,-13 (ix)
-   76EF DD 66 F4      [19] 7846 	ld	h,-12 (ix)
+   76EC DD 6E F6      [19] 7845 	ld	l,-10 (ix)
+   76EF DD 66 F7      [19] 7846 	ld	h,-9 (ix)
    76F2 71            [ 7] 7847 	ld	(hl), c
-                           7848 ;src/main.c:1792: break;
+                           7848 ;src/main.c:1776: break;
    76F3 C3 08 78      [10] 7849 	jp	00168$
-                           7850 ;src/main.c:1795: case M_chaser:
+                           7850 ;src/main.c:1779: case M_chaser:
    76F6                    7851 00152$:
-                           7852 ;src/main.c:1796: if (ctMainLoop % pSpr->lives_speed == 0) {
-   76F6 DD 6E F8      [19] 7853 	ld	l,-8 (ix)
-   76F9 DD 66 F9      [19] 7854 	ld	h,-7 (ix)
+                           7852 ;src/main.c:1780: if (ctMainLoop % pSpr->lives_speed == 0) {
+   76F6 DD 6E FC      [19] 7853 	ld	l,-4 (ix)
+   76F9 DD 66 FD      [19] 7854 	ld	h,-3 (ix)
    76FC 4E            [ 7] 7855 	ld	c, (hl)
    76FD 06 00         [ 7] 7856 	ld	b, #0x00
    76FF C5            [11] 7857 	push	bc
@@ -7953,17 +7953,17 @@
    7707 F1            [10] 7861 	pop	af
    7708 F1            [10] 7862 	pop	af
    7709 7C            [ 4] 7863 	ld	a, h
-                           7864 ;src/main.c:1797: z = 0;
+                           7864 ;src/main.c:1781: z = 0;
    770A B5            [ 4] 7865 	or	a,l
    770B C2 08 78      [10] 7866 	jp	NZ,00168$
    770E 4F            [ 4] 7867 	ld	c,a
-                           7868 ;src/main.c:1799: if (TwoPlayers)
+                           7868 ;src/main.c:1783: if (TwoPlayers)
    770F 3A BE 48      [13] 7869 	ld	a,(#_TwoPlayers + 0)
    7712 B7            [ 4] 7870 	or	a, a
    7713 CA 99 77      [10] 7871 	jp	Z, 00154$
-                           7872 ;src/main.c:1800: z = Abs(pSpr->x - spr[1].x)*2 + Abs(pSpr->y - spr[1].y) <
-   7716 DD 6E F6      [19] 7873 	ld	l,-10 (ix)
-   7719 DD 66 F7      [19] 7874 	ld	h,-9 (ix)
+                           7872 ;src/main.c:1784: z = Abs(pSpr->x - spr[1].x)*2 + Abs(pSpr->y - spr[1].y) <
+   7716 DD 6E F4      [19] 7873 	ld	l,-12 (ix)
+   7719 DD 66 F5      [19] 7874 	ld	h,-11 (ix)
    771C 4E            [ 7] 7875 	ld	c, (hl)
    771D 06 00         [ 7] 7876 	ld	b, #0x00
    771F 21 04 49      [10] 7877 	ld	hl, #_spr + 17
@@ -7996,11 +7996,11 @@
    7747 CD 6C 49      [17] 7904 	call	_Abs
    774A C1            [10] 7905 	pop	bc
    774B 09            [11] 7906 	add	hl,bc
-   774C DD 75 FC      [19] 7907 	ld	-4 (ix), l
-   774F DD 74 FD      [19] 7908 	ld	-3 (ix), h
-                           7909 ;src/main.c:1801: Abs(pSpr->x - spr[0].x)*2 + Abs(pSpr->y - spr[0].y);
-   7752 DD 6E F6      [19] 7910 	ld	l,-10 (ix)
-   7755 DD 66 F7      [19] 7911 	ld	h,-9 (ix)
+   774C DD 75 FA      [19] 7907 	ld	-6 (ix), l
+   774F DD 74 FB      [19] 7908 	ld	-5 (ix), h
+                           7909 ;src/main.c:1785: Abs(pSpr->x - spr[0].x)*2 + Abs(pSpr->y - spr[0].y);
+   7752 DD 6E F4      [19] 7910 	ld	l,-12 (ix)
+   7755 DD 66 F5      [19] 7911 	ld	h,-11 (ix)
    7758 4E            [ 7] 7912 	ld	c, (hl)
    7759 06 00         [ 7] 7913 	ld	b, #0x00
    775B 21 F5 48      [10] 7914 	ld	hl, #_spr + 2
@@ -8033,9 +8033,9 @@
    7783 CD 6C 49      [17] 7941 	call	_Abs
    7786 C1            [10] 7942 	pop	bc
    7787 09            [11] 7943 	add	hl, bc
-   7788 DD 7E FC      [19] 7944 	ld	a, -4 (ix)
+   7788 DD 7E FA      [19] 7944 	ld	a, -6 (ix)
    778B 95            [ 4] 7945 	sub	a, l
-   778C DD 7E FD      [19] 7946 	ld	a, -3 (ix)
+   778C DD 7E FB      [19] 7946 	ld	a, -5 (ix)
    778F 9C            [ 4] 7947 	sbc	a, h
    7790 E2 95 77      [10] 7948 	jp	PO, 00314$
    7793 EE 80         [ 7] 7949 	xor	a, #0x80
@@ -8044,9 +8044,9 @@
    7796 E6 01         [ 7] 7952 	and	a,#0x01
    7798 4F            [ 4] 7953 	ld	c, a
    7799                    7954 00154$:
-                           7955 ;src/main.c:1803: if (pSpr->x < spr[z].x) {
-   7799 DD 6E F6      [19] 7956 	ld	l,-10 (ix)
-   779C DD 66 F7      [19] 7957 	ld	h,-9 (ix)
+                           7955 ;src/main.c:1787: if (pSpr->x < spr[z].x) {
+   7799 DD 6E F4      [19] 7956 	ld	l,-12 (ix)
+   779C DD 66 F5      [19] 7957 	ld	h,-11 (ix)
    779F 46            [ 7] 7958 	ld	b, (hl)
    77A0 11 F3 48      [10] 7959 	ld	de, #_spr+0
    77A3 D5            [11] 7960 	push	de
@@ -8070,32 +8070,32 @@
    77B6 78            [ 4] 7978 	ld	a, b
    77B7 91            [ 4] 7979 	sub	a, c
    77B8 30 12         [12] 7980 	jr	NC,00158$
-                           7981 ;src/main.c:1804: pSpr->x++;
+                           7981 ;src/main.c:1788: pSpr->x++;
    77BA 04            [ 4] 7982 	inc	b
-   77BB DD 6E F6      [19] 7983 	ld	l,-10 (ix)
-   77BE DD 66 F7      [19] 7984 	ld	h,-9 (ix)
+   77BB DD 6E F4      [19] 7983 	ld	l,-12 (ix)
+   77BE DD 66 F5      [19] 7984 	ld	h,-11 (ix)
    77C1 70            [ 7] 7985 	ld	(hl), b
-                           7986 ;src/main.c:1805: pSpr->dir = D_right;
-   77C2 DD 6E F3      [19] 7987 	ld	l,-13 (ix)
-   77C5 DD 66 F4      [19] 7988 	ld	h,-12 (ix)
+                           7986 ;src/main.c:1789: pSpr->dir = D_right;
+   77C2 DD 6E F6      [19] 7987 	ld	l,-10 (ix)
+   77C5 DD 66 F7      [19] 7988 	ld	h,-9 (ix)
    77C8 36 03         [10] 7989 	ld	(hl), #0x03
    77CA 18 14         [12] 7990 	jr	00159$
    77CC                    7991 00158$:
-                           7992 ;src/main.c:1808: else if (pSpr->x > spr[z].x) {
+                           7992 ;src/main.c:1792: else if (pSpr->x > spr[z].x) {
    77CC 79            [ 4] 7993 	ld	a, c
    77CD 90            [ 4] 7994 	sub	a, b
    77CE 30 10         [12] 7995 	jr	NC,00159$
-                           7996 ;src/main.c:1809: pSpr->x--;
+                           7996 ;src/main.c:1793: pSpr->x--;
    77D0 05            [ 4] 7997 	dec	b
-   77D1 DD 6E F6      [19] 7998 	ld	l,-10 (ix)
-   77D4 DD 66 F7      [19] 7999 	ld	h,-9 (ix)
+   77D1 DD 6E F4      [19] 7998 	ld	l,-12 (ix)
+   77D4 DD 66 F5      [19] 7999 	ld	h,-11 (ix)
    77D7 70            [ 7] 8000 	ld	(hl), b
-                           8001 ;src/main.c:1810: pSpr->dir = D_left;
-   77D8 DD 6E F3      [19] 8002 	ld	l,-13 (ix)
-   77DB DD 66 F4      [19] 8003 	ld	h,-12 (ix)
+                           8001 ;src/main.c:1794: pSpr->dir = D_left;
+   77D8 DD 6E F6      [19] 8002 	ld	l,-10 (ix)
+   77DB DD 66 F7      [19] 8003 	ld	h,-9 (ix)
    77DE 36 02         [10] 8004 	ld	(hl), #0x02
    77E0                    8005 00159$:
-                           8006 ;src/main.c:1813: if (pSpr->y < spr[z].y) {
+                           8006 ;src/main.c:1797: if (pSpr->y < spr[z].y) {
    77E0 DD 6E FE      [19] 8007 	ld	l,-2 (ix)
    77E3 DD 66 FF      [19] 8008 	ld	h,-1 (ix)
    77E6 4E            [ 7] 8009 	ld	c, (hl)
@@ -8107,7 +8107,7 @@
    77EC 79            [ 4] 8015 	ld	a, c
    77ED 90            [ 4] 8016 	sub	a, b
    77EE 30 0B         [12] 8017 	jr	NC,00163$
-                           8018 ;src/main.c:1814: pSpr->y+=2;
+                           8018 ;src/main.c:1798: pSpr->y+=2;
    77F0 0C            [ 4] 8019 	inc	c
    77F1 0C            [ 4] 8020 	inc	c
    77F2 DD 6E FE      [19] 8021 	ld	l,-2 (ix)
@@ -8115,22 +8115,22 @@
    77F8 71            [ 7] 8023 	ld	(hl), c
    77F9 18 0D         [12] 8024 	jr	00168$
    77FB                    8025 00163$:
-                           8026 ;src/main.c:1817: else if (pSpr->y > spr[z].y) {
+                           8026 ;src/main.c:1801: else if (pSpr->y > spr[z].y) {
    77FB 78            [ 4] 8027 	ld	a, b
    77FC 91            [ 4] 8028 	sub	a, c
    77FD 30 09         [12] 8029 	jr	NC,00168$
-                           8030 ;src/main.c:1818: pSpr->y-=2;
+                           8030 ;src/main.c:1802: pSpr->y-=2;
    77FF 0D            [ 4] 8031 	dec	c
    7800 0D            [ 4] 8032 	dec	c
    7801 DD 6E FE      [19] 8033 	ld	l,-2 (ix)
    7804 DD 66 FF      [19] 8034 	ld	h,-1 (ix)
    7807 71            [ 7] 8035 	ld	(hl), c
-                           8036 ;src/main.c:1822: }
+                           8036 ;src/main.c:1806: }
    7808                    8037 00168$:
    7808 DD F9         [10] 8038 	ld	sp, ix
    780A DD E1         [14] 8039 	pop	ix
    780C C9            [10] 8040 	ret
-                           8041 ;src/main.c:1827: void SetEnemyParams(u8 i, u8 ident, u8 mov, u8 dir, u8 speed, u8 x, u8 y, u8 minV, u8 maxV) {
+                           8041 ;src/main.c:1811: void SetEnemyParams(u8 i, u8 ident, u8 mov, u8 dir, u8 speed, u8 x, u8 y, u8 minV, u8 maxV) {
                            8042 ;	---------------------------------
                            8043 ; Function SetEnemyParams
                            8044 ; ---------------------------------
@@ -8138,7 +8138,7 @@
    780D DD E5         [15] 8046 	push	ix
    780F DD 21 00 00   [14] 8047 	ld	ix,#0
    7813 DD 39         [15] 8048 	add	ix,sp
-                           8049 ;src/main.c:1828: spr[i].num = i;
+                           8049 ;src/main.c:1812: spr[i].num = i;
    7815 01 F3 48      [10] 8050 	ld	bc, #_spr+0
    7818 DD 5E 04      [19] 8051 	ld	e,4 (ix)
    781B 16 00         [ 7] 8052 	ld	d,#0x00
@@ -8155,28 +8155,28 @@
    7827 44            [ 4] 8063 	ld	b, h
    7828 DD 7E 04      [19] 8064 	ld	a, 4 (ix)
    782B 02            [ 7] 8065 	ld	(bc), a
-                           8066 ;src/main.c:1829: spr[i].ident = ident; 
+                           8066 ;src/main.c:1813: spr[i].ident = ident; 
    782C 59            [ 4] 8067 	ld	e, c
    782D 50            [ 4] 8068 	ld	d, b
    782E 13            [ 6] 8069 	inc	de
    782F DD 7E 05      [19] 8070 	ld	a, 5 (ix)
    7832 12            [ 7] 8071 	ld	(de), a
-                           8072 ;src/main.c:1830: spr[i].objNum_mov = mov;	 
+                           8072 ;src/main.c:1814: spr[i].objNum_mov = mov;	 
    7833 21 0C 00      [10] 8073 	ld	hl, #0x000c
    7836 09            [11] 8074 	add	hl, bc
    7837 DD 7E 06      [19] 8075 	ld	a, 6 (ix)
    783A 77            [ 7] 8076 	ld	(hl), a
-                           8077 ;src/main.c:1831: spr[i].dir = dir; 
+                           8077 ;src/main.c:1815: spr[i].dir = dir; 
    783B 21 07 00      [10] 8078 	ld	hl, #0x0007
    783E 09            [11] 8079 	add	hl, bc
    783F DD 7E 07      [19] 8080 	ld	a, 7 (ix)
    7842 77            [ 7] 8081 	ld	(hl), a
-                           8082 ;src/main.c:1832: spr[i].lives_speed = speed;
+                           8082 ;src/main.c:1816: spr[i].lives_speed = speed;
    7843 21 0B 00      [10] 8083 	ld	hl, #0x000b
    7846 09            [11] 8084 	add	hl, bc
    7847 DD 7E 08      [19] 8085 	ld	a, 8 (ix)
    784A 77            [ 7] 8086 	ld	(hl), a
-                           8087 ;src/main.c:1833: spr[i].x = spr[i].px = x;
+                           8087 ;src/main.c:1817: spr[i].x = spr[i].px = x;
    784B 59            [ 4] 8088 	ld	e, c
    784C 50            [ 4] 8089 	ld	d, b
    784D 13            [ 6] 8090 	inc	de
@@ -8187,7 +8187,7 @@
    7856 77            [ 7] 8095 	ld	(hl), a
    7857 DD 7E 09      [19] 8096 	ld	a, 9 (ix)
    785A 12            [ 7] 8097 	ld	(de), a
-                           8098 ;src/main.c:1834: spr[i].y = spr[i].py = y;
+                           8098 ;src/main.c:1818: spr[i].y = spr[i].py = y;
    785B 59            [ 4] 8099 	ld	e, c
    785C 50            [ 4] 8100 	ld	d, b
    785D 13            [ 6] 8101 	inc	de
@@ -8199,24 +8199,24 @@
    7867 77            [ 7] 8107 	ld	(hl), a
    7868 DD 7E 0A      [19] 8108 	ld	a, 10 (ix)
    786B 12            [ 7] 8109 	ld	(de), a
-                           8110 ;src/main.c:1835: spr[i].print_minV = minV;
+                           8110 ;src/main.c:1819: spr[i].print_minV = minV;
    786C 21 0D 00      [10] 8111 	ld	hl, #0x000d
    786F 09            [11] 8112 	add	hl, bc
    7870 DD 7E 0B      [19] 8113 	ld	a, 11 (ix)
    7873 77            [ 7] 8114 	ld	(hl), a
-                           8115 ;src/main.c:1836: spr[i].power_maxV = maxV;
+                           8115 ;src/main.c:1820: spr[i].power_maxV = maxV;
    7874 21 0E 00      [10] 8116 	ld	hl, #0x000e
    7877 09            [11] 8117 	add	hl, bc
    7878 DD 7E 0C      [19] 8118 	ld	a, 12 (ix)
    787B 77            [ 7] 8119 	ld	(hl), a
    787C DD E1         [14] 8120 	pop	ix
    787E C9            [10] 8121 	ret
-                           8122 ;src/main.c:1846: void SetEnemies() {
+                           8122 ;src/main.c:1830: void SetEnemies() {
                            8123 ;	---------------------------------
                            8124 ; Function SetEnemies
                            8125 ; ---------------------------------
    787F                    8126 _SetEnemies::
-                           8127 ;src/main.c:1847: switch (nMap) {
+                           8127 ;src/main.c:1831: switch (nMap) {
    787F 3E 0B         [ 7] 8128 	ld	a, #0x0b
    7881 FD 21 BA 48   [14] 8129 	ld	iy, #_nMap
    7885 FD 96 00      [19] 8130 	sub	a, 0 (iy)
@@ -8241,9 +8241,9 @@
    78B2 C3 3A 7F      [10] 8149 	jp	00110$
    78B5 C3 F2 7F      [10] 8150 	jp	00111$
    78B8 C3 A8 80      [10] 8151 	jp	00112$
-                           8152 ;src/main.c:1849: case 0: {			 
+                           8152 ;src/main.c:1833: case 0: {			 
    78BB                    8153 00101$:
-                           8154 ;src/main.c:1851: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1, 73, 158,   2,  73);						
+                           8154 ;src/main.c:1835: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1, 73, 158,   2,  73);						
    78BB 21 02 49      [10] 8155 	ld	hl, #0x4902
    78BE E5            [11] 8156 	push	hl
    78BF 21 49 9E      [10] 8157 	ld	hl, #0x9e49
@@ -8259,7 +8259,7 @@
    78D1 21 09 00      [10] 8167 	ld	hl, #9
    78D4 39            [11] 8168 	add	hl, sp
    78D5 F9            [ 6] 8169 	ld	sp, hl
-                           8170 ;src/main.c:1852: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  3, 110,   2,  73);
+                           8170 ;src/main.c:1836: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  3, 110,   2,  73);
    78D6 21 02 49      [10] 8171 	ld	hl, #0x4902
    78D9 E5            [11] 8172 	push	hl
    78DA 21 03 6E      [10] 8173 	ld	hl, #0x6e03
@@ -8275,7 +8275,7 @@
    78EC 21 09 00      [10] 8183 	ld	hl, #9
    78EF 39            [11] 8184 	add	hl, sp
    78F0 F9            [ 6] 8185 	ld	sp, hl
-                           8186 ;src/main.c:1853: SetEnemyParams(4, SENTINEL,	M_linear_X, 	D_left,     1, 73,  62,  40,  73);
+                           8186 ;src/main.c:1837: SetEnemyParams(4, SENTINEL,	M_linear_X, 	D_left,     1, 73,  62,  40,  73);
    78F1 21 28 49      [10] 8187 	ld	hl, #0x4928
    78F4 E5            [11] 8188 	push	hl
    78F5 21 49 3E      [10] 8189 	ld	hl, #0x3e49
@@ -8291,7 +8291,7 @@
    7907 21 09 00      [10] 8199 	ld	hl, #9
    790A 39            [11] 8200 	add	hl, sp
    790B F9            [ 6] 8201 	ld	sp, hl
-                           8202 ;src/main.c:1854: SetEnemyParams(5, SENTINEL,	M_linear_X, 	D_right,    1,  2,  62,   2,  35);
+                           8202 ;src/main.c:1838: SetEnemyParams(5, SENTINEL,	M_linear_X, 	D_right,    1,  2,  62,   2,  35);
    790C 21 02 23      [10] 8203 	ld	hl, #0x2302
    790F E5            [11] 8204 	push	hl
    7910 26 3E         [ 7] 8205 	ld	h, #0x3e
@@ -8307,51 +8307,51 @@
    7922 21 09 00      [10] 8215 	ld	hl, #9
    7925 39            [11] 8216 	add	hl, sp
    7926 F9            [ 6] 8217 	ld	sp, hl
-                           8218 ;src/main.c:1856: spr[0].x = spr[0].px = 6; 
+                           8218 ;src/main.c:1840: spr[0].x = spr[0].px = 6; 
    7927 21 F7 48      [10] 8219 	ld	hl, #(_spr + 0x0004)
    792A 36 06         [10] 8220 	ld	(hl), #0x06
    792C 21 F5 48      [10] 8221 	ld	hl, #(_spr + 0x0002)
    792F 36 06         [10] 8222 	ld	(hl), #0x06
-                           8223 ;src/main.c:1857: spr[0].y = spr[0].py = 178;			
+                           8223 ;src/main.c:1841: spr[0].y = spr[0].py = 178;			
    7931 21 F8 48      [10] 8224 	ld	hl, #(_spr + 0x0005)
    7934 36 B2         [10] 8225 	ld	(hl), #0xb2
    7936 21 F6 48      [10] 8226 	ld	hl, #(_spr + 0x0003)
    7939 36 B2         [10] 8227 	ld	(hl), #0xb2
-                           8228 ;src/main.c:1859: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
+                           8228 ;src/main.c:1843: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
    793B 21 5B 3C      [10] 8229 	ld	hl, #(_mappk0 + 0x0279)
    793E E5            [11] 8230 	push	hl
    793F 21 00 16      [10] 8231 	ld	hl, #0x1600
    7942 E5            [11] 8232 	push	hl
    7943 CD 44 46      [17] 8233 	call	_cpct_zx7b_decrunch_s
-                           8234 ;src/main.c:1861: lName = "1;1@@GARDENS";
+                           8234 ;src/main.c:1845: lName = "1;1@@GARDENS";
    7946 21 7C 81      [10] 8235 	ld	hl, #___str_35+0
    7949 22 BC 48      [16] 8236 	ld	(_lName), hl
-                           8237 ;src/main.c:1863: doorKey[0] = 4;	// toad snot
+                           8237 ;src/main.c:1847: doorKey[0] = 4;	// toad snot
    794C 21 C9 48      [10] 8238 	ld	hl, #_doorKey
    794F 36 04         [10] 8239 	ld	(hl), #0x04
-                           8240 ;src/main.c:1864: doorKey[1] = 5;	// diamond dust
+                           8240 ;src/main.c:1848: doorKey[1] = 5;	// diamond dust
    7951 21 CA 48      [10] 8241 	ld	hl, #(_doorKey + 0x0001)
    7954 36 05         [10] 8242 	ld	(hl), #0x05
-                           8243 ;src/main.c:1865: doorKey[2] = 4;	// toad snot
+                           8243 ;src/main.c:1849: doorKey[2] = 4;	// toad snot
    7956 21 CB 48      [10] 8244 	ld	hl, #(_doorKey + 0x0002)
    7959 36 04         [10] 8245 	ld	(hl), #0x04
-                           8246 ;src/main.c:1866: doorKey[3] = 5;	// diamond dust
+                           8246 ;src/main.c:1850: doorKey[3] = 5;	// diamond dust
    795B 21 CC 48      [10] 8247 	ld	hl, #(_doorKey + 0x0003)
    795E 36 05         [10] 8248 	ld	(hl), #0x05
-                           8249 ;src/main.c:1867: doorKey[4] = 4; // toad snot
+                           8249 ;src/main.c:1851: doorKey[4] = 4; // toad snot
    7960 21 CD 48      [10] 8250 	ld	hl, #(_doorKey + 0x0004)
    7963 36 04         [10] 8251 	ld	(hl), #0x04
-                           8252 ;src/main.c:1869: storeX = 51;
+                           8252 ;src/main.c:1853: storeX = 51;
    7965 21 D3 48      [10] 8253 	ld	hl,#_storeX + 0
    7968 36 33         [10] 8254 	ld	(hl), #0x33
-                           8255 ;src/main.c:1870: storeY = 11;
+                           8255 ;src/main.c:1854: storeY = 11;
    796A 21 D4 48      [10] 8256 	ld	hl,#_storeY + 0
    796D 36 0B         [10] 8257 	ld	(hl), #0x0b
-                           8258 ;src/main.c:1871: break;
+                           8258 ;src/main.c:1855: break;
    796F C3 5E 81      [10] 8259 	jp	00113$
-                           8260 ;src/main.c:1874: case 1: {
+                           8260 ;src/main.c:1858: case 1: {
    7972                    8261 00102$:
-                           8262 ;src/main.c:1876: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
+                           8262 ;src/main.c:1860: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
    7972 21 00 00      [10] 8263 	ld	hl, #0x0000
    7975 E5            [11] 8264 	push	hl
    7976 2E 00         [ 7] 8265 	ld	l, #0x00
@@ -8367,7 +8367,7 @@
    7988 21 09 00      [10] 8275 	ld	hl, #9
    798B 39            [11] 8276 	add	hl, sp
    798C F9            [ 6] 8277 	ld	sp, hl
-                           8278 ;src/main.c:1877: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  2, 114,   2,  73);						
+                           8278 ;src/main.c:1861: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1,  2, 114,   2,  73);						
    798D 21 02 49      [10] 8279 	ld	hl, #0x4902
    7990 E5            [11] 8280 	push	hl
    7991 26 72         [ 7] 8281 	ld	h, #0x72
@@ -8383,7 +8383,7 @@
    79A3 21 09 00      [10] 8291 	ld	hl, #9
    79A6 39            [11] 8292 	add	hl, sp
    79A7 F9            [ 6] 8293 	ld	sp, hl
-                           8294 ;src/main.c:1878: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
+                           8294 ;src/main.c:1862: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  62,   0,   0);
    79A8 21 00 00      [10] 8295 	ld	hl, #0x0000
    79AB E5            [11] 8296 	push	hl
    79AC 21 0A 3E      [10] 8297 	ld	hl, #0x3e0a
@@ -8399,7 +8399,7 @@
    79BE 21 09 00      [10] 8307 	ld	hl, #9
    79C1 39            [11] 8308 	add	hl, sp
    79C2 F9            [ 6] 8309 	ld	sp, hl
-                           8310 ;src/main.c:1879: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
+                           8310 ;src/main.c:1863: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
    79C3 21 00 00      [10] 8311 	ld	hl, #0x0000
    79C6 E5            [11] 8312 	push	hl
    79C7 21 02 26      [10] 8313 	ld	hl, #0x2602
@@ -8415,51 +8415,51 @@
    79DA 21 09 00      [10] 8323 	ld	hl, #9
    79DD 39            [11] 8324 	add	hl, sp
    79DE F9            [ 6] 8325 	ld	sp, hl
-                           8326 ;src/main.c:1881: spr[0].x = spr[0].px = 58; 
+                           8326 ;src/main.c:1865: spr[0].x = spr[0].px = 58; 
    79DF 21 F7 48      [10] 8327 	ld	hl, #(_spr + 0x0004)
    79E2 36 3A         [10] 8328 	ld	(hl), #0x3a
    79E4 21 F5 48      [10] 8329 	ld	hl, #(_spr + 0x0002)
    79E7 36 3A         [10] 8330 	ld	(hl), #0x3a
-                           8331 ;src/main.c:1882: spr[0].y = spr[0].py = 178;	
+                           8331 ;src/main.c:1866: spr[0].y = spr[0].py = 178;	
    79E9 21 F8 48      [10] 8332 	ld	hl, #(_spr + 0x0005)
    79EC 36 B2         [10] 8333 	ld	(hl), #0xb2
    79EE 21 F6 48      [10] 8334 	ld	hl, #(_spr + 0x0003)
    79F1 36 B2         [10] 8335 	ld	(hl), #0xb2
-                           8336 ;src/main.c:1884: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
+                           8336 ;src/main.c:1868: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
    79F3 21 E1 39      [10] 8337 	ld	hl, #(_mappk1 + 0x02a0)
    79F6 E5            [11] 8338 	push	hl
    79F7 21 00 16      [10] 8339 	ld	hl, #0x1600
    79FA E5            [11] 8340 	push	hl
    79FB CD 44 46      [17] 8341 	call	_cpct_zx7b_decrunch_s
-                           8342 ;src/main.c:1886: lName = "1;2@@GARDENS";
+                           8342 ;src/main.c:1870: lName = "1;2@@GARDENS";
    79FE 21 89 81      [10] 8343 	ld	hl, #___str_36+0
    7A01 22 BC 48      [16] 8344 	ld	(_lName), hl
-                           8345 ;src/main.c:1888: doorKey[0] = 4;	// toad snot
+                           8345 ;src/main.c:1872: doorKey[0] = 4;	// toad snot
    7A04 21 C9 48      [10] 8346 	ld	hl, #_doorKey
    7A07 36 04         [10] 8347 	ld	(hl), #0x04
-                           8348 ;src/main.c:1889: doorKey[1] = 6;	// newt eye
+                           8348 ;src/main.c:1873: doorKey[1] = 6;	// newt eye
    7A09 21 CA 48      [10] 8349 	ld	hl, #(_doorKey + 0x0001)
    7A0C 36 06         [10] 8350 	ld	(hl), #0x06
-                           8351 ;src/main.c:1890: doorKey[2] = 5; // diamond dust
+                           8351 ;src/main.c:1874: doorKey[2] = 5; // diamond dust
    7A0E 21 CB 48      [10] 8352 	ld	hl, #(_doorKey + 0x0002)
    7A11 36 05         [10] 8353 	ld	(hl), #0x05
-                           8354 ;src/main.c:1891: doorKey[3] = 6; // newt eye
+                           8354 ;src/main.c:1875: doorKey[3] = 6; // newt eye
    7A13 21 CC 48      [10] 8355 	ld	hl, #(_doorKey + 0x0003)
    7A16 36 06         [10] 8356 	ld	(hl), #0x06
-                           8357 ;src/main.c:1892: doorKey[4] = 4; // toad snot
+                           8357 ;src/main.c:1876: doorKey[4] = 4; // toad snot
    7A18 21 CD 48      [10] 8358 	ld	hl, #(_doorKey + 0x0004)
    7A1B 36 04         [10] 8359 	ld	(hl), #0x04
-                           8360 ;src/main.c:1894: storeX = 51;
+                           8360 ;src/main.c:1878: storeX = 51;
    7A1D 21 D3 48      [10] 8361 	ld	hl,#_storeX + 0
    7A20 36 33         [10] 8362 	ld	(hl), #0x33
-                           8363 ;src/main.c:1895: storeY = 55;
+                           8363 ;src/main.c:1879: storeY = 55;
    7A22 21 D4 48      [10] 8364 	ld	hl,#_storeY + 0
    7A25 36 37         [10] 8365 	ld	(hl), #0x37
-                           8366 ;src/main.c:1896: break;
+                           8366 ;src/main.c:1880: break;
    7A27 C3 5E 81      [10] 8367 	jp	00113$
-                           8368 ;src/main.c:1899: case 2: {			 
+                           8368 ;src/main.c:1883: case 2: {			 
    7A2A                    8369 00103$:
-                           8370 ;src/main.c:1901: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_right,    1,  3, 120,   0,   0);						
+                           8370 ;src/main.c:1885: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_right,    1,  3, 120,   0,   0);						
    7A2A 21 00 00      [10] 8371 	ld	hl, #0x0000
    7A2D E5            [11] 8372 	push	hl
    7A2E 21 03 78      [10] 8373 	ld	hl, #0x7803
@@ -8475,7 +8475,7 @@
    7A40 21 09 00      [10] 8383 	ld	hl, #9
    7A43 39            [11] 8384 	add	hl, sp
    7A44 F9            [ 6] 8385 	ld	sp, hl
-                           8386 ;src/main.c:1902: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_left,     1, 73,  99,   0,   0);
+                           8386 ;src/main.c:1886: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_left,     1, 73,  99,   0,   0);
    7A45 21 00 00      [10] 8387 	ld	hl, #0x0000
    7A48 E5            [11] 8388 	push	hl
    7A49 21 49 63      [10] 8389 	ld	hl, #0x6349
@@ -8491,7 +8491,7 @@
    7A5C 21 09 00      [10] 8399 	ld	hl, #9
    7A5F 39            [11] 8400 	add	hl, sp
    7A60 F9            [ 6] 8401 	ld	sp, hl
-                           8402 ;src/main.c:1903: SetEnemyParams(4, BAT,	 	M_linear_X,    	D_right,    1, 22,  58,  22,  60);																		
+                           8402 ;src/main.c:1887: SetEnemyParams(4, BAT,	 	M_linear_X,    	D_right,    1, 22,  58,  22,  60);																		
    7A61 21 16 3C      [10] 8403 	ld	hl, #0x3c16
    7A64 E5            [11] 8404 	push	hl
    7A65 26 3A         [ 7] 8405 	ld	h, #0x3a
@@ -8507,7 +8507,7 @@
    7A77 21 09 00      [10] 8415 	ld	hl, #9
    7A7A 39            [11] 8416 	add	hl, sp
    7A7B F9            [ 6] 8417 	ld	sp, hl
-                           8418 ;src/main.c:1904: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  78,   2,  73);
+                           8418 ;src/main.c:1888: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  78,   2,  73);
    7A7C 21 02 49      [10] 8419 	ld	hl, #0x4902
    7A7F E5            [11] 8420 	push	hl
    7A80 21 03 4E      [10] 8421 	ld	hl, #0x4e03
@@ -8523,51 +8523,51 @@
    7A93 21 09 00      [10] 8431 	ld	hl, #9
    7A96 39            [11] 8432 	add	hl, sp
    7A97 F9            [ 6] 8433 	ld	sp, hl
-                           8434 ;src/main.c:1906: spr[0].x = spr[0].px = 58; 
+                           8434 ;src/main.c:1890: spr[0].x = spr[0].px = 58; 
    7A98 21 F7 48      [10] 8435 	ld	hl, #(_spr + 0x0004)
    7A9B 36 3A         [10] 8436 	ld	(hl), #0x3a
    7A9D 21 F5 48      [10] 8437 	ld	hl, #(_spr + 0x0002)
    7AA0 36 3A         [10] 8438 	ld	(hl), #0x3a
-                           8439 ;src/main.c:1907: spr[0].y = spr[0].py = 178;			
+                           8439 ;src/main.c:1891: spr[0].y = spr[0].py = 178;			
    7AA2 21 F8 48      [10] 8440 	ld	hl, #(_spr + 0x0005)
    7AA5 36 B2         [10] 8441 	ld	(hl), #0xb2
    7AA7 21 F6 48      [10] 8442 	ld	hl, #(_spr + 0x0003)
    7AAA 36 B2         [10] 8443 	ld	(hl), #0xb2
-                           8444 ;src/main.c:1909: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
+                           8444 ;src/main.c:1893: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
    7AAC 21 40 37      [10] 8445 	ld	hl, #(_mappk2 - 0x0001)
    7AAF E5            [11] 8446 	push	hl
    7AB0 21 00 16      [10] 8447 	ld	hl, #0x1600
    7AB3 E5            [11] 8448 	push	hl
    7AB4 CD 44 46      [17] 8449 	call	_cpct_zx7b_decrunch_s
-                           8450 ;src/main.c:1911: lName = "2;1@CEMETERY";
+                           8450 ;src/main.c:1895: lName = "2;1@CEMETERY";
    7AB7 21 96 81      [10] 8451 	ld	hl, #___str_37+0
    7ABA 22 BC 48      [16] 8452 	ld	(_lName), hl
-                           8453 ;src/main.c:1913: doorKey[0] = 4;	// toad snot
+                           8453 ;src/main.c:1897: doorKey[0] = 4;	// toad snot
    7ABD 21 C9 48      [10] 8454 	ld	hl, #_doorKey
    7AC0 36 04         [10] 8455 	ld	(hl), #0x04
-                           8456 ;src/main.c:1914: doorKey[1] = 5;	// diamond dust
+                           8456 ;src/main.c:1898: doorKey[1] = 5;	// diamond dust
    7AC2 21 CA 48      [10] 8457 	ld	hl, #(_doorKey + 0x0001)
    7AC5 36 05         [10] 8458 	ld	(hl), #0x05
-                           8459 ;src/main.c:1915: doorKey[2] = 6; // newt eye
+                           8459 ;src/main.c:1899: doorKey[2] = 6; // newt eye
    7AC7 21 CB 48      [10] 8460 	ld	hl, #(_doorKey + 0x0002)
    7ACA 36 06         [10] 8461 	ld	(hl), #0x06
-                           8462 ;src/main.c:1916: doorKey[3] = 7;	// mammoth poop
+                           8462 ;src/main.c:1900: doorKey[3] = 7;	// mammoth poop
    7ACC 21 CC 48      [10] 8463 	ld	hl, #(_doorKey + 0x0003)
    7ACF 36 07         [10] 8464 	ld	(hl), #0x07
-                           8465 ;src/main.c:1917: doorKey[4] = 8; // kraken ink
+                           8465 ;src/main.c:1901: doorKey[4] = 8; // kraken ink
    7AD1 21 CD 48      [10] 8466 	ld	hl, #(_doorKey + 0x0004)
    7AD4 36 08         [10] 8467 	ld	(hl), #0x08
-                           8468 ;src/main.c:1919: storeX = 3;
+                           8468 ;src/main.c:1903: storeX = 3;
    7AD6 21 D3 48      [10] 8469 	ld	hl,#_storeX + 0
    7AD9 36 03         [10] 8470 	ld	(hl), #0x03
-                           8471 ;src/main.c:1920: storeY = 11;
+                           8471 ;src/main.c:1904: storeY = 11;
    7ADB 21 D4 48      [10] 8472 	ld	hl,#_storeY + 0
    7ADE 36 0B         [10] 8473 	ld	(hl), #0x0b
-                           8474 ;src/main.c:1921: break;
+                           8474 ;src/main.c:1905: break;
    7AE0 C3 5E 81      [10] 8475 	jp	00113$
-                           8476 ;src/main.c:1924: case 3: {			 
+                           8476 ;src/main.c:1908: case 3: {			 
    7AE3                    8477 00104$:
-                           8478 ;src/main.c:1926: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_left,     1,  2, 180,   0,   0);
+                           8478 ;src/main.c:1910: SetEnemyParams(2, GHOST,	M_linear_XY, 	D_left,     1,  2, 180,   0,   0);
    7AE3 21 00 00      [10] 8479 	ld	hl, #0x0000
    7AE6 E5            [11] 8480 	push	hl
    7AE7 21 02 B4      [10] 8481 	ld	hl, #0xb402
@@ -8583,7 +8583,7 @@
    7AF9 21 09 00      [10] 8491 	ld	hl, #9
    7AFC 39            [11] 8492 	add	hl, sp
    7AFD F9            [ 6] 8493 	ld	sp, hl
-                           8494 ;src/main.c:1927: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_right,    1,  2, 136,   0,   0);
+                           8494 ;src/main.c:1911: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_right,    1,  2, 136,   0,   0);
    7AFE 21 00 00      [10] 8495 	ld	hl, #0x0000
    7B01 E5            [11] 8496 	push	hl
    7B02 21 02 88      [10] 8497 	ld	hl, #0x8802
@@ -8599,7 +8599,7 @@
    7B15 21 09 00      [10] 8507 	ld	hl, #9
    7B18 39            [11] 8508 	add	hl, sp
    7B19 F9            [ 6] 8509 	ld	sp, hl
-                           8510 ;src/main.c:1928: SetEnemyParams(4, GHOST,	M_linear_XY, 	D_left,     1, 70,  40,   0,   0);
+                           8510 ;src/main.c:1912: SetEnemyParams(4, GHOST,	M_linear_XY, 	D_left,     1, 70,  40,   0,   0);
    7B1A 21 00 00      [10] 8511 	ld	hl, #0x0000
    7B1D E5            [11] 8512 	push	hl
    7B1E 21 46 28      [10] 8513 	ld	hl, #0x2846
@@ -8615,7 +8615,7 @@
    7B31 21 09 00      [10] 8523 	ld	hl, #9
    7B34 39            [11] 8524 	add	hl, sp
    7B35 F9            [ 6] 8525 	ld	sp, hl
-                           8526 ;src/main.c:1929: SetEnemyParams(5, GHOST,	M_linear_XY,	D_left,     1,  2,  40,   0,   0);
+                           8526 ;src/main.c:1913: SetEnemyParams(5, GHOST,	M_linear_XY,	D_left,     1,  2,  40,   0,   0);
    7B36 21 00 00      [10] 8527 	ld	hl, #0x0000
    7B39 E5            [11] 8528 	push	hl
    7B3A 21 02 28      [10] 8529 	ld	hl, #0x2802
@@ -8631,51 +8631,51 @@
    7B4C 21 09 00      [10] 8539 	ld	hl, #9
    7B4F 39            [11] 8540 	add	hl, sp
    7B50 F9            [ 6] 8541 	ld	sp, hl
-                           8542 ;src/main.c:1931: spr[0].x = spr[0].px = 36; 
+                           8542 ;src/main.c:1915: spr[0].x = spr[0].px = 36; 
    7B51 21 F7 48      [10] 8543 	ld	hl, #(_spr + 0x0004)
    7B54 36 24         [10] 8544 	ld	(hl), #0x24
    7B56 21 F5 48      [10] 8545 	ld	hl, #(_spr + 0x0002)
    7B59 36 24         [10] 8546 	ld	(hl), #0x24
-                           8547 ;src/main.c:1932: spr[0].y = spr[0].py = 178;			
+                           8547 ;src/main.c:1916: spr[0].y = spr[0].py = 178;			
    7B5B 21 F8 48      [10] 8548 	ld	hl, #(_spr + 0x0005)
    7B5E 36 B2         [10] 8549 	ld	(hl), #0xb2
    7B60 21 F6 48      [10] 8550 	ld	hl, #(_spr + 0x0003)
    7B63 36 B2         [10] 8551 	ld	(hl), #0xb2
-                           8552 ;src/main.c:1934: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
+                           8552 ;src/main.c:1918: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
    7B65 21 40 37      [10] 8553 	ld	hl, #(_mappk3 - 0x0001)
    7B68 E5            [11] 8554 	push	hl
    7B69 21 00 16      [10] 8555 	ld	hl, #0x1600
    7B6C E5            [11] 8556 	push	hl
    7B6D CD 44 46      [17] 8557 	call	_cpct_zx7b_decrunch_s
-                           8558 ;src/main.c:1936: lName = "2;2@CEMETERY";
+                           8558 ;src/main.c:1920: lName = "2;2@CEMETERY";
    7B70 21 A3 81      [10] 8559 	ld	hl, #___str_38+0
    7B73 22 BC 48      [16] 8560 	ld	(_lName), hl
-                           8561 ;src/main.c:1938: doorKey[0] = 5;	// diamond dust
+                           8561 ;src/main.c:1922: doorKey[0] = 5;	// diamond dust
    7B76 21 C9 48      [10] 8562 	ld	hl, #_doorKey
    7B79 36 05         [10] 8563 	ld	(hl), #0x05
-                           8564 ;src/main.c:1939: doorKey[1] = 7; // mammooth poop
+                           8564 ;src/main.c:1923: doorKey[1] = 7; // mammooth poop
    7B7B 21 CA 48      [10] 8565 	ld	hl, #(_doorKey + 0x0001)
    7B7E 36 07         [10] 8566 	ld	(hl), #0x07
-                           8567 ;src/main.c:1940: doorKey[2] = 6; // newt eye
+                           8567 ;src/main.c:1924: doorKey[2] = 6; // newt eye
    7B80 21 CB 48      [10] 8568 	ld	hl, #(_doorKey + 0x0002)
    7B83 36 06         [10] 8569 	ld	(hl), #0x06
-                           8570 ;src/main.c:1941: doorKey[3] = 7; // mammooth poop
+                           8570 ;src/main.c:1925: doorKey[3] = 7; // mammooth poop
    7B85 21 CC 48      [10] 8571 	ld	hl, #(_doorKey + 0x0003)
    7B88 36 07         [10] 8572 	ld	(hl), #0x07
-                           8573 ;src/main.c:1942: doorKey[4] = 5; // diamond dust
+                           8573 ;src/main.c:1926: doorKey[4] = 5; // diamond dust
    7B8A 21 CD 48      [10] 8574 	ld	hl, #(_doorKey + 0x0004)
    7B8D 36 05         [10] 8575 	ld	(hl), #0x05
-                           8576 ;src/main.c:1944: storeX = 41;
+                           8576 ;src/main.c:1928: storeX = 41;
    7B8F 21 D3 48      [10] 8577 	ld	hl,#_storeX + 0
    7B92 36 29         [10] 8578 	ld	(hl), #0x29
-                           8579 ;src/main.c:1945: storeY = 71;
+                           8579 ;src/main.c:1929: storeY = 71;
    7B94 21 D4 48      [10] 8580 	ld	hl,#_storeY + 0
    7B97 36 47         [10] 8581 	ld	(hl), #0x47
-                           8582 ;src/main.c:1946: break;
+                           8582 ;src/main.c:1930: break;
    7B99 C3 5E 81      [10] 8583 	jp	00113$
-                           8584 ;src/main.c:1949: case 4: {			 
+                           8584 ;src/main.c:1933: case 4: {			 
    7B9C                    8585 00105$:
-                           8586 ;src/main.c:1951: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 134,  16,  73);							
+                           8586 ;src/main.c:1935: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 134,  16,  73);							
    7B9C 21 10 49      [10] 8587 	ld	hl, #0x4910
    7B9F E5            [11] 8588 	push	hl
    7BA0 21 49 86      [10] 8589 	ld	hl, #0x8649
@@ -8691,7 +8691,7 @@
    7BB3 21 09 00      [10] 8599 	ld	hl, #9
    7BB6 39            [11] 8600 	add	hl, sp
    7BB7 F9            [ 6] 8601 	ld	sp, hl
-                           8602 ;src/main.c:1952: SetEnemyParams(3, BAT,		M_linear_X, 	D_right,    1,  3,  94,   2,  73);		
+                           8602 ;src/main.c:1936: SetEnemyParams(3, BAT,		M_linear_X, 	D_right,    1,  3,  94,   2,  73);		
    7BB8 21 02 49      [10] 8603 	ld	hl, #0x4902
    7BBB E5            [11] 8604 	push	hl
    7BBC 21 03 5E      [10] 8605 	ld	hl, #0x5e03
@@ -8707,7 +8707,7 @@
    7BCE 21 09 00      [10] 8615 	ld	hl, #9
    7BD1 39            [11] 8616 	add	hl, sp
    7BD2 F9            [ 6] 8617 	ld	sp, hl
-                           8618 ;src/main.c:1953: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,    	1, 17,  50,   0,   0);
+                           8618 ;src/main.c:1937: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,    	1, 17,  50,   0,   0);
    7BD3 21 00 00      [10] 8619 	ld	hl, #0x0000
    7BD6 E5            [11] 8620 	push	hl
    7BD7 21 11 32      [10] 8621 	ld	hl, #0x3211
@@ -8723,7 +8723,7 @@
    7BEA 21 09 00      [10] 8631 	ld	hl, #9
    7BED 39            [11] 8632 	add	hl, sp
    7BEE F9            [ 6] 8633 	ld	sp, hl
-                           8634 ;src/main.c:1954: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_up,     	1, 57, 156,   0,   0);
+                           8634 ;src/main.c:1938: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_up,     	1, 57, 156,   0,   0);
    7BEF 21 00 00      [10] 8635 	ld	hl, #0x0000
    7BF2 E5            [11] 8636 	push	hl
    7BF3 21 39 9C      [10] 8637 	ld	hl, #0x9c39
@@ -8739,51 +8739,51 @@
    7C06 21 09 00      [10] 8647 	ld	hl, #9
    7C09 39            [11] 8648 	add	hl, sp
    7C0A F9            [ 6] 8649 	ld	sp, hl
-                           8650 ;src/main.c:1956: spr[0].x = spr[0].px = 6; 
+                           8650 ;src/main.c:1940: spr[0].x = spr[0].px = 6; 
    7C0B 21 F7 48      [10] 8651 	ld	hl, #(_spr + 0x0004)
    7C0E 36 06         [10] 8652 	ld	(hl), #0x06
    7C10 21 F5 48      [10] 8653 	ld	hl, #(_spr + 0x0002)
    7C13 36 06         [10] 8654 	ld	(hl), #0x06
-                           8655 ;src/main.c:1957: spr[0].y = spr[0].py = 175;			
+                           8655 ;src/main.c:1941: spr[0].y = spr[0].py = 175;			
    7C15 21 F8 48      [10] 8656 	ld	hl, #(_spr + 0x0005)
    7C18 36 AF         [10] 8657 	ld	(hl), #0xaf
    7C1A 21 F6 48      [10] 8658 	ld	hl, #(_spr + 0x0003)
    7C1D 36 AF         [10] 8659 	ld	(hl), #0xaf
-                           8660 ;src/main.c:1959: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
+                           8660 ;src/main.c:1943: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
    7C1F 21 40 37      [10] 8661 	ld	hl, #(_mappk4 - 0x0001)
    7C22 E5            [11] 8662 	push	hl
    7C23 21 00 16      [10] 8663 	ld	hl, #0x1600
    7C26 E5            [11] 8664 	push	hl
    7C27 CD 44 46      [17] 8665 	call	_cpct_zx7b_decrunch_s
-                           8666 ;src/main.c:1961: lName = "3;1@@CELLARS";	
+                           8666 ;src/main.c:1945: lName = "3;1@@CELLARS";	
    7C2A 21 B0 81      [10] 8667 	ld	hl, #___str_39+0
    7C2D 22 BC 48      [16] 8668 	ld	(_lName), hl
-                           8669 ;src/main.c:1963: doorKey[0] = 4; // toad snot
+                           8669 ;src/main.c:1947: doorKey[0] = 4; // toad snot
    7C30 21 C9 48      [10] 8670 	ld	hl, #_doorKey
    7C33 36 04         [10] 8671 	ld	(hl), #0x04
-                           8672 ;src/main.c:1964: doorKey[1] = 9; // mermaid tear
+                           8672 ;src/main.c:1948: doorKey[1] = 9; // mermaid tear
    7C35 21 CA 48      [10] 8673 	ld	hl, #(_doorKey + 0x0001)
    7C38 36 09         [10] 8674 	ld	(hl), #0x09
-                           8675 ;src/main.c:1965: doorKey[2] = 10;// martian mushroom
+                           8675 ;src/main.c:1949: doorKey[2] = 10;// martian mushroom
    7C3A 21 CB 48      [10] 8676 	ld	hl, #(_doorKey + 0x0002)
    7C3D 36 0A         [10] 8677 	ld	(hl), #0x0a
-                           8678 ;src/main.c:1966: doorKey[3] = 9; // mermaid tear
+                           8678 ;src/main.c:1950: doorKey[3] = 9; // mermaid tear
    7C3F 21 CC 48      [10] 8679 	ld	hl, #(_doorKey + 0x0003)
    7C42 36 09         [10] 8680 	ld	(hl), #0x09
-                           8681 ;src/main.c:1967: doorKey[4] = 4; // toad snot
+                           8681 ;src/main.c:1951: doorKey[4] = 4; // toad snot
    7C44 21 CD 48      [10] 8682 	ld	hl, #(_doorKey + 0x0004)
    7C47 36 04         [10] 8683 	ld	(hl), #0x04
-                           8684 ;src/main.c:1969: storeX = 5;
+                           8684 ;src/main.c:1953: storeX = 5;
    7C49 21 D3 48      [10] 8685 	ld	hl,#_storeX + 0
    7C4C 36 05         [10] 8686 	ld	(hl), #0x05
-                           8687 ;src/main.c:1970: storeY = 103;		
+                           8687 ;src/main.c:1954: storeY = 103;		
    7C4E 21 D4 48      [10] 8688 	ld	hl,#_storeY + 0
    7C51 36 67         [10] 8689 	ld	(hl), #0x67
-                           8690 ;src/main.c:1971: break;
+                           8690 ;src/main.c:1955: break;
    7C53 C3 5E 81      [10] 8691 	jp	00113$
-                           8692 ;src/main.c:1974: case 5: {			 
+                           8692 ;src/main.c:1958: case 5: {			 
    7C56                    8693 00106$:
-                           8694 ;src/main.c:1976: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  3, 142,   2,  73);
+                           8694 ;src/main.c:1960: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  3, 142,   2,  73);
    7C56 21 02 49      [10] 8695 	ld	hl, #0x4902
    7C59 E5            [11] 8696 	push	hl
    7C5A 21 03 8E      [10] 8697 	ld	hl, #0x8e03
@@ -8799,7 +8799,7 @@
    7C6C 21 09 00      [10] 8707 	ld	hl, #9
    7C6F 39            [11] 8708 	add	hl, sp
    7C70 F9            [ 6] 8709 	ld	sp, hl
-                           8710 ;src/main.c:1977: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1, 73, 102,   2,  73);						
+                           8710 ;src/main.c:1961: SetEnemyParams(3, SENTINEL,	M_linear_X, 	D_right,    1, 73, 102,   2,  73);						
    7C71 21 02 49      [10] 8711 	ld	hl, #0x4902
    7C74 E5            [11] 8712 	push	hl
    7C75 21 49 66      [10] 8713 	ld	hl, #0x6649
@@ -8815,7 +8815,7 @@
    7C88 21 09 00      [10] 8723 	ld	hl, #9
    7C8B 39            [11] 8724 	add	hl, sp
    7C8C F9            [ 6] 8725 	ld	sp, hl
-                           8726 ;src/main.c:1978: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_down,     1, 38,  50,  50, 178);
+                           8726 ;src/main.c:1962: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_down,     1, 38,  50,  50, 178);
    7C8D 21 32 B2      [10] 8727 	ld	hl, #0xb232
    7C90 E5            [11] 8728 	push	hl
    7C91 21 26 32      [10] 8729 	ld	hl, #0x3226
@@ -8831,7 +8831,7 @@
    7CA3 21 09 00      [10] 8739 	ld	hl, #9
    7CA6 39            [11] 8740 	add	hl, sp
    7CA7 F9            [ 6] 8741 	ld	sp, hl
-                           8742 ;src/main.c:1979: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  62,   2,  73);
+                           8742 ;src/main.c:1963: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  62,   2,  73);
    7CA8 21 02 49      [10] 8743 	ld	hl, #0x4902
    7CAB E5            [11] 8744 	push	hl
    7CAC 21 03 3E      [10] 8745 	ld	hl, #0x3e03
@@ -8847,51 +8847,51 @@
    7CBF 21 09 00      [10] 8755 	ld	hl, #9
    7CC2 39            [11] 8756 	add	hl, sp
    7CC3 F9            [ 6] 8757 	ld	sp, hl
-                           8758 ;src/main.c:1981: spr[0].x = spr[0].px = 34; 
+                           8758 ;src/main.c:1965: spr[0].x = spr[0].px = 34; 
    7CC4 21 F7 48      [10] 8759 	ld	hl, #(_spr + 0x0004)
    7CC7 36 22         [10] 8760 	ld	(hl), #0x22
    7CC9 21 F5 48      [10] 8761 	ld	hl, #(_spr + 0x0002)
    7CCC 36 22         [10] 8762 	ld	(hl), #0x22
-                           8763 ;src/main.c:1982: spr[0].y = spr[0].py = 176;			
+                           8763 ;src/main.c:1966: spr[0].y = spr[0].py = 176;			
    7CCE 21 F8 48      [10] 8764 	ld	hl, #(_spr + 0x0005)
    7CD1 36 B0         [10] 8765 	ld	(hl), #0xb0
    7CD3 21 F6 48      [10] 8766 	ld	hl, #(_spr + 0x0003)
    7CD6 36 B0         [10] 8767 	ld	(hl), #0xb0
-                           8768 ;src/main.c:1984: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk5_end);
+                           8768 ;src/main.c:1968: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk5_end);
    7CD8 21 40 37      [10] 8769 	ld	hl, #(_mappk5 - 0x0001)
    7CDB E5            [11] 8770 	push	hl
    7CDC 21 00 16      [10] 8771 	ld	hl, #0x1600
    7CDF E5            [11] 8772 	push	hl
    7CE0 CD 44 46      [17] 8773 	call	_cpct_zx7b_decrunch_s
-                           8774 ;src/main.c:1986: lName = "3;2@@CELLARS";
+                           8774 ;src/main.c:1970: lName = "3;2@@CELLARS";
    7CE3 21 BD 81      [10] 8775 	ld	hl, #___str_40+0
    7CE6 22 BC 48      [16] 8776 	ld	(_lName), hl
-                           8777 ;src/main.c:1988: doorKey[0] = 7; // mammooth poop
+                           8777 ;src/main.c:1972: doorKey[0] = 7; // mammooth poop
    7CE9 21 C9 48      [10] 8778 	ld	hl, #_doorKey
    7CEC 36 07         [10] 8779 	ld	(hl), #0x07
-                           8780 ;src/main.c:1989: doorKey[1] = 8; // kraken ink
+                           8780 ;src/main.c:1973: doorKey[1] = 8; // kraken ink
    7CEE 21 CA 48      [10] 8781 	ld	hl, #(_doorKey + 0x0001)
    7CF1 36 08         [10] 8782 	ld	(hl), #0x08
-                           8783 ;src/main.c:1990: doorKey[2] = 9; // mermaid tear
+                           8783 ;src/main.c:1974: doorKey[2] = 9; // mermaid tear
    7CF3 21 CB 48      [10] 8784 	ld	hl, #(_doorKey + 0x0002)
    7CF6 36 09         [10] 8785 	ld	(hl), #0x09
-                           8786 ;src/main.c:1991: doorKey[3] = 6; // newt eye
+                           8786 ;src/main.c:1975: doorKey[3] = 6; // newt eye
    7CF8 21 CC 48      [10] 8787 	ld	hl, #(_doorKey + 0x0003)
    7CFB 36 06         [10] 8788 	ld	(hl), #0x06
-                           8789 ;src/main.c:1992: doorKey[4] = 5; // diamond dust
+                           8789 ;src/main.c:1976: doorKey[4] = 5; // diamond dust
    7CFD 21 CD 48      [10] 8790 	ld	hl, #(_doorKey + 0x0004)
    7D00 36 05         [10] 8791 	ld	(hl), #0x05
-                           8792 ;src/main.c:1994: storeX = 3;
+                           8792 ;src/main.c:1978: storeX = 3;
    7D02 21 D3 48      [10] 8793 	ld	hl,#_storeX + 0
    7D05 36 03         [10] 8794 	ld	(hl), #0x03
-                           8795 ;src/main.c:1995: storeY = 143;
+                           8795 ;src/main.c:1979: storeY = 143;
    7D07 21 D4 48      [10] 8796 	ld	hl,#_storeY + 0
    7D0A 36 8F         [10] 8797 	ld	(hl), #0x8f
-                           8798 ;src/main.c:1996: break;
+                           8798 ;src/main.c:1980: break;
    7D0C C3 5E 81      [10] 8799 	jp	00113$
-                           8800 ;src/main.c:1999: case 6: {			 
+                           8800 ;src/main.c:1983: case 6: {			 
    7D0F                    8801 00107$:
-                           8802 ;src/main.c:2001: SetEnemyParams(2, KNIGHT,	M_linear_XY, 	D_up,     	1,  2, 174,   0,   0);
+                           8802 ;src/main.c:1985: SetEnemyParams(2, KNIGHT,	M_linear_XY, 	D_up,     	1,  2, 174,   0,   0);
    7D0F 21 00 00      [10] 8803 	ld	hl, #0x0000
    7D12 E5            [11] 8804 	push	hl
    7D13 21 02 AE      [10] 8805 	ld	hl, #0xae02
@@ -8907,7 +8907,7 @@
    7D26 21 09 00      [10] 8815 	ld	hl, #9
    7D29 39            [11] 8816 	add	hl, sp
    7D2A F9            [ 6] 8817 	ld	sp, hl
-                           8818 ;src/main.c:2002: SetEnemyParams(3, KNIGHT,	M_linear_XY, 	D_left,    	1, 60, 116,   0,   0);
+                           8818 ;src/main.c:1986: SetEnemyParams(3, KNIGHT,	M_linear_XY, 	D_left,    	1, 60, 116,   0,   0);
    7D2B 21 00 00      [10] 8819 	ld	hl, #0x0000
    7D2E E5            [11] 8820 	push	hl
    7D2F 21 3C 74      [10] 8821 	ld	hl, #0x743c
@@ -8923,7 +8923,7 @@
    7D42 21 09 00      [10] 8831 	ld	hl, #9
    7D45 39            [11] 8832 	add	hl, sp
    7D46 F9            [ 6] 8833 	ld	sp, hl
-                           8834 ;src/main.c:2003: SetEnemyParams(4, SENTINEL,	M_linear_XY, 	D_left,     1, 73,  96,   0,   0);
+                           8834 ;src/main.c:1987: SetEnemyParams(4, SENTINEL,	M_linear_XY, 	D_left,     1, 73,  96,   0,   0);
    7D47 21 00 00      [10] 8835 	ld	hl, #0x0000
    7D4A E5            [11] 8836 	push	hl
    7D4B 21 49 60      [10] 8837 	ld	hl, #0x6049
@@ -8939,7 +8939,7 @@
    7D5D 21 09 00      [10] 8847 	ld	hl, #9
    7D60 39            [11] 8848 	add	hl, sp
    7D61 F9            [ 6] 8849 	ld	sp, hl
-                           8850 ;src/main.c:2004: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  60,   2,  73);
+                           8850 ;src/main.c:1988: SetEnemyParams(5, WITCH,	M_linear_X,		D_left,     1,  3,  60,   2,  73);
    7D62 21 02 49      [10] 8851 	ld	hl, #0x4902
    7D65 E5            [11] 8852 	push	hl
    7D66 21 03 3C      [10] 8853 	ld	hl, #0x3c03
@@ -8955,51 +8955,51 @@
    7D79 21 09 00      [10] 8863 	ld	hl, #9
    7D7C 39            [11] 8864 	add	hl, sp
    7D7D F9            [ 6] 8865 	ld	sp, hl
-                           8866 ;src/main.c:2006: spr[0].x = spr[0].px = 67; 
+                           8866 ;src/main.c:1990: spr[0].x = spr[0].px = 67; 
    7D7E 21 F7 48      [10] 8867 	ld	hl, #(_spr + 0x0004)
    7D81 36 43         [10] 8868 	ld	(hl), #0x43
    7D83 21 F5 48      [10] 8869 	ld	hl, #(_spr + 0x0002)
    7D86 36 43         [10] 8870 	ld	(hl), #0x43
-                           8871 ;src/main.c:2007: spr[0].y = spr[0].py = 176;			
+                           8871 ;src/main.c:1991: spr[0].y = spr[0].py = 176;			
    7D88 21 F8 48      [10] 8872 	ld	hl, #(_spr + 0x0005)
    7D8B 36 B0         [10] 8873 	ld	(hl), #0xb0
    7D8D 21 F6 48      [10] 8874 	ld	hl, #(_spr + 0x0003)
    7D90 36 B0         [10] 8875 	ld	(hl), #0xb0
-                           8876 ;src/main.c:2009: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk6_end);
+                           8876 ;src/main.c:1993: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk6_end);
    7D92 21 40 37      [10] 8877 	ld	hl, #(_mappk6 - 0x0001)
    7D95 E5            [11] 8878 	push	hl
    7D96 21 00 16      [10] 8879 	ld	hl, #0x1600
    7D99 E5            [11] 8880 	push	hl
    7D9A CD 44 46      [17] 8881 	call	_cpct_zx7b_decrunch_s
-                           8882 ;src/main.c:2011: lName = "4;1@@@CASTLE";	
+                           8882 ;src/main.c:1995: lName = "4;1@@@CASTLE";	
    7D9D 21 CA 81      [10] 8883 	ld	hl, #___str_41+0
    7DA0 22 BC 48      [16] 8884 	ld	(_lName), hl
-                           8885 ;src/main.c:2013: doorKey[0] = 10; // martian mushroom
+                           8885 ;src/main.c:1997: doorKey[0] = 10; // martian mushroom
    7DA3 21 C9 48      [10] 8886 	ld	hl, #_doorKey
    7DA6 36 0A         [10] 8887 	ld	(hl), #0x0a
-                           8888 ;src/main.c:2014: doorKey[1] = 6; // newt eye
+                           8888 ;src/main.c:1998: doorKey[1] = 6; // newt eye
    7DA8 21 CA 48      [10] 8889 	ld	hl, #(_doorKey + 0x0001)
    7DAB 36 06         [10] 8890 	ld	(hl), #0x06
-                           8891 ;src/main.c:2015: doorKey[2] = 11; // dragon blood
+                           8891 ;src/main.c:1999: doorKey[2] = 11; // dragon blood
    7DAD 21 CB 48      [10] 8892 	ld	hl, #(_doorKey + 0x0002)
    7DB0 36 0B         [10] 8893 	ld	(hl), #0x0b
-                           8894 ;src/main.c:2016: doorKey[3] = 6; // newt eye
+                           8894 ;src/main.c:2000: doorKey[3] = 6; // newt eye
    7DB2 21 CC 48      [10] 8895 	ld	hl, #(_doorKey + 0x0003)
    7DB5 36 06         [10] 8896 	ld	(hl), #0x06
-                           8897 ;src/main.c:2017: doorKey[4] = 10; // martian mushroom
+                           8897 ;src/main.c:2001: doorKey[4] = 10; // martian mushroom
    7DB7 21 CD 48      [10] 8898 	ld	hl, #(_doorKey + 0x0004)
    7DBA 36 0A         [10] 8899 	ld	(hl), #0x0a
-                           8900 ;src/main.c:2019: storeX = 3;
+                           8900 ;src/main.c:2003: storeX = 3;
    7DBC 21 D3 48      [10] 8901 	ld	hl,#_storeX + 0
    7DBF 36 03         [10] 8902 	ld	(hl), #0x03
-                           8903 ;src/main.c:2020: storeY = 11;		
+                           8903 ;src/main.c:2004: storeY = 11;		
    7DC1 21 D4 48      [10] 8904 	ld	hl,#_storeY + 0
    7DC4 36 0B         [10] 8905 	ld	(hl), #0x0b
-                           8906 ;src/main.c:2021: break;
+                           8906 ;src/main.c:2005: break;
    7DC6 C3 5E 81      [10] 8907 	jp	00113$
-                           8908 ;src/main.c:2024: case 7: {			 
+                           8908 ;src/main.c:2008: case 7: {			 
    7DC9                    8909 00108$:
-                           8910 ;src/main.c:2026: SetEnemyParams(2, NOBODY,	M_linear_XY, 	D_left,     1,  0,   0,   0,   0);
+                           8910 ;src/main.c:2010: SetEnemyParams(2, NOBODY,	M_linear_XY, 	D_left,     1,  0,   0,   0,   0);
    7DC9 21 00 00      [10] 8911 	ld	hl, #0x0000
    7DCC E5            [11] 8912 	push	hl
    7DCD 2E 00         [ 7] 8913 	ld	l, #0x00
@@ -9015,7 +9015,7 @@
    7DDF 21 09 00      [10] 8923 	ld	hl, #9
    7DE2 39            [11] 8924 	add	hl, sp
    7DE3 F9            [ 6] 8925 	ld	sp, hl
-                           8926 ;src/main.c:2027: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_up,       1,  3, 176,   0,   0);
+                           8926 ;src/main.c:2011: SetEnemyParams(3, GHOST,	M_linear_XY, 	D_up,       1,  3, 176,   0,   0);
    7DE4 21 00 00      [10] 8927 	ld	hl, #0x0000
    7DE7 E5            [11] 8928 	push	hl
    7DE8 21 03 B0      [10] 8929 	ld	hl, #0xb003
@@ -9031,7 +9031,7 @@
    7DFB 21 09 00      [10] 8939 	ld	hl, #9
    7DFE 39            [11] 8940 	add	hl, sp
    7DFF F9            [ 6] 8941 	ld	sp, hl
-                           8942 ;src/main.c:2028: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_right,    1,  3,  44,   0,   0);
+                           8942 ;src/main.c:2012: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_right,    1,  3,  44,   0,   0);
    7E00 21 00 00      [10] 8943 	ld	hl, #0x0000
    7E03 E5            [11] 8944 	push	hl
    7E04 21 03 2C      [10] 8945 	ld	hl, #0x2c03
@@ -9047,7 +9047,7 @@
    7E15 21 09 00      [10] 8955 	ld	hl, #9
    7E18 39            [11] 8956 	add	hl, sp
    7E19 F9            [ 6] 8957 	ld	sp, hl
-                           8958 ;src/main.c:2029: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 73,  44,   0,   0);
+                           8958 ;src/main.c:2013: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 73,  44,   0,   0);
    7E1A 21 00 00      [10] 8959 	ld	hl, #0x0000
    7E1D E5            [11] 8960 	push	hl
    7E1E 21 49 2C      [10] 8961 	ld	hl, #0x2c49
@@ -9063,51 +9063,51 @@
    7E31 21 09 00      [10] 8971 	ld	hl, #9
    7E34 39            [11] 8972 	add	hl, sp
    7E35 F9            [ 6] 8973 	ld	sp, hl
-                           8974 ;src/main.c:2031: spr[0].x = spr[0].px = 36; 
+                           8974 ;src/main.c:2015: spr[0].x = spr[0].px = 36; 
    7E36 21 F7 48      [10] 8975 	ld	hl, #(_spr + 0x0004)
    7E39 36 24         [10] 8976 	ld	(hl), #0x24
    7E3B 21 F5 48      [10] 8977 	ld	hl, #(_spr + 0x0002)
    7E3E 36 24         [10] 8978 	ld	(hl), #0x24
-                           8979 ;src/main.c:2032: spr[0].y = spr[0].py = 176;			
+                           8979 ;src/main.c:2016: spr[0].y = spr[0].py = 176;			
    7E40 21 F8 48      [10] 8980 	ld	hl, #(_spr + 0x0005)
    7E43 36 B0         [10] 8981 	ld	(hl), #0xb0
    7E45 21 F6 48      [10] 8982 	ld	hl, #(_spr + 0x0003)
    7E48 36 B0         [10] 8983 	ld	(hl), #0xb0
-                           8984 ;src/main.c:2034: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk7_end);
+                           8984 ;src/main.c:2018: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk7_end);
    7E4A 21 40 37      [10] 8985 	ld	hl, #(_mappk7 - 0x0001)
    7E4D E5            [11] 8986 	push	hl
    7E4E 21 00 16      [10] 8987 	ld	hl, #0x1600
    7E51 E5            [11] 8988 	push	hl
    7E52 CD 44 46      [17] 8989 	call	_cpct_zx7b_decrunch_s
-                           8990 ;src/main.c:2036: lName = "4;2@@@CASTLE";
+                           8990 ;src/main.c:2020: lName = "4;2@@@CASTLE";
    7E55 21 D7 81      [10] 8991 	ld	hl, #___str_42+0
    7E58 22 BC 48      [16] 8992 	ld	(_lName), hl
-                           8993 ;src/main.c:2038: doorKey[0] = 5; // diamond dust
+                           8993 ;src/main.c:2022: doorKey[0] = 5; // diamond dust
    7E5B 21 C9 48      [10] 8994 	ld	hl, #_doorKey
    7E5E 36 05         [10] 8995 	ld	(hl), #0x05
-                           8996 ;src/main.c:2039: doorKey[1] = 11; // dragon blood
+                           8996 ;src/main.c:2023: doorKey[1] = 11; // dragon blood
    7E60 21 CA 48      [10] 8997 	ld	hl, #(_doorKey + 0x0001)
    7E63 36 0B         [10] 8998 	ld	(hl), #0x0b
-                           8999 ;src/main.c:2040: doorKey[2] = 7; // mammooth poop
+                           8999 ;src/main.c:2024: doorKey[2] = 7; // mammooth poop
    7E65 21 CB 48      [10] 9000 	ld	hl, #(_doorKey + 0x0002)
    7E68 36 07         [10] 9001 	ld	(hl), #0x07
-                           9002 ;src/main.c:2041: doorKey[3] = 11; // dragon blood
+                           9002 ;src/main.c:2025: doorKey[3] = 11; // dragon blood
    7E6A 21 CC 48      [10] 9003 	ld	hl, #(_doorKey + 0x0003)
    7E6D 36 0B         [10] 9004 	ld	(hl), #0x0b
-                           9005 ;src/main.c:2042: doorKey[4] = 5; // diamond dust
+                           9005 ;src/main.c:2026: doorKey[4] = 5; // diamond dust
    7E6F 21 CD 48      [10] 9006 	ld	hl, #(_doorKey + 0x0004)
    7E72 36 05         [10] 9007 	ld	(hl), #0x05
-                           9008 ;src/main.c:2044: storeX = 33;
+                           9008 ;src/main.c:2028: storeX = 33;
    7E74 21 D3 48      [10] 9009 	ld	hl,#_storeX + 0
    7E77 36 21         [10] 9010 	ld	(hl), #0x21
-                           9011 ;src/main.c:2045: storeY = 95;
+                           9011 ;src/main.c:2029: storeY = 95;
    7E79 21 D4 48      [10] 9012 	ld	hl,#_storeY + 0
    7E7C 36 5F         [10] 9013 	ld	(hl), #0x5f
-                           9014 ;src/main.c:2046: break;
+                           9014 ;src/main.c:2030: break;
    7E7E C3 5E 81      [10] 9015 	jp	00113$
-                           9016 ;src/main.c:2049: case 8: {			 
+                           9016 ;src/main.c:2033: case 8: {			 
    7E81                    9017 00109$:
-                           9018 ;src/main.c:2051: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
+                           9018 ;src/main.c:2035: SetEnemyParams(2, NOBODY,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
    7E81 21 00 00      [10] 9019 	ld	hl, #0x0000
    7E84 E5            [11] 9020 	push	hl
    7E85 2E 00         [ 7] 9021 	ld	l, #0x00
@@ -9123,7 +9123,7 @@
    7E97 21 09 00      [10] 9031 	ld	hl, #9
    7E9A 39            [11] 9032 	add	hl, sp
    7E9B F9            [ 6] 9033 	ld	sp, hl
-                           9034 ;src/main.c:2052: SetEnemyParams(3, GHOST,	M_chaser,		D_right,    7,  2, 114,   0,   0);						
+                           9034 ;src/main.c:2036: SetEnemyParams(3, GHOST,	M_chaser,		D_right,    7,  2, 114,   0,   0);						
    7E9C 21 00 00      [10] 9035 	ld	hl, #0x0000
    7E9F E5            [11] 9036 	push	hl
    7EA0 21 02 72      [10] 9037 	ld	hl, #0x7202
@@ -9139,7 +9139,7 @@
    7EB3 21 09 00      [10] 9047 	ld	hl, #9
    7EB6 39            [11] 9048 	add	hl, sp
    7EB7 F9            [ 6] 9049 	ld	sp, hl
-                           9050 ;src/main.c:2053: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  68,   0,   0);
+                           9050 ;src/main.c:2037: SetEnemyParams(4, KNIGHT, 	M_linear_XY,    D_right,    1, 10,  68,   0,   0);
    7EB8 21 00 00      [10] 9051 	ld	hl, #0x0000
    7EBB E5            [11] 9052 	push	hl
    7EBC 21 0A 44      [10] 9053 	ld	hl, #0x440a
@@ -9155,7 +9155,7 @@
    7ECE 21 09 00      [10] 9063 	ld	hl, #9
    7ED1 39            [11] 9064 	add	hl, sp
    7ED2 F9            [ 6] 9065 	ld	sp, hl
-                           9066 ;src/main.c:2054: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
+                           9066 ;src/main.c:2038: SetEnemyParams(5, KNIGHT,	M_linear_XY,	D_down,     1,  2,  38,   0,   0);
    7ED3 21 00 00      [10] 9067 	ld	hl, #0x0000
    7ED6 E5            [11] 9068 	push	hl
    7ED7 21 02 26      [10] 9069 	ld	hl, #0x2602
@@ -9171,51 +9171,51 @@
    7EEA 21 09 00      [10] 9079 	ld	hl, #9
    7EED 39            [11] 9080 	add	hl, sp
    7EEE F9            [ 6] 9081 	ld	sp, hl
-                           9082 ;src/main.c:2056: spr[0].x = spr[0].px = 34; 
+                           9082 ;src/main.c:2040: spr[0].x = spr[0].px = 34; 
    7EEF 21 F7 48      [10] 9083 	ld	hl, #(_spr + 0x0004)
    7EF2 36 22         [10] 9084 	ld	(hl), #0x22
    7EF4 21 F5 48      [10] 9085 	ld	hl, #(_spr + 0x0002)
    7EF7 36 22         [10] 9086 	ld	(hl), #0x22
-                           9087 ;src/main.c:2057: spr[0].y = spr[0].py = 176;			
+                           9087 ;src/main.c:2041: spr[0].y = spr[0].py = 176;			
    7EF9 21 F8 48      [10] 9088 	ld	hl, #(_spr + 0x0005)
    7EFC 36 B0         [10] 9089 	ld	(hl), #0xb0
    7EFE 21 F6 48      [10] 9090 	ld	hl, #(_spr + 0x0003)
    7F01 36 B0         [10] 9091 	ld	(hl), #0xb0
-                           9092 ;src/main.c:2059: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk8_end);
+                           9092 ;src/main.c:2043: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk8_end);
    7F03 21 40 37      [10] 9093 	ld	hl, #(_mappk8 - 0x0001)
    7F06 E5            [11] 9094 	push	hl
    7F07 21 00 16      [10] 9095 	ld	hl, #0x1600
    7F0A E5            [11] 9096 	push	hl
    7F0B CD 44 46      [17] 9097 	call	_cpct_zx7b_decrunch_s
-                           9098 ;src/main.c:2061: lName = "5;1@@@TOWER";	
+                           9098 ;src/main.c:2045: lName = "5;1@@@TOWER";	
    7F0E 21 E4 81      [10] 9099 	ld	hl, #___str_43+0
    7F11 22 BC 48      [16] 9100 	ld	(_lName), hl
-                           9101 ;src/main.c:2063: doorKey[0] = 8; // kraken ink
+                           9101 ;src/main.c:2047: doorKey[0] = 8; // kraken ink
    7F14 21 C9 48      [10] 9102 	ld	hl, #_doorKey
    7F17 36 08         [10] 9103 	ld	(hl), #0x08
-                           9104 ;src/main.c:2064: doorKey[1] = 9; // mermaid tear
+                           9104 ;src/main.c:2048: doorKey[1] = 9; // mermaid tear
    7F19 21 CA 48      [10] 9105 	ld	hl, #(_doorKey + 0x0001)
    7F1C 36 09         [10] 9106 	ld	(hl), #0x09
-                           9107 ;src/main.c:2065: doorKey[2] = 10; // martian mushroom
+                           9107 ;src/main.c:2049: doorKey[2] = 10; // martian mushroom
    7F1E 21 CB 48      [10] 9108 	ld	hl, #(_doorKey + 0x0002)
    7F21 36 0A         [10] 9109 	ld	(hl), #0x0a
-                           9110 ;src/main.c:2066: doorKey[3] = 11; // dragon blood
+                           9110 ;src/main.c:2050: doorKey[3] = 11; // dragon blood
    7F23 21 CC 48      [10] 9111 	ld	hl, #(_doorKey + 0x0003)
    7F26 36 0B         [10] 9112 	ld	(hl), #0x0b
-                           9113 ;src/main.c:2067: doorKey[4] = 12; // dodo egg
+                           9113 ;src/main.c:2051: doorKey[4] = 12; // dodo egg
    7F28 21 CD 48      [10] 9114 	ld	hl, #(_doorKey + 0x0004)
    7F2B 36 0C         [10] 9115 	ld	(hl), #0x0c
-                           9116 ;src/main.c:2069: storeX = 25;
+                           9116 ;src/main.c:2053: storeX = 25;
    7F2D 21 D3 48      [10] 9117 	ld	hl,#_storeX + 0
    7F30 36 19         [10] 9118 	ld	(hl), #0x19
-                           9119 ;src/main.c:2070: storeY = 95;		
+                           9119 ;src/main.c:2054: storeY = 95;		
    7F32 21 D4 48      [10] 9120 	ld	hl,#_storeY + 0
    7F35 36 5F         [10] 9121 	ld	(hl), #0x5f
-                           9122 ;src/main.c:2071: break;
+                           9122 ;src/main.c:2055: break;
    7F37 C3 5E 81      [10] 9123 	jp	00113$
-                           9124 ;src/main.c:2074: case 9: {			 
+                           9124 ;src/main.c:2058: case 9: {			 
    7F3A                    9125 00110$:
-                           9126 ;src/main.c:2076: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 111,  41,  73);
+                           9126 ;src/main.c:2060: SetEnemyParams(2, BAT,		M_linear_X, 	D_left,     1, 73, 111,  41,  73);
    7F3A 21 29 49      [10] 9127 	ld	hl, #0x4929
    7F3D E5            [11] 9128 	push	hl
    7F3E 21 49 6F      [10] 9129 	ld	hl, #0x6f49
@@ -9231,7 +9231,7 @@
    7F51 21 09 00      [10] 9139 	ld	hl, #9
    7F54 39            [11] 9140 	add	hl, sp
    7F55 F9            [ 6] 9141 	ld	sp, hl
-                           9142 ;src/main.c:2077: SetEnemyParams(3, BAT,		M_linear_X,		D_right,    1,  2, 111,   2,  34);				
+                           9142 ;src/main.c:2061: SetEnemyParams(3, BAT,		M_linear_X,		D_right,    1,  2, 111,   2,  34);				
    7F56 21 02 22      [10] 9143 	ld	hl, #0x2202
    7F59 E5            [11] 9144 	push	hl
    7F5A 26 6F         [ 7] 9145 	ld	h, #0x6f
@@ -9247,7 +9247,7 @@
    7F6C 21 09 00      [10] 9155 	ld	hl, #9
    7F6F 39            [11] 9156 	add	hl, sp
    7F70 F9            [ 6] 9157 	ld	sp, hl
-                           9158 ;src/main.c:2078: SetEnemyParams(4, SENTINEL, M_linear_Y,    	D_down,     1, 27,  44,  44, 175);
+                           9158 ;src/main.c:2062: SetEnemyParams(4, SENTINEL, M_linear_Y,    	D_down,     1, 27,  44,  44, 175);
    7F71 21 2C AF      [10] 9159 	ld	hl, #0xaf2c
    7F74 E5            [11] 9160 	push	hl
    7F75 21 1B 2C      [10] 9161 	ld	hl, #0x2c1b
@@ -9263,7 +9263,7 @@
    7F87 21 09 00      [10] 9171 	ld	hl, #9
    7F8A 39            [11] 9172 	add	hl, sp
    7F8B F9            [ 6] 9173 	ld	sp, hl
-                           9174 ;src/main.c:2079: SetEnemyParams(5, SENTINEL,	M_linear_Y,		D_up,       1, 49, 160,  44, 175);
+                           9174 ;src/main.c:2063: SetEnemyParams(5, SENTINEL,	M_linear_Y,		D_up,       1, 49, 160,  44, 175);
    7F8C 21 2C AF      [10] 9175 	ld	hl, #0xaf2c
    7F8F E5            [11] 9176 	push	hl
    7F90 21 31 A0      [10] 9177 	ld	hl, #0xa031
@@ -9279,51 +9279,51 @@
    7FA2 21 09 00      [10] 9187 	ld	hl, #9
    7FA5 39            [11] 9188 	add	hl, sp
    7FA6 F9            [ 6] 9189 	ld	sp, hl
-                           9190 ;src/main.c:2081: spr[0].x = spr[0].px = 34; 
+                           9190 ;src/main.c:2065: spr[0].x = spr[0].px = 34; 
    7FA7 21 F7 48      [10] 9191 	ld	hl, #(_spr + 0x0004)
    7FAA 36 22         [10] 9192 	ld	(hl), #0x22
    7FAC 21 F5 48      [10] 9193 	ld	hl, #(_spr + 0x0002)
    7FAF 36 22         [10] 9194 	ld	(hl), #0x22
-                           9195 ;src/main.c:2082: spr[0].y = spr[0].py = 176;			
+                           9195 ;src/main.c:2066: spr[0].y = spr[0].py = 176;			
    7FB1 21 F8 48      [10] 9196 	ld	hl, #(_spr + 0x0005)
    7FB4 36 B0         [10] 9197 	ld	(hl), #0xb0
    7FB6 21 F6 48      [10] 9198 	ld	hl, #(_spr + 0x0003)
    7FB9 36 B0         [10] 9199 	ld	(hl), #0xb0
-                           9200 ;src/main.c:2084: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk9_end);
+                           9200 ;src/main.c:2068: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk9_end);
    7FBB 21 40 37      [10] 9201 	ld	hl, #(_mappk9 - 0x0001)
    7FBE E5            [11] 9202 	push	hl
    7FBF 21 00 16      [10] 9203 	ld	hl, #0x1600
    7FC2 E5            [11] 9204 	push	hl
    7FC3 CD 44 46      [17] 9205 	call	_cpct_zx7b_decrunch_s
-                           9206 ;src/main.c:2086: lName = "5;2@@@TOWER";	
+                           9206 ;src/main.c:2070: lName = "5;2@@@TOWER";	
    7FC6 21 F0 81      [10] 9207 	ld	hl, #___str_44+0
    7FC9 22 BC 48      [16] 9208 	ld	(_lName), hl
-                           9209 ;src/main.c:2088: doorKey[0] = 10; // martian mushroom
+                           9209 ;src/main.c:2072: doorKey[0] = 10; // martian mushroom
    7FCC 21 C9 48      [10] 9210 	ld	hl, #_doorKey
    7FCF 36 0A         [10] 9211 	ld	(hl), #0x0a
-                           9212 ;src/main.c:2089: doorKey[1] = 5; // diamond dust
+                           9212 ;src/main.c:2073: doorKey[1] = 5; // diamond dust
    7FD1 21 CA 48      [10] 9213 	ld	hl, #(_doorKey + 0x0001)
    7FD4 36 05         [10] 9214 	ld	(hl), #0x05
-                           9215 ;src/main.c:2090: doorKey[2] = 12; // dodo egg
+                           9215 ;src/main.c:2074: doorKey[2] = 12; // dodo egg
    7FD6 21 CB 48      [10] 9216 	ld	hl, #(_doorKey + 0x0002)
    7FD9 36 0C         [10] 9217 	ld	(hl), #0x0c
-                           9218 ;src/main.c:2091: doorKey[3] = 4; // toad snot
+                           9218 ;src/main.c:2075: doorKey[3] = 4; // toad snot
    7FDB 21 CC 48      [10] 9219 	ld	hl, #(_doorKey + 0x0003)
    7FDE 36 04         [10] 9220 	ld	(hl), #0x04
-                           9221 ;src/main.c:2092: doorKey[4] = 13; // unicorn blood
+                           9221 ;src/main.c:2076: doorKey[4] = 13; // unicorn blood
    7FE0 21 CD 48      [10] 9222 	ld	hl, #(_doorKey + 0x0004)
    7FE3 36 0D         [10] 9223 	ld	(hl), #0x0d
-                           9224 ;src/main.c:2094: storeX = 41;
+                           9224 ;src/main.c:2078: storeX = 41;
    7FE5 21 D3 48      [10] 9225 	ld	hl,#_storeX + 0
    7FE8 36 29         [10] 9226 	ld	(hl), #0x29
-                           9227 ;src/main.c:2095: storeY = 43;		
+                           9227 ;src/main.c:2079: storeY = 43;		
    7FEA 21 D4 48      [10] 9228 	ld	hl,#_storeY + 0
    7FED 36 2B         [10] 9229 	ld	(hl), #0x2b
-                           9230 ;src/main.c:2096: break;
+                           9230 ;src/main.c:2080: break;
    7FEF C3 5E 81      [10] 9231 	jp	00113$
-                           9232 ;src/main.c:2099: case 10: {			 
+                           9232 ;src/main.c:2083: case 10: {			 
    7FF2                    9233 00111$:
-                           9234 ;src/main.c:2101: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  2, 156,   2,  73);
+                           9234 ;src/main.c:2085: SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  2, 156,   2,  73);
    7FF2 21 02 49      [10] 9235 	ld	hl, #0x4902
    7FF5 E5            [11] 9236 	push	hl
    7FF6 26 9C         [ 7] 9237 	ld	h, #0x9c
@@ -9339,7 +9339,7 @@
    8006 21 09 00      [10] 9247 	ld	hl, #9
    8009 39            [11] 9248 	add	hl, sp
    800A F9            [ 6] 9249 	ld	sp, hl
-                           9250 ;src/main.c:2102: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    4,  2, 114,   0,   0);
+                           9250 ;src/main.c:2086: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    4,  2, 114,   0,   0);
    800B 21 00 00      [10] 9251 	ld	hl, #0x0000
    800E E5            [11] 9252 	push	hl
    800F 21 02 72      [10] 9253 	ld	hl, #0x7202
@@ -9355,7 +9355,7 @@
    8022 21 09 00      [10] 9263 	ld	hl, #9
    8025 39            [11] 9264 	add	hl, sp
    8026 F9            [ 6] 9265 	ld	sp, hl
-                           9266 ;src/main.c:2103: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_right,    1, 17,  40,  40, 145);
+                           9266 ;src/main.c:2087: SetEnemyParams(4, KNIGHT,	M_linear_Y, 	D_right,    1, 17,  40,  40, 145);
    8027 21 28 91      [10] 9267 	ld	hl, #0x9128
    802A E5            [11] 9268 	push	hl
    802B 21 11 28      [10] 9269 	ld	hl, #0x2811
@@ -9371,7 +9371,7 @@
    803D 21 09 00      [10] 9279 	ld	hl, #9
    8040 39            [11] 9280 	add	hl, sp
    8041 F9            [ 6] 9281 	ld	sp, hl
-                           9282 ;src/main.c:2104: SetEnemyParams(5, KNIGHT,	M_linear_Y, 	D_left,     1, 59,  40,  40, 145);
+                           9282 ;src/main.c:2088: SetEnemyParams(5, KNIGHT,	M_linear_Y, 	D_left,     1, 59,  40,  40, 145);
    8042 21 28 91      [10] 9283 	ld	hl, #0x9128
    8045 E5            [11] 9284 	push	hl
    8046 21 3B 28      [10] 9285 	ld	hl, #0x283b
@@ -9387,51 +9387,51 @@
    8058 21 09 00      [10] 9295 	ld	hl, #9
    805B 39            [11] 9296 	add	hl, sp
    805C F9            [ 6] 9297 	ld	sp, hl
-                           9298 ;src/main.c:2106: spr[0].x = spr[0].px = 54; 
+                           9298 ;src/main.c:2090: spr[0].x = spr[0].px = 54; 
    805D 21 F7 48      [10] 9299 	ld	hl, #(_spr + 0x0004)
    8060 36 36         [10] 9300 	ld	(hl), #0x36
    8062 21 F5 48      [10] 9301 	ld	hl, #(_spr + 0x0002)
    8065 36 36         [10] 9302 	ld	(hl), #0x36
-                           9303 ;src/main.c:2107: spr[0].y = spr[0].py = 176;			
+                           9303 ;src/main.c:2091: spr[0].y = spr[0].py = 176;			
    8067 21 F8 48      [10] 9304 	ld	hl, #(_spr + 0x0005)
    806A 36 B0         [10] 9305 	ld	(hl), #0xb0
    806C 21 F6 48      [10] 9306 	ld	hl, #(_spr + 0x0003)
    806F 36 B0         [10] 9307 	ld	(hl), #0xb0
-                           9308 ;src/main.c:2109: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk10_end);
+                           9308 ;src/main.c:2093: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk10_end);
    8071 21 40 37      [10] 9309 	ld	hl, #(_mappk10 + 0x01ad)
    8074 E5            [11] 9310 	push	hl
    8075 21 00 16      [10] 9311 	ld	hl, #0x1600
    8078 E5            [11] 9312 	push	hl
    8079 CD 44 46      [17] 9313 	call	_cpct_zx7b_decrunch_s
-                           9314 ;src/main.c:2111: lName = "6;1@@LIBRARY";
+                           9314 ;src/main.c:2095: lName = "6;1@@LIBRARY";
    807C 21 FC 81      [10] 9315 	ld	hl, #___str_45+0
    807F 22 BC 48      [16] 9316 	ld	(_lName), hl
-                           9317 ;src/main.c:2113: doorKey[0] = 11; // dragon blood
+                           9317 ;src/main.c:2097: doorKey[0] = 11; // dragon blood
    8082 21 C9 48      [10] 9318 	ld	hl, #_doorKey
    8085 36 0B         [10] 9319 	ld	(hl), #0x0b
-                           9320 ;src/main.c:2114: doorKey[1] = 8; // kraken ink
+                           9320 ;src/main.c:2098: doorKey[1] = 8; // kraken ink
    8087 21 CA 48      [10] 9321 	ld	hl, #(_doorKey + 0x0001)
    808A 36 08         [10] 9322 	ld	(hl), #0x08
-                           9323 ;src/main.c:2115: doorKey[2] = 9; // dodo egg
+                           9323 ;src/main.c:2099: doorKey[2] = 9; // dodo egg
    808C 21 CB 48      [10] 9324 	ld	hl, #(_doorKey + 0x0002)
    808F 36 09         [10] 9325 	ld	(hl), #0x09
-                           9326 ;src/main.c:2116: doorKey[3] = 10; // martian mushroom
+                           9326 ;src/main.c:2100: doorKey[3] = 10; // martian mushroom
    8091 21 CC 48      [10] 9327 	ld	hl, #(_doorKey + 0x0003)
    8094 36 0A         [10] 9328 	ld	(hl), #0x0a
-                           9329 ;src/main.c:2117: doorKey[4] = 15; // mordor lava
+                           9329 ;src/main.c:2101: doorKey[4] = 15; // mordor lava
    8096 21 CD 48      [10] 9330 	ld	hl, #(_doorKey + 0x0004)
    8099 36 0F         [10] 9331 	ld	(hl), #0x0f
-                           9332 ;src/main.c:2119: storeX = 3;
+                           9332 ;src/main.c:2103: storeX = 3;
    809B 21 D3 48      [10] 9333 	ld	hl,#_storeX + 0
    809E 36 03         [10] 9334 	ld	(hl), #0x03
-                           9335 ;src/main.c:2120: storeY = 143;
+                           9335 ;src/main.c:2104: storeY = 143;
    80A0 21 D4 48      [10] 9336 	ld	hl,#_storeY + 0
    80A3 36 8F         [10] 9337 	ld	(hl), #0x8f
-                           9338 ;src/main.c:2121: break;
+                           9338 ;src/main.c:2105: break;
    80A5 C3 5E 81      [10] 9339 	jp	00113$
-                           9340 ;src/main.c:2124: case 11: {			 
+                           9340 ;src/main.c:2108: case 11: {			 
    80A8                    9341 00112$:
-                           9342 ;src/main.c:2126: SetEnemyParams(2, GHOST,	M_linear_X, 	D_left,     1,  2, 132,   2,  72);
+                           9342 ;src/main.c:2110: SetEnemyParams(2, GHOST,	M_linear_X, 	D_left,     1,  2, 132,   2,  72);
    80A8 21 02 48      [10] 9343 	ld	hl, #0x4802
    80AB E5            [11] 9344 	push	hl
    80AC 26 84         [ 7] 9345 	ld	h, #0x84
@@ -9447,7 +9447,7 @@
    80BD 21 09 00      [10] 9355 	ld	hl, #9
    80C0 39            [11] 9356 	add	hl, sp
    80C1 F9            [ 6] 9357 	ld	sp, hl
-                           9358 ;src/main.c:2127: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    5,  2, 114,   0,   0);
+                           9358 ;src/main.c:2111: SetEnemyParams(3, GHOST,	M_chaser, 		D_right,    5,  2, 114,   0,   0);
    80C2 21 00 00      [10] 9359 	ld	hl, #0x0000
    80C5 E5            [11] 9360 	push	hl
    80C6 21 02 72      [10] 9361 	ld	hl, #0x7202
@@ -9463,7 +9463,7 @@
    80D9 21 09 00      [10] 9371 	ld	hl, #9
    80DC 39            [11] 9372 	add	hl, sp
    80DD F9            [ 6] 9373 	ld	sp, hl
-                           9374 ;src/main.c:2128: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,     1, 21,  38,   0,   0);
+                           9374 ;src/main.c:2112: SetEnemyParams(4, KNIGHT,	M_linear_XY, 	D_down,     1, 21,  38,   0,   0);
    80DE 21 00 00      [10] 9375 	ld	hl, #0x0000
    80E1 E5            [11] 9376 	push	hl
    80E2 21 15 26      [10] 9377 	ld	hl, #0x2615
@@ -9479,7 +9479,7 @@
    80F5 21 09 00      [10] 9387 	ld	hl, #9
    80F8 39            [11] 9388 	add	hl, sp
    80F9 F9            [ 6] 9389 	ld	sp, hl
-                           9390 ;src/main.c:2129: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 55,  38,   0,   0);
+                           9390 ;src/main.c:2113: SetEnemyParams(5, KNIGHT,	M_linear_XY, 	D_down,     1, 55,  38,   0,   0);
    80FA 21 00 00      [10] 9391 	ld	hl, #0x0000
    80FD E5            [11] 9392 	push	hl
    80FE 21 37 26      [10] 9393 	ld	hl, #0x2637
@@ -9495,60 +9495,60 @@
    8111 21 09 00      [10] 9403 	ld	hl, #9
    8114 39            [11] 9404 	add	hl, sp
    8115 F9            [ 6] 9405 	ld	sp, hl
-                           9406 ;src/main.c:2131: spr[0].x = spr[0].px = 34; 
+                           9406 ;src/main.c:2115: spr[0].x = spr[0].px = 34; 
    8116 21 F7 48      [10] 9407 	ld	hl, #(_spr + 0x0004)
    8119 36 22         [10] 9408 	ld	(hl), #0x22
    811B 21 F5 48      [10] 9409 	ld	hl, #(_spr + 0x0002)
    811E 36 22         [10] 9410 	ld	(hl), #0x22
-                           9411 ;src/main.c:2132: spr[0].y = spr[0].py = 176;			
+                           9411 ;src/main.c:2116: spr[0].y = spr[0].py = 176;			
    8120 21 F8 48      [10] 9412 	ld	hl, #(_spr + 0x0005)
    8123 36 B0         [10] 9413 	ld	(hl), #0xb0
    8125 21 F6 48      [10] 9414 	ld	hl, #(_spr + 0x0003)
    8128 36 B0         [10] 9415 	ld	(hl), #0xb0
-                           9416 ;src/main.c:2134: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk11_end);
+                           9416 ;src/main.c:2118: cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk11_end);
    812A 21 92 35      [10] 9417 	ld	hl, #(_mappk11 + 0x020b)
    812D E5            [11] 9418 	push	hl
    812E 21 00 16      [10] 9419 	ld	hl, #0x1600
    8131 E5            [11] 9420 	push	hl
    8132 CD 44 46      [17] 9421 	call	_cpct_zx7b_decrunch_s
-                           9422 ;src/main.c:2136: lName = "6;2@@LIBRARY";
+                           9422 ;src/main.c:2120: lName = "6;2@@LIBRARY";
    8135 21 09 82      [10] 9423 	ld	hl, #___str_46+0
    8138 22 BC 48      [16] 9424 	ld	(_lName), hl
-                           9425 ;src/main.c:2138: doorKey[0] = 13; // unicorn blood
+                           9425 ;src/main.c:2122: doorKey[0] = 13; // unicorn blood
    813B 21 C9 48      [10] 9426 	ld	hl, #_doorKey
    813E 36 0D         [10] 9427 	ld	(hl), #0x0d
-                           9428 ;src/main.c:2139: doorKey[1] = 15; // mordor lava
+                           9428 ;src/main.c:2123: doorKey[1] = 15; // mordor lava
    8140 21 CA 48      [10] 9429 	ld	hl, #(_doorKey + 0x0001)
    8143 36 0F         [10] 9430 	ld	(hl), #0x0f
-                           9431 ;src/main.c:2140: doorKey[2] = 14; // troll fat
+                           9431 ;src/main.c:2124: doorKey[2] = 14; // troll fat
    8145 21 CB 48      [10] 9432 	ld	hl, #(_doorKey + 0x0002)
    8148 36 0E         [10] 9433 	ld	(hl), #0x0e
-                           9434 ;src/main.c:2141: doorKey[3] = 15; // mordor lava
+                           9434 ;src/main.c:2125: doorKey[3] = 15; // mordor lava
    814A 21 CC 48      [10] 9435 	ld	hl, #(_doorKey + 0x0003)
    814D 36 0F         [10] 9436 	ld	(hl), #0x0f
-                           9437 ;src/main.c:2142: doorKey[4] = 13; // unicorn blood
+                           9437 ;src/main.c:2126: doorKey[4] = 13; // unicorn blood
    814F 21 CD 48      [10] 9438 	ld	hl, #(_doorKey + 0x0004)
    8152 36 0D         [10] 9439 	ld	(hl), #0x0d
-                           9440 ;src/main.c:2144: storeX = 73;
+                           9440 ;src/main.c:2128: storeX = 73;
    8154 21 D3 48      [10] 9441 	ld	hl,#_storeX + 0
    8157 36 49         [10] 9442 	ld	(hl), #0x49
-                           9443 ;src/main.c:2145: storeY = 11;
+                           9443 ;src/main.c:2129: storeY = 11;
    8159 21 D4 48      [10] 9444 	ld	hl,#_storeY + 0
    815C 36 0B         [10] 9445 	ld	(hl), #0x0b
-                           9446 ;src/main.c:2148: }
+                           9446 ;src/main.c:2132: }
    815E                    9447 00113$:
-                           9448 ;src/main.c:2150: if (TwoPlayers) {
+                           9448 ;src/main.c:2134: if (TwoPlayers) {
    815E 3A BE 48      [13] 9449 	ld	a,(#_TwoPlayers + 0)
    8161 B7            [ 4] 9450 	or	a, a
    8162 C8            [11] 9451 	ret	Z
-                           9452 ;src/main.c:2151: spr[1].x = spr[1].px = spr[0].x + 6; 
+                           9452 ;src/main.c:2135: spr[1].x = spr[1].px = spr[0].x + 6; 
    8163 01 04 49      [10] 9453 	ld	bc, #_spr + 17
    8166 11 06 49      [10] 9454 	ld	de, #_spr + 19
    8169 3A F5 48      [13] 9455 	ld	a, (#_spr + 2)
    816C C6 06         [ 7] 9456 	add	a, #0x06
    816E 12            [ 7] 9457 	ld	(de), a
    816F 02            [ 7] 9458 	ld	(bc), a
-                           9459 ;src/main.c:2152: spr[1].y = spr[1].py = spr[0].y;
+                           9459 ;src/main.c:2136: spr[1].y = spr[1].py = spr[0].y;
    8170 01 05 49      [10] 9460 	ld	bc, #_spr + 18
    8173 11 07 49      [10] 9461 	ld	de, #_spr + 20
    8176 3A F6 48      [13] 9462 	ld	a, (#_spr + 3)
@@ -9603,7 +9603,7 @@
    8209 36 3B 32 40 40 4C  9500 	.ascii "6;2@@LIBRARY"
         49 42 52 41 52 59
    8215 00                 9501 	.db 0x00
-                           9502 ;src/main.c:2158: void CheckEnemyCollision(u8 player, TSpr *pSpr) 
+                           9502 ;src/main.c:2142: void CheckEnemyCollision(u8 player, TSpr *pSpr) 
                            9503 ;	---------------------------------
                            9504 ; Function CheckEnemyCollision
                            9505 ; ---------------------------------
@@ -9614,7 +9614,7 @@
    821E 21 F8 FF      [10] 9510 	ld	hl, #-8
    8221 39            [11] 9511 	add	hl, sp
    8222 F9            [ 6] 9512 	ld	sp, hl
-                           9513 ;src/main.c:2160: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
+                           9513 ;src/main.c:2144: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
    8223 01 F3 48      [10] 9514 	ld	bc, #_spr+0
    8226 DD 5E 04      [19] 9515 	ld	e,4 (ix)
    8229 16 00         [ 7] 9516 	ld	d,#0x00
@@ -9635,30 +9635,30 @@
    8239 06 00         [ 7] 9531 	ld	b, #0x00
    823B 21 05 00      [10] 9532 	ld	hl, #0x0005
    823E 09            [11] 9533 	add	hl,bc
-   823F DD 75 FE      [19] 9534 	ld	-2 (ix), l
-   8242 DD 74 FF      [19] 9535 	ld	-1 (ix), h
+   823F DD 75 FA      [19] 9534 	ld	-6 (ix), l
+   8242 DD 74 FB      [19] 9535 	ld	-5 (ix), h
    8245 DD 7E 05      [19] 9536 	ld	a, 5 (ix)
-   8248 DD 77 FC      [19] 9537 	ld	-4 (ix), a
+   8248 DD 77 FE      [19] 9537 	ld	-2 (ix), a
    824B DD 7E 06      [19] 9538 	ld	a, 6 (ix)
-   824E DD 77 FD      [19] 9539 	ld	-3 (ix), a
-   8251 DD 6E FC      [19] 9540 	ld	l,-4 (ix)
-   8254 DD 66 FD      [19] 9541 	ld	h,-3 (ix)
+   824E DD 77 FF      [19] 9539 	ld	-1 (ix), a
+   8251 DD 6E FE      [19] 9540 	ld	l,-2 (ix)
+   8254 DD 66 FF      [19] 9541 	ld	h,-1 (ix)
    8257 23            [ 6] 9542 	inc	hl
    8258 23            [ 6] 9543 	inc	hl
    8259 6E            [ 7] 9544 	ld	l, (hl)
    825A 26 00         [ 7] 9545 	ld	h, #0x00
-                           9546 ;src/main.c:2161: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
+                           9546 ;src/main.c:2145: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
    825C 13            [ 6] 9547 	inc	de
    825D 13            [ 6] 9548 	inc	de
    825E 13            [ 6] 9549 	inc	de
    825F 33            [ 6] 9550 	inc	sp
    8260 33            [ 6] 9551 	inc	sp
    8261 D5            [11] 9552 	push	de
-                           9553 ;src/main.c:2160: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
+                           9553 ;src/main.c:2144: if ((spr[player].x + SPR_W) > pSpr->x && spr[player].x < (pSpr->x + SPR_W) &&
    8262 7D            [ 4] 9554 	ld	a, l
-   8263 DD 96 FE      [19] 9555 	sub	a, -2 (ix)
+   8263 DD 96 FA      [19] 9555 	sub	a, -6 (ix)
    8266 7C            [ 4] 9556 	ld	a, h
-   8267 DD 9E FF      [19] 9557 	sbc	a, -1 (ix)
+   8267 DD 9E FB      [19] 9557 	sbc	a, -5 (ix)
    826A E2 6F 82      [10] 9558 	jp	PO, 00153$
    826D EE 80         [ 7] 9559 	xor	a, #0x80
    826F                    9560 00153$:
@@ -9673,26 +9673,26 @@
    827D EE 80         [ 7] 9569 	xor	a, #0x80
    827F                    9570 00154$:
    827F F2 DC 82      [10] 9571 	jp	P, 00110$
-                           9572 ;src/main.c:2161: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
+                           9572 ;src/main.c:2145: (spr[player].y + SPR_H) > pSpr->y && spr[player].y < (pSpr->y + SPR_H)) {
    8282 E1            [10] 9573 	pop	hl
    8283 E5            [11] 9574 	push	hl
    8284 5E            [ 7] 9575 	ld	e, (hl)
    8285 16 00         [ 7] 9576 	ld	d, #0x00
    8287 21 0C 00      [10] 9577 	ld	hl, #0x000c
    828A 19            [11] 9578 	add	hl,de
-   828B DD 75 FA      [19] 9579 	ld	-6 (ix), l
-   828E DD 74 FB      [19] 9580 	ld	-5 (ix), h
-   8291 DD 6E FC      [19] 9581 	ld	l,-4 (ix)
-   8294 DD 66 FD      [19] 9582 	ld	h,-3 (ix)
+   828B DD 75 FC      [19] 9579 	ld	-4 (ix), l
+   828E DD 74 FD      [19] 9580 	ld	-3 (ix), h
+   8291 DD 6E FE      [19] 9581 	ld	l,-2 (ix)
+   8294 DD 66 FF      [19] 9582 	ld	h,-1 (ix)
    8297 23            [ 6] 9583 	inc	hl
    8298 23            [ 6] 9584 	inc	hl
    8299 23            [ 6] 9585 	inc	hl
    829A 6E            [ 7] 9586 	ld	l, (hl)
    829B 26 00         [ 7] 9587 	ld	h, #0x00
    829D 7D            [ 4] 9588 	ld	a, l
-   829E DD 96 FA      [19] 9589 	sub	a, -6 (ix)
+   829E DD 96 FC      [19] 9589 	sub	a, -4 (ix)
    82A1 7C            [ 4] 9590 	ld	a, h
-   82A2 DD 9E FB      [19] 9591 	sbc	a, -5 (ix)
+   82A2 DD 9E FD      [19] 9591 	sbc	a, -3 (ix)
    82A5 E2 AA 82      [10] 9592 	jp	PO, 00155$
    82A8 EE 80         [ 7] 9593 	xor	a, #0x80
    82AA                    9594 00155$:
@@ -9709,9 +9709,9 @@
    82BA EE 80         [ 7] 9605 	xor	a, #0x80
    82BC                    9606 00156$:
    82BC F2 DC 82      [10] 9607 	jp	P, 00110$
-                           9608 ;src/main.c:2163: ExplodeSprite(player, pSpr->num);			
-   82BF DD 6E FC      [19] 9609 	ld	l,-4 (ix)
-   82C2 DD 66 FD      [19] 9610 	ld	h,-3 (ix)
+                           9608 ;src/main.c:2147: ExplodeSprite(player, pSpr->num);			
+   82BF DD 6E FE      [19] 9609 	ld	l,-2 (ix)
+   82C2 DD 66 FF      [19] 9610 	ld	h,-1 (ix)
    82C5 46            [ 7] 9611 	ld	b, (hl)
    82C6 C5            [11] 9612 	push	bc
    82C7 33            [ 6] 9613 	inc	sp
@@ -9720,7 +9720,7 @@
    82CC 33            [ 6] 9616 	inc	sp
    82CD CD AA 65      [17] 9617 	call	_ExplodeSprite
    82D0 F1            [10] 9618 	pop	af
-                           9619 ;src/main.c:2164: GameOver(player);
+                           9619 ;src/main.c:2148: GameOver(player);
    82D1 DD 7E 04      [19] 9620 	ld	a, 4 (ix)
    82D4 F5            [11] 9621 	push	af
    82D5 33            [ 6] 9622 	inc	sp
@@ -9728,11 +9728,11 @@
    82D9 33            [ 6] 9624 	inc	sp
    82DA 18 76         [12] 9625 	jr	00115$
    82DC                    9626 00110$:
-                           9627 ;src/main.c:2167: else if (sht.active) {
+                           9627 ;src/main.c:2151: else if (sht.active) {
    82DC 3A 60 49      [13] 9628 	ld	a, (#_sht + 4)
    82DF B7            [ 4] 9629 	or	a, a
    82E0 28 70         [12] 9630 	jr	Z,00115$
-                           9631 ;src/main.c:2168: if ((sht.x + SHT_W) > (spr[player].x) && sht.x < (spr[player].x + SPR_W))
+                           9631 ;src/main.c:2152: if ((sht.x + SHT_W) > (spr[player].x) && sht.x < (spr[player].x + SPR_W))
    82E2 21 5C 49      [10] 9632 	ld	hl, #_sht + 0
    82E5 5E            [ 7] 9633 	ld	e, (hl)
    82E6 16 00         [ 7] 9634 	ld	d, #0x00
@@ -9747,14 +9747,14 @@
    82F5                    9643 00157$:
    82F5 F2 52 83      [10] 9644 	jp	P, 00115$
    82F8 7B            [ 4] 9645 	ld	a, e
-   82F9 DD 96 FE      [19] 9646 	sub	a, -2 (ix)
+   82F9 DD 96 FA      [19] 9646 	sub	a, -6 (ix)
    82FC 7A            [ 4] 9647 	ld	a, d
-   82FD DD 9E FF      [19] 9648 	sbc	a, -1 (ix)
+   82FD DD 9E FB      [19] 9648 	sbc	a, -5 (ix)
    8300 E2 05 83      [10] 9649 	jp	PO, 00158$
    8303 EE 80         [ 7] 9650 	xor	a, #0x80
    8305                    9651 00158$:
    8305 F2 52 83      [10] 9652 	jp	P, 00115$
-                           9653 ;src/main.c:2169: if ((sht.y + SHT_H) > (spr[player].y) && (sht.y) < (spr[player].y + SPR_H))	{
+                           9653 ;src/main.c:2153: if ((sht.y + SHT_H) > (spr[player].y) && (sht.y) < (spr[player].y + SPR_H))	{
    8308 21 5D 49      [10] 9654 	ld	hl, #_sht + 1
    830B 4E            [ 7] 9655 	ld	c, (hl)
    830C 06 00         [ 7] 9656 	ld	b, #0x00
@@ -9783,11 +9783,11 @@
    832F EE 80         [ 7] 9679 	xor	a, #0x80
    8331                    9680 00160$:
    8331 F2 52 83      [10] 9681 	jp	P, 00115$
-                           9682 ;src/main.c:2171: DeleteShot();
+                           9682 ;src/main.c:2155: DeleteShot();
    8334 CD 5B 71      [17] 9683 	call	_DeleteShot
-                           9684 ;src/main.c:2172: ExplodeSprite(player, pSpr->num);			
-   8337 DD 6E FC      [19] 9685 	ld	l,-4 (ix)
-   833A DD 66 FD      [19] 9686 	ld	h,-3 (ix)
+                           9684 ;src/main.c:2156: ExplodeSprite(player, pSpr->num);			
+   8337 DD 6E FE      [19] 9685 	ld	l,-2 (ix)
+   833A DD 66 FF      [19] 9686 	ld	h,-1 (ix)
    833D 46            [ 7] 9687 	ld	b, (hl)
    833E C5            [11] 9688 	push	bc
    833F 33            [ 6] 9689 	inc	sp
@@ -9796,7 +9796,7 @@
    8344 33            [ 6] 9692 	inc	sp
    8345 CD AA 65      [17] 9693 	call	_ExplodeSprite
    8348 F1            [10] 9694 	pop	af
-                           9695 ;src/main.c:2173: GameOver(player);
+                           9695 ;src/main.c:2157: GameOver(player);
    8349 DD 7E 04      [19] 9696 	ld	a, 4 (ix)
    834C F5            [11] 9697 	push	af
    834D 33            [ 6] 9698 	inc	sp
@@ -9806,34 +9806,34 @@
    8352 DD F9         [10] 9702 	ld	sp, ix
    8354 DD E1         [14] 9703 	pop	ix
    8356 C9            [10] 9704 	ret
-                           9705 ;src/main.c:2180: void EnemyLoop(TSpr *pSpr) __z88dk_fastcall {
+                           9705 ;src/main.c:2164: void EnemyLoop(TSpr *pSpr) __z88dk_fastcall {
                            9706 ;	---------------------------------
                            9707 ; Function EnemyLoop
                            9708 ; ---------------------------------
    8357                    9709 _EnemyLoop::
-                           9710 ;src/main.c:2181: if (pSpr->ident == NOBODY) 
+                           9710 ;src/main.c:2165: if (pSpr->ident == NOBODY) 
    8357 4D            [ 4] 9711 	ld	c,l
    8358 44            [ 4] 9712 	ld	b,h
    8359 23            [ 6] 9713 	inc	hl
    835A 7E            [ 7] 9714 	ld	a, (hl)
    835B D6 09         [ 7] 9715 	sub	a, #0x09
    835D C8            [11] 9716 	ret	Z
-                           9717 ;src/main.c:2182: return; 
+                           9717 ;src/main.c:2166: return; 
    835E 18 00         [12] 9718 	jr	00102$
    8360                    9719 00102$:
-                           9720 ;src/main.c:2184: MoveEnemy(pSpr);
+                           9720 ;src/main.c:2168: MoveEnemy(pSpr);
    8360 C5            [11] 9721 	push	bc
    8361 C5            [11] 9722 	push	bc
    8362 CD 7D 73      [17] 9723 	call	_MoveEnemy
    8365 F1            [10] 9724 	pop	af
    8366 C1            [10] 9725 	pop	bc
-                           9726 ;src/main.c:2186: SelectFrame(pSpr); 
+                           9726 ;src/main.c:2170: SelectFrame(pSpr); 
    8367 C5            [11] 9727 	push	bc
    8368 69            [ 4] 9728 	ld	l, c
    8369 60            [ 4] 9729 	ld	h, b
    836A CD EE 62      [17] 9730 	call	_SelectFrame
    836D C1            [10] 9731 	pop	bc
-                           9732 ;src/main.c:2187: WalkAnim(pSpr, pSpr->dir);
+                           9732 ;src/main.c:2171: WalkAnim(pSpr, pSpr->dir);
    836E C5            [11] 9733 	push	bc
    836F FD E1         [14] 9734 	pop	iy
    8371 FD 56 07      [19] 9735 	ld	d, 7 (iy)
@@ -9845,13 +9845,13 @@
    837B F1            [10] 9741 	pop	af
    837C 33            [ 6] 9742 	inc	sp
    837D C1            [10] 9743 	pop	bc
-                           9744 ;src/main.c:2189: DeleteSprite(pSpr);
+                           9744 ;src/main.c:2173: DeleteSprite(pSpr);
    837E C5            [11] 9745 	push	bc
    837F 69            [ 4] 9746 	ld	l, c
    8380 60            [ 4] 9747 	ld	h, b
    8381 CD 39 62      [17] 9748 	call	_DeleteSprite
    8384 C1            [10] 9749 	pop	bc
-                           9750 ;src/main.c:2190: pSpr->px = pSpr->x; // save the current X coordinate
+                           9750 ;src/main.c:2174: pSpr->px = pSpr->x; // save the current X coordinate
    8385 21 04 00      [10] 9751 	ld	hl, #0x0004
    8388 09            [11] 9752 	add	hl,bc
    8389 EB            [ 4] 9753 	ex	de,hl
@@ -9861,7 +9861,7 @@
    838D 23            [ 6] 9757 	inc	hl
    838E 7E            [ 7] 9758 	ld	a, (hl)
    838F 12            [ 7] 9759 	ld	(de), a
-                           9760 ;src/main.c:2191: pSpr->py = pSpr->y; // save the current Y coordinate
+                           9760 ;src/main.c:2175: pSpr->py = pSpr->y; // save the current Y coordinate
    8390 21 05 00      [10] 9761 	ld	hl, #0x0005
    8393 09            [11] 9762 	add	hl,bc
    8394 EB            [ 4] 9763 	ex	de,hl
@@ -9872,13 +9872,13 @@
    8399 23            [ 6] 9768 	inc	hl
    839A 7E            [ 7] 9769 	ld	a, (hl)
    839B 12            [ 7] 9770 	ld	(de), a
-                           9771 ;src/main.c:2192: PrintSprite(pSpr);
+                           9771 ;src/main.c:2176: PrintSprite(pSpr);
    839C C5            [11] 9772 	push	bc
    839D 69            [ 4] 9773 	ld	l, c
    839E 60            [ 4] 9774 	ld	h, b
    839F CD 0A 62      [17] 9775 	call	_PrintSprite
    83A2 C1            [10] 9776 	pop	bc
-                           9777 ;src/main.c:2194: CheckEnemyCollision(0, pSpr);
+                           9777 ;src/main.c:2178: CheckEnemyCollision(0, pSpr);
    83A3 C5            [11] 9778 	push	bc
    83A4 C5            [11] 9779 	push	bc
    83A5 AF            [ 4] 9780 	xor	a, a
@@ -9888,11 +9888,11 @@
    83AB F1            [10] 9784 	pop	af
    83AC 33            [ 6] 9785 	inc	sp
    83AD C1            [10] 9786 	pop	bc
-                           9787 ;src/main.c:2195: if (TwoPlayers)
+                           9787 ;src/main.c:2179: if (TwoPlayers)
    83AE 3A BE 48      [13] 9788 	ld	a,(#_TwoPlayers + 0)
    83B1 B7            [ 4] 9789 	or	a, a
    83B2 C8            [11] 9790 	ret	Z
-                           9791 ;src/main.c:2196: CheckEnemyCollision(1, pSpr);
+                           9791 ;src/main.c:2180: CheckEnemyCollision(1, pSpr);
    83B3 C5            [11] 9792 	push	bc
    83B4 3E 01         [ 7] 9793 	ld	a, #0x01
    83B6 F5            [11] 9794 	push	af
@@ -9901,14 +9901,14 @@
    83BB F1            [10] 9797 	pop	af
    83BC 33            [ 6] 9798 	inc	sp
    83BD C9            [10] 9799 	ret
-                           9800 ;src/main.c:2212: void PrintStartMenu() {
+                           9800 ;src/main.c:2196: void PrintStartMenu() {
                            9801 ;	---------------------------------
                            9802 ; Function PrintStartMenu
                            9803 ; ---------------------------------
    83BE                    9804 _PrintStartMenu::
-                           9805 ;src/main.c:2213: ClearScreen();
+                           9805 ;src/main.c:2197: ClearScreen();
    83BE CD 8C 4B      [17] 9806 	call	_ClearScreen
-                           9807 ;src/main.c:2216: cpct_drawSprite(g_logo_0, cpctm_screenPtr(CPCT_VMEM_START, 0, 0), G_LOGO_0_W, G_LOGO_0_H);
+                           9807 ;src/main.c:2200: cpct_drawSprite(g_logo_0, cpctm_screenPtr(CPCT_VMEM_START, 0, 0), G_LOGO_0_W, G_LOGO_0_H);
    83C1 21 28 23      [10] 9808 	ld	hl, #0x2328
    83C4 E5            [11] 9809 	push	hl
    83C5 21 00 C0      [10] 9810 	ld	hl, #0xc000
@@ -9916,7 +9916,7 @@
    83C9 21 B7 16      [10] 9812 	ld	hl, #_g_logo_0
    83CC E5            [11] 9813 	push	hl
    83CD CD 56 44      [17] 9814 	call	_cpct_drawSprite
-                           9815 ;src/main.c:2217: cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
+                           9815 ;src/main.c:2201: cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
    83D0 21 28 23      [10] 9816 	ld	hl, #0x2328
    83D3 E5            [11] 9817 	push	hl
    83D4 26 C0         [ 7] 9818 	ld	h, #0xc0
@@ -9924,7 +9924,7 @@
    83D7 21 2F 1C      [10] 9820 	ld	hl, #_g_logo_1
    83DA E5            [11] 9821 	push	hl
    83DB CD 56 44      [17] 9822 	call	_cpct_drawSprite
-                           9823 ;src/main.c:2219: PrintText("1@@1@PLAYER@GAME", 10, 50, 0);
+                           9823 ;src/main.c:2203: PrintText("1@@1@PLAYER@GAME", 10, 50, 0);
    83DE 21 32 00      [10] 9824 	ld	hl, #0x0032
    83E1 E5            [11] 9825 	push	hl
    83E2 3E 0A         [ 7] 9826 	ld	a, #0x0a
@@ -9934,7 +9934,7 @@
    83E9 E5            [11] 9830 	push	hl
    83EA CD E6 4C      [17] 9831 	call	_PrintText
    83ED F1            [10] 9832 	pop	af
-                           9833 ;src/main.c:2220: PrintText("2@@2@PLAYER@GAME", 10, 60, 0);
+                           9833 ;src/main.c:2204: PrintText("2@@2@PLAYER@GAME", 10, 60, 0);
    83EE 33            [ 6] 9834 	inc	sp
    83EF 21 3C 00      [10] 9835 	ld	hl,#0x003c
    83F2 E3            [19] 9836 	ex	(sp),hl
@@ -9945,7 +9945,7 @@
    83FA E5            [11] 9841 	push	hl
    83FB CD E6 4C      [17] 9842 	call	_PrintText
    83FE F1            [10] 9843 	pop	af
-                           9844 ;src/main.c:2221: PrintText("3@@REDEFINE@CONTROLS", 10, 70, 0);
+                           9844 ;src/main.c:2205: PrintText("3@@REDEFINE@CONTROLS", 10, 70, 0);
    83FF 33            [ 6] 9845 	inc	sp
    8400 21 46 00      [10] 9846 	ld	hl,#0x0046
    8403 E3            [19] 9847 	ex	(sp),hl
@@ -9958,11 +9958,11 @@
    840F F1            [10] 9854 	pop	af
    8410 F1            [10] 9855 	pop	af
    8411 33            [ 6] 9856 	inc	sp
-                           9857 ;src/main.c:2222: if (turboMode)
+                           9857 ;src/main.c:2206: if (turboMode)
    8412 3A D8 48      [13] 9858 	ld	a,(#_turboMode + 0)
    8415 B7            [ 4] 9859 	or	a, a
    8416 28 14         [12] 9860 	jr	Z,00102$
-                           9861 ;src/main.c:2223: PrintText("4@@TURBO@MODE:@ON", 10, 80, 0);
+                           9861 ;src/main.c:2207: PrintText("4@@TURBO@MODE:@ON", 10, 80, 0);
    8418 21 50 00      [10] 9862 	ld	hl, #0x0050
    841B E5            [11] 9863 	push	hl
    841C 3E 0A         [ 7] 9864 	ld	a, #0x0a
@@ -9976,7 +9976,7 @@
    8429 33            [ 6] 9872 	inc	sp
    842A 18 12         [12] 9873 	jr	00103$
    842C                    9874 00102$:
-                           9875 ;src/main.c:2225: PrintText("4@@TURBO@MODE:@OFF", 10, 80, 0);
+                           9875 ;src/main.c:2209: PrintText("4@@TURBO@MODE:@OFF", 10, 80, 0);
    842C 21 50 00      [10] 9876 	ld	hl, #0x0050
    842F E5            [11] 9877 	push	hl
    8430 3E 0A         [ 7] 9878 	ld	a, #0x0a
@@ -9989,13 +9989,13 @@
    843C F1            [10] 9885 	pop	af
    843D 33            [ 6] 9886 	inc	sp
    843E                    9887 00103$:
-                           9888 ;src/main.c:2229: cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
+                           9888 ;src/main.c:2213: cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
    843E 21 06 BB      [10] 9889 	ld	hl, #0xbb06
    8441 E5            [11] 9890 	push	hl
    8442 21 00 C0      [10] 9891 	ld	hl, #0xc000
    8445 E5            [11] 9892 	push	hl
    8446 CD B9 47      [17] 9893 	call	_cpct_getScreenPtr
-                           9894 ;src/main.c:2228: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
+                           9894 ;src/main.c:2212: cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
    8449 01 D7 2D      [10] 9895 	ld	bc, #_g_sorcerer1_06+0
    844C 11 00 01      [10] 9896 	ld	de, #_g_maskTable
    844F D5            [11] 9897 	push	de
@@ -10004,13 +10004,13 @@
    8454 E5            [11] 9900 	push	hl
    8455 C5            [11] 9901 	push	bc
    8456 CD CF 47      [17] 9902 	call	_cpct_drawSpriteMaskedAlignedTable
-                           9903 ;src/main.c:2231: cpct_getScreenPtr(CPCT_VMEM_START, 68, 187), SPR_W, SPR_H, g_maskTable);
+                           9903 ;src/main.c:2215: cpct_getScreenPtr(CPCT_VMEM_START, 68, 187), SPR_W, SPR_H, g_maskTable);
    8459 21 44 BB      [10] 9904 	ld	hl, #0xbb44
    845C E5            [11] 9905 	push	hl
    845D 21 00 C0      [10] 9906 	ld	hl, #0xc000
    8460 E5            [11] 9907 	push	hl
    8461 CD B9 47      [17] 9908 	call	_cpct_getScreenPtr
-                           9909 ;src/main.c:2230: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
+                           9909 ;src/main.c:2214: cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_04, 
    8464 01 07 2B      [10] 9910 	ld	bc, #_g_sorcerer2_04+0
    8467 11 00 01      [10] 9911 	ld	de, #_g_maskTable
    846A D5            [11] 9912 	push	de
@@ -10019,7 +10019,7 @@
    846F E5            [11] 9915 	push	hl
    8470 C5            [11] 9916 	push	bc
    8471 CD CF 47      [17] 9917 	call	_cpct_drawSpriteMaskedAlignedTable
-                           9918 ;src/main.c:2233: PrintText("CODE@=@GFX", 25, 110, 0);
+                           9918 ;src/main.c:2217: PrintText("CODE@=@GFX", 25, 110, 0);
    8474 21 6E 00      [10] 9919 	ld	hl, #0x006e
    8477 E5            [11] 9920 	push	hl
    8478 3E 19         [ 7] 9921 	ld	a, #0x19
@@ -10029,7 +10029,7 @@
    847F E5            [11] 9925 	push	hl
    8480 CD E6 4C      [17] 9926 	call	_PrintText
    8483 F1            [10] 9927 	pop	af
-                           9928 ;src/main.c:2234: PrintText("SALVAKANTERO", 22, 120, 0);
+                           9928 ;src/main.c:2218: PrintText("SALVAKANTERO", 22, 120, 0);
    8484 33            [ 6] 9929 	inc	sp
    8485 21 78 00      [10] 9930 	ld	hl,#0x0078
    8488 E3            [19] 9931 	ex	(sp),hl
@@ -10040,7 +10040,7 @@
    8490 E5            [11] 9936 	push	hl
    8491 CD E6 4C      [17] 9937 	call	_PrintText
    8494 F1            [10] 9938 	pop	af
-                           9939 ;src/main.c:2235: PrintText("MUSIC@=@FX", 25, 135, 0);
+                           9939 ;src/main.c:2219: PrintText("MUSIC@=@FX", 25, 135, 0);
    8495 33            [ 6] 9940 	inc	sp
    8496 21 87 00      [10] 9941 	ld	hl,#0x0087
    8499 E3            [19] 9942 	ex	(sp),hl
@@ -10051,7 +10051,7 @@
    84A1 E5            [11] 9947 	push	hl
    84A2 CD E6 4C      [17] 9948 	call	_PrintText
    84A5 F1            [10] 9949 	pop	af
-                           9950 ;src/main.c:2236: PrintText("MCKLAIN", 30, 145, 0);
+                           9950 ;src/main.c:2220: PrintText("MCKLAIN", 30, 145, 0);
    84A6 33            [ 6] 9951 	inc	sp
    84A7 21 91 00      [10] 9952 	ld	hl,#0x0091
    84AA E3            [19] 9953 	ex	(sp),hl
@@ -10062,7 +10062,7 @@
    84B2 E5            [11] 9958 	push	hl
    84B3 CD E6 4C      [17] 9959 	call	_PrintText
    84B6 F1            [10] 9960 	pop	af
-                           9961 ;src/main.c:2237: PrintText("BETA@TESTING", 22, 160, 0);
+                           9961 ;src/main.c:2221: PrintText("BETA@TESTING", 22, 160, 0);
    84B7 33            [ 6] 9962 	inc	sp
    84B8 21 A0 00      [10] 9963 	ld	hl,#0x00a0
    84BB E3            [19] 9964 	ex	(sp),hl
@@ -10073,7 +10073,7 @@
    84C3 E5            [11] 9969 	push	hl
    84C4 CD E6 4C      [17] 9970 	call	_PrintText
    84C7 F1            [10] 9971 	pop	af
-                           9972 ;src/main.c:2238: PrintText("BLACKMORES", 25, 170, 0);
+                           9972 ;src/main.c:2222: PrintText("BLACKMORES", 25, 170, 0);
    84C8 33            [ 6] 9973 	inc	sp
    84C9 21 AA 00      [10] 9974 	ld	hl,#0x00aa
    84CC E3            [19] 9975 	ex	(sp),hl
@@ -10084,7 +10084,7 @@
    84D4 E5            [11] 9980 	push	hl
    84D5 CD E6 4C      [17] 9981 	call	_PrintText
    84D8 F1            [10] 9982 	pop	af
-                           9983 ;src/main.c:2240: PrintText("PLAY@ON@RETRO@2020", 13, 190, 0);
+                           9983 ;src/main.c:2224: PrintText("PLAY@ON@RETRO@2020", 13, 190, 0);
    84D9 33            [ 6] 9984 	inc	sp
    84DA 21 BE 00      [10] 9985 	ld	hl,#0x00be
    84DD E3            [19] 9986 	ex	(sp),hl
@@ -10153,14 +10153,14 @@
         4E 40 52 45 54 52
         4F 40 32 30 32 30
    859E 00                10032 	.db 0x00
-                          10033 ;src/main.c:2245: void PrintObjInfo() {
+                          10033 ;src/main.c:2229: void PrintObjInfo() {
                           10034 ;	---------------------------------
                           10035 ; Function PrintObjInfo
                           10036 ; ---------------------------------
    859F                   10037 _PrintObjInfo::
-                          10038 ;src/main.c:2248: ClearScreen();
+                          10038 ;src/main.c:2232: ClearScreen();
    859F CD 8C 4B      [17]10039 	call	_ClearScreen
-                          10040 ;src/main.c:2249: PrintText("INGREDIENT@VALUES", 13, 0, 0);
+                          10040 ;src/main.c:2233: PrintText("INGREDIENT@VALUES", 13, 0, 0);
    85A2 21 00 00      [10]10041 	ld	hl, #0x0000
    85A5 E5            [11]10042 	push	hl
    85A6 3E 0D         [ 7]10043 	ld	a, #0x0d
@@ -10170,7 +10170,7 @@
    85AD E5            [11]10047 	push	hl
    85AE CD E6 4C      [17]10048 	call	_PrintText
    85B1 F1            [10]10049 	pop	af
-                          10050 ;src/main.c:2251: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 3, 12), cpct_px2byteM0(4, 4), 37, 188);
+                          10050 ;src/main.c:2235: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 3, 12), cpct_px2byteM0(4, 4), 37, 188);
    85B2 33            [ 6]10051 	inc	sp
    85B3 21 04 04      [10]10052 	ld	hl,#0x0404
    85B6 E3            [19]10053 	ex	(sp),hl
@@ -10182,7 +10182,7 @@
    85C1 21 53 E0      [10]10059 	ld	hl, #0xe053
    85C4 E5            [11]10060 	push	hl
    85C5 CD D7 46      [17]10061 	call	_cpct_drawSolidBox
-                          10062 ;src/main.c:2252: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 12), cpct_px2byteM0(4, 4), 35, 188);	
+                          10062 ;src/main.c:2236: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 12), cpct_px2byteM0(4, 4), 35, 188);	
    85C8 21 04 04      [10]10063 	ld	hl, #0x0404
    85CB E5            [11]10064 	push	hl
    85CC CD 9D 46      [17]10065 	call	_cpct_px2byteM0
@@ -10193,7 +10193,7 @@
    85D6 21 78 E0      [10]10070 	ld	hl, #0xe078
    85D9 E5            [11]10071 	push	hl
    85DA CD D7 46      [17]10072 	call	_cpct_drawSolidBox
-                          10073 ;src/main.c:2253: PrintFrame(3,12,72,194);
+                          10073 ;src/main.c:2237: PrintFrame(3,12,72,194);
    85DD 21 48 C2      [10]10074 	ld	hl, #0xc248
    85E0 E5            [11]10075 	push	hl
    85E1 21 03 0C      [10]10076 	ld	hl, #0x0c03
@@ -10201,10 +10201,10 @@
    85E5 CD 89 4D      [17]10078 	call	_PrintFrame
    85E8 F1            [10]10079 	pop	af
    85E9 F1            [10]10080 	pop	af
-                          10081 ;src/main.c:2255: for (obj=4; obj<16; obj++) {
+                          10081 ;src/main.c:2239: for (obj=4; obj<16; obj++) {
    85EA 01 04 19      [10]10082 	ld	bc,#0x1904
    85ED                   10083 00102$:
-                          10084 ;src/main.c:2256: PrintObject(obj, 7, yPos);
+                          10084 ;src/main.c:2240: PrintObject(obj, 7, yPos);
    85ED C5            [11]10085 	push	bc
    85EE C5            [11]10086 	push	bc
    85EF 33            [ 6]10087 	inc	sp
@@ -10214,7 +10214,7 @@
    85F6 F1            [10]10091 	pop	af
    85F7 33            [ 6]10092 	inc	sp
    85F8 C1            [10]10093 	pop	bc
-                          10094 ;src/main.c:2257: PrintNumber(obj-3, 2, 62, yPos, 0); PrintText("<", 68, yPos, 0);
+                          10094 ;src/main.c:2241: PrintNumber(obj-3, 2, 62, yPos, 0); PrintText("<", 68, yPos, 0);
    85F9 59            [ 4]10095 	ld	e, c
    85FA 16 00         [ 7]10096 	ld	d, #0x00
    85FC 7B            [ 4]10097 	ld	a, e
@@ -10253,16 +10253,16 @@
    862A F1            [10]10130 	pop	af
    862B 33            [ 6]10131 	inc	sp
    862C C1            [10]10132 	pop	bc
-                          10133 ;src/main.c:2258: yPos += 14;
+                          10133 ;src/main.c:2242: yPos += 14;
    862D 78            [ 4]10134 	ld	a, b
    862E C6 0E         [ 7]10135 	add	a, #0x0e
    8630 47            [ 4]10136 	ld	b, a
-                          10137 ;src/main.c:2255: for (obj=4; obj<16; obj++) {
+                          10137 ;src/main.c:2239: for (obj=4; obj<16; obj++) {
    8631 0C            [ 4]10138 	inc	c
    8632 79            [ 4]10139 	ld	a, c
    8633 D6 10         [ 7]10140 	sub	a, #0x10
    8635 38 B6         [12]10141 	jr	C,00102$
-                          10142 ;src/main.c:2261: PrintText("TOAD@SNOT", 14, 25, 0);
+                          10142 ;src/main.c:2245: PrintText("TOAD@SNOT", 14, 25, 0);
    8637 21 19 00      [10]10143 	ld	hl, #0x0019
    863A E5            [11]10144 	push	hl
    863B 3E 0E         [ 7]10145 	ld	a, #0x0e
@@ -10272,7 +10272,7 @@
    8642 E5            [11]10149 	push	hl
    8643 CD E6 4C      [17]10150 	call	_PrintText
    8646 F1            [10]10151 	pop	af
-                          10152 ;src/main.c:2262: PrintText("DIAMOND@DUST", 14, 39, 0);
+                          10152 ;src/main.c:2246: PrintText("DIAMOND@DUST", 14, 39, 0);
    8647 33            [ 6]10153 	inc	sp
    8648 21 27 00      [10]10154 	ld	hl,#0x0027
    864B E3            [19]10155 	ex	(sp),hl
@@ -10283,7 +10283,7 @@
    8653 E5            [11]10160 	push	hl
    8654 CD E6 4C      [17]10161 	call	_PrintText
    8657 F1            [10]10162 	pop	af
-                          10163 ;src/main.c:2263: PrintText("NEWT@EYE", 14, 53, 0);
+                          10163 ;src/main.c:2247: PrintText("NEWT@EYE", 14, 53, 0);
    8658 33            [ 6]10164 	inc	sp
    8659 21 35 00      [10]10165 	ld	hl,#0x0035
    865C E3            [19]10166 	ex	(sp),hl
@@ -10294,7 +10294,7 @@
    8664 E5            [11]10171 	push	hl
    8665 CD E6 4C      [17]10172 	call	_PrintText
    8668 F1            [10]10173 	pop	af
-                          10174 ;src/main.c:2264: PrintText("MAMMOTH@POOP", 14, 67, 0);
+                          10174 ;src/main.c:2248: PrintText("MAMMOTH@POOP", 14, 67, 0);
    8669 33            [ 6]10175 	inc	sp
    866A 21 43 00      [10]10176 	ld	hl,#0x0043
    866D E3            [19]10177 	ex	(sp),hl
@@ -10305,7 +10305,7 @@
    8675 E5            [11]10182 	push	hl
    8676 CD E6 4C      [17]10183 	call	_PrintText
    8679 F1            [10]10184 	pop	af
-                          10185 ;src/main.c:2265: PrintText("KRAKEN@INK", 14, 81, 0); 
+                          10185 ;src/main.c:2249: PrintText("KRAKEN@INK", 14, 81, 0); 
    867A 33            [ 6]10186 	inc	sp
    867B 21 51 00      [10]10187 	ld	hl,#0x0051
    867E E3            [19]10188 	ex	(sp),hl
@@ -10316,7 +10316,7 @@
    8686 E5            [11]10193 	push	hl
    8687 CD E6 4C      [17]10194 	call	_PrintText
    868A F1            [10]10195 	pop	af
-                          10196 ;src/main.c:2266: PrintText("MERMAID@TEAR", 14, 95, 0);
+                          10196 ;src/main.c:2250: PrintText("MERMAID@TEAR", 14, 95, 0);
    868B 33            [ 6]10197 	inc	sp
    868C 21 5F 00      [10]10198 	ld	hl,#0x005f
    868F E3            [19]10199 	ex	(sp),hl
@@ -10327,7 +10327,7 @@
    8697 E5            [11]10204 	push	hl
    8698 CD E6 4C      [17]10205 	call	_PrintText
    869B F1            [10]10206 	pop	af
-                          10207 ;src/main.c:2267: PrintText("MARTIAN@MUSHROOM", 14, 109, 0);
+                          10207 ;src/main.c:2251: PrintText("MARTIAN@MUSHROOM", 14, 109, 0);
    869C 33            [ 6]10208 	inc	sp
    869D 21 6D 00      [10]10209 	ld	hl,#0x006d
    86A0 E3            [19]10210 	ex	(sp),hl
@@ -10338,7 +10338,7 @@
    86A8 E5            [11]10215 	push	hl
    86A9 CD E6 4C      [17]10216 	call	_PrintText
    86AC F1            [10]10217 	pop	af
-                          10218 ;src/main.c:2268: PrintText("DRAGON@BLOOD", 14, 123, 0);
+                          10218 ;src/main.c:2252: PrintText("DRAGON@BLOOD", 14, 123, 0);
    86AD 33            [ 6]10219 	inc	sp
    86AE 21 7B 00      [10]10220 	ld	hl,#0x007b
    86B1 E3            [19]10221 	ex	(sp),hl
@@ -10349,7 +10349,7 @@
    86B9 E5            [11]10226 	push	hl
    86BA CD E6 4C      [17]10227 	call	_PrintText
    86BD F1            [10]10228 	pop	af
-                          10229 ;src/main.c:2269: PrintText("DODO@EGG", 14, 137, 0); 
+                          10229 ;src/main.c:2253: PrintText("DODO@EGG", 14, 137, 0); 
    86BE 33            [ 6]10230 	inc	sp
    86BF 21 89 00      [10]10231 	ld	hl,#0x0089
    86C2 E3            [19]10232 	ex	(sp),hl
@@ -10360,7 +10360,7 @@
    86CA E5            [11]10237 	push	hl
    86CB CD E6 4C      [17]10238 	call	_PrintText
    86CE F1            [10]10239 	pop	af
-                          10240 ;src/main.c:2270: PrintText("UNICORN@BLOOD", 14, 151, 0);
+                          10240 ;src/main.c:2254: PrintText("UNICORN@BLOOD", 14, 151, 0);
    86CF 33            [ 6]10241 	inc	sp
    86D0 21 97 00      [10]10242 	ld	hl,#0x0097
    86D3 E3            [19]10243 	ex	(sp),hl
@@ -10371,7 +10371,7 @@
    86DB E5            [11]10248 	push	hl
    86DC CD E6 4C      [17]10249 	call	_PrintText
    86DF F1            [10]10250 	pop	af
-                          10251 ;src/main.c:2271: PrintText("TROLL@FAT", 14, 165, 0); 
+                          10251 ;src/main.c:2255: PrintText("TROLL@FAT", 14, 165, 0); 
    86E0 33            [ 6]10252 	inc	sp
    86E1 21 A5 00      [10]10253 	ld	hl,#0x00a5
    86E4 E3            [19]10254 	ex	(sp),hl
@@ -10382,7 +10382,7 @@
    86EC E5            [11]10259 	push	hl
    86ED CD E6 4C      [17]10260 	call	_PrintText
    86F0 F1            [10]10261 	pop	af
-                          10262 ;src/main.c:2272: PrintText("MORDOR@LAVA", 14, 179, 0);
+                          10262 ;src/main.c:2256: PrintText("MORDOR@LAVA", 14, 179, 0);
    86F1 33            [ 6]10263 	inc	sp
    86F2 21 B3 00      [10]10264 	ld	hl,#0x00b3
    86F5 E3            [19]10265 	ex	(sp),hl
@@ -10454,7 +10454,7 @@
    879D 4D 4F 52 44 4F 52 10316 	.ascii "MORDOR@LAVA"
         40 4C 41 56 41
    87A8 00                10317 	.db 0x00
-                          10318 ;src/main.c:2298: void StartMenu() {
+                          10318 ;src/main.c:2282: void StartMenu() {
                           10319 ;	---------------------------------
                           10320 ; Function StartMenu
                           10321 ; ---------------------------------
@@ -10463,83 +10463,83 @@
    87AB DD 21 00 00   [14]10324 	ld	ix,#0
    87AF DD 39         [15]10325 	add	ix,sp
    87B1 F5            [11]10326 	push	af
-                          10327 ;src/main.c:2299: u8 randSeed = 254;
+                          10327 ;src/main.c:2283: u8 randSeed = 254;
    87B2 DD 36 FE FE   [19]10328 	ld	-2 (ix), #0xfe
-                          10329 ;src/main.c:2300: u8 page = 0;
+                          10329 ;src/main.c:2284: u8 page = 0;
    87B6 DD 36 FF 00   [19]10330 	ld	-1 (ix), #0x00
-                          10331 ;src/main.c:2302: while(1) {
+                          10331 ;src/main.c:2286: while(1) {
    87BA                   10332 00122$:
-                          10333 ;src/main.c:2305: if (++randSeed == 255) {					
+                          10333 ;src/main.c:2289: if (++randSeed == 255) {					
    87BA DD 34 FE      [23]10334 	inc	-2 (ix)
    87BD DD 7E FE      [19]10335 	ld	a, -2 (ix)
    87C0 3C            [ 4]10336 	inc	a
    87C1 20 27         [12]10337 	jr	NZ,00109$
-                          10338 ;src/main.c:2306: if (page == 0) 		PrintStartMenu();	// page 1; menu
+                          10338 ;src/main.c:2290: if (page == 0) 		PrintStartMenu();	// page 1; menu
    87C3 DD 7E FF      [19]10339 	ld	a, -1 (ix)
    87C6 B7            [ 4]10340 	or	a, a
    87C7 20 05         [12]10341 	jr	NZ,00104$
    87C9 CD BE 83      [17]10342 	call	_PrintStartMenu
    87CC 18 0A         [12]10343 	jr	00105$
    87CE                   10344 00104$:
-                          10345 ;src/main.c:2307: else if(page == 4)	PrintObjInfo();		// page 2; ingredients info
+                          10345 ;src/main.c:2291: else if(page == 4)	PrintObjInfo();		// page 2; ingredients info
    87CE DD 7E FF      [19]10346 	ld	a, -1 (ix)
    87D1 D6 04         [ 7]10347 	sub	a, #0x04
    87D3 20 03         [12]10348 	jr	NZ,00105$
    87D5 CD 9F 85      [17]10349 	call	_PrintObjInfo
    87D8                   10350 00105$:
-                          10351 ;src/main.c:2309: randSeed = 0;
+                          10351 ;src/main.c:2293: randSeed = 0;
    87D8 DD 36 FE 00   [19]10352 	ld	-2 (ix), #0x00
-                          10353 ;src/main.c:2310: if (++page == 8) //12
+                          10353 ;src/main.c:2294: if (++page == 8) //12
    87DC DD 34 FF      [23]10354 	inc	-1 (ix)
    87DF DD 7E FF      [19]10355 	ld	a, -1 (ix)
    87E2 D6 08         [ 7]10356 	sub	a, #0x08
    87E4 20 04         [12]10357 	jr	NZ,00109$
-                          10358 ;src/main.c:2311: page = 0;		
+                          10358 ;src/main.c:2295: page = 0;		
    87E6 DD 36 FF 00   [19]10359 	ld	-1 (ix), #0x00
    87EA                   10360 00109$:
-                          10361 ;src/main.c:2314: cpct_scanKeyboard_f();
+                          10361 ;src/main.c:2298: cpct_scanKeyboard_f();
    87EA CD E0 43      [17]10362 	call	_cpct_scanKeyboard_f
-                          10363 ;src/main.c:2315: if(cpct_isKeyPressed(Key_1)) { // 1 player
+                          10363 ;src/main.c:2299: if(cpct_isKeyPressed(Key_1)) { // 1 player
    87ED 21 08 01      [10]10364 	ld	hl, #0x0108
    87F0 CD D4 43      [17]10365 	call	_cpct_isKeyPressed
    87F3 7D            [ 4]10366 	ld	a, l
    87F4 B7            [ 4]10367 	or	a, a
    87F5 28 08         [12]10368 	jr	Z,00119$
-                          10369 ;src/main.c:2316: TwoPlayers = FALSE;	
+                          10369 ;src/main.c:2300: TwoPlayers = FALSE;	
    87F7 21 BE 48      [10]10370 	ld	hl,#_TwoPlayers + 0
    87FA 36 00         [10]10371 	ld	(hl), #0x00
-                          10372 ;src/main.c:2317: break;
+                          10372 ;src/main.c:2301: break;
    87FC C3 07 89      [10]10373 	jp	00123$
    87FF                   10374 00119$:
-                          10375 ;src/main.c:2319: else if(cpct_isKeyPressed(Key_2)) {	// 2 players
+                          10375 ;src/main.c:2303: else if(cpct_isKeyPressed(Key_2)) {	// 2 players
    87FF 21 08 02      [10]10376 	ld	hl, #0x0208
    8802 CD D4 43      [17]10377 	call	_cpct_isKeyPressed
    8805 7D            [ 4]10378 	ld	a, l
    8806 B7            [ 4]10379 	or	a, a
    8807 28 08         [12]10380 	jr	Z,00116$
-                          10381 ;src/main.c:2320: TwoPlayers = TRUE;
+                          10381 ;src/main.c:2304: TwoPlayers = TRUE;
    8809 21 BE 48      [10]10382 	ld	hl,#_TwoPlayers + 0
    880C 36 01         [10]10383 	ld	(hl), #0x01
-                          10384 ;src/main.c:2321: break;
+                          10384 ;src/main.c:2305: break;
    880E C3 07 89      [10]10385 	jp	00123$
    8811                   10386 00116$:
-                          10387 ;src/main.c:2323: else if(cpct_isKeyPressed(Key_3)){ // redefine keys
+                          10387 ;src/main.c:2307: else if(cpct_isKeyPressed(Key_3)){ // redefine keys
    8811 21 07 02      [10]10388 	ld	hl, #0x0207
    8814 CD D4 43      [17]10389 	call	_cpct_isKeyPressed
    8817 7D            [ 4]10390 	ld	a, l
    8818 B7            [ 4]10391 	or	a, a
    8819 CA DA 88      [10]10392 	jp	Z, 00113$
-                          10393 ;src/main.c:2324: Wait4Key(Key_3);
+                          10393 ;src/main.c:2308: Wait4Key(Key_3);
    881C 21 07 02      [10]10394 	ld	hl, #0x0207
    881F E5            [11]10395 	push	hl
    8820 CD 25 54      [17]10396 	call	_Wait4Key
    8823 F1            [10]10397 	pop	af
-                          10398 ;src/main.c:2325: randSeed = 0; page = 1;
+                          10398 ;src/main.c:2309: randSeed = 0; page = 1;
    8824 DD 36 FE 00   [19]10399 	ld	-2 (ix), #0x00
    8828 DD 36 FF 01   [19]10400 	ld	-1 (ix), #0x01
-                          10401 ;src/main.c:2326: PrintStartMenu();
+                          10401 ;src/main.c:2310: PrintStartMenu();
    882C CD BE 83      [17]10402 	call	_PrintStartMenu
-                          10403 ;src/main.c:2328: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 22, 110), cpct_px2byteM0(1, 1), 45, 70);
+                          10403 ;src/main.c:2312: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 22, 110), cpct_px2byteM0(1, 1), 45, 70);
    882F 21 01 01      [10]10404 	ld	hl, #0x0101
    8832 E5            [11]10405 	push	hl
    8833 CD 9D 46      [17]10406 	call	_cpct_px2byteM0
@@ -10550,7 +10550,7 @@
    883D 21 26 F4      [10]10411 	ld	hl, #0xf426
    8840 E5            [11]10412 	push	hl
    8841 CD D7 46      [17]10413 	call	_cpct_drawSolidBox
-                          10414 ;src/main.c:2331: ctlUp[0] = 		RedefineKey("@P1@UP");
+                          10414 ;src/main.c:2315: ctlUp[0] = 		RedefineKey("@P1@UP");
    8844 21 15 89      [10]10415 	ld	hl, #___str_73
    8847 E5            [11]10416 	push	hl
    8848 CD 42 54      [17]10417 	call	_RedefineKey
@@ -10558,7 +10558,7 @@
    884C 4D            [ 4]10419 	ld	c, l
    884D 44            [ 4]10420 	ld	b, h
    884E ED 43 DD 48   [20]10421 	ld	(_ctlUp), bc
-                          10422 ;src/main.c:2332: ctlDown[0] = 	RedefineKey("P1@DOWN");
+                          10422 ;src/main.c:2316: ctlDown[0] = 	RedefineKey("P1@DOWN");
    8852 21 1C 89      [10]10423 	ld	hl, #___str_74
    8855 E5            [11]10424 	push	hl
    8856 CD 42 54      [17]10425 	call	_RedefineKey
@@ -10566,7 +10566,7 @@
    885A 4D            [ 4]10427 	ld	c, l
    885B 44            [ 4]10428 	ld	b, h
    885C ED 43 E1 48   [20]10429 	ld	(_ctlDown), bc
-                          10430 ;src/main.c:2333: ctlLeft[0] = 	RedefineKey("P1@LEFT");
+                          10430 ;src/main.c:2317: ctlLeft[0] = 	RedefineKey("P1@LEFT");
    8860 21 24 89      [10]10431 	ld	hl, #___str_75
    8863 E5            [11]10432 	push	hl
    8864 CD 42 54      [17]10433 	call	_RedefineKey
@@ -10574,7 +10574,7 @@
    8868 4D            [ 4]10435 	ld	c, l
    8869 44            [ 4]10436 	ld	b, h
    886A ED 43 E5 48   [20]10437 	ld	(_ctlLeft), bc
-                          10438 ;src/main.c:2334: ctlRight[0] = 	RedefineKey("P1@RIGHT");
+                          10438 ;src/main.c:2318: ctlRight[0] = 	RedefineKey("P1@RIGHT");
    886E 21 2C 89      [10]10439 	ld	hl, #___str_76
    8871 E5            [11]10440 	push	hl
    8872 CD 42 54      [17]10441 	call	_RedefineKey
@@ -10582,7 +10582,7 @@
    8876 4D            [ 4]10443 	ld	c, l
    8877 44            [ 4]10444 	ld	b, h
    8878 ED 43 E9 48   [20]10445 	ld	(_ctlRight), bc
-                          10446 ;src/main.c:2336: ctlUp[1] = 		RedefineKey("@P2@UP@@");
+                          10446 ;src/main.c:2320: ctlUp[1] = 		RedefineKey("@P2@UP@@");
    887C 21 35 89      [10]10447 	ld	hl, #___str_77
    887F E5            [11]10448 	push	hl
    8880 CD 42 54      [17]10449 	call	_RedefineKey
@@ -10590,7 +10590,7 @@
    8884 4D            [ 4]10451 	ld	c, l
    8885 44            [ 4]10452 	ld	b, h
    8886 ED 43 DF 48   [20]10453 	ld	((_ctlUp + 0x0002)), bc
-                          10454 ;src/main.c:2337: ctlDown[1] = 	RedefineKey("P2@DOWN");
+                          10454 ;src/main.c:2321: ctlDown[1] = 	RedefineKey("P2@DOWN");
    888A 21 3E 89      [10]10455 	ld	hl, #___str_78
    888D E5            [11]10456 	push	hl
    888E CD 42 54      [17]10457 	call	_RedefineKey
@@ -10598,7 +10598,7 @@
    8892 4D            [ 4]10459 	ld	c, l
    8893 44            [ 4]10460 	ld	b, h
    8894 ED 43 E3 48   [20]10461 	ld	((_ctlDown + 0x0002)), bc
-                          10462 ;src/main.c:2338: ctlLeft[1] = 	RedefineKey("P2@LEFT");
+                          10462 ;src/main.c:2322: ctlLeft[1] = 	RedefineKey("P2@LEFT");
    8898 21 46 89      [10]10463 	ld	hl, #___str_79
    889B E5            [11]10464 	push	hl
    889C CD 42 54      [17]10465 	call	_RedefineKey
@@ -10606,7 +10606,7 @@
    88A0 4D            [ 4]10467 	ld	c, l
    88A1 44            [ 4]10468 	ld	b, h
    88A2 ED 43 E7 48   [20]10469 	ld	((_ctlLeft + 0x0002)), bc
-                          10470 ;src/main.c:2339: ctlRight[1] = 	RedefineKey("P2@RIGHT");	
+                          10470 ;src/main.c:2323: ctlRight[1] = 	RedefineKey("P2@RIGHT");	
    88A6 21 4E 89      [10]10471 	ld	hl, #___str_80
    88A9 E5            [11]10472 	push	hl
    88AA CD 42 54      [17]10473 	call	_RedefineKey
@@ -10614,56 +10614,56 @@
    88AE 4D            [ 4]10475 	ld	c, l
    88AF 44            [ 4]10476 	ld	b, h
    88B0 ED 43 EB 48   [20]10477 	ld	((_ctlRight + 0x0002)), bc
-                          10478 ;src/main.c:2341: ctlAbort = 		RedefineKey("@ABORT@@");
+                          10478 ;src/main.c:2325: ctlAbort = 		RedefineKey("@ABORT@@");
    88B4 21 57 89      [10]10479 	ld	hl, #___str_81
    88B7 E5            [11]10480 	push	hl
    88B8 CD 42 54      [17]10481 	call	_RedefineKey
    88BB F1            [10]10482 	pop	af
    88BC 22 ED 48      [16]10483 	ld	(_ctlAbort), hl
-                          10484 ;src/main.c:2342: ctlMusic = 		RedefineKey("@MUSIC");
+                          10484 ;src/main.c:2326: ctlMusic = 		RedefineKey("@MUSIC");
    88BF 21 60 89      [10]10485 	ld	hl, #___str_82
    88C2 E5            [11]10486 	push	hl
    88C3 CD 42 54      [17]10487 	call	_RedefineKey
    88C6 F1            [10]10488 	pop	af
    88C7 22 EF 48      [16]10489 	ld	(_ctlMusic), hl
-                          10490 ;src/main.c:2343: ctlPause =		RedefineKey("@PAUSE");		
+                          10490 ;src/main.c:2327: ctlPause =		RedefineKey("@PAUSE");		
    88CA 21 67 89      [10]10491 	ld	hl, #___str_83
    88CD E5            [11]10492 	push	hl
    88CE CD 42 54      [17]10493 	call	_RedefineKey
    88D1 F1            [10]10494 	pop	af
    88D2 22 F1 48      [16]10495 	ld	(_ctlPause), hl
-                          10496 ;src/main.c:2344: PrintStartMenu();
+                          10496 ;src/main.c:2328: PrintStartMenu();
    88D5 CD BE 83      [17]10497 	call	_PrintStartMenu
    88D8 18 24         [12]10498 	jr	00120$
    88DA                   10499 00113$:
-                          10500 ;src/main.c:2346: else if(cpct_isKeyPressed(Key_4)) {	// turbo mode
+                          10500 ;src/main.c:2330: else if(cpct_isKeyPressed(Key_4)) {	// turbo mode
    88DA 21 07 01      [10]10501 	ld	hl, #0x0107
    88DD CD D4 43      [17]10502 	call	_cpct_isKeyPressed
    88E0 7D            [ 4]10503 	ld	a, l
    88E1 B7            [ 4]10504 	or	a, a
    88E2 28 1A         [12]10505 	jr	Z,00120$
-                          10506 ;src/main.c:2347: turboMode = !turboMode;
+                          10506 ;src/main.c:2331: turboMode = !turboMode;
    88E4 FD 21 D8 48   [14]10507 	ld	iy, #_turboMode
    88E8 FD 7E 00      [19]10508 	ld	a, 0 (iy)
    88EB D6 01         [ 7]10509 	sub	a,#0x01
    88ED 3E 00         [ 7]10510 	ld	a, #0x00
    88EF 17            [ 4]10511 	rla
    88F0 FD 77 00      [19]10512 	ld	0 (iy), a
-                          10513 ;src/main.c:2348: randSeed = 0; page = 1;
+                          10513 ;src/main.c:2332: randSeed = 0; page = 1;
    88F3 DD 36 FE 00   [19]10514 	ld	-2 (ix), #0x00
    88F7 DD 36 FF 01   [19]10515 	ld	-1 (ix), #0x01
-                          10516 ;src/main.c:2349: PrintStartMenu();
+                          10516 ;src/main.c:2333: PrintStartMenu();
    88FB CD BE 83      [17]10517 	call	_PrintStartMenu
    88FE                   10518 00120$:
-                          10519 ;src/main.c:2351: Pause(3);
+                          10519 ;src/main.c:2335: Pause(3);
    88FE 21 03 00      [10]10520 	ld	hl, #0x0003
    8901 CD 6A 4B      [17]10521 	call	_Pause
    8904 C3 BA 87      [10]10522 	jp	00122$
    8907                   10523 00123$:
-                          10524 ;src/main.c:2353: cpct_setSeed_lcg_u8(randSeed); // set the seed
+                          10524 ;src/main.c:2337: cpct_setSeed_lcg_u8(randSeed); // set the seed
    8907 DD 6E FE      [19]10525 	ld	l, -2 (ix)
    890A CD 8E 45      [17]10526 	call	_cpct_setSeed_lcg_u8
-                          10527 ;src/main.c:2354: ClearScreen();
+                          10527 ;src/main.c:2338: ClearScreen();
    890D CD 8C 4B      [17]10528 	call	_ClearScreen
    8910 DD F9         [10]10529 	ld	sp, ix
    8912 DD E1         [14]10530 	pop	ix
@@ -10709,200 +10709,200 @@
    8967                   10562 ___str_83:
    8967 40 50 41 55 53 45 10563 	.ascii "@PAUSE"
    896D 00                10564 	.db 0x00
-                          10565 ;src/main.c:2371: void InitValues() {	
+                          10565 ;src/main.c:2355: void InitValues() {	
                           10566 ;	---------------------------------
                           10567 ; Function InitValues
                           10568 ; ---------------------------------
    896E                   10569 _InitValues::
-                          10570 ;src/main.c:2374: ctlUp[0] = Key_W;
+                          10570 ;src/main.c:2358: ctlUp[0] = Key_W;
    896E 21 07 08      [10]10571 	ld	hl, #0x0807
    8971 22 DD 48      [16]10572 	ld	(_ctlUp), hl
-                          10573 ;src/main.c:2375: ctlDown[0] = Key_S;
+                          10573 ;src/main.c:2359: ctlDown[0] = Key_S;
    8974 26 10         [ 7]10574 	ld	h, #0x10
    8976 22 E1 48      [16]10575 	ld	(_ctlDown), hl
-                          10576 ;src/main.c:2376: ctlLeft[0] = Key_A;
+                          10576 ;src/main.c:2360: ctlLeft[0] = Key_A;
    8979 21 08 20      [10]10577 	ld	hl, #0x2008
    897C 22 E5 48      [16]10578 	ld	(_ctlLeft), hl
-                          10579 ;src/main.c:2377: ctlRight[0] = Key_D;
+                          10579 ;src/main.c:2361: ctlRight[0] = Key_D;
    897F 2E 07         [ 7]10580 	ld	l, #0x07
    8981 22 E9 48      [16]10581 	ld	(_ctlRight), hl
-                          10582 ;src/main.c:2379: ctlUp[1] = Key_F5;
+                          10582 ;src/main.c:2363: ctlUp[1] = Key_F5;
    8984 21 01 10      [10]10583 	ld	hl, #0x1001
    8987 22 DF 48      [16]10584 	ld	((_ctlUp + 0x0002)), hl
-                          10585 ;src/main.c:2380: ctlDown[1] = Key_F2;
+                          10585 ;src/main.c:2364: ctlDown[1] = Key_F2;
    898A 26 40         [ 7]10586 	ld	h, #0x40
    898C 22 E3 48      [16]10587 	ld	((_ctlDown + 0x0002)), hl
-                          10588 ;src/main.c:2381: ctlLeft[1] = Key_F1;
+                          10588 ;src/main.c:2365: ctlLeft[1] = Key_F1;
    898F 26 20         [ 7]10589 	ld	h, #0x20
    8991 22 E7 48      [16]10590 	ld	((_ctlLeft + 0x0002)), hl
-                          10591 ;src/main.c:2382: ctlRight[1] = Key_F3;
+                          10591 ;src/main.c:2366: ctlRight[1] = Key_F3;
    8994 2E 00         [ 7]10592 	ld	l, #0x00
    8996 22 EB 48      [16]10593 	ld	((_ctlRight + 0x0002)), hl
-                          10594 ;src/main.c:2384: ctlAbort = Key_X;
+                          10594 ;src/main.c:2368: ctlAbort = Key_X;
    8999 21 07 80      [10]10595 	ld	hl, #0x8007
    899C 22 ED 48      [16]10596 	ld	(_ctlAbort), hl
-                          10597 ;src/main.c:2385: ctlMusic = Key_M;
+                          10597 ;src/main.c:2369: ctlMusic = Key_M;
    899F 21 04 40      [10]10598 	ld	hl, #0x4004
    89A2 22 EF 48      [16]10599 	ld	(_ctlMusic), hl
-                          10600 ;src/main.c:2386: ctlPause = Key_H;	
+                          10600 ;src/main.c:2370: ctlPause = Key_H;	
    89A5 21 05 10      [10]10601 	ld	hl, #0x1005
    89A8 22 F1 48      [16]10602 	ld	(_ctlPause), hl
-                          10603 ;src/main.c:2388: turboMode = FALSE;
+                          10603 ;src/main.c:2372: turboMode = FALSE;
    89AB 21 D8 48      [10]10604 	ld	hl,#_turboMode + 0
    89AE 36 00         [10]10605 	ld	(hl), #0x00
-                          10606 ;src/main.c:2389: nTip = 0;
+                          10606 ;src/main.c:2373: nTip = 0;
    89B0 21 D9 48      [10]10607 	ld	hl,#_nTip + 0
    89B3 36 00         [10]10608 	ld	(hl), #0x00
    89B5 C9            [10]10609 	ret
-                          10610 ;src/main.c:2394: void ResetData() {
+                          10610 ;src/main.c:2378: void ResetData() {
                           10611 ;	---------------------------------
                           10612 ; Function ResetData
                           10613 ; ---------------------------------
    89B6                   10614 _ResetData::
-                          10615 ;src/main.c:2395: ctMainLoop = 0;
+                          10615 ;src/main.c:2379: ctMainLoop = 0;
    89B6 21 00 00      [10]10616 	ld	hl, #0x0000
    89B9 22 DB 48      [16]10617 	ld	(_ctMainLoop), hl
-                          10618 ;src/main.c:2396: nObj[0] = -1;
+                          10618 ;src/main.c:2380: nObj[0] = -1;
    89BC 21 61 49      [10]10619 	ld	hl, #_nObj+0
    89BF 36 FF         [10]10620 	ld	(hl), #0xff
-                          10621 ;src/main.c:2397: nObj[1] = -1;
+                          10621 ;src/main.c:2381: nObj[1] = -1;
    89C1 23            [ 6]10622 	inc	hl
    89C2 36 FF         [10]10623 	ld	(hl), #0xff
-                          10624 ;src/main.c:2398: sht.active = FALSE;
+                          10624 ;src/main.c:2382: sht.active = FALSE;
    89C4 21 60 49      [10]10625 	ld	hl, #(_sht + 0x0004)
    89C7 36 00         [10]10626 	ld	(hl), #0x00
-                          10627 ;src/main.c:2399: ctWizardAnim = 0;
+                          10627 ;src/main.c:2383: ctWizardAnim = 0;
    89C9 21 DA 48      [10]10628 	ld	hl,#_ctWizardAnim + 0
    89CC 36 00         [10]10629 	ld	(hl), #0x00
-                          10630 ;src/main.c:2402: spr[0].dir = D_right; 
+                          10630 ;src/main.c:2386: spr[0].dir = D_right; 
    89CE 21 FA 48      [10]10631 	ld	hl, #(_spr + 0x0007)
    89D1 36 03         [10]10632 	ld	(hl), #0x03
-                          10633 ;src/main.c:2403: spr[0].status = S_stopped;
+                          10633 ;src/main.c:2387: spr[0].status = S_stopped;
    89D3 21 F9 48      [10]10634 	ld	hl, #(_spr + 0x0006)
    89D6 36 04         [10]10635 	ld	(hl), #0x04
-                          10636 ;src/main.c:2404: spr[0].print_minV = TRUE; // the first time must be printed on screen
+                          10636 ;src/main.c:2388: spr[0].print_minV = TRUE; // the first time must be printed on screen
    89D8 21 00 49      [10]10637 	ld	hl, #(_spr + 0x000d)
    89DB 36 01         [10]10638 	ld	(hl), #0x01
-                          10639 ;src/main.c:2405: spr[0].power_maxV = 0;
+                          10639 ;src/main.c:2389: spr[0].power_maxV = 0;
    89DD 21 01 49      [10]10640 	ld	hl, #(_spr + 0x000e)
    89E0 36 00         [10]10641 	ld	(hl), #0x00
-                          10642 ;src/main.c:2406: ctInactivity[0] = 0;
+                          10642 ;src/main.c:2390: ctInactivity[0] = 0;
    89E2 01 D6 48      [10]10643 	ld	bc, #_ctInactivity+0
    89E5 AF            [ 4]10644 	xor	a, a
    89E6 02            [ 7]10645 	ld	(bc), a
-                          10646 ;src/main.c:2408: spr[1].dir = D_left; 
+                          10646 ;src/main.c:2392: spr[1].dir = D_left; 
    89E7 21 09 49      [10]10647 	ld	hl, #(_spr + 0x0016)
    89EA 36 02         [10]10648 	ld	(hl), #0x02
-                          10649 ;src/main.c:2409: spr[1].status = S_stopped;	
+                          10649 ;src/main.c:2393: spr[1].status = S_stopped;	
    89EC 21 08 49      [10]10650 	ld	hl, #(_spr + 0x0015)
    89EF 36 04         [10]10651 	ld	(hl), #0x04
-                          10652 ;src/main.c:2410: spr[1].print_minV = TRUE; // the first time must be printed on screen
+                          10652 ;src/main.c:2394: spr[1].print_minV = TRUE; // the first time must be printed on screen
    89F1 21 0F 49      [10]10653 	ld	hl, #(_spr + 0x001c)
    89F4 36 01         [10]10654 	ld	(hl), #0x01
-                          10655 ;src/main.c:2411: spr[1].power_maxV = 0;
+                          10655 ;src/main.c:2395: spr[1].power_maxV = 0;
    89F6 21 10 49      [10]10656 	ld	hl, #(_spr + 0x001d)
    89F9 36 00         [10]10657 	ld	(hl), #0x00
-                          10658 ;src/main.c:2412: ctInactivity[1] = 0;
+                          10658 ;src/main.c:2396: ctInactivity[1] = 0;
    89FB 03            [ 6]10659 	inc	bc
    89FC AF            [ 4]10660 	xor	a, a
    89FD 02            [ 7]10661 	ld	(bc), a
-                          10662 ;src/main.c:2414: SetEnemies();
+                          10662 ;src/main.c:2398: SetEnemies();
    89FE CD 7F 78      [17]10663 	call	_SetEnemies
-                          10664 ;src/main.c:2415: PrintMap();
+                          10664 ;src/main.c:2399: PrintMap();
    8A01 CD 01 4C      [17]10665 	call	_PrintMap
-                          10666 ;src/main.c:2416: RefreshScoreboard();
+                          10666 ;src/main.c:2400: RefreshScoreboard();
    8A04 CD EC 55      [17]10667 	call	_RefreshScoreboard
-                          10668 ;src/main.c:2417: DeleteObjectInStore();
+                          10668 ;src/main.c:2401: DeleteObjectInStore();
    8A07 CD 90 58      [17]10669 	call	_DeleteObjectInStore
-                          10670 ;src/main.c:2420: if (nMap != lastNMap) {
+                          10670 ;src/main.c:2404: if (nMap != lastNMap) {
    8A0A 3A BA 48      [13]10671 	ld	a,(#_nMap + 0)
    8A0D FD 21 BB 48   [14]10672 	ld	iy, #_lastNMap
    8A11 FD 96 00      [19]10673 	sub	a, 0 (iy)
    8A14 C8            [11]10674 	ret	Z
-                          10675 ;src/main.c:2421: if (!TwoPlayers) {
+                          10675 ;src/main.c:2405: if (!TwoPlayers) {
    8A15 3A BE 48      [13]10676 	ld	a,(#_TwoPlayers + 0)
    8A18 B7            [ 4]10677 	or	a, a
    8A19 20 1C         [12]10678 	jr	NZ,00102$
-                          10679 ;src/main.c:2422: PrintKey();
+                          10679 ;src/main.c:2406: PrintKey();
    8A1B CD 77 5F      [17]10680 	call	_PrintKey
-                          10681 ;src/main.c:2424: playerKey[0] = 0;
+                          10681 ;src/main.c:2408: playerKey[0] = 0;
    8A1E 21 CE 48      [10]10682 	ld	hl, #_playerKey
    8A21 36 00         [10]10683 	ld	(hl), #0x00
-                          10684 ;src/main.c:2425: playerKey[1] = 0;
+                          10684 ;src/main.c:2409: playerKey[1] = 0;
    8A23 21 CF 48      [10]10685 	ld	hl, #(_playerKey + 0x0001)
    8A26 36 00         [10]10686 	ld	(hl), #0x00
-                          10687 ;src/main.c:2426: playerKey[2] = 0;
+                          10687 ;src/main.c:2410: playerKey[2] = 0;
    8A28 21 D0 48      [10]10688 	ld	hl, #(_playerKey + 0x0002)
    8A2B 36 00         [10]10689 	ld	(hl), #0x00
-                          10690 ;src/main.c:2427: playerKey[3] = 0;
+                          10690 ;src/main.c:2411: playerKey[3] = 0;
    8A2D 21 D1 48      [10]10691 	ld	hl, #(_playerKey + 0x0003)
    8A30 36 00         [10]10692 	ld	(hl), #0x00
-                          10693 ;src/main.c:2428: playerKey[4] = 0;
+                          10693 ;src/main.c:2412: playerKey[4] = 0;
    8A32 21 D2 48      [10]10694 	ld	hl, #(_playerKey + 0x0004)
    8A35 36 00         [10]10695 	ld	(hl), #0x00
    8A37                   10696 00102$:
-                          10697 ;src/main.c:2430: PrintLevelInfo();	
+                          10697 ;src/main.c:2414: PrintLevelInfo();	
    8A37 CD 00 50      [17]10698 	call	_PrintLevelInfo
-                          10699 ;src/main.c:2431: PrintMap();	
+                          10699 ;src/main.c:2415: PrintMap();	
    8A3A CD 01 4C      [17]10700 	call	_PrintMap
-                          10701 ;src/main.c:2432: lastNMap = nMap;
+                          10701 ;src/main.c:2416: lastNMap = nMap;
    8A3D 3A BA 48      [13]10702 	ld	a,(#_nMap + 0)
    8A40 32 BB 48      [13]10703 	ld	(#_lastNMap + 0),a
    8A43 C9            [10]10704 	ret
-                          10705 ;src/main.c:2438: void InitGame() {
+                          10705 ;src/main.c:2422: void InitGame() {
                           10706 ;	---------------------------------
                           10707 ; Function InitGame
                           10708 ; ---------------------------------
    8A44                   10709 _InitGame::
-                          10710 ;src/main.c:2439: StartMenu(); // run the start menu
+                          10710 ;src/main.c:2423: StartMenu(); // run the start menu
    8A44 CD A9 87      [17]10711 	call	_StartMenu
-                          10712 ;src/main.c:2440: nMap = 0; // initial map number
+                          10712 ;src/main.c:2424: nMap = 0; // initial map number
    8A47 21 BA 48      [10]10713 	ld	hl,#_nMap + 0
    8A4A 36 00         [10]10714 	ld	(hl), #0x00
-                          10715 ;src/main.c:2441: lastNMap = 255;
+                          10715 ;src/main.c:2425: lastNMap = 255;
    8A4C 21 BB 48      [10]10716 	ld	hl,#_lastNMap + 0
    8A4F 36 FF         [10]10717 	ld	(hl), #0xff
-                          10718 ;src/main.c:2444: spr[0].num = 0; // sprite number
+                          10718 ;src/main.c:2428: spr[0].num = 0; // sprite number
    8A51 21 F3 48      [10]10719 	ld	hl, #_spr
    8A54 36 00         [10]10720 	ld	(hl), #0x00
-                          10721 ;src/main.c:2445: spr[0].ident = SORCERER1; // identity
+                          10721 ;src/main.c:2429: spr[0].ident = SORCERER1; // identity
    8A56 21 F4 48      [10]10722 	ld	hl, #(_spr + 0x0001)
    8A59 36 00         [10]10723 	ld	(hl), #0x00
-                          10724 ;src/main.c:2446: spr[0].lives_speed = 3; // lives
+                          10724 ;src/main.c:2430: spr[0].lives_speed = 3; // lives
    8A5B 21 FE 48      [10]10725 	ld	hl, #(_spr + 0x000b)
    8A5E 36 03         [10]10726 	ld	(hl), #0x03
-                          10727 ;src/main.c:2447: score[0] = 0; // score
+                          10727 ;src/main.c:2431: score[0] = 0; // score
    8A60 21 00 00      [10]10728 	ld	hl, #0x0000
    8A63 22 BF 48      [16]10729 	ld	(_score), hl
-                          10730 ;src/main.c:2448: ResetObjData(0);
+                          10730 ;src/main.c:2432: ResetObjData(0);
    8A66 2E 00         [ 7]10731 	ld	l, #0x00
    8A68 CD 05 57      [17]10732 	call	_ResetObjData
-                          10733 ;src/main.c:2451: spr[1].num = 1; // sprite number
+                          10733 ;src/main.c:2435: spr[1].num = 1; // sprite number
    8A6B 21 02 49      [10]10734 	ld	hl, #(_spr + 0x000f)
    8A6E 36 01         [10]10735 	ld	(hl), #0x01
-                          10736 ;src/main.c:2452: spr[1].ident = SORCERER2; // identity
+                          10736 ;src/main.c:2436: spr[1].ident = SORCERER2; // identity
    8A70 21 03 49      [10]10737 	ld	hl, #(_spr + 0x0010)
    8A73 36 01         [10]10738 	ld	(hl), #0x01
-                          10739 ;src/main.c:2453: spr[1].lives_speed = 3; // lives
+                          10739 ;src/main.c:2437: spr[1].lives_speed = 3; // lives
    8A75 21 0D 49      [10]10740 	ld	hl, #(_spr + 0x001a)
    8A78 36 03         [10]10741 	ld	(hl), #0x03
-                          10742 ;src/main.c:2454: score[1] = 0; // score
+                          10742 ;src/main.c:2438: score[1] = 0; // score
    8A7A 21 00 00      [10]10743 	ld	hl, #0x0000
    8A7D 22 C1 48      [16]10744 	ld	((_score + 0x0002)), hl
-                          10745 ;src/main.c:2455: ResetObjData(1);
+                          10745 ;src/main.c:2439: ResetObjData(1);
    8A80 2E 01         [ 7]10746 	ld	l, #0x01
    8A82 CD 05 57      [17]10747 	call	_ResetObjData
-                          10748 ;src/main.c:2458: spr[6].num = 6; // sprite number
+                          10748 ;src/main.c:2442: spr[6].num = 6; // sprite number
    8A85 21 4D 49      [10]10749 	ld	hl, #(_spr + 0x005a)
    8A88 36 06         [10]10750 	ld	(hl), #0x06
-                          10751 ;src/main.c:2459: spr[6].ident = WIZARD; // identity
+                          10751 ;src/main.c:2443: spr[6].ident = WIZARD; // identity
    8A8A 21 4E 49      [10]10752 	ld	hl, #(_spr + 0x005b)
    8A8D 36 07         [10]10753 	ld	(hl), #0x07
-                          10754 ;src/main.c:2461: InitScoreboard();		
+                          10754 ;src/main.c:2445: InitScoreboard();		
    8A8F CD 81 54      [17]10755 	call	_InitScoreboard
-                          10756 ;src/main.c:2462: ResetData();
+                          10756 ;src/main.c:2446: ResetData();
    8A92 C3 B6 89      [10]10757 	jp  _ResetData
-                          10758 ;src/main.c:2467: void GameOver(u8 player) {
+                          10758 ;src/main.c:2451: void GameOver(u8 player) {
                           10759 ;	---------------------------------
                           10760 ; Function GameOver
                           10761 ; ---------------------------------
@@ -10911,7 +10911,7 @@
    8A97 DD 21 00 00   [14]10764 	ld	ix,#0
    8A9B DD 39         [15]10765 	add	ix,sp
    8A9D F5            [11]10766 	push	af
-                          10767 ;src/main.c:2469: if (spr[player].lives_speed > 1 && player != 2) {
+                          10767 ;src/main.c:2453: if (spr[player].lives_speed > 1 && player != 2) {
    8A9E 01 F3 48      [10]10768 	ld	bc, #_spr+0
    8AA1 DD 5E 04      [19]10769 	ld	e,4 (ix)
    8AA4 16 00         [ 7]10770 	ld	d,#0x00
@@ -10936,22 +10936,22 @@
    8ABC DD 7E 04      [19]10789 	ld	a, 4 (ix)
    8ABF D6 02         [ 7]10790 	sub	a, #0x02
    8AC1 28 0A         [12]10791 	jr	Z,00113$
-                          10792 ;src/main.c:2470: spr[player].lives_speed--;
+                          10792 ;src/main.c:2454: spr[player].lives_speed--;
    8AC3 0D            [ 4]10793 	dec	c
    8AC4 E1            [10]10794 	pop	hl
    8AC5 E5            [11]10795 	push	hl
    8AC6 71            [ 7]10796 	ld	(hl), c
-                          10797 ;src/main.c:2471: ResetData();
+                          10797 ;src/main.c:2455: ResetData();
    8AC7 CD B6 89      [17]10798 	call	_ResetData
    8ACA C3 9E 8B      [10]10799 	jp	00116$
    8ACD                   10800 00113$:
-                          10801 ;src/main.c:2475: spr[player].lives_speed = 0;
+                          10801 ;src/main.c:2459: spr[player].lives_speed = 0;
    8ACD E1            [10]10802 	pop	hl
    8ACE E5            [11]10803 	push	hl
    8ACF 36 00         [10]10804 	ld	(hl), #0x00
-                          10805 ;src/main.c:2476: RefreshScoreboard();
+                          10805 ;src/main.c:2460: RefreshScoreboard();
    8AD1 CD EC 55      [17]10806 	call	_RefreshScoreboard
-                          10807 ;src/main.c:2478: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
+                          10807 ;src/main.c:2462: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
    8AD4 21 04 04      [10]10808 	ld	hl, #0x0404
    8AD7 E5            [11]10809 	push	hl
    8AD8 CD 9D 46      [17]10810 	call	_cpct_px2byteM0
@@ -10962,7 +10962,7 @@
    8AE2 21 26 C3      [10]10815 	ld	hl, #0xc326
    8AE5 E5            [11]10816 	push	hl
    8AE6 CD D7 46      [17]10817 	call	_cpct_drawSolidBox
-                          10818 ;src/main.c:2479: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
+                          10818 ;src/main.c:2463: cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
    8AE9 21 04 04      [10]10819 	ld	hl, #0x0404
    8AEC E5            [11]10820 	push	hl
    8AED CD 9D 46      [17]10821 	call	_cpct_px2byteM0
@@ -10973,7 +10973,7 @@
    8AF7 21 48 C3      [10]10826 	ld	hl, #0xc348
    8AFA E5            [11]10827 	push	hl
    8AFB CD D7 46      [17]10828 	call	_cpct_drawSolidBox
-                          10829 ;src/main.c:2480: PrintFrame(6,80,71,134);
+                          10829 ;src/main.c:2464: PrintFrame(6,80,71,134);
    8AFE 21 47 86      [10]10830 	ld	hl, #0x8647
    8B01 E5            [11]10831 	push	hl
    8B02 21 06 50      [10]10832 	ld	hl, #0x5006
@@ -10981,11 +10981,11 @@
    8B06 CD 89 4D      [17]10834 	call	_PrintFrame
    8B09 F1            [10]10835 	pop	af
    8B0A F1            [10]10836 	pop	af
-                          10837 ;src/main.c:2481: if (TwoPlayers) {
+                          10837 ;src/main.c:2465: if (TwoPlayers) {
    8B0B 3A BE 48      [13]10838 	ld	a,(#_TwoPlayers + 0)
    8B0E B7            [ 4]10839 	or	a, a
    8B0F 28 6B         [12]10840 	jr	Z,00107$
-                          10841 ;src/main.c:2482: PrintText("G@A@M@E@@O@V@E@R", 16, 91, 0);
+                          10841 ;src/main.c:2466: PrintText("G@A@M@E@@O@V@E@R", 16, 91, 0);
    8B11 21 5B 00      [10]10842 	ld	hl, #0x005b
    8B14 E5            [11]10843 	push	hl
    8B15 3E 10         [ 7]10844 	ld	a, #0x10
@@ -10997,7 +10997,7 @@
    8B20 F1            [10]10850 	pop	af
    8B21 F1            [10]10851 	pop	af
    8B22 33            [ 6]10852 	inc	sp
-                          10853 ;src/main.c:2483: if (player == 0) PrintText("PLAYER@2@WINS>", 19, 106, 0);
+                          10853 ;src/main.c:2467: if (player == 0) PrintText("PLAYER@2@WINS>", 19, 106, 0);
    8B23 DD 7E 04      [19]10854 	ld	a, 4 (ix)
    8B26 B7            [ 4]10855 	or	a, a
    8B27 20 14         [12]10856 	jr	NZ,00104$
@@ -11014,7 +11014,7 @@
    8B3A 33            [ 6]10867 	inc	sp
    8B3B 18 18         [12]10868 	jr	00105$
    8B3D                   10869 00104$:
-                          10870 ;src/main.c:2484: else if (player == 1) PrintText("PLAYER@1@WINS>", 19, 106, 0);
+                          10870 ;src/main.c:2468: else if (player == 1) PrintText("PLAYER@1@WINS>", 19, 106, 0);
    8B3D DD 7E 04      [19]10871 	ld	a, 4 (ix)
    8B40 3D            [ 4]10872 	dec	a
    8B41 20 12         [12]10873 	jr	NZ,00105$
@@ -11030,7 +11030,7 @@
    8B53 F1            [10]10883 	pop	af
    8B54 33            [ 6]10884 	inc	sp
    8B55                   10885 00105$:
-                          10886 ;src/main.c:2485: PrintText("HIGH@SCORE:", 16, 122, 0);
+                          10886 ;src/main.c:2469: PrintText("HIGH@SCORE:", 16, 122, 0);
    8B55 21 7A 00      [10]10887 	ld	hl, #0x007a
    8B58 E5            [11]10888 	push	hl
    8B59 3E 10         [ 7]10889 	ld	a, #0x10
@@ -11040,7 +11040,7 @@
    8B60 E5            [11]10893 	push	hl
    8B61 CD E6 4C      [17]10894 	call	_PrintText
    8B64 F1            [10]10895 	pop	af
-                          10896 ;src/main.c:2486: PrintNumber(highScore, 4, 52, 122, 0);			
+                          10896 ;src/main.c:2470: PrintNumber(highScore, 4, 52, 122, 0);			
    8B65 33            [ 6]10897 	inc	sp
    8B66 21 7A 00      [10]10898 	ld	hl,#0x007a
    8B69 E3            [19]10899 	ex	(sp),hl
@@ -11054,7 +11054,7 @@
    8B79 F9            [ 6]10907 	ld	sp, hl
    8B7A 18 12         [12]10908 	jr	00108$
    8B7C                   10909 00107$:
-                          10910 ;src/main.c:2489: PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
+                          10910 ;src/main.c:2473: PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
    8B7C 21 6B 00      [10]10911 	ld	hl, #0x006b
    8B7F E5            [11]10912 	push	hl
    8B80 3E 10         [ 7]10913 	ld	a, #0x10
@@ -11067,16 +11067,16 @@
    8B8C F1            [10]10920 	pop	af
    8B8D 33            [ 6]10921 	inc	sp
    8B8E                   10922 00108$:
-                          10923 ;src/main.c:2490: Pause(500);	
+                          10923 ;src/main.c:2474: Pause(500);	
    8B8E 21 F4 01      [10]10924 	ld	hl, #0x01f4
    8B91 CD 6A 4B      [17]10925 	call	_Pause
-                          10926 ;src/main.c:2492: while (!cpct_isAnyKeyPressed());
+                          10926 ;src/main.c:2476: while (!cpct_isAnyKeyPressed());
    8B94                   10927 00109$:
    8B94 CD CF 45      [17]10928 	call	_cpct_isAnyKeyPressed
    8B97 7D            [ 4]10929 	ld	a, l
    8B98 B7            [ 4]10930 	or	a, a
    8B99 28 F9         [12]10931 	jr	Z,00109$
-                          10932 ;src/main.c:2493: InitGame();
+                          10932 ;src/main.c:2477: InitGame();
    8B9B CD 44 8A      [17]10933 	call	_InitGame
    8B9E                   10934 00116$:
    8B9E DD F9         [10]10935 	ld	sp, ix
@@ -11101,26 +11101,26 @@
    8BD2 48 49 47 48 40 53 10948 	.ascii "HIGH@SCORE:"
         43 4F 52 45 3A
    8BDD 00                10949 	.db 0x00
-                          10950 ;src/main.c:2498: void main(void) {
+                          10950 ;src/main.c:2482: void main(void) {
                           10951 ;	---------------------------------
                           10952 ; Function main
                           10953 ; ---------------------------------
    8BDE                   10954 _main::
-                          10955 ;src/main.c:2500: cpct_disableFirmware();
+                          10955 ;src/main.c:2484: cpct_disableFirmware();
    8BDE CD C7 46      [17]10956 	call	_cpct_disableFirmware
-                          10957 ;src/main.c:2503: cpct_setInterruptHandler(Interrupt); 
+                          10957 ;src/main.c:2487: cpct_setInterruptHandler(Interrupt); 
    8BE1 21 76 4B      [10]10958 	ld	hl, #_Interrupt
    8BE4 CD 3B 48      [17]10959 	call	_cpct_setInterruptHandler
-                          10960 ;src/main.c:2505: cpct_setVideoMode(0);
+                          10960 ;src/main.c:2489: cpct_setVideoMode(0);
    8BE7 2E 00         [ 7]10961 	ld	l, #0x00
    8BE9 CD 8F 46      [17]10962 	call	_cpct_setVideoMode
-                          10963 ;src/main.c:2507: cpct_setPalette(g_palette, 16);
+                          10963 ;src/main.c:2491: cpct_setPalette(g_palette, 16);
    8BEC 21 10 00      [10]10964 	ld	hl, #0x0010
    8BEF E5            [11]10965 	push	hl
    8BF0 21 C7 2E      [10]10966 	ld	hl, #_g_palette
    8BF3 E5            [11]10967 	push	hl
    8BF4 CD BD 43      [17]10968 	call	_cpct_setPalette
-                          10969 ;src/main.c:2509: cpct_setBorder(g_palette[BG_COLOR]);
+                          10969 ;src/main.c:2493: cpct_setBorder(g_palette[BG_COLOR]);
    8BF7 21 C8 2E      [10]10970 	ld	hl, #_g_palette + 1
    8BFA 46            [ 7]10971 	ld	b, (hl)
    8BFB C5            [11]10972 	push	bc
@@ -11129,16 +11129,16 @@
    8BFF F5            [11]10975 	push	af
    8C00 33            [ 6]10976 	inc	sp
    8C01 CD 4A 44      [17]10977 	call	_cpct_setPALColour
-                          10978 ;src/main.c:2511: cpct_etm_setTileset2x4(g_tileset);	
+                          10978 ;src/main.c:2495: cpct_etm_setTileset2x4(g_tileset);	
    8C04 21 D7 2E      [10]10979 	ld	hl, #_g_tileset
    8C07 CD 8A 45      [17]10980 	call	_cpct_etm_setTileset2x4
-                          10981 ;src/main.c:2513: InitValues();
+                          10981 ;src/main.c:2497: InitValues();
    8C0A CD 6E 89      [17]10982 	call	_InitValues
-                          10983 ;src/main.c:2515: InitGame();
+                          10983 ;src/main.c:2499: InitGame();
    8C0D CD 44 8A      [17]10984 	call	_InitGame
-                          10985 ;src/main.c:2518: while (1) {
+                          10985 ;src/main.c:2502: while (1) {
    8C10                   10986 00140$:
-                          10987 ;src/main.c:2520: if (ctMainLoop % 8 == 0) {
+                          10987 ;src/main.c:2504: if (ctMainLoop % 8 == 0) {
    8C10 21 08 00      [10]10988 	ld	hl, #0x0008
    8C13 E5            [11]10989 	push	hl
    8C14 2A DB 48      [16]10990 	ld	hl, (_ctMainLoop)
@@ -11149,26 +11149,26 @@
    8C1D 7C            [ 4]10995 	ld	a, h
    8C1E B5            [ 4]10996 	or	a,l
    8C1F 20 46         [12]10997 	jr	NZ,00108$
-                          10998 ;src/main.c:2521: ReprintObject(); // reprint the active object
+                          10998 ;src/main.c:2505: ReprintObject(); // reprint the active object
    8C21 CD 5D 5B      [17]10999 	call	_ReprintObject
-                          11000 ;src/main.c:2522: PrintObjectInStore(); // reprint the object into the store
+                          11000 ;src/main.c:2506: PrintObjectInStore(); // reprint the object into the store
    8C24 CD CC 58      [17]11001 	call	_PrintObjectInStore
-                          11002 ;src/main.c:2523: CheckObject(0); // verify collection of object 1
+                          11002 ;src/main.c:2507: CheckObject(0); // verify collection of object 1
    8C27 AF            [ 4]11003 	xor	a, a
    8C28 F5            [11]11004 	push	af
    8C29 33            [ 6]11005 	inc	sp
    8C2A CD FF 58      [17]11006 	call	_CheckObject
    8C2D 33            [ 6]11007 	inc	sp
-                          11008 ;src/main.c:2524: CheckObject(1); // verify collection of object 2
+                          11008 ;src/main.c:2508: CheckObject(1); // verify collection of object 2
    8C2E 3E 01         [ 7]11009 	ld	a, #0x01
    8C30 F5            [11]11010 	push	af
    8C31 33            [ 6]11011 	inc	sp
    8C32 CD FF 58      [17]11012 	call	_CheckObject
    8C35 33            [ 6]11013 	inc	sp
-                          11014 ;src/main.c:2525: MakeWizardAnim(0); // activates the wizard's shot if the player 1 is inactive		
+                          11014 ;src/main.c:2509: MakeWizardAnim(0); // activates the wizard's shot if the player 1 is inactive		
    8C36 2E 00         [ 7]11015 	ld	l, #0x00
    8C38 CD 21 73      [17]11016 	call	_MakeWizardAnim
-                          11017 ;src/main.c:2526: if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
+                          11017 ;src/main.c:2510: if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
    8C3B 3A 00 49      [13]11018 	ld	a, (#_spr + 13)
    8C3E B7            [ 4]11019 	or	a, a
    8C3F 28 07         [12]11020 	jr	Z,00102$
@@ -11178,16 +11178,16 @@
    8C44 CD D3 5F      [17]11024 	call	_CheckActiveTile
    8C47 33            [ 6]11025 	inc	sp
    8C48                   11026 00102$:
-                          11027 ;src/main.c:2528: if (TwoPlayers) {
+                          11027 ;src/main.c:2512: if (TwoPlayers) {
    8C48 3A BE 48      [13]11028 	ld	a,(#_TwoPlayers + 0)
    8C4B B7            [ 4]11029 	or	a, a
    8C4C 28 16         [12]11030 	jr	Z,00106$
-                          11031 ;src/main.c:2529: CheckDuel(); // check that both players collide and have potions
+                          11031 ;src/main.c:2513: CheckDuel(); // check that both players collide and have potions
    8C4E CD CB 70      [17]11032 	call	_CheckDuel
-                          11033 ;src/main.c:2530: MakeWizardAnim(1); // activates the wizard's shot if the player 2 is inactive		
+                          11033 ;src/main.c:2514: MakeWizardAnim(1); // activates the wizard's shot if the player 2 is inactive		
    8C51 2E 01         [ 7]11034 	ld	l, #0x01
    8C53 CD 21 73      [17]11035 	call	_MakeWizardAnim
-                          11036 ;src/main.c:2531: if (spr[1].print_minV) CheckActiveTile(1); // check entry into store, door or well of player 2
+                          11036 ;src/main.c:2515: if (spr[1].print_minV) CheckActiveTile(1); // check entry into store, door or well of player 2
    8C56 3A 0F 49      [13]11037 	ld	a, (#_spr + 28)
    8C59 B7            [ 4]11038 	or	a, a
    8C5A 28 08         [12]11039 	jr	Z,00106$
@@ -11197,16 +11197,16 @@
    8C60 CD D3 5F      [17]11043 	call	_CheckActiveTile
    8C63 33            [ 6]11044 	inc	sp
    8C64                   11045 00106$:
-                          11046 ;src/main.c:2533: WizardAnim(); // print the wizard if active
+                          11046 ;src/main.c:2517: WizardAnim(); // print the wizard if active
    8C64 CD 68 72      [17]11047 	call	_WizardAnim
    8C67                   11048 00108$:
-                          11049 ;src/main.c:2536: if (!turboMode) cpct_waitVSYNC(); // wait for vertical retrace	
+                          11049 ;src/main.c:2520: if (!turboMode) cpct_waitVSYNC(); // wait for vertical retrace	
    8C67 3A D8 48      [13]11050 	ld	a,(#_turboMode + 0)
    8C6A B7            [ 4]11051 	or	a, a
    8C6B 20 03         [12]11052 	jr	NZ,00110$
    8C6D CD 87 46      [17]11053 	call	_cpct_waitVSYNC
    8C70                   11054 00110$:
-                          11055 ;src/main.c:2539: switch (ctMainLoop % 3) {
+                          11055 ;src/main.c:2523: switch (ctMainLoop % 3) {
    8C70 21 03 00      [10]11056 	ld	hl, #0x0003
    8C73 E5            [11]11057 	push	hl
    8C74 2A DB 48      [16]11058 	ld	hl, (_ctMainLoop)
@@ -11229,39 +11229,39 @@
    8C8C B0            [ 4]11075 	or	a, b
    8C8D 28 2F         [12]11076 	jr	Z,00117$
    8C8F C3 18 8D      [10]11077 	jp	00129$
-                          11078 ;src/main.c:2541: case 0: {							
+                          11078 ;src/main.c:2525: case 0: {							
    8C92                   11079 00111$:
-                          11080 ;src/main.c:2542: PlayerLoop(&spr[0]); // player 1
+                          11080 ;src/main.c:2526: PlayerLoop(&spr[0]); // player 1
    8C92 21 F3 48      [10]11081 	ld	hl, #_spr
    8C95 CD 40 6C      [17]11082 	call	_PlayerLoop
-                          11083 ;src/main.c:2543: EnemyLoop(&spr[2]);	 // enemy sprite 2 is always processed (fast)
+                          11083 ;src/main.c:2527: EnemyLoop(&spr[2]);	 // enemy sprite 2 is always processed (fast)
    8C98 21 11 49      [10]11084 	ld	hl, #(_spr + 0x001e)
    8C9B CD 57 83      [17]11085 	call	_EnemyLoop
-                          11086 ;src/main.c:2544: break;
+                          11086 ;src/main.c:2528: break;
    8C9E C3 18 8D      [10]11087 	jp	00129$
-                          11088 ;src/main.c:2547: case 1:	{			
+                          11088 ;src/main.c:2531: case 1:	{			
    8CA1                   11089 00112$:
-                          11090 ;src/main.c:2548: if (TwoPlayers) {
+                          11090 ;src/main.c:2532: if (TwoPlayers) {
    8CA1 3A BE 48      [13]11091 	ld	a,(#_TwoPlayers + 0)
    8CA4 B7            [ 4]11092 	or	a, a
    8CA5 28 0F         [12]11093 	jr	Z,00116$
-                          11094 ;src/main.c:2549: PlayerLoop(&spr[1]); // player 2
+                          11094 ;src/main.c:2533: PlayerLoop(&spr[1]); // player 2
    8CA7 21 02 49      [10]11095 	ld	hl, #(_spr + 0x000f)
    8CAA CD 40 6C      [17]11096 	call	_PlayerLoop
-                          11097 ;src/main.c:2550: if (!turboMode) cpct_waitVSYNC(); // additional wait for vertical retrace (avoid flickering)
+                          11097 ;src/main.c:2534: if (!turboMode) cpct_waitVSYNC(); // additional wait for vertical retrace (avoid flickering)
    8CAD 3A D8 48      [13]11098 	ld	a,(#_turboMode + 0)
    8CB0 B7            [ 4]11099 	or	a, a
    8CB1 20 03         [12]11100 	jr	NZ,00116$
    8CB3 CD 87 46      [17]11101 	call	_cpct_waitVSYNC
    8CB6                   11102 00116$:
-                          11103 ;src/main.c:2552: EnemyLoop(&spr[3]);	 // enemy sprite 3 is always processed (fast)
+                          11103 ;src/main.c:2536: EnemyLoop(&spr[3]);	 // enemy sprite 3 is always processed (fast)
    8CB6 21 20 49      [10]11104 	ld	hl, #(_spr + 0x002d)
    8CB9 CD 57 83      [17]11105 	call	_EnemyLoop
-                          11106 ;src/main.c:2553: break;
+                          11106 ;src/main.c:2537: break;
    8CBC 18 5A         [12]11107 	jr	00129$
-                          11108 ;src/main.c:2556: case 2:	{
+                          11108 ;src/main.c:2540: case 2:	{
    8CBE                   11109 00117$:
-                          11110 ;src/main.c:2557: EnemyLoop(&spr[enemyTurn+4]); // enemy sprites 4 and 5 take turns processing (slow)				
+                          11110 ;src/main.c:2541: EnemyLoop(&spr[enemyTurn+4]); // enemy sprites 4 and 5 take turns processing (slow)				
    8CBE 3A D5 48      [13]11111 	ld	a,(#_enemyTurn + 0)
    8CC1 C6 04         [ 7]11112 	add	a, #0x04
    8CC3 4F            [ 4]11113 	ld	c,a
@@ -11277,7 +11277,7 @@
    8CCE 11 F3 48      [10]11123 	ld	de, #_spr
    8CD1 19            [11]11124 	add	hl, de
    8CD2 CD 57 83      [17]11125 	call	_EnemyLoop
-                          11126 ;src/main.c:2558: if (++enemyTurn > 1) enemyTurn = 0;
+                          11126 ;src/main.c:2542: if (++enemyTurn > 1) enemyTurn = 0;
    8CD5 FD 21 D5 48   [14]11127 	ld	iy, #_enemyTurn
    8CD9 FD 34 00      [23]11128 	inc	0 (iy)
    8CDC 3E 01         [ 7]11129 	ld	a, #0x01
@@ -11285,26 +11285,26 @@
    8CE1 30 04         [12]11131 	jr	NC,00119$
    8CE3 FD 36 00 00   [19]11132 	ld	0 (iy), #0x00
    8CE7                   11133 00119$:
-                          11134 ;src/main.c:2561: if (sht.active) {				
+                          11134 ;src/main.c:2545: if (sht.active) {				
    8CE7 3A 60 49      [13]11135 	ld	a, (#(_sht + 0x0004) + 0)
    8CEA B7            [ 4]11136 	or	a, a
    8CEB 28 17         [12]11137 	jr	Z,00124$
-                          11138 ;src/main.c:2562: MoveShot(); // update the shot's XY coordinates	
+                          11138 ;src/main.c:2546: MoveShot(); // update the shot's XY coordinates	
    8CED CD EE 71      [17]11139 	call	_MoveShot
-                          11140 ;src/main.c:2565: if (ctWizardAnim > 0) 	
+                          11140 ;src/main.c:2549: if (ctWizardAnim > 0) 	
    8CF0 3A DA 48      [13]11141 	ld	a,(#_ctWizardAnim + 0)
    8CF3 B7            [ 4]11142 	or	a, a
    8CF4 28 08         [12]11143 	jr	Z,00121$
-                          11144 ;src/main.c:2566: PrintShot(g_magic_3);	// wizard
+                          11144 ;src/main.c:2550: PrintShot(g_magic_3);	// wizard
    8CF6 21 61 16      [10]11145 	ld	hl, #_g_magic_3
    8CF9 CD C4 71      [17]11146 	call	_PrintShot
    8CFC 18 06         [12]11147 	jr	00124$
    8CFE                   11148 00121$:
-                          11149 ;src/main.c:2568: PrintShot(g_magic_2);	// witch
+                          11149 ;src/main.c:2552: PrintShot(g_magic_2);	// witch
    8CFE 21 41 16      [10]11150 	ld	hl, #_g_magic_2
    8D01 CD C4 71      [17]11151 	call	_PrintShot
    8D04                   11152 00124$:
-                          11153 ;src/main.c:2572: if (spr[0].power_maxV > 0) spr[0].power_maxV--;
+                          11153 ;src/main.c:2556: if (spr[0].power_maxV > 0) spr[0].power_maxV--;
    8D04 01 01 49      [10]11154 	ld	bc, #_spr + 14
    8D07 0A            [ 7]11155 	ld	a, (bc)
    8D08 B7            [ 4]11156 	or	a, a
@@ -11312,30 +11312,30 @@
    8D0B C6 FF         [ 7]11158 	add	a, #0xff
    8D0D 02            [ 7]11159 	ld	(bc), a
    8D0E                   11160 00126$:
-                          11161 ;src/main.c:2573: if (spr[1].power_maxV > 0) spr[1].power_maxV--;			
+                          11161 ;src/main.c:2557: if (spr[1].power_maxV > 0) spr[1].power_maxV--;			
    8D0E 01 10 49      [10]11162 	ld	bc, #_spr + 29
    8D11 0A            [ 7]11163 	ld	a, (bc)
    8D12 B7            [ 4]11164 	or	a, a
    8D13 28 03         [12]11165 	jr	Z,00129$
    8D15 C6 FF         [ 7]11166 	add	a, #0xff
    8D17 02            [ 7]11167 	ld	(bc), a
-                          11168 ;src/main.c:2575: }
+                          11168 ;src/main.c:2559: }
    8D18                   11169 00129$:
-                          11170 ;src/main.c:2578: ctMainLoop++;
+                          11170 ;src/main.c:2562: ctMainLoop++;
    8D18 ED 4B DB 48   [20]11171 	ld	bc, (_ctMainLoop)
    8D1C 03            [ 6]11172 	inc	bc
-                          11173 ;src/main.c:2577: if (ctMainLoop == 174) {
+                          11173 ;src/main.c:2561: if (ctMainLoop == 174) {
    8D1D FD 21 DB 48   [14]11174 	ld	iy, #_ctMainLoop
    8D21 FD 7E 00      [19]11175 	ld	a, 0 (iy)
    8D24 D6 AE         [ 7]11176 	sub	a, #0xae
    8D26 FD B6 01      [19]11177 	or	a, 1 (iy)
    8D29 20 25         [12]11178 	jr	NZ,00137$
-                          11179 ;src/main.c:2578: ctMainLoop++;
+                          11179 ;src/main.c:2562: ctMainLoop++;
    8D2B ED 43 DB 48   [20]11180 	ld	(_ctMainLoop), bc
-                          11181 ;src/main.c:2579: SetObject(1); // set the second object
+                          11181 ;src/main.c:2563: SetObject(1); // set the second object
    8D2F 2E 01         [ 7]11182 	ld	l, #0x01
    8D31 CD F7 5D      [17]11183 	call	_SetObject
-                          11184 ;src/main.c:2581: if (nMap == 0 && !TwoPlayers && nTip<1) 
+                          11184 ;src/main.c:2565: if (nMap == 0 && !TwoPlayers && nTip<1) 
    8D34 3A BA 48      [13]11185 	ld	a,(#_nMap + 0)
    8D37 B7            [ 4]11186 	or	a, a
    8D38 C2 10 8C      [10]11187 	jp	NZ, 00140$
@@ -11345,11 +11345,11 @@
    8D42 3A D9 48      [13]11191 	ld	a,(#_nTip + 0)
    8D45 D6 01         [ 7]11192 	sub	a, #0x01
    8D47 D2 10 8C      [10]11193 	jp	NC, 00140$
-                          11194 ;src/main.c:2582: PrintTip(); // novice help
+                          11194 ;src/main.c:2566: PrintTip(); // novice help
    8D4A CD E5 51      [17]11195 	call	_PrintTip
    8D4D C3 10 8C      [10]11196 	jp	00140$
    8D50                   11197 00137$:
-                          11198 ;src/main.c:2584: else if (ctMainLoop++ == 350) {			
+                          11198 ;src/main.c:2568: else if (ctMainLoop++ == 350) {			
    8D50 ED 5B DB 48   [20]11199 	ld	de, (_ctMainLoop)
    8D54 ED 43 DB 48   [20]11200 	ld	(_ctMainLoop), bc
    8D58 7B            [ 4]11201 	ld	a, e
@@ -11357,10 +11357,10 @@
    8D5B C2 10 8C      [10]11203 	jp	NZ,00140$
    8D5E 15            [ 4]11204 	dec	d
    8D5F C2 10 8C      [10]11205 	jp	NZ,00140$
-                          11206 ;src/main.c:2585: SetObject(0); // set the first object			
+                          11206 ;src/main.c:2569: SetObject(0); // set the first object			
    8D62 2E 00         [ 7]11207 	ld	l, #0x00
    8D64 CD F7 5D      [17]11208 	call	_SetObject
-                          11209 ;src/main.c:2586: ctMainLoop = 0; // reset counter
+                          11209 ;src/main.c:2570: ctMainLoop = 0; // reset counter
    8D67 21 00 00      [10]11210 	ld	hl, #0x0000
    8D6A 22 DB 48      [16]11211 	ld	(_ctMainLoop), hl
    8D6D C3 10 8C      [10]11212 	jp	00140$
