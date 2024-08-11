@@ -89,7 +89,6 @@ u8 *lName; // text to display on screen for each level
 
 // other global variables
 u8 playerKey[5];	// player's 5 item key
-u8 enemyTurn;		// To avoid flickering sprites, the enemies logic takes turns for each cycle
 u8 ctInactivity[2];	// counters to detect inactive players
 u8 turboMode;		// disable VSYNC when turboMode = "1" or "TRUE"
 u8 nTip;			// control show tips
@@ -1090,9 +1089,7 @@ void main(void) {
 			}			
 			// turn 3			
 			case 2:	{
-				if (++enemyTurn > 1) 
-          enemyTurn = 0;
-				
+				break;
 			}
 		}
 		
