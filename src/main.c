@@ -431,14 +431,6 @@ void Interrupt() {
 }
 
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 // GRAPHICS, TILES AND SCREEN MANAGEMENT FUNCTIONS 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -535,14 +527,6 @@ void PrintFrame(u8 xIni, u8 yIni, u8 xEnd, u8 yEnd) {
 }
 
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 // ON SCREEN MESSAGES
 ///////////////////////////////////////////////////////////////////////////////////
@@ -592,48 +576,6 @@ void PrintEndGame(u8 player) __z88dk_fastcall {
 	while (!cpct_isAnyKeyPressed()); // wait for a key press
 	InitGame();
 }
-
-
-// novice help tips
-void PrintTip() {
-	PrintSprite(&spr[0]);
-	PrintSmallBlueBox();
-	switch (nTip) {
-		case 0: {
-			PrintText("TIP:@TAKE@THE@EXACT", 11, 95, 0);
-			PrintText("COINS@TO@BUY@THE", 16, 105, 0);
-			PrintText("REQUIRED@INGREDIENT", 11, 115, 0);
-			break;
-		}
-		case 1: {
-			PrintText("TIP:@GO@TO@THE@SHOP", 11, 95, 0);
-			PrintText("WHEN@YOU@CAN@GET@THE", 10, 105, 0);
-			PrintText("INGREDIENT@YOU@NEED", 11, 115, 0);
-			break;
-		}
-		case 2: {
-			PrintText("TIP:@USE@THE@WELL", 14, 95, 0);
-			PrintText("WHEN@YOU@TAKE@MORE", 13, 105, 0);
-			PrintText("COINS@THAN@YOU@NEED", 11, 115, 0);
-			break;
-		}
-		case 3: {
-			PrintText("TIP:@GO@TO@THE@EXIT", 11, 95, 0);
-			PrintText("DOOR@WHEN@YOU@HAVE", 13, 105, 0);
-			PrintText("THE@RIGHT@POTION", 15, 115, 0);
-		}
-	}
-	Pause(400);
-	while (!cpct_isAnyKeyPressed()); // wait for a key press
-	nTip++; // next message
-	PrintMap();
-}
-
-
-
-
-
-
 
 
 
@@ -840,12 +782,6 @@ void CheckObject(u8 index) {
 		if (player >= 0)	{									
 			DeleteObject(index);
 
-			// coins
-			if (nObj[index] <= 1) {
-				if (nMap == 0 && !TwoPlayers && nTip<2) 
-					PrintTip(); // novice help
-			}
-
 			switch (nObj[index])
 			{
 				case 0:	{	// coin
@@ -1038,12 +974,11 @@ void CheckActiveTile(u8 player) {
 			score[player] += coinScore[player] * 2; // increase the player score
 			RefreshHighScore(player);
 			coinScore[player] -= nPObj - 3; // decrease the coin score
+
 			if (!TwoPlayers) {
 				playerKey[spr[player].objNum_mov-1] = nPObj; // add object to key
-				// novice tip
-				if (nMap == 0 && (nTip<3 || (nTip<4 && spr[0].objNum_mov >= 5)))
-					PrintTip();
 			}
+
 			DeleteObjectInStore();
 			AddObjectToScoreboard(player); 
 			RefreshScoreboard();
@@ -2561,9 +2496,6 @@ void main(void) {
 		if (ctMainLoop == 174) {
 			ctMainLoop++;
 			SetObject(1); // set the second object
-
-			if (nMap == 0 && !TwoPlayers && nTip<1) 
-				PrintTip(); // novice help
 		}
 		else if (ctMainLoop++ == 350) {			
 			SetObject(0); // set the first object			
