@@ -73,7 +73,6 @@
 
 #define TILESET_WELL 38 // the well is detected in this tile number
 #define TILESET_DOOR 14 // the door is detected in this tile number
-#define TILESET_STORE 39 // in this tile and the next two the store is detected
 #define TILESET_BLOCKERS 45 // tile number where the blocking tiles begin
 
 #define BG_COLOR 1 // background color (1 = black)
@@ -90,8 +89,6 @@ u8 *lName; // text to display on screen for each level
 
 // other global variables
 u8 playerKey[5];	// player's 5 item key
-u8 storeX;			// X position of the store on the current map (to print objects on it)
-u8 storeY;			// Y position of the store on the current map
 u8 enemyTurn;		// To avoid flickering sprites, the enemies logic takes turns for each cycle
 u8 ctInactivity[2];	// counters to detect inactive players
 u8 turboMode;		// disable VSYNC when turboMode = "1" or "TRUE"
@@ -1072,11 +1069,13 @@ void main(void) {
 			ReprintObject(); // reprint the active object
 			CheckObject(0); // verify collection of object 1
 			CheckObject(1); // verify collection of object 2
-			if (spr[0].print_minV) CheckActiveTile(0); // check entry into store, door or well of player 1
+			if (spr[0].print_minV) 
+        CheckActiveTile(0); // check entry into store, door or well of player 1
 
 		}		
 		
-		if (!turboMode) cpct_waitVSYNC(); // wait for vertical retrace	
+		if (!turboMode) 
+        cpct_waitVSYNC(); // wait for vertical retrace	
 
 		// shift system to avoid double video buffer
 		switch (ctMainLoop % 3) {
