@@ -575,50 +575,13 @@ void RefreshHighScore(u8 player) __z88dk_fastcall {
 void InitScoreboard() {
 	nPObj = 0;
 	PrintFrame(0,0,77,24);	
-
 	// player 1
 	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, cpct_getScreenPtr(CPCT_VMEM_START,  3, 4), SPR_W, SPR_H, g_maskTable);
-	PrintText("0000", 14, 6, 1); // player score
-	PrintObject(nPObj, 28, 6); PrintText("00", 32, 6, 1);	// coins score	
-	PrintText("<", 28, 15, 1); PrintText("00", 32, 15, 1);	// potion score
-
-	// player 2
-	if (TwoPlayers) {
-		cpct_drawSpriteMaskedAlignedTable(g_sorcerer2_06, cpct_getScreenPtr(CPCT_VMEM_START, 42, 4), SPR_W, SPR_H, g_maskTable);
-		PrintText("0000", 53, 6, 1); // player score
-		PrintObject(nPObj, 67, 6); PrintText("00", 71, 6, 1);	// coins score
-		PrintText("<", 67, 15, 1); PrintText("00", 71, 15, 1);	// potion score
-	}
-	else {
-		PrintText("HIGH:", 44, 6 , 1);
-		PrintText("00000", 61, 6, 1); 
-		PrintNumber(highScore, 5, 61, 6, 1); // high score
-		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 60, 16), cpct_px2byteM0(BG_COLOR, BG_COLOR), 16, 8); // key
-		PrintText("KEY:", 47, 15, 1);
-	}	
 }
 
 
 // refresh data on scoreboard
 void RefreshScoreboard() { 
-	// player 1
-	PrintNumber(spr[0].lives_speed,  1,  8, 6, 1); 		// lives
-	PrintNumber(score[0], 4, 14, 6, 1);		 			// current score
-	PrintText("0", 32, 6, 1);
-	PrintNumber(coinScore[0], 2, 32, 6, 1); 			// coin score
-	PrintText("0", 32, 15, 1);
-	PrintNumber(potScore[0], 2, 32, 15, 1); 			// potion score
-	// player 2
-	if (TwoPlayers) {
-		PrintNumber(spr[1].lives_speed,  1, 47, 6, 1); 	// lives
-		PrintNumber(score[1], 4, 53, 6, 1);		 		// current score
-		PrintText("0", 71, 6, 1);
-		PrintNumber(coinScore[1], 2, 71, 6, 1); 		// coin score
-		PrintText("0", 71, 15, 1);
-		PrintNumber(potScore[1], 2, 71, 15, 1); 		// potion score
-	}
-	else
-		PrintNumber(highScore, 5, 61, 6, 1);
 }
 
 
@@ -853,15 +816,6 @@ void SetObject(u8 index) __z88dk_fastcall {
 }
 
 
-// print the purchased item on the player scoreboard in the XY coordinates 
-// that correspond according to the player and the number of accumulated objects
-void AddObjectToScoreboard(u8 player) __z88dk_fastcall {
-	u8 x = spr[player].objNum_mov * 3 + 7;
-	if (player == 1) x += 39;		
-	PrintObject(nPObj, x, 16);
-}
-
-
 // prints the objects that make up the opening key on the scoreboard
 void PrintKey() {
 	u8 i = 0;	
@@ -911,7 +865,6 @@ void CheckActiveTile(u8 player) {
 			}
 
 			DeleteObjectInStore();
-			AddObjectToScoreboard(player); 
 			RefreshScoreboard();
 		}
 	}
