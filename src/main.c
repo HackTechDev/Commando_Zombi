@@ -34,7 +34,6 @@
 #include "sprites/ghost.h"		// 8 frames for the ghost sprite (10x12 px)
 #include "sprites/bat.h"		// 2 frames for the bat sprite (10x12 px)
 #include "sprites/witch.h"		// 4 frames for the witch sprite (10x12 px)
-#include "sprites/wizard.h"		// 4 frames for the wizard sprite (10x12 px)
 #include "sprites/explosion.h"	// 2 frames for the explosion effect (10x12 px)
 #include "sprites/dust.h"		// 2 frames for the dust effect (8x8 px)
 #include "sprites/coin.h"		// 3 frames for the coin animation (6x8 px)
@@ -109,7 +108,6 @@ u8 enemyTurn;		// To avoid flickering sprites, the enemies logic takes turns for
 u8 ctInactivity[2];	// counters to detect inactive players
 u8 turboMode;		// disable VSYNC when turboMode = "1" or "TRUE"
 u8 nTip;			// control show tips
-u8 ctWizardAnim;	// organizes the wizard animation
 i16 ctMainLoop; 	// main loop iteration counter
 
 // keyboard / joystick controls
@@ -1143,87 +1141,6 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////
-// FUNCTIONS FOR THE WIZARD
-///////////////////////////////////////////////////////////////////////////////////
-
-// print the wizard sprite
-void PrintWizard(u8 shooting) __z88dk_fastcall {
-	u8* wizard;
-	u8 x = 0;
-
-	if (spr[6].dir == D_left) { // on the right bank facing left
-		if (shooting) wizard = g_wizard_1;
-		else wizard = g_wizard_0;
-		x = 75;
-	}
-	else { // on the left bank facing right
-		if (shooting) wizard = g_wizard_3; 
-		else wizard = g_wizard_2;
-	}
-	
-	cpct_drawSpriteMaskedAlignedTable(wizard, cpct_getScreenPtr(CPCT_VMEM_START, x, spr[6].y), 
-									  SPR_W, SPR_H, g_maskTable); 							
-}
-
-
-// animation of the wizard shooting the player
-void WizardAnim() {
-	if (ctWizardAnim > 0) {
-		switch(ctWizardAnim++) {			
-			// different phases of the initial explosion
-			case 1:
-			case 29:	{ PrintExplosion(&spr[6], 0); break; }
-			case 2:	
-			case 30:	{ PrintExplosion(&spr[6], 1); break; }
-			case 3:	
-			case 31:	{ DeleteSprite(&spr[6]); PrintExplosion(&spr[6], 0); break; }						
-			// print the wizard shooting, deleting the previous explosion
-			case 4:		{ DeleteSprite(&spr[6]); PrintWizard(TRUE); break; }		
-			case 5:			
-			// do nothing
-			case 6:			
-			case 7:	
-			case 8:
-			case 9:
-			case 10:			
-			case 11:	{break;}
-			// print the wizard, deleting the previous sprite shooting
-			case 12:    { DeleteSprite(&spr[6]); PrintWizard(FALSE); break;}
-			// makes the wizard disappear
-			case 32:    { DeleteSprite(&spr[6]); ctWizardAnim = 0; return; }
-			// reprint the witcher in case he is deleted
-			default:	{ PrintWizard(FALSE); break;	}			
-		}		
-	}
-}
-
-
-// brings up the wizard
-void MakeWizardAnim(u8 player) __z88dk_fastcall {
-	if (ctInactivity[player]++ == 80) {	
-		spr[6].y = spr[6].py = spr[player].y;
-
-		if (spr[player].x < 40) {
-			spr[6].x = spr[6].px = 74;		
-			spr[6].dir = D_left;
-		}
-		else {
-			spr[6].x = spr[6].px = 1;
-			spr[6].dir = D_right;
-		}
-		ctWizardAnim++; // makes the wizard shooting animation start
-	}
-}
-
-
-
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR THE ENEMIES CONTROL
@@ -1556,7 +1473,6 @@ void ResetData() {
 	ctMainLoop = 0;
 	nObj[0] = -1;
 	nObj[1] = -1;
-	ctWizardAnim = 0;
 	
 	// reset player data
 	spr[0].dir = D_right; 
