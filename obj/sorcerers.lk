@@ -1,0 +1,54 @@
+-mjwx
+-i obj/sorcerers.ihx
+-b _CODE = 0x1601
+-b _DATA = 0x0000
+-u
+-k /home/util01/AMSTRAD/cpctelera-development/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80
+-k /home/util01/AMSTRAD/cpctelera-development/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
+-l /home/util01/AMSTRAD/cpctelera-development/cpctelera/cpctelera.lib
+-l z80
+obj/gfx/magic.rel
+obj/gfx/goldframe.rel
+obj/gfx/logo.rel
+obj/sprites/wizard.rel
+obj/sprites/witch.rel
+obj/sprites/door.rel
+obj/sprites/bat.rel
+obj/sprites/ghost.rel
+obj/sprites/knight.rel
+obj/sprites/sentinel.rel
+obj/sprites/sorcerer2.rel
+obj/sprites/sorcerer1.rel
+obj/gfx/tiles.rel
+obj/map/mappk11.rel
+obj/map/mappk10.rel
+obj/map/mappk9.rel
+obj/map/mappk8.rel
+obj/map/mappk7.rel
+obj/map/mappk6.rel
+obj/map/mappk5.rel
+obj/map/mappk4.rel
+obj/map/mappk3.rel
+obj/map/mappk2.rel
+obj/map/mappk1.rel
+obj/map/mappk0.rel
+obj/main.rel
+obj/sprites/coin.rel
+obj/sprites/dust.rel
+obj/sprites/explosion.rel
+obj/gfx/font.rel
+obj/gfx/objects.rel
+obj/map/mappk0.h.rel
+obj/map/mappk10.h.rel
+obj/map/mappk11.h.rel
+obj/map/mappk1.h.rel
+obj/map/mappk2.h.rel
+obj/map/mappk3.h.rel
+obj/map/mappk4.h.rel
+obj/map/mappk5.h.rel
+obj/map/mappk6.h.rel
+obj/map/mappk7.h.rel
+obj/map/mappk8.h.rel
+obj/map/mappk9.h.rel
+
+-e

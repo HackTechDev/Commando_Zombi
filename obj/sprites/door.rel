@@ -1,0 +1,40 @@
+XL2
+H 9 areas 3 global symbols
+M door
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 78 flags 0 addr 0
+S _g_door_0 Def0000
+S _g_door_1 Def003C
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 00 C0 C0 80 00 40 07 07 42 00 85 07 43 43
+R 00 00 00 00
+T 0E 00 80 85 43 43 43 80 85 43 43 43 80 C1 43 43
+R 00 00 00 00
+T 1C 00 43 80 C0 C0 C0 C0 80 81 03 03 42 80 C1 43
+R 00 00 00 00
+T 2A 00 43 03 80 81 43 43 43 80 81 03 43 43 80 B3
+R 00 00 00 00
+T 38 00 23 B3 63 B3
+R 00 00 00 00
+T 3C 00
+R 00 00 00 00
+T 3C 00 00 C0 C0 80 00 40 C0 C0 C0 00 C0 03 C0 C0
+R 00 00 00 00
+T 4A 00 80 85 03 42 C0 80 C1 03 C0 C0 80 C1 42 42
+R 00 00 00 00
+T 58 00 C0 80 C0 81 C0 C0 80 81 03 42 C0 80 C1 03
+R 00 00 00 00
+T 66 00 C0 C0 80 C1 03 42 C0 80 81 03 42 C0 80 D1
+R 00 00 00 00
+T 74 00 23 C0 91 80
+R 00 00 00 00

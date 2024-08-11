@@ -60,21 +60,6 @@
 #include "map/mappk10.h"
 #include "map/mappk11.h"
 
-#include "sfx/fx.h"				// sound effects
-#include "sfx/start.h"			// start level theme
-#include "sfx/end.h"			// game over theme
-#include "sfx/menu.h"			// main menu theme
-#include "sfx/ingame.h"			// music during game
-#include "sfx/completed.h"		// level completed theme
-
-
-
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 // DEFINITIONS AND VARIABLES
@@ -136,7 +121,6 @@ u8 doorKey[5];		// 5 item key needed to open the exit door
 u8 playerKey[5];	// player's 5 item key
 u8 storeX;			// X position of the store on the current map (to print objects on it)
 u8 storeY;			// Y position of the store on the current map
-u8 music;			// "TRUE" = plays the music during the game, "FALSE" = only effects
 u8 enemyTurn;		// To avoid flickering sprites, the enemies logic takes turns for each cycle
 u8 ctInactivity[2];	// counters to detect inactive players
 u8 turboMode;		// disable VSYNC when turboMode = "1" or "TRUE"
@@ -435,32 +419,12 @@ void Pause(u16 value) __z88dk_fastcall {
 }
 
 
-// Arkos tracker music player
-void PlayMusic() {
-   __asm 
-      exx
-      .db #0x08
-      push af
-      push bc
-      push de
-      push hl
-      call _cpct_akp_musicPlay
-      pop hl
-      pop de
-      pop bc
-      pop af
-      .db #0x08
-      exx
-   __endasm;
-}
-
 
 // every x calls, plays the music and/or FX and reads the keyboard
 void Interrupt() {
    static u8 nInt;
 
    if (++nInt == 6) {
-      PlayMusic();
       cpct_scanKeyboard_if();
       nInt = 0;
    }
@@ -605,10 +569,7 @@ void PrintLevelInfo() {
 		PrintText(lName, 31, 107, 0);
 	}
 
-	cpct_akp_musicInit(g_start); // start level music
 	Pause(1150);
-	if (music)
-		cpct_akp_musicInit(g_ingame); // music ingame
 }
 
 
@@ -627,7 +588,6 @@ void PrintEndGame(u8 player) __z88dk_fastcall {
 	PrintText("BE@UNSURPASSED", 12, 130, 0);
 	PrintText(";THANKS@FOR@PLAYING;", 10, 160, 0);	
 
-	cpct_akp_musicInit(g_completed); // completed level theme
 	Pause(1000);
 	while (!cpct_isAnyKeyPressed()); // wait for a key press
 	InitGame();
@@ -715,7 +675,6 @@ cpct_keyID RedefineKey(u8 *info) {
     PrintText(info, 28, 120, 1);       
     key = ReturnKeyPressed();
     Wait4Key(key);
-	cpct_akp_SFXPlay (1, 12, 59, 0, 0, AY_CHANNEL_A);    
     return key;    
 }
 
@@ -883,7 +842,6 @@ void CheckObject(u8 index) {
 
 			// coins
 			if (nObj[index] <= 1) {
-				cpct_akp_SFXPlay (2, 12, 79, 0, 0, AY_CHANNEL_C); // take an item
 				if (nMap == 0 && !TwoPlayers && nTip<2) 
 					PrintTip(); // novice help
 			}
@@ -905,14 +863,12 @@ void CheckObject(u8 index) {
 					break;
 				}
 				case 2: {	// extra life
-					cpct_akp_SFXPlay (8, 12, 60, 0, 0, AY_CHANNEL_C); // Prince of Persia tune
 					if (spr[player].lives_speed < 9)
 						spr[player].lives_speed++;
 					score[player] += 30;
 					break;
 				}	
 				case 3: {	// power up speed*2
-					cpct_akp_SFXPlay (9, 12, 60, 0, 0, AY_CHANNEL_A); // powerUp
 					spr[player].power_maxV = 255;
 					score[player] += 25;
 				}	
@@ -1027,7 +983,6 @@ void SetObject(u8 index) __z88dk_fastcall {
 	else if (nObj[index] == 21) nObj[index] = 3; // slightly more chance of powerUps showing up
 	else if (nObj[index] > 3) nObj[index] = 0; // only PowerUps and coins, others are purchased
 
-	cpct_akp_SFXPlay(1, 12, 65, 0, 0, AY_CHANNEL_A); // new item
 }
 
 
@@ -1074,7 +1029,6 @@ void CheckActiveTile(u8 player) {
 	if (currentTile >= TILESET_STORE && currentTile <= TILESET_STORE + 5) {
 		// money to buy? Is there room to carry more objects?
 		while (coinScore[player] > 0 && spr[player].objNum_mov < 5) {
-			cpct_akp_SFXPlay (7, 12, 65, 0, 0, AY_CHANNEL_A);
 			if (coinScore[player] < 13) // no money left
 				nPObj = coinScore[player] + 3; // assign the corresponding object to the available money
 			else // excess of money
@@ -1099,7 +1053,6 @@ void CheckActiveTile(u8 player) {
 	// collision with the well. Do we have objects or coins?
 	else if (currentTile == TILESET_WELL && (potScore[player] > 0 || coinScore[player] > 0)) {	
 		// it sounds like we dropped something
-		cpct_akp_SFXPlay (3, 12, 57, 0, 0, AY_CHANNEL_C);
 		// clear P1 or P2 scoreboard
 		if (player == 0)
 			cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 7, 16), 
@@ -1248,7 +1201,6 @@ void ExplodeSprite(u8 player, u8 deleteSpr)
 {
 	u8 ct = 0;
 	u8 i = 0;
-	cpct_akp_SFXPlay (4, 12, 48, 0, 0, AY_CHANNEL_B); // explosion
 	while (ct++ < 2) {	
 		PrintExplosion(&spr[player], 0); Pause(40);
 		PrintExplosion(&spr[player], 1); Pause(40);
@@ -1361,45 +1313,14 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
 		spr[1].lives_speed = 0;
 		GameOver(2);
 	}
-	// mute music TRUE/FALSE
-	else if(cpct_isKeyPressed(ctlMusic)) {
-		Wait4Key(ctlMusic);
-		if (music == TRUE) { // if the music is playing ...
-			music = FALSE;
-			cpct_akp_musicInit(g_fx);
-		}
-		else { // if there was no music playing ...
-			music = TRUE;			
-			cpct_akp_musicInit(g_ingame); // music ingame
-		}
-	}
 	// pause
 	else if(cpct_isKeyPressed(ctlPause)) {
 		Wait4Key(ctlPause);
-		cpct_akp_musicInit(g_fx);
 		while (!cpct_isAnyKeyPressed());
 		Wait4Key(ctlPause);
-		if (music)
-			cpct_akp_musicInit(g_ingame); // music ingame
 	}
 
 	
-	/*
-	// beta testing helper /////////////////////////////////////////
-	else if(cpct_isKeyPressed(Key_Space)) {
-		if (nMap < 11) 
-			nMap++; // go to the next screen on the map
-		else
-			nMap = 0;
-		
-		// reset data related to object collection
-		ResetObjData(0);
-		ResetObjData(1);		
-		InitScoreboard();
-		ResetData();
-	}
-	////////////////////////////////////////////////////////////////
-	*/
 }
 
 
@@ -1524,7 +1445,6 @@ void MakeDuel() {
 			cpct_getScreenPtr(CPCT_VMEM_START, spr[1].x, spr[1].y), SPR_W, SPR_H, g_maskTable);
 		spr[1].x -= OBJ_W;
 	}
-	cpct_akp_SFXPlay (5, 12, 60, 0, 0, AY_CHANNEL_B); // shot sound
 
 	// print/delete both magic shots on the move
 	while (spr[0].x < 50)
@@ -1600,7 +1520,6 @@ void MakeDuel() {
 	else
 		PrintText("COMPLETED", 27, 101, 0);	
 	
-	cpct_akp_musicInit(g_completed); // level completed music
 	Pause(1000);
 
 	if (loser < 2) // if there is no tie
@@ -1661,7 +1580,6 @@ void MakeShot(u8 x, u8 y, u8 dir) {
 		// gives the shot the X coordinate of the main sprite
 		if (sht.dir == D_right) sht.x = x + SPR_W;
 		else sht.x = x - SHT_W;
-		cpct_akp_SFXPlay (6, 12, 65, 0, 0, AY_CHANNEL_B); // shot sound
 	}  
 }
 
@@ -2364,7 +2282,6 @@ void PrintGameInfo() {
 void StartMenu() {
 	u8 randSeed = 254;
 	u8 page = 0;
-	cpct_akp_musicInit(g_menu); // initialize music. Main theme
 
 	while(1) {
 		// get the seed of randomness based on the time it takes to press a key
@@ -2418,7 +2335,6 @@ void StartMenu() {
 		Pause(3);
 	}	
 	cpct_setSeed_lcg_u8(randSeed); // set the seed
-	cpct_akp_musicInit(g_fx); // mute the music
 	ClearScreen();
 }
 
@@ -2505,7 +2421,6 @@ void ResetData() {
 // initialization of some variables
 void InitGame() {
 	StartMenu(); // run the start menu
-	music = TRUE;
 	nMap = 0; // initial map number
 	lastNMap = 255;
 	
@@ -2540,7 +2455,6 @@ void GameOver(u8 player) {
 		ResetData();
 	}
 	else { // prepare a new game
-		cpct_akp_musicInit(g_end); // game over music
 		// puts 0 life on the scoreboard of the losing player
 		spr[player].lives_speed = 0;
 		RefreshScoreboard();
@@ -2569,7 +2483,6 @@ void main(void) {
 	// disable firmware
 	cpct_disableFirmware();
 	// initialize sound effects
-	cpct_akp_SFXInit(g_fx);
 	// initialize the interrupt manager (keyboard and sound)
 	cpct_setInterruptHandler(Interrupt); 
 	// activate mode 0; 160 * 200 16 colors

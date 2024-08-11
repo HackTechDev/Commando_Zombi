@@ -1,0 +1,35 @@
+XL2
+H 9 areas 4 global symbols
+M goldframe
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 36 flags 0 addr 0
+S _g_goldframe_0 Def0000
+S _g_goldframe_1 Def0012
+S _g_goldframe_2 Def0024
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 40 C0 80 C4 CC E2 C4 F3 62 C4 F3 62 D1 33
+R 00 00 00 00
+T 0E 00 62 40 C0 80
+R 00 00 00 00
+T 12 00
+R 00 00 00 00
+T 12 00 40 BF 80 C4 95 6A C4 EA 6A 40 BF 80 C4 95
+R 00 00 00 00
+T 20 00 6A C4 EA 6A
+R 00 00 00 00
+T 24 00
+R 00 00 00 00
+T 24 00 C0 40 80 CC C4 C8 EA FF D5 95 6A 3F 3F 95
+R 00 00 00 00
+T 32 00 6A C0 40 80
+R 00 00 00 00
