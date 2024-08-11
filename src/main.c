@@ -29,7 +29,6 @@
 
 #include "sprites/sorcerer1.h"	// 10 frames for SVEN, the 1st player (10x12 px)
 #include "sprites/sentinel.h"	// 8 frames for the sentinel sprite (10x12 px)
-#include "sprites/dust.h"		// 2 frames for the dust effect (8x8 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
 // compressed game map (40x42 tiles / 160x168 pixels each)
@@ -143,7 +142,6 @@ TSpr spr[7];	// 0) sorcerer #1
 i8 nObj[2];	// item number
 u8 objX[2];	// X coordinate of item
 u8 objY[2];	// Y coordinate of item
-i8 nPObj;	// last purchased item number
 
 			// -1) No active object
 			// 	0) Coin
@@ -469,14 +467,6 @@ void DeleteObject(u8 index) __z88dk_fastcall {
 }
 
 
-// a frame of the dust effect is printed at the XY coordinates of the object
-void PrintDust(u8 nFrame, u8 index) {
-	cpct_drawSpriteMaskedAlignedTable(g_dust[nFrame], 
-									  cpct_getScreenPtr(CPCT_VMEM_START, objX[index], objY[index]), 
-									  OBJ_W, OBJ_H, g_maskTable);
-}
-
-
 
 // check if any player has passed over the object
 // increase the score and update the scoreboard.
@@ -519,13 +509,13 @@ void ReprintObject() {
 		switch(ctMainLoop) {
 			// "dust effect" 1st frame
 			case 0:
-			case 344:	{ DeleteObject(0); PrintDust(0,0); break; }
+			case 344:	
 			// "dust effect" 2nd frame
 			case 8:
-			case 336:	{ DeleteObject(0); PrintDust(1,0); break; }
+			case 336:	
 			
 			// erase the dust and print the object
-			case 16:	{ DeleteObject(0); PrintObject(nObj[0], objX[0], objY[0]); break; }
+			case 16:	
 
 			// coin animation
 			case 24:
@@ -549,12 +539,12 @@ void ReprintObject() {
 		switch(ctMainLoop) {
 			// "dust effect" 1st frame
 			case 176:
-			case 168:	{ DeleteObject(1); PrintDust(0,1); break; }
+			case 168:	
 			// "dust effect" 2nd frame
 			case 184:
-			case 160:	{ DeleteObject(1); PrintDust(1,1); break; }
+			case 160:	
 			// delete the dust and print the object
-			case 192:	{ DeleteObject(1); PrintObject(nObj[1], objX[1], objY[1]); break; }
+			case 192:	
 
 			// coin animation
 			case 200:
@@ -970,7 +960,6 @@ void InitValues() {
 	ctlMusic = Key_M;
 	ctlPause = Key_H;	
 
-	nTip = 0;
 }
 
 
