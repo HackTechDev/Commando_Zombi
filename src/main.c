@@ -29,7 +29,6 @@
 
 #include "sprites/sorcerer1.h"	// 10 frames for SVEN, the 1st player (10x12 px)
 #include "sprites/sentinel.h"	// 8 frames for the sentinel sprite (10x12 px)
-#include "sprites/explosion.h"	// 2 frames for the explosion effect (10x12 px)
 #include "sprites/dust.h"		// 2 frames for the dust effect (8x8 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
@@ -605,8 +604,8 @@ void SetObject(u8 index) __z88dk_fastcall {
 	// the XY of the object will only be valid on background tiles and away from other sprites
 	while (tile > 34 || tile == TILESET_DOOR || // tile is a blocker
 			Abs(objX[0] - objX[1]) < 12 || // near the other object
-			SpriteCollision(objX[index], objY[index], &spr[0], 12) || // near player 1
-			SpriteCollision(objX[index], objY[index], &spr[1], 12)); // near player 2
+			SpriteCollision(objX[index], objY[index], &spr[0], 12) // near player 1
+			); // near player 2
 
 	if (nObj[index] == 22) nObj[index] = 1; // slightly more chance of showing 5 coins
 	else if (nObj[index] == 21) nObj[index] = 3; // slightly more chance of powerUps showing up
@@ -692,35 +691,6 @@ void SelectFrame(TSpr *pSpr) __z88dk_fastcall {
 	}
 }
 
-
-// prints an explosion frame at the XY coordinates of the sprite
-void PrintExplosion(TSpr *pSpr, u8 nFrame)
-{
-	cpct_drawSpriteMaskedAlignedTable(g_explosion[nFrame], 
-									  cpct_getScreenPtr(CPCT_VMEM_START, pSpr->x, pSpr->y), 
-									  SPR_W, SPR_H, g_maskTable);
-}
-
-
-// Eliminate the player touched by an explosion
-void ExplodeSprite(u8 player, u8 deleteSpr)
-{
-	u8 ct = 0;
-	u8 i = 0;
-	while (ct++ < 2) {	
-		PrintExplosion(&spr[player], 0); Pause(40);
-		PrintExplosion(&spr[player], 1); Pause(40);
-		if (deleteSpr > FALSE) {
-			DeleteSprite(&spr[player]); // delete player
-			PrintSprite(&spr[deleteSpr]); // reprint enemy, which may have been partially erased
-		}
-	}
-	PrintExplosion(&spr[player], 0); Pause(40);
-	if (deleteSpr > FALSE) {
-		DeleteSprite(&spr[player]);
-		PrintSprite(&spr[deleteSpr]);
-	}
-}
 
 
 // return "1" or "TRUE" if the coordinates match those of the sprite + the supplied margin
