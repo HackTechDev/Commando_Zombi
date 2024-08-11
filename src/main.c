@@ -329,14 +329,6 @@ TFrm* const animRight_Witch[2] = {&frmWitch[2], &frmWitch[3]};
 cpctm_createTransparentMaskTable(g_maskTable, 0x100, M0, 0);
 
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 //  FUNCTION STATEMENTS
 ///////////////////////////////////////////////////////////////////////////////////
@@ -348,14 +340,6 @@ u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX);
 void PrintSprite(TSpr *pSpr) __z88dk_fastcall;
 void MakeDuel();
 void ResetData();
-
-
-
-
-
-
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -524,17 +508,6 @@ void PrintFrame(u8 xIni, u8 yIni, u8 xEnd, u8 yEnd) {
 	cpct_drawSpriteMaskedAlignedTable(g_goldframe_0, cpctm_screenPtr(CPCT_VMEM_START, xIni, yEnd), 3, 6, g_maskTable);
 	// lower right corner				
 	cpct_drawSpriteMaskedAlignedTable(g_goldframe_0, cpctm_screenPtr(CPCT_VMEM_START, xEnd, yEnd), 3, 6, g_maskTable);									
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////
-// ON SCREEN MESSAGES
-///////////////////////////////////////////////////////////////////////////////////
-
-void PrintSmallBlueBox() {
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
-	PrintFrame(6,80,71,134);
 }
 
 
