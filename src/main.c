@@ -565,34 +565,6 @@ void ReprintObject() {
 	}
 }
 
-
-void SetObject(u8 index) __z88dk_fastcall {
-	u8 tile;
-	// if there is any active object, delete it
-	if (nObj[index] >= 0) DeleteObject(index); 
-	// generates a new object
-	nObj[index] = cpct_getRandom_lcg_u8(0) / 11;	// obj = 0 a 22
-
-	do {
-		objX[index] = 4 + (cpct_getRandom_lcg_u8(0)*10/36); 	// x = 4 a 74
-		objY[index] = 40 + (cpct_getRandom_lcg_u8(0)*10/17);	// y = 40 a 190	
-		tile = *GetTileNum(objX[index]+2, objY[index]+8);	
-	}
-	// the XY of the object will only be valid on background tiles and away from other sprites
-	while (tile > 34 || tile == TILESET_DOOR || // tile is a blocker
-			Abs(objX[0] - objX[1]) < 12 || // near the other object
-			SpriteCollision(objX[index], objY[index], &spr[0], 12) // near player 1
-			); // near player 2
-
-	if (nObj[index] == 22) nObj[index] = 1; // slightly more chance of showing 5 coins
-	else if (nObj[index] == 21) nObj[index] = 3; // slightly more chance of powerUps showing up
-	else if (nObj[index] > 3) nObj[index] = 0; // only PowerUps and coins, others are purchased
-
-}
-
-
-
-
 // check if any player has stepped on a special tile; shop, well, exit door
 void CheckActiveTile(u8 player) {	
 	u8 currentTile = *GetTileNum(spr[player].x+3, spr[player].y+8);	
@@ -994,6 +966,7 @@ void InitGame() {
 	ResetObjData(0);
 	
 	InitScoreboard();		
+  
 	ResetData();
 }
 
@@ -1073,10 +1046,8 @@ void main(void) {
 		
 		if (ctMainLoop == 174) {
 			ctMainLoop++;
-			SetObject(1); // set the second object
 		}
 		else if (ctMainLoop++ == 350) {			
-			SetObject(0); // set the first object			
 			ctMainLoop = 0; // reset counter
 		}		
 
