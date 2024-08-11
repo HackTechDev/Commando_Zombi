@@ -40,29 +40,9 @@
 
 $(eval $(call ADD2PACK,mappk0,src/map0.bin))
 $(eval $(call ADD2PACK,mappk1,src/map1.bin))
-$(eval $(call ADD2PACK,mappk2,src/map2.bin))
-$(eval $(call ADD2PACK,mappk3,src/map3.bin))
-$(eval $(call ADD2PACK,mappk4,src/map4.bin))
-$(eval $(call ADD2PACK,mappk5,src/map5.bin))
-$(eval $(call ADD2PACK,mappk6,src/map6.bin))
-$(eval $(call ADD2PACK,mappk7,src/map7.bin))
-$(eval $(call ADD2PACK,mappk8,src/map8.bin))
-$(eval $(call ADD2PACK,mappk9,src/map9.bin))
-$(eval $(call ADD2PACK,mappk10,src/map10.bin))
-$(eval $(call ADD2PACK,mappk11,src/map11.bin))
 
 $(eval $(call PACKZX7B,mappk0,src/map/))
 $(eval $(call PACKZX7B,mappk1,src/map/))
-$(eval $(call PACKZX7B,mappk2,src/map/))
-$(eval $(call PACKZX7B,mappk3,src/map/))
-$(eval $(call PACKZX7B,mappk4,src/map/))
-$(eval $(call PACKZX7B,mappk5,src/map/))
-$(eval $(call PACKZX7B,mappk6,src/map/))
-$(eval $(call PACKZX7B,mappk7,src/map/))
-$(eval $(call PACKZX7B,mappk8,src/map/))
-$(eval $(call PACKZX7B,mappk9,src/map/))
-$(eval $(call PACKZX7B,mappk10,src/map/))
-$(eval $(call PACKZX7B,mappk11,src/map/))
 
 
 ############################################################################
