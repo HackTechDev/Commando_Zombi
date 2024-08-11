@@ -100,7 +100,6 @@ u16 score[2];		// score of both players
 u16 highScore;		// maximum score of the entire session
 u8 potScore[2];		// current potion score for players 1 and 2
 u8 coinScore[2];	// value of the coins collected by players 1 and 2
-u8 doorKey[5];		// 5 item key needed to open the exit door
 u8 playerKey[5];	// player's 5 item key
 u8 storeX;			// X position of the store on the current map (to print objects on it)
 u8 storeY;			// Y position of the store on the current map
@@ -756,29 +755,6 @@ void SetObject(u8 index) __z88dk_fastcall {
 }
 
 
-// prints the objects that make up the opening key on the scoreboard
-void PrintKey() {
-	u8 i = 0;	
-	u8 x = 60;
-	while (i<=4) {
-		PrintObject(doorKey[i], x, 16);
-		i++;
-		x+=3;
-	}
-}
-
-
-// Compare the objects the player is carrying with the key on the current map
-u8 CompareKeys() {
-	if (doorKey[0] == playerKey[0] && 
-		doorKey[1] == playerKey[1] &&
-		doorKey[2] == playerKey[2] && 
-		doorKey[3] == playerKey[3] &&
-		doorKey[4] == playerKey[4]) 
-		return 1;
-		
-	return 0;
-}
 
 
 // check if any player has stepped on a special tile; shop, well, exit door
@@ -820,17 +796,6 @@ void CheckActiveTile(u8 player) {
 		spr[player].objNum_mov = 0;	// throwing objects
 		potScore[player] = 0;		// potion value to zero
 		
-			while (i<5) {
-				if (playerKey[i] == doorKey[i] ) {
-					potScore[0] += playerKey[i] - 3; // increases potion value
-					spr[0].objNum_mov++; // increases the number of objects		
-					// reprint the object in the scoreboard					
-					PrintObject(playerKey[i++], spr[0].objNum_mov * 3 + 7, 16);					
-				}
-				else // wrong object. Delete the rest of the sequence
-					while (i<5)	
-						playerKey[i++] = 0;					
-			}
 			DeleteObjectInStore();
 	}
 
@@ -1277,15 +1242,6 @@ void SetEnemies() {
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
 			// screen title
 			lName = "1;1@@GARDENS";
-			// exit door key
-			doorKey[0] = 4;	// toad snot
-			doorKey[1] = 5;	// diamond dust
-			doorKey[2] = 4;	// toad snot
-			doorKey[3] = 5;	// diamond dust
-			doorKey[4] = 4; // toad snot
-			// store
-			storeX = 51;
-			storeY = 11;
 			break;
 		}
 		// gardens #2
@@ -1302,15 +1258,6 @@ void SetEnemies() {
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
 			// screen title
 			lName = "1;2@@GARDENS";
-			// exit door key
-			doorKey[0] = 4;	// toad snot
-			doorKey[1] = 6;	// newt eye
-			doorKey[2] = 5; // diamond dust
-			doorKey[3] = 6; // newt eye
-			doorKey[4] = 4; // toad snot
-			// store
-			storeX = 51;
-			storeY = 55;
 			break;
 		}
 	}
