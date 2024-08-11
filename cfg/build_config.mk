@@ -37,6 +37,8 @@
 ##   This variable should always have the absolute path value.
 ##
 #>> Uses environment variable $(CPCT_PATH)
+THIS_FILE_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+CPCT_PATH      := $(THIS_FILE_PATH)../../../../cpctelera/
 
 ####
 ## SECTION 1: Project configuration 
