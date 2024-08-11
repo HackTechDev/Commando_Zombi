@@ -529,12 +529,6 @@ cpct_keyID RedefineKey(u8 *info) {
 // SCOREBOARD FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
 
-// update the record
-void RefreshHighScore(u8 player) __z88dk_fastcall {
-	if (highScore < score[player])
-		highScore = score[player];
-}
-
 
 // print the scoreboard
 void InitScoreboard() {
@@ -653,7 +647,6 @@ void CheckObject(u8 index) {
 					score[player] += 25;
 				}	
 			}
-			RefreshHighScore(player);
 			nObj[index] = -1; // object not assigned
 		}
 	}
@@ -806,7 +799,6 @@ void CheckActiveTile(u8 player) {
 			spr[player].objNum_mov++; // increases the number of objects the player carries
 			potScore[player] += coinScore[player]; // increase the potion score
 			score[player] += coinScore[player] * 2; // increase the player score
-			RefreshHighScore(player);
 			coinScore[player] -= nPObj - 3; // decrease the coin score
 
 				playerKey[spr[player].objNum_mov-1] = nPObj; // add object to key
