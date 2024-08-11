@@ -182,16 +182,6 @@ TSpr spr[7];	// 0) sorcerer #1
 				// 5) enemy #4
 				// 6) enemy #5 (wizard)
 
-// structure to manage the shots
-typedef struct {
-	u8 x, y;	// X, Y coordinates of the shot
-	u8 px;		// previous X coordinate of the shot (only has horizontal movement)
-	u8 dir;		// firing direction; right or left.
-	u8 active;	// the shot is on screen if active = "1" or "TRUE"
-} Tsht;
-
-Tsht sht; // witch/wizard shot
-
 // necessary data to control the two objects to collect
 i8 nObj[2];	// item number
 u8 objX[2];	// X coordinate of item
@@ -1184,59 +1174,6 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-// FUNCTIONS FOR FIRE MANAGEMENT
-///////////////////////////////////////////////////////////////////////////////////
-
-// generates the shot
-void MakeShot(u8 x, u8 y, u8 dir) {	
-	if (sht.active == FALSE) { // if there is no active shot...
-		sht.active = TRUE; // activate it
-		sht.dir = dir; // the direction of the shot is that of the sprite that shoots
-		sht.y = y + 5; // adjusts to the height of the gun (hand)
-		// gives the shot the X coordinate of the main sprite
-		if (sht.dir == D_right) sht.x = x + SPR_W;
-		else sht.x = x - SHT_W;
-	}  
-}
-
-
-// print a map portion in the shot coordinates (to delete it)
-void DeleteShot() {
-	cpct_etm_drawTileBox2x4(sht.px / 2, (sht.y - ORIG_MAP_Y) / 4, 
-							2 + (sht.px & 1), 2 + (sht.y & 3 ? 1 : 0), 
-							MAP_W, cpctm_screenPtr(CPCT_VMEM_START, 0, ORIG_MAP_Y), UNPACKED_MAP_INI);							
-}
-
-
-void PrintShot(u8* magic) __z88dk_fastcall {
-	DeleteShot(); // delete the previous shot
-	if (!sht.active) return; // outside the margins. no need to print
-	cpct_drawSpriteMaskedAlignedTable(magic, cpct_getScreenPtr(CPCT_VMEM_START, sht.x, sht.y), 
-									  SHT_W, SHT_H, g_maskTable);
-}
-
-
-// move shot to corresponding XY position
-void MoveShot() {
-	sht.px = sht.x; // save the current X coordinate
-	// change X for the next redrawn
-	if (sht.dir == D_right)	sht.x++; else sht.x--;
-	// check if we should continue drawing the shot (it has reached the extremes)
-	if (sht.x + SHT_W >= GLOBAL_MAX_X || sht.x <= 0) {
-		sht.active = FALSE;
-		DeleteShot();
-	}
-}
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR THE WIZARD
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -1273,8 +1210,7 @@ void WizardAnim() {
 			case 31:	{ DeleteSprite(&spr[6]); PrintExplosion(&spr[6], 0); break; }						
 			// print the wizard shooting, deleting the previous explosion
 			case 4:		{ DeleteSprite(&spr[6]); PrintWizard(TRUE); break; }		
-			// activate the shot
-			case 5:		{ MakeShot(spr[6].x, spr[6].y-3, spr[6].dir); break; }			
+			case 5:			
 			// do nothing
 			case 6:			
 			case 7:	
@@ -1295,7 +1231,7 @@ void WizardAnim() {
 
 // brings up the wizard
 void MakeWizardAnim(u8 player) __z88dk_fastcall {
-	if (ctInactivity[player]++ == 80 && !sht.active) {	
+	if (ctInactivity[player]++ == 80) {	
 		spr[6].y = spr[6].py = spr[player].y;
 
 		if (spr[player].x < 40) {
@@ -1350,7 +1286,6 @@ void MoveEnemy(TSpr *pSpr) {
 				if (z < 255) {
 					if (spr[z].x > pSpr->x) pSpr->dir = D_right; 
 					else pSpr->dir = D_left;
-					MakeShot(pSpr->x, pSpr->y, pSpr->dir);
 				}
 			}				
 			break;
@@ -1763,16 +1698,6 @@ void CheckEnemyCollision(u8 player, TSpr *pSpr)
 		ExplodeSprite(player, pSpr->num);			
 		GameOver(player);
 	}
-	// collision shot with sprites
-	else if (sht.active) {
-		if ((sht.x + SHT_W) > (spr[player].x) && sht.x < (spr[player].x + SPR_W))
-			if ((sht.y + SHT_H) > (spr[player].y) && (sht.y) < (spr[player].y + SPR_H))	{
-				// a shot has touched player 1 or 2
-				DeleteShot();
-				ExplodeSprite(player, pSpr->num);			
-				GameOver(player);
-			}
-	}
 }
 
 
@@ -1960,7 +1885,6 @@ void ResetData() {
 	ctMainLoop = 0;
 	nObj[0] = -1;
 	nObj[1] = -1;
-	sht.active = FALSE;
 	ctWizardAnim = 0;
 	
 	// reset player data
@@ -2114,17 +2038,6 @@ void main(void) {
 				EnemyLoop(&spr[enemyTurn+4]); // enemy sprites 4 and 5 take turns processing (slow)				
 				if (++enemyTurn > 1) enemyTurn = 0;
 				
-				// process active shot
-				if (sht.active) {				
-					MoveShot(); // update the shot's XY coordinates	
-					
-					// delete the shot and reprint it on the new XY	
-					if (ctWizardAnim > 0) 	
-						PrintShot(g_magic_3);	// wizard
-					else
-						PrintShot(g_magic_2);	// witch
-				}
-
 				// decrease the powerUp value of the players
 				if (spr[0].power_maxV > 0) spr[0].power_maxV--;
 				if (spr[1].power_maxV > 0) spr[1].power_maxV--;			
