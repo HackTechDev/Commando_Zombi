@@ -969,37 +969,6 @@ void PrintStartMenu() {
 }
 
 
-// ingredients info table
-void PrintObjInfo() {
-	u8 obj;
-	u8 yPos = 25;
-	ClearScreen();
-	PrintText("INGREDIENT@VALUES", 13, 0, 0);
-	// blue background frame
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 3, 12), cpct_px2byteM0(4, 4), 37, 188);
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 12), cpct_px2byteM0(4, 4), 35, 188);	
-	PrintFrame(3,12,72,194);
-	// object graphic and value
-	for (obj=4; obj<16; obj++) {
-		PrintObject(obj, 7, yPos);
-		PrintNumber(obj-3, 2, 62, yPos, 0); PrintText("<", 68, yPos, 0);
-		yPos += 14;
-	}
-	// object names
-	PrintText("TOAD@SNOT", 14, 25, 0);
-	PrintText("DIAMOND@DUST", 14, 39, 0);
-	PrintText("NEWT@EYE", 14, 53, 0);
-	PrintText("MAMMOTH@POOP", 14, 67, 0);
-	PrintText("KRAKEN@INK", 14, 81, 0); 
-	PrintText("MERMAID@TEAR", 14, 95, 0);
-	PrintText("MARTIAN@MUSHROOM", 14, 109, 0);
-	PrintText("DRAGON@BLOOD", 14, 123, 0);
-	PrintText("DODO@EGG", 14, 137, 0); 
-	PrintText("UNICORN@BLOOD", 14, 151, 0);
-	PrintText("TROLL@FAT", 14, 165, 0); 
-	PrintText("MORDOR@LAVA", 14, 179, 0);
-}
-
 
 void StartMenu() {
 	u8 randSeed = 254;
@@ -1009,9 +978,8 @@ void StartMenu() {
 		// get the seed of randomness based on the time it takes to press a key
 		// switches between menu and help after 256 cycles
 		if (++randSeed == 255) {					
-			if (page == 0) 		PrintStartMenu();	// page 1; menu
-			else if(page == 4)	PrintObjInfo();		// page 2; ingredients info
-			//else if(page == 8)	PrintGameInfo();	// page 3; introductory help
+			if (page == 0) 		
+        PrintStartMenu();	// page 1; menu
 			randSeed = 0;
 			if (++page == 8) //12
 				page = 0;		
@@ -1026,14 +994,6 @@ void StartMenu() {
 	cpct_setSeed_lcg_u8(randSeed); // set the seed
 	ClearScreen();
 }
-
-
-
-
-
-
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -1161,11 +1121,9 @@ void main(void) {
 			}			
 			// turn 3			
 			case 2:	{
-				if (++enemyTurn > 1) enemyTurn = 0;
+				if (++enemyTurn > 1) 
+          enemyTurn = 0;
 				
-				// decrease the powerUp value of the players
-				if (spr[0].power_maxV > 0) spr[0].power_maxV--;
-				if (spr[1].power_maxV > 0) spr[1].power_maxV--;			
 			}
 		}
 		
