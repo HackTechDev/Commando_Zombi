@@ -61,12 +61,6 @@
 #define SORCERER1	0
 #define SORCERER2	1
 #define SENTINEL	2
-#define KNIGHT		3
-#define GHOST		4
-#define BAT			5
-#define WITCH		6
-#define WIZARD		7
-#define NOBODY		9
 
 #define OBJ_W 4 // object width (bytes)
 #define OBJ_H 8 // object height (px)
@@ -88,10 +82,7 @@ u8 lastNMap; // has been a level change?
 u8 *lName; // text to display on screen for each level
 
 // other global variables
-u8 playerKey[5];	// player's 5 item key
 u8 ctInactivity[2];	// counters to detect inactive players
-u8 turboMode;		// disable VSYNC when turboMode = "1" or "TRUE"
-u8 nTip;			// control show tips
 i16 ctMainLoop; 	// main loop iteration counter
 
 // keyboard / joystick controls
@@ -979,7 +970,6 @@ void InitValues() {
 	ctlMusic = Key_M;
 	ctlPause = Key_H;	
 
-	turboMode = FALSE;
 	nTip = 0;
 }
 
@@ -1073,8 +1063,7 @@ void main(void) {
 
 		}		
 		
-		if (!turboMode) 
-        cpct_waitVSYNC(); // wait for vertical retrace	
+    cpct_waitVSYNC(); // wait for vertical retrace	
 
 		// shift system to avoid double video buffer
 		switch (ctMainLoop % 3) {
