@@ -557,28 +557,6 @@ void PrintLevelInfo() {
 }
 
 
-void PrintEndGame(u8 player) __z88dk_fastcall {
-	// blue background frame
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 5, 40), cpct_px2byteM0(4, 4), 35, 144);
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 40), cpct_px2byteM0(4, 4), 35, 144);	
-	PrintFrame(5,40,72,178);
-
-	PrintText("CONGRATULATIONS", 12, 60, 0);
-	PrintText("PLAYER@@>", 12, 70, 0);
-	PrintNumber(++player, 1, 33, 70, 0);
-	PrintText("YOU@FOUND@YOUR", 12, 90, 0);
-	PrintText("FATHERS@SPELL@BOOK", 12, 100, 0);
-	PrintText("NOW@YOUR@POWER@WILL", 12, 120, 0);
-	PrintText("BE@UNSURPASSED", 12, 130, 0);
-	PrintText(";THANKS@FOR@PLAYING;", 10, 160, 0);	
-
-	Pause(1000);
-	while (!cpct_isAnyKeyPressed()); // wait for a key press
-	InitGame();
-}
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 // KEYBOARD FUNCTIONS
@@ -1460,13 +1438,6 @@ void MakeDuel() {
 	if (loser < 2) // if there is no tie
 		nMap++; // go to the next screen on the map
 
-	if (nMap == 12) { // screens are over. End of the game
-		if (loser == 0)		
-			PrintEndGame(1); // player 2 wins
-		else
-			PrintEndGame(0); // player 1 wins
-	}
-
 	// reset data related to object collection
 	ResetObjData(0);
 	ResetObjData(1);
@@ -2190,28 +2161,6 @@ void PrintObjInfo() {
 	PrintText("TROLL@FAT", 14, 165, 0); 
 	PrintText("MORDOR@LAVA", 14, 179, 0);
 }
-
-/*
-// introductory help (dismissed; not enough memory)
-void PrintGameInfo() {
-	ClearScreen();
-	PrintText("THE@STORY", 26, 0, 0);
-	// blue background frame
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 1, 12), cpct_px2byteM0(4, 4), 39, 180);
-	cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 12), cpct_px2byteM0(4, 4), 37, 180);	
-	PrintFrame(1,12,74,186);
-
-	PrintText("EINAR@IS@DEAD>", 17, 30, 0);
-	PrintText("THE@OLD@AND@WISE", 14, 45, 0);
-	PrintText("SORCERER", 26, 60, 0);
-
-	PrintText("GUIDE@SVEN@AND@ERIK[", 11, 90, 0);
-	PrintText("SONS@OF@EINAR@AND", 14, 105, 0);
-	PrintText("SORCERERS@APPRENTICES[", 8, 120, 0);
-	PrintText("TO@THE@CASTLE@LIBRARY", 8, 135, 0);
-	PrintText("TO@GAIN@THE@KNOWLEDGE", 8, 150, 0);	
-	PrintText("OF@EINAR>", 26, 165, 0);
-}*/
 
 
 void StartMenu() {
