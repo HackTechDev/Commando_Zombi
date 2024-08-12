@@ -58,7 +58,6 @@
 
 // character types
 #define SORCERER1	0
-#define SORCERER2	1
 #define SENTINEL	2
 
 #define OBJ_W 4 // object width (bytes)
