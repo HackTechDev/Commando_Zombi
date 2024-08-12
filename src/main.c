@@ -23,7 +23,6 @@
 #include "gfx/logo.h"			// game logo for the main menu (106x36 px)
 #include "gfx/goldframe.h"		// three pieces to create decorative frames (6x6 px) 
 #include "gfx/objects.h"		// 16 objects (8x8 px)
-#include "gfx/magic.h"			// magic shots; red, blue, green and yellow (8x8 px)
 
 #include "sprites/sorcerer1.h"	// 10 frames for SVEN, the 1st player (10x12 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
