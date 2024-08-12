@@ -103,7 +103,6 @@ PALETTE={8 0 13 26 1 2 11 20 3 6 15 16 9 18 12 24}
 
 $(eval $(call IMG2SPRITES,assets/tiles.png,0,g,4,4,$(PALETTE),tileset,src/gfx/,hwpalette))
 $(eval $(call IMG2SPRITES,assets/sorcerer1.png,0,g,10,12,$(PALETTE),,src/sprites/))
-$(eval $(call IMG2SPRITES,assets/sentinel.png,0,g,10,12,$(PALETTE),,src/sprites/))
 $(eval $(call IMG2SPRITES,assets/door.png,0,g,10,12,$(PALETTE),,src/sprites/))
 $(eval $(call IMG2SPRITES,assets/logo.png,0,g,80,35,$(PALETTE),,src/gfx/))
 $(eval $(call IMG2SPRITES,assets/goldframe.png,0,g,6,6,$(PALETTE),,src/gfx/))

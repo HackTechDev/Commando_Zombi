@@ -28,7 +28,6 @@
 #include "gfx/magic.h"			// magic shots; red, blue, green and yellow (8x8 px)
 
 #include "sprites/sorcerer1.h"	// 10 frames for SVEN, the 1st player (10x12 px)
-#include "sprites/sentinel.h"	// 8 frames for the sentinel sprite (10x12 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
 // compressed game map (40x42 tiles / 160x168 pixels each)
@@ -58,7 +57,6 @@
 
 // character types
 #define SORCERER1	0
-#define SENTINEL	2
 
 #define OBJ_W 4 // object width (bytes)
 #define OBJ_H 8 // object height (px)
@@ -185,24 +183,6 @@ TFrm* const animUp_Sorcerer1[2] = {&frmSorcerer1[0], &frmSorcerer1[1]};
 TFrm* const animDown_Sorcerer1[2] = {&frmSorcerer1[2], &frmSorcerer1[3]};
 TFrm* const animLeft_Sorcerer1[2] = {&frmSorcerer1[4], &frmSorcerer1[5]};
 TFrm* const animRight_Sorcerer1[2] = {&frmSorcerer1[6], &frmSorcerer1[7]};
-
-// 8 frames of Sentinel in motion
-const TFrm frmSentinel[8] = {
-	{g_sentinel_0}, // up step 1
-	{g_sentinel_1}, // up step 2
-	{g_sentinel_2}, // down step 1
-	{g_sentinel_3}, // down step 2	
-	{g_sentinel_4}, // left step 1
-	{g_sentinel_5}, // left step 2
-	{g_sentinel_6}, // right step 1
-	{g_sentinel_7}	// right step 2 
-};
-// Sentinel animation sequences
-TFrm* const animUp_Sentinel[2] = {&frmSentinel[0], &frmSentinel[1]};
-TFrm* const animDown_Sentinel[2] = {&frmSentinel[2], &frmSentinel[3]};
-TFrm* const animLeft_Sentinel[2] = {&frmSentinel[4], &frmSentinel[5]};
-TFrm* const animRight_Sentinel[2] = {&frmSentinel[6], &frmSentinel[7]};
-
 
 // Transparency mask table
 cpctm_createTransparentMaskTable(g_maskTable, 0x100, M0, 0);
@@ -434,7 +414,6 @@ cpct_keyID RedefineKey(u8 *info) {
 // SCOREBOARD FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
 
-
 // print the scoreboard
 void InitScoreboard() {
 	PrintFrame(0,0,77,24);	
@@ -465,7 +444,6 @@ void DeleteObject(u8 index) __z88dk_fastcall {
 							2 + (objX[index] & 1), 2 + (objY[index] & 3 ? 1 : 0), MAP_W, 
 							cpctm_screenPtr(CPCT_VMEM_START, 0, ORIG_MAP_Y), UNPACKED_MAP_INI);	
 }
-
 
 
 // check if any player has passed over the object
@@ -629,15 +607,7 @@ void SelectFrame(TSpr *pSpr) __z88dk_fastcall {
 			case S_stopped:			{spr[0].frm = &frmSorcerer1[spr[0].dir*2];}		
 		}
 	}
-	// sentinel
-	else if(pSpr->ident == SENTINEL) {
-		switch(pSpr->dir) {
-			case D_up:				{AssignFrame(pSpr, animUp_Sentinel); break;}
-			case D_down:			{AssignFrame(pSpr, animDown_Sentinel); break;}
-			case D_left:			{AssignFrame(pSpr, animLeft_Sentinel); break;}
-			case D_right:			{AssignFrame(pSpr, animRight_Sentinel);}
-		}
-	}
+
 }
 
 
