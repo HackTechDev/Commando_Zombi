@@ -816,10 +816,10 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 // for "chaser" movements, the lower SPEED value, the higher speed
 // to avoid flickering assigning enemies 2 and 3 to those with the highest Y and putting a minimum Y
 // enemies 2 and 3 are processed in each iteration of the loop (fast)
-void SetEnemies() {
+void changeMap() {
 	switch (nMap) {
 		// gardens #1
-		case 0: {			 
+		case 1: {			 
 			// player 1 starting position
 			spr[0].x = spr[0].px = 6; 
 			spr[0].y = spr[0].py = 178;			
@@ -830,7 +830,7 @@ void SetEnemies() {
 			break;
 		}
 		// gardens #2
-		case 1: {
+		case 0: {
 			// player 1 starting position
 			spr[0].x = spr[0].px = 58; 
 			spr[0].y = spr[0].py = 178;	
@@ -924,7 +924,7 @@ void ResetData() {
 	spr[0].power_maxV = 0;
 	ctInactivity[0] = 0;
 
-	SetEnemies();
+	changeMap();
 	PrintMap();
 }
 
