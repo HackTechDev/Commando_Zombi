@@ -16,8 +16,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////
 
-// Sorcerers v1.0
-
 #include <cpctelera.h>
 
 #include "gfx/tiles.h"			// tiles to compose the map (4x4 px)
@@ -861,7 +859,7 @@ void PrintStartMenu() {
 	cpct_drawSprite(g_logo_0, cpctm_screenPtr(CPCT_VMEM_START, 0, 0), G_LOGO_0_W, G_LOGO_0_H);
 	cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
 
-	PrintText("1@@1@PLAYER@GAME", 10, 50, 0);
+	PrintText("1@@@MISSION", 10, 50, 0);
 
 	// Sven y Erik
 	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
@@ -953,7 +951,6 @@ void InitGame() {
 }
 
 
-// Players 1 or 2 lose a life, some variables are reset
 void GameOver(u8 player) {
 	// if there are lives left
 	if (spr[player].lives_speed > 1 && player != 2) {
