@@ -91,6 +91,7 @@ cpct_keyID ctlRight[2];
 cpct_keyID ctlAbort;
 cpct_keyID ctlMusic;  
 cpct_keyID ctlPause;
+cpct_keyID ctlGoToMap;
 
 // frame of the sprite to print
 typedef struct {
@@ -730,15 +731,50 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
 		spr[1].lives_speed = 0;
 		GameOver(2);
 	}
+	else  if(cpct_isKeyPressed(ctlGoToMap)) {
+		spr[0].lives_speed = 0;
+		spr[1].lives_speed = 0;
+		goToMap();
+	}
 	// pause
 	else if(cpct_isKeyPressed(ctlPause)) {
 		Wait4Key(ctlPause);
 		while (!cpct_isAnyKeyPressed());
 		Wait4Key(ctlPause);
 	}
-
 	
 }
+
+
+
+// initialization of some variables
+void goToMap() {
+	if (nMap == 1) {
+		nMap = 0;
+	} else if (nMap == 0) {
+		nMap = 1;
+	}
+	
+	// initial player 1 data
+	spr[0].num = 0; // sprite number
+	spr[0].ident = SORCERER1; // identity
+	spr[0].lives_speed = 3; // lives
+
+	ctMainLoop = 0;
+	nObj[0] = -1;
+	
+	// reset player data
+	spr[0].dir = D_right; 
+	spr[0].status = S_stopped;
+	spr[0].print_minV = TRUE; // the first time must be printed on screen
+	spr[0].power_maxV = 0;
+	ctInactivity[0] = 0;
+
+	changeMap();
+	PrintMap();
+}
+
+
 
 
 // assign the frame corresponding to the animation sequence of the sprite
@@ -819,7 +855,7 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 void changeMap() {
 	switch (nMap) {
 		// gardens #1
-		case 1: {			 
+		case 0: {			 
 			// player 1 starting position
 			spr[0].x = spr[0].px = 6; 
 			spr[0].y = spr[0].py = 178;			
@@ -830,7 +866,7 @@ void changeMap() {
 			break;
 		}
 		// gardens #2
-		case 0: {
+		case 1: {
 			// player 1 starting position
 			spr[0].x = spr[0].px = 58; 
 			spr[0].y = spr[0].py = 178;	
@@ -907,7 +943,7 @@ void InitValues() {
 	ctlAbort = Key_X;
 	ctlMusic = Key_M;
 	ctlPause = Key_H;	
-
+	ctlGoToMap = Key_G;
 }
 
 
