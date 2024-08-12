@@ -182,7 +182,7 @@
 ## $(eval $(call CDTMAN, GEN_MINILOADER          , assets/fight.png))        ##
 
 SCR_PAL=1 11 2 26
-$(eval $(call CDTMAN, SET_FILENAME				, sorcerers))
+$(eval $(call CDTMAN, SET_FILENAME				, comzom))
 $(eval $(call CDTMAN, SET_MINILOAD_MODE			, 1)) 
 $(eval $(call CDTMAN, SET_MINILOAD_PALETTE_FW	, 1, $(SCR_PAL)))   
 
