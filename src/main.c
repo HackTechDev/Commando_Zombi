@@ -811,22 +811,6 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 }	
 
 
-
-
-// assign properties to enemy sprites
-void SetEnemyParams(u8 i, u8 ident, u8 mov, u8 dir, u8 speed, u8 x, u8 y, u8 minV, u8 maxV) {
-	spr[i].num = i;
-	spr[i].ident = ident; 
-	spr[i].objNum_mov = mov;	 
-	spr[i].dir = dir; 
-	spr[i].lives_speed = speed;
-	spr[i].x = spr[i].px = x;
-	spr[i].y = spr[i].py = y;
-	spr[i].print_minV = minV;
-	spr[i].power_maxV = maxV;
-}
-
-
 // values ​​enemy properties based on current map
 // coordinate calculation: x=TILED(x)*2  y=(TILED(y)*4)+ORIG_MAP_Y  [ORIG_MAP_Y=32]
 // for "linear" movements, the higher SPEED value, the higher speed
@@ -837,8 +821,6 @@ void SetEnemies() {
 	switch (nMap) {
 		// gardens #1
 		case 0: {			 
-						//SPR IDENTITY	MOVEMENT		DIR     SPEED   X    Y  MIN  MAX
-			SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1, 73, 158,   2,  73);						
 			// player 1 starting position
 			spr[0].x = spr[0].px = 6; 
 			spr[0].y = spr[0].py = 178;			
@@ -850,8 +832,6 @@ void SetEnemies() {
 		}
 		// gardens #2
 		case 1: {
-						//SPR IDENTITY	MOVEMENT		DIR     SPEED   X    Y  MIN  MAX
-			SetEnemyParams(2, SENTINEL,	M_linear_X, 	D_left,     1,  0,   0,   0,   0);
 			// player 1 starting position
 			spr[0].x = spr[0].px = 58; 
 			spr[0].y = spr[0].py = 178;	
@@ -863,8 +843,6 @@ void SetEnemies() {
 		}
 	}
 }
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -886,7 +864,6 @@ void PrintStartMenu() {
 
     PrintText("NEKROFAGE", 13, 190, 0);
 }
-
 
 
 void StartMenu() {
