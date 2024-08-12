@@ -2,8 +2,8 @@
 ;; Compresor used:   zx7b
 ;; Files compressed: [ 'src/map0.bin' ]
 ;; Uncompressed:     1680 bytes
-;; Compressed:       634 bytes
-;; Space saved:      1046 bytes
+;; Compressed:       636 bytes
+;; Space saved:      1044 bytes
 ;;
 
 ;; Declaration of the compressed array and
@@ -12,7 +12,7 @@
 .globl _mappk0_end
 
 ;; Compressed and uncompressed sizes
-_mappk0_size_z == 634
+_mappk0_size_z == 636
 _mappk0_size   == 1680
 
 
