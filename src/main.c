@@ -74,6 +74,8 @@ u8 nMap; // current level number
 u8 lastNMap; // has been a level change?
 u8 *lName; // text to display on screen for each level
 
+u8 currentTileNumber = -1;
+
 // other global variables
 u8 ctInactivity[2];	// counters to detect inactive players
 i16 ctMainLoop; 	// main loop iteration counter
@@ -195,7 +197,6 @@ void PrintObject(u8 nObj, u8 objX, u8 objY);
 u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX);
 void PrintSprite(TSpr *pSpr) __z88dk_fastcall;
 void ResetData();
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 // GENERIC FUNCTIONS
@@ -546,19 +547,10 @@ void CheckActiveTile(u8 player) {
 	u8 i = 0;
 	
 
-	// collision with the well. Do we have objects or coins?
-	if (currentTile == TILESET_WELL ) {	
-		// it sounds like we dropped something
-		// clear P1 or P2 scoreboard
-		if (player == 0)
-			cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 7, 16), 
-							  cpct_px2byteM0(BG_COLOR, BG_COLOR), 20, 8);
-		else
-			cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 46, 16), 
-							  cpct_px2byteM0(BG_COLOR, BG_COLOR), 20, 8);
-				
-		spr[player].objNum_mov = 0;	// throwing objects
-		
+	if (currentTile == TILESET_DOOR || currentTile == 30) {
+		currentTileNumber = currentTile;
+  	} else {
+		currentTileNumber = -1;
 	}
 
 }
@@ -698,7 +690,7 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
 		spr[1].lives_speed = 0;
 		GameOver(2);
 	}
-	else  if(cpct_isKeyPressed(ctlGoToMap)) {
+	else  if(cpct_isKeyPressed(ctlGoToMap) && currentTileNumber == TILESET_DOOR) {
 		spr[0].lives_speed = 0;
 		spr[1].lives_speed = 0;
 		goToMap();
@@ -824,8 +816,8 @@ void changeMap() {
 		// gardens #1
 		case 0: {			 
 			// player 1 starting position
-			spr[0].x = spr[0].px = 6; 
-			spr[0].y = spr[0].py = 178;			
+			spr[0].x = spr[0].px = 70; 
+			spr[0].y = spr[0].py = 36;			
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
 			// screen title
@@ -835,8 +827,8 @@ void changeMap() {
 		// gardens #2
 		case 1: {
 			// player 1 starting position
-			spr[0].x = spr[0].px = 58; 
-			spr[0].y = spr[0].py = 178;	
+			spr[0].x = spr[0].px = 40; 
+			spr[0].y = spr[0].py = 36;	
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
 			// screen title
