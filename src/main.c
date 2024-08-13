@@ -812,7 +812,7 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 // enemies 2 and 3 are processed in each iteration of the loop (fast)
 void changeMap() {
 	switch (nMap) {
-		// gardens #1
+		// spaceship #1
 		case 0: {			 
 			// player 1 starting position
 			spr[0].x = spr[0].px = 70; 
@@ -820,10 +820,10 @@ void changeMap() {
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
 			// screen title
-			lName = "1;1@@GARDENS";
+			lName = "1;1@@SPACESHIP";
 			break;
 		}
-		// gardens #2
+		// spaceship #2
 		case 1: {
 			// player 1 starting position
 			spr[0].x = spr[0].px = 40; 
@@ -831,7 +831,7 @@ void changeMap() {
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
 			// screen title
-			lName = "1;2@@GARDENS";
+			lName = "1;2@@SPACESHIP";
 			break;
 		}
 	}
@@ -852,8 +852,7 @@ void PrintStartMenu() {
 	PrintText("1@@@MISSION", 10, 50, 0);
 
 	// Sven y Erik
-	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, 
-		cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
+	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
 
     PrintText("NEKROFAGE", 13, 190, 0);
 }
@@ -954,7 +953,7 @@ void GameOver(u8 player) {
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
 		PrintFrame(6,80,71,134);
-	PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
+		PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
 		Pause(500);	
 		// wait for a key press
 		while (!cpct_isAnyKeyPressed());
@@ -990,11 +989,10 @@ void main(void) {
 			CheckObject(0); // verify collection of object 1
 			CheckObject(1); // verify collection of object 2
 			if (spr[0].print_minV) 
-        CheckActiveTile(0); // check entry into store, door or well of player 1
-
+        		CheckActiveTile(0); // check entry into store, door or well of player 1
 		}		
 		
-    cpct_waitVSYNC(); // wait for vertical retrace	
+    	cpct_waitVSYNC(); // wait for vertical retrace	
 
 		// shift system to avoid double video buffer
 		switch (ctMainLoop % 3) {
