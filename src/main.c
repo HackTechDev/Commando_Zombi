@@ -27,10 +27,11 @@
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
 // compressed game map (40x42 tiles / 160x168 pixels each)
-// gardens
 #include "map/mappk0.h"
 #include "map/mappk1.h"
-
+#include "map/mappk2.h"
+#include "map/mappk3.h"
+#include "map/mappk4.h"
 
 ///////////////////////////////////////////////////////////////////////////////////
 // DEFINITIONS AND VARIABLES
@@ -69,6 +70,8 @@
 #define ORIG_MAP_Y 32 // the map starts at position 32 of the vertical coordinates
 #define UNPACKED_MAP_END (u8*)(0x1600) // the program starts at 0x1601
 #define UNPACKED_MAP_INI (u8*)(0x0F71)
+
+u8 previousMap;
 u8 nMap; // current level number
 u8 lastNMap; // has been a level change?
 u8 *lName; // text to display on screen for each level
@@ -109,9 +112,6 @@ typedef struct {
 
 	// shared properties for players and enemies (saving memory)
 	
-	// players: lives left
-	// enemies: speed
-	u8 lives_speed;
 	
 	// players: number of ingredients purchased
 	// enemies: movement type
@@ -545,8 +545,7 @@ void CheckActiveTile(u8 player) {
 	u8 currentTile = *GetTileNum(spr[player].x+3, spr[player].y+8);	
 	u8 i = 0;
 	
-
-	if (currentTile == TILESET_DOOR || currentTile == 30) {
+	if (currentTile == TILESET_DOOR || currentTile == 30 || currentTile == 31) {
 		currentTileNumber = currentTile;
   	} else {
 		currentTileNumber = -1;
@@ -685,14 +684,13 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
 	else if(cpct_isKeyPressed(ctlRight[pSpr->ident]))	WalkIn(pSpr, D_right);	
 	// leave the game
 	else if(cpct_isKeyPressed(ctlAbort)) {
-		spr[0].lives_speed = 0;
-		spr[1].lives_speed = 0;
 		GameOver(2);
 	}
-	else  if(cpct_isKeyPressed(ctlGoToMap) && currentTileNumber == TILESET_DOOR) {
-		spr[0].lives_speed = 0;
-		spr[1].lives_speed = 0;
-		goToMap();
+	else  if(cpct_isKeyPressed(ctlGoToMap)) {
+		
+		if (currentTileNumber == TILESET_DOOR || currentTileNumber == 30 || currentTileNumber == 31) {
+			goToMap();
+		}
 	}
 	// pause
 	else if(cpct_isKeyPressed(ctlPause)) {
@@ -707,16 +705,33 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
 
 // initialization of some variables
 void goToMap() {
-	if (nMap == 1) {
-		nMap = 0;
-	} else if (nMap == 0) {
+
+	previousMap = nMap;
+	// Map0 => Map 1
+	if (nMap == 0 && currentTileNumber == 30) {
 		nMap = 1;
+	} 
+	// Map0 => Map 2
+	else if (nMap == 0 && currentTileNumber == 31) {
+		nMap = 2;
+	} 
+	// Map1 => map 0
+	else if (nMap == 1 && currentTileNumber == 30) {
+		nMap = 0;
+	} 
+	// Map2 => map 0
+	else if (nMap == 2 && currentTileNumber == 30) {
+		nMap = 0;
 	}
-	
+
+	PrintNumber(previousMap, 2, 10, 185, 1); 
+	PrintNumber(nMap, 2, 15, 185, 1); 
+	PrintNumber(currentTileNumber, 2, 25, 185, 1); 
+
+
 	// initial player 1 data
 	spr[0].num = 0; // sprite number
 	spr[0].ident = SORCERER1; // identity
-	spr[0].lives_speed = 3; // lives
 
 	ctMainLoop = 0;
 	nObj[0] = -1;
@@ -812,18 +827,24 @@ void PlayerLoop(TSpr *pSpr) __z88dk_fastcall {
 // enemies 2 and 3 are processed in each iteration of the loop (fast)
 void changeMap() {
 	switch (nMap) {
-		// spaceship #1
+		// spaceship #0
 		case 0: {			 
 			// player 1 starting position
-			spr[0].x = spr[0].px = 70; 
-			spr[0].y = spr[0].py = 36;			
+			if (previousMap == 1) {
+				spr[0].x = spr[0].px = 70; 
+				spr[0].y = spr[0].py = 36;			
+			}
+			if (previousMap == 2) {
+				spr[0].x = spr[0].px = 30; 
+				spr[0].y = spr[0].py = 184;			
+			}
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
 			// screen title
 			lName = "1;1@@SPACESHIP";
 			break;
 		}
-		// spaceship #2
+		// spaceship #1
 		case 1: {
 			// player 1 starting position
 			spr[0].x = spr[0].px = 40; 
@@ -834,6 +855,41 @@ void changeMap() {
 			lName = "1;2@@SPACESHIP";
 			break;
 		}
+		// spaceship #2
+		case 2: {			 
+			// player 1 starting position
+			spr[0].x = spr[0].px = 6; 
+			spr[0].y = spr[0].py = 100;			
+			// unzip the map
+			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
+			// screen title
+			lName = "2;1@SPACESHIP";
+			break;
+		}
+		// cemetery #2
+		case 3: {			 
+			// player 1 starting position
+			spr[0].x = spr[0].px = 36; 
+			spr[0].y = spr[0].py = 178;			
+			// unzip the map
+			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
+			// screen title
+			lName = "2;2@CEMETERY";
+			break;
+		}	
+		// cellars #1
+		case 4: {			 
+			// player 1 starting position
+			spr[0].x = spr[0].px = 6; 
+			spr[0].y = spr[0].py = 175;			
+			// unzip the map
+			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
+			// screen title
+			lName = "3;1@@CELLARS";	
+			break;
+		}
+
+
 	}
 }
 
@@ -845,13 +901,11 @@ void changeMap() {
 void PrintStartMenu() {
 	ClearScreen();
 
-    // "SORCERERS" logo
 	cpct_drawSprite(g_logo_0, cpctm_screenPtr(CPCT_VMEM_START, 0, 0), G_LOGO_0_W, G_LOGO_0_H);
 	cpct_drawSprite(g_logo_1, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_0_W, 0), G_LOGO_0_W, G_LOGO_0_H);
 
 	PrintText("1@@@MISSION", 10, 50, 0);
 
-	// Sven y Erik
 	cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
 
     PrintText("NEKROFAGE", 13, 190, 0);
@@ -925,13 +979,13 @@ void ResetData() {
 // initialization of some variables
 void InitGame() {
 	StartMenu(); // run the start menu
+	previousMap = 1;
 	nMap = 0; // initial map number
 	lastNMap = 255;
 	
 	// initial player 1 data
 	spr[0].num = 0; // sprite number
 	spr[0].ident = SORCERER1; // identity
-	spr[0].lives_speed = 3; // lives
 	ResetObjData(0);
 	
 	InitScoreboard();		
@@ -941,14 +995,7 @@ void InitGame() {
 
 
 void GameOver(u8 player) {
-	// if there are lives left
-	if (spr[player].lives_speed > 1 && player != 2) {
-		spr[player].lives_speed--;
-		ResetData();
-	}
-	else { // prepare a new game
-		// puts 0 life on the scoreboard of the losing player
-		spr[player].lives_speed = 0;
+
 		// print a GAME OVER in the center of the play area
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
 		cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
@@ -958,7 +1005,7 @@ void GameOver(u8 player) {
 		// wait for a key press
 		while (!cpct_isAnyKeyPressed());
 		InitGame();
-	}
+	
 }
 
 
