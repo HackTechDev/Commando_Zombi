@@ -23,7 +23,7 @@
 #include "gfx/goldframe.h"		// three pieces to create decorative frames (6x6 px)
 #include "gfx/objects.h"		// 16 objects (8x8 px)
 
-#include "sprites/sorcerer1.h"	// 10 frames for SVEN, the 1st player (10x12 px)
+#include "sprites/mercenary.h"	// 10 frames for SVEN, the 1st player (10x12 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
 // compressed game map (40x42 tiles / 160x168 pixels each)
@@ -52,7 +52,7 @@
 #define SHT_H 8 // shot height (px)
 
 // character types
-#define SORCERER1	0
+#define MERCENARY	0
 
 #define OBJ_W 4 // object width (bytes)
 #define OBJ_H 8 // object height (px)
@@ -101,7 +101,7 @@ typedef struct {
 typedef struct {
   // common properties
   u8 num;		// sprite number (0 to 6; two players and five enemies)
-  u8 ident;	// identity; Sorcerer1, Sorcerer2, Sentinel, etc ...
+  u8 ident;	// identity; Mercenary, Sorcerer2, Sentinel, etc ...
   u8 x, y;	// X, Y coordinates of the sprite
   u8 px, py;	// previous X, Y coordinates of the sprite
   u8 status;	// current status of the sprite; standing, walking, etc ...
@@ -164,22 +164,22 @@ enum {S_walkingUp, S_walkingDown, S_walkingLeft, S_walkingRight, S_stopped} enum
 // behavior of sprites controlled by CPU
 enum {M_linear_X, M_linear_Y, M_linear_XY, M_chaser} enum_mov;
 
-// 8 frames of Sorcerer1 in motion
-const TFrm frmSorcerer1[8] = {
-  {g_sorcerer1_00}, // up step 1
-  {g_sorcerer1_01}, // up step 2
-  {g_sorcerer1_02}, // dows step 1
-  {g_sorcerer1_03}, // down step 2
-  {g_sorcerer1_04}, // left step 1
-  {g_sorcerer1_05}, // left step 2
-  {g_sorcerer1_06}, // right step 1
-  {g_sorcerer1_07}  // right step 2
+// 8 frames of Mercenary in motion
+const TFrm frmMercenary[8] = {
+  {g_mercenary_00}, // up step 1
+  {g_mercenary_01}, // up step 2
+  {g_mercenary_02}, // dows step 1
+  {g_mercenary_03}, // down step 2
+  {g_mercenary_04}, // left step 1
+  {g_mercenary_05}, // left step 2
+  {g_mercenary_06}, // right step 1
+  {g_mercenary_07}  // right step 2
 };
-// Sorcerer1 animation sequences
-TFrm* const animUp_Sorcerer1[2] = {&frmSorcerer1[0], &frmSorcerer1[1]};
-TFrm* const animDown_Sorcerer1[2] = {&frmSorcerer1[2], &frmSorcerer1[3]};
-TFrm* const animLeft_Sorcerer1[2] = {&frmSorcerer1[4], &frmSorcerer1[5]};
-TFrm* const animRight_Sorcerer1[2] = {&frmSorcerer1[6], &frmSorcerer1[7]};
+// Mercenary animation sequences
+TFrm* const animUp_Mercenary[2] = {&frmMercenary[0], &frmMercenary[1]};
+TFrm* const animDown_Mercenary[2] = {&frmMercenary[2], &frmMercenary[3]};
+TFrm* const animLeft_Mercenary[2] = {&frmMercenary[4], &frmMercenary[5]};
+TFrm* const animRight_Mercenary[2] = {&frmMercenary[6], &frmMercenary[7]};
 
 // Transparency mask table
 cpctm_createTransparentMaskTable(g_maskTable, 0x100, M0, 0);
@@ -584,13 +584,13 @@ void AssignFrame(TSpr *pSpr, TFrm **anim) {
 // we assign a frame or sequence of frames to each state
 void SelectFrame(TSpr *pSpr) __z88dk_fastcall {
   // player 1
-  if(pSpr->ident == SORCERER1) {
+  if(pSpr->ident == MERCENARY) {
     switch(pSpr->status) {
-      case S_walkingUp: 		{AssignFrame(&spr[0], animUp_Sorcerer1); break;}
-      case S_walkingDown:		{AssignFrame(&spr[0], animDown_Sorcerer1); break;}
-      case S_walkingLeft:		{AssignFrame(&spr[0], animLeft_Sorcerer1); break;}
-      case S_walkingRight:	{AssignFrame(&spr[0], animRight_Sorcerer1); break;}
-      case S_stopped:			{spr[0].frm = &frmSorcerer1[spr[0].dir*2];}
+      case S_walkingUp: 		{AssignFrame(&spr[0], animUp_Mercenary); break;}
+      case S_walkingDown:		{AssignFrame(&spr[0], animDown_Mercenary); break;}
+      case S_walkingLeft:		{AssignFrame(&spr[0], animLeft_Mercenary); break;}
+      case S_walkingRight:	{AssignFrame(&spr[0], animRight_Mercenary); break;}
+      case S_stopped:			{spr[0].frm = &frmMercenary[spr[0].dir*2];}
     }
   }
 
@@ -739,7 +739,7 @@ void goToMap() {
 
   // initial player 1 data
   spr[0].num = 0; // sprite number
-  spr[0].ident = SORCERER1; // identity
+  spr[0].ident = MERCENARY; // identity
 
   ctMainLoop = 0;
   nObj[0] = -1;
@@ -909,7 +909,7 @@ void PrintStartMenu() {
 
   PrintText("1@@@MISSION", 10, 50, 0);
 
-  cpct_drawSpriteMaskedAlignedTable(g_sorcerer1_06, cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
+  cpct_drawSpriteMaskedAlignedTable(g_mercenary_06, cpct_getScreenPtr(CPCT_VMEM_START, 6, 187), SPR_W, SPR_H, g_maskTable);
 
   PrintText("NEKROFAGE", 13, 190, 0);
 }
@@ -988,7 +988,7 @@ void InitGame() {
 
   // initial player 1 data
   spr[0].num = 0; // sprite number
-  spr[0].ident = SORCERER1; // identity
+  spr[0].ident = MERCENARY; // identity
   ResetObjData(0);
 
   InitScoreboard();
