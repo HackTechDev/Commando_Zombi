@@ -31,7 +31,6 @@
 #include "map/mappk1.h"
 #include "map/mappk2.h"
 #include "map/mappk3.h"
-#include "map/mappk4.h"
 
 ///////////////////////////////////////////////////////////////////////////////////
 // DEFINITIONS AND VARIABLES
@@ -723,6 +722,15 @@ void goToMap() {
 	else if (nMap == 2 && currentTileNumber == 30) {
 		nMap = 0;
 	}
+	
+	// Map1 => map 3
+	else if (nMap == 1 && currentTileNumber == 31) {
+		nMap = 3;
+	}
+	// Map3 => map 1
+	else if (nMap == 3 && currentTileNumber == 30) {
+		nMap = 1;
+	}
 
 	PrintNumber(previousMap, 2, 10, 185, 1); 
 	PrintNumber(nMap, 2, 15, 185, 1); 
@@ -847,8 +855,15 @@ void changeMap() {
 		// spaceship #1
 		case 1: {
 			// player 1 starting position
-			spr[0].x = spr[0].px = 40; 
-			spr[0].y = spr[0].py = 36;	
+			if (previousMap == 0) {
+				spr[0].x = spr[0].px = 40; 
+				spr[0].y = spr[0].py = 36;	
+			}
+			if (previousMap == 3) {
+				spr[0].x = spr[0].px = 54; 
+				spr[0].y = spr[0].py = 128;	
+			}
+
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
 			// screen title
@@ -866,29 +881,17 @@ void changeMap() {
 			lName = "2;1@SPACESHIP";
 			break;
 		}
-		// cemetery #2
+		// spaceship #3
 		case 3: {			 
 			// player 1 starting position
-			spr[0].x = spr[0].px = 36; 
-			spr[0].y = spr[0].py = 178;			
+			spr[0].x = spr[0].px = 40; 
+			spr[0].y = spr[0].py = 132;			
 			// unzip the map
 			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
 			// screen title
 			lName = "2;2@CEMETERY";
 			break;
 		}	
-		// cellars #1
-		case 4: {			 
-			// player 1 starting position
-			spr[0].x = spr[0].px = 6; 
-			spr[0].y = spr[0].py = 175;			
-			// unzip the map
-			cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
-			// screen title
-			lName = "3;1@@CELLARS";	
-			break;
-		}
-
 
 	}
 }
