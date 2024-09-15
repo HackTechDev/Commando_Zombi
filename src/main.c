@@ -32,46 +32,17 @@
 #include "map/mappk2.h"
 #include "map/mappk3.h"
 
+#include "lib/constant.h";
 #include "lib/generic.h";
 #include "lib/keyboard.h";
+#include "lib/screen.h";
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 // DEFINITIONS AND VARIABLES
 ///////////////////////////////////////////////////////////////////////////////////
 
-#define TRUE	1
-#define FALSE	0
 
-#define GLOBAL_MAX_X  80 	// X maximum value for the screen (bytes)
-#define GLOBAL_MAX_Y  200	// Y maximun value for the screen (px)
-
-#define FNT_W 3 // width of text characters (bytes)
-#define FNT_H 8 // height of text characters (px)
-
-#define SPR_W 5 // sprite width (bytes)
-#define SPR_H 12 // sprite height (px)
-
-#define SHT_W 4 // shot width (bytes)
-#define SHT_H 8 // shot height (px)
-
-// character types
-#define MERCENARY	0
-
-#define OBJ_W 4 // object width (bytes)
-#define OBJ_H 8 // object height (px)
-
-#define TILESET_WELL 38 // the well is detected in this tile number
-#define TILESET_DOOR 14 // the door is detected in this tile number
-#define TILESET_BLOCKERS 45 // tile number where the blocking tiles begin
-
-#define BG_COLOR 1 // background color (1 = black)
-
-// maps
-#define MAP_W 40 // game screen size in tiles
-#define MAP_H 42
-#define ORIG_MAP_Y 32 // the map starts at position 32 of the vertical coordinates
-#define UNPACKED_MAP_END (u8*)(0x1600) // the program starts at 0x1601
-#define UNPACKED_MAP_INI (u8*)(0x0F71)
 
 u8 previousMap;
 u8 nMap; // current level number
@@ -202,26 +173,6 @@ void ResetData();
 ///////////////////////////////////////////////////////////////////////////////////
 // GRAPHICS, TILES AND SCREEN MANAGEMENT FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
-
-// cleans the screen with the specified color
-void ClearScreen() {
-  cpct_memset(CPCT_VMEM_START, cpct_px2byteM0(BG_COLOR, BG_COLOR), 16384);
-}
-
-
-// get the tile number of a certain position XY in the current map
-u8* GetTileNum(u8 x, u8 y) {
-  return UNPACKED_MAP_INI + (y - ORIG_MAP_Y) / 4 * MAP_W + x / 2;
-}
-
-
-// returns "1" if the coordinates are placed on the background tiles, "0" if they are blockers
-u8 OnBackground(u8 x, u8 y) {
-  if (*GetTileNum(x+3, y+8) >= TILESET_BLOCKERS)
-    return FALSE;
-  return TRUE;
-}
-
 
 // print the map corresponding to the current map number
 void PrintMap() {

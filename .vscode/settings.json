@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "generic.h": "c",
-        "keyboard.h": "c"
+        "keyboard.h": "c",
+        "screen.h": "c"
     }
 }
