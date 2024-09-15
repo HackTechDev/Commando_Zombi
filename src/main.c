@@ -246,8 +246,6 @@ void PrintFrame(u8 xIni, u8 yIni, u8 xEnd, u8 yEnd) {
 }
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 // SCOREBOARD FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
@@ -381,6 +379,7 @@ void ReprintObject() {
   }
 }
 
+
 // check if any player has stepped on a special tile; shop, well, exit door
 void CheckActiveTile(u8 player) {
   u8 currentTile = *GetTileNum(spr[player].x+3, spr[player].y+8);
@@ -439,7 +438,6 @@ void SelectFrame(TSpr *pSpr) __z88dk_fastcall {
 }
 
 
-
 // return "1" or "TRUE" if the coordinates match those of the sprite + the supplied margin
 u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX) {
   u8 marginY = marginX+marginX;
@@ -448,7 +446,6 @@ u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX) {
       return TRUE;
   return FALSE;
 }
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -543,7 +540,6 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
 }
 
 
-
 // initialization of some variables
 void goToMap() {
 
@@ -578,7 +574,6 @@ void goToMap() {
   PrintNumber(nMap, 2, 15, 185, 1);
   PrintNumber(currentTileNumber, 2, 25, 185, 1);
 
-
   // initial player 1 data
   spr[0].num = 0; // sprite number
   spr[0].ident = MERCENARY; // identity
@@ -596,8 +591,6 @@ void goToMap() {
   changeMap();
   PrintMap();
 }
-
-
 
 
 // assign the frame corresponding to the animation sequence of the sprite
@@ -764,14 +757,10 @@ void PrintStartMenu() {
   cpct_drawSprite(g_logo_10, cpctm_screenPtr(CPCT_VMEM_START, 0, G_LOGO_00_H * 5), G_LOGO_10_W, G_LOGO_10_H);
   cpct_drawSprite(g_logo_11, cpctm_screenPtr(CPCT_VMEM_START, G_LOGO_00_W, G_LOGO_00_H * 5), G_LOGO_11_W, G_LOGO_11_H);
 
-
   PrintText("COMMANDO", 5, 10, 0);
   PrintText("ZOMBI", 5, 20, 0);
 
-
   cpct_drawSpriteMaskedAlignedTable(g_mercenary_06, cpct_getScreenPtr(CPCT_VMEM_START, 5, 30), SPR_W, SPR_H, g_maskTable);
-
-  
 }
 
 
@@ -858,7 +847,6 @@ void InitGame() {
 
 
 void GameOver(u8 player) {
-
   // print a GAME OVER in the center of the play area
   cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
   cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
@@ -868,7 +856,6 @@ void GameOver(u8 player) {
   // wait for a key press
   while (!cpct_isAnyKeyPressed());
   InitGame();
-
 }
 
 
