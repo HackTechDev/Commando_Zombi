@@ -847,11 +847,10 @@ void InitGame() {
 
 
 void GameOver(u8 player) {
-  // print a GAME OVER in the center of the play area
   cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
   cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
   PrintFrame(6,80,71,134);
-  PrintText("G@A@M@E@@O@V@E@R", 16, 107, 0);
+  PrintText("E@N@D@@M@I@S@S@I@O@N", 10, 107, 0);
   Pause(500);
   // wait for a key press
   while (!cpct_isAnyKeyPressed());
