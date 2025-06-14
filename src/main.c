@@ -235,11 +235,11 @@ void initInfoBoard() {
   PrintFrame(0,0,77,24);
   cpct_drawSpriteMaskedAlignedTable(g_mercenary_03, cpct_getScreenPtr(CPCT_VMEM_START,  3, 4), SPR_W, SPR_H, g_maskTable);
 
-	PrintText(mapName, 25, 6, 1); 
+	PrintText(mapName, 25, 6, 1);
 }
 
-void RefreshInfoBoard() { 
-	PrintText(mapName, 25, 6, 1); 
+void RefreshInfoBoard() {
+	PrintText(mapName, 25, 6, 1);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -502,27 +502,25 @@ void WalkIn(TSpr *pSpr, u8 dir) {
 // stands still
 void Stop(TSpr *pSpr) __z88dk_fastcall {
   cpct_scanKeyboard_f(); // check the pressed keys
-  if(cpct_isKeyPressed(ctlUp[pSpr->ident]))			WalkIn(pSpr, D_up);
-  else if(cpct_isKeyPressed(ctlDown[pSpr->ident]))	WalkIn(pSpr, D_down);
-  else if(cpct_isKeyPressed(ctlLeft[pSpr->ident]))	WalkIn(pSpr, D_left);
-  else if(cpct_isKeyPressed(ctlRight[pSpr->ident]))	WalkIn(pSpr, D_right);
-  // leave the game
-  else if(cpct_isKeyPressed(ctlAbort)) {
+  if(cpct_isKeyPressed(ctlUp[pSpr->ident])) {
+    WalkIn(pSpr, D_up);
+  } else if(cpct_isKeyPressed(ctlDown[pSpr->ident])) {
+    WalkIn(pSpr, D_down);
+  } else if(cpct_isKeyPressed(ctlLeft[pSpr->ident])) {
+    WalkIn(pSpr, D_left);
+  } else if(cpct_isKeyPressed(ctlRight[pSpr->ident]))	{
+    WalkIn(pSpr, D_right);
+  } else if(cpct_isKeyPressed(ctlAbort)) { // leave the game
     EndMission(2);
-  }
-  else  if(cpct_isKeyPressed(ctlGoToMap)) {
-
+  } else  if(cpct_isKeyPressed(ctlGoToMap)) {
     if (currentTileNumber == TILESET_DOOR || currentTileNumber == 30 || currentTileNumber == 31) {
       goToMap();
     }
-  }
-  // pause
-  else if(cpct_isKeyPressed(ctlPause)) {
+  } else if(cpct_isKeyPressed(ctlPause)) { // pause
     Wait4Key(ctlPause);
     while (!cpct_isAnyKeyPressed());
     Wait4Key(ctlPause);
   }
-
 }
 
 
@@ -672,7 +670,7 @@ void changeMap() {
               // screen title
               levelName = "1;1@@SPACESHIP";
               mapName = "MAP@0";
-             
+
               RefreshInfoBoard();
 
               break;
@@ -694,7 +692,7 @@ void changeMap() {
               // screen title
               levelName = "1;2@@SPACESHIP";
               mapName = "MAP@1";
-             
+
               RefreshInfoBoard();
 
               break;
@@ -709,7 +707,7 @@ void changeMap() {
               // screen title
               levelName = "2;1@SPACESHIP";
               mapName = "MAP@2";
-             
+
               RefreshInfoBoard();
 
               break;
@@ -724,7 +722,7 @@ void changeMap() {
               // screen title
               levelName = "2;2@CEMETERY";
               mapName = "MAP@3";
-              
+
               RefreshInfoBoard();
 
               break;
