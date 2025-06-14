@@ -228,18 +228,19 @@ void PrintFrame(u8 xIni, u8 yIni, u8 xEnd, u8 yEnd) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-// SCOREBOARD FUNCTIONS
+// INFOBOARD FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////////
 
-// print the scoreboard
-void InitScoreboard() {
+void initInfoBoard() {
   PrintFrame(0,0,77,24);
   cpct_drawSpriteMaskedAlignedTable(g_mercenary_03, cpct_getScreenPtr(CPCT_VMEM_START,  3, 4), SPR_W, SPR_H, g_maskTable);
-
 
 	PrintText(mapName, 25, 6, 1); 
 }
 
+void RefreshInfoBoard() { 
+	PrintText(mapName, 25, 6, 1); 
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS FOR OBJECT MANAGEMENT
@@ -672,6 +673,8 @@ void changeMap() {
               levelName = "1;1@@SPACESHIP";
               mapName = "MAP@0";
              
+              RefreshInfoBoard();
+
               break;
             }
             // spaceship #1
@@ -692,6 +695,8 @@ void changeMap() {
               levelName = "1;2@@SPACESHIP";
               mapName = "MAP@1";
              
+              RefreshInfoBoard();
+
               break;
             }
             // spaceship #2
@@ -705,6 +710,8 @@ void changeMap() {
               levelName = "2;1@SPACESHIP";
               mapName = "MAP@2";
              
+              RefreshInfoBoard();
+
               break;
             }
             // spaceship #3
@@ -718,6 +725,8 @@ void changeMap() {
               levelName = "2;2@CEMETERY";
               mapName = "MAP@3";
               
+              RefreshInfoBoard();
+
               break;
             }
 
@@ -832,11 +841,11 @@ void InitGame() {
   spr[0].num = 0; // sprite number
   spr[0].ident = MERCENARY; // identity
 
-  mapName = "MAP@01";
+  mapName = "MAP@1";
 
   ResetObjData(0);
 
-  InitScoreboard();
+  initInfoBoard();
 
   ResetData();
 }
