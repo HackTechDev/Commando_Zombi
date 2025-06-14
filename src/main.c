@@ -164,7 +164,7 @@ cpctm_createTransparentMaskTable(g_maskTable, 0x100, M0, 0);
 ///////////////////////////////////////////////////////////////////////////////////
 
 void InitGame();
-void GameOver(u8 player);
+void EndMission(u8 player);
 void PrintObject(u8 nObj, u8 objX, u8 objY);
 u8 SpriteCollision(u8 x, u8 y, TSpr *pSpr, u8 marginX);
 void PrintSprite(TSpr *pSpr) __z88dk_fastcall;
@@ -522,7 +522,7 @@ void Stop(TSpr *pSpr) __z88dk_fastcall {
   else if(cpct_isKeyPressed(ctlRight[pSpr->ident]))	WalkIn(pSpr, D_right);
   // leave the game
   else if(cpct_isKeyPressed(ctlAbort)) {
-    GameOver(2);
+    EndMission(2);
   }
   else  if(cpct_isKeyPressed(ctlGoToMap)) {
 
@@ -685,6 +685,8 @@ void changeMap() {
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
               // screen title
               lName = "1;1@@SPACESHIP";
+
+              PrintText("MAP0", 5, 10, 0);
               break;
             }
             // spaceship #1
@@ -703,6 +705,8 @@ void changeMap() {
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
               // screen title
               lName = "1;2@@SPACESHIP";
+
+              PrintText("MAP1", 5, 10, 0);
               break;
             }
             // spaceship #2
@@ -714,6 +718,8 @@ void changeMap() {
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
               // screen title
               lName = "2;1@SPACESHIP";
+
+              PrintText("MAP2", 5, 10, 0);
               break;
             }
             // spaceship #3
@@ -725,6 +731,8 @@ void changeMap() {
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
               // screen title
               lName = "2;2@CEMETERY";
+
+              PrintText("MAP3", 5, 10, 0);
               break;
             }
 
@@ -846,12 +854,12 @@ void InitGame() {
 }
 
 
-void GameOver(u8 player) {
+void EndMission(u8 player) {
   cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START,  6, 80), cpct_px2byteM0(4, 4), 34, 60);
   cpct_drawSolidBox(cpctm_screenPtr(CPCT_VMEM_START, 40, 80), cpct_px2byteM0(4, 4), 34, 60);
   PrintFrame(6,80,71,134);
   PrintText("E@N@D@@M@I@S@S@I@O@N", 10, 107, 0);
-  Pause(500);
+  Pause(1000);
   // wait for a key press
   while (!cpct_isAnyKeyPressed());
   InitGame();
