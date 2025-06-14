@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////
-//  This file is part of Sorcerers. Copyright (C) 2020 @salvakantero
+//  This file is part of Commando Zombi. Copyright (C) 2020 @salvakantero
 //                                                2024 @HackTechDev
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -23,7 +23,7 @@
 #include "gfx/goldframe.h"		// three pieces to create decorative frames (6x6 px)
 #include "gfx/objects.h"		// 16 objects (8x8 px)
 
-#include "sprites/mercenary.h"	// 10 frames for SVEN, the 1st player (10x12 px)
+#include "sprites/mercenary.h"	// 10 frames for Mercenary, the 1st player (10x12 px)
 #include "sprites/door.h"		// 2 frames for the door (10x12 px)
 
 // compressed game map (40x42 tiles / 160x168 pixels each)
@@ -74,7 +74,7 @@ typedef struct {
 typedef struct {
   // common properties
   u8 num;		// sprite number (0 to 6; two players and five enemies)
-  u8 ident;	// identity; Mercenary, Sorcerer2, Sentinel, etc ...
+  u8 ident;	// identity; Mercenary, Mercenary2, Sentinel, etc ...
   u8 x, y;	// X, Y coordinates of the sprite
   u8 px, py;	// previous X, Y coordinates of the sprite
   u8 status;	// current status of the sprite; standing, walking, etc ...
@@ -98,8 +98,8 @@ typedef struct {
   u8 power_maxV;
 } TSpr;
 
-TSpr spr[7];	// 0) sorcerer #1
-              // 1) sorcerer #2
+TSpr spr[7];	// 0) mercenary #1
+              // 1) mercenary #2
               // 2) enemy #1
               // 3) enemy #2
               // 4) enemy #3
