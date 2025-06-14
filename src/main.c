@@ -42,12 +42,11 @@
 // DEFINITIONS AND VARIABLES
 ///////////////////////////////////////////////////////////////////////////////////
 
-
-
 u8 previousMap;
 u8 nMap; // current level number
 u8 lastNMap; // has been a level change?
-u8 *lName; // text to display on screen for each level
+u8 *levelName; // text to display on screen for each level
+u8 *mapName; // text to display on screen for each level
 
 u8 currentTileNumber = -1;
 
@@ -112,24 +111,6 @@ i8 nObj[2];	// item number
 u8 objX[2];	// X coordinate of item
 u8 objY[2];	// Y coordinate of item
 
-// -1) No active object
-// 	0) Coin
-//  1) Coin x5
-//  2) Extra life
-//  3) PowerUp speed*2
-//	4) Toad snot
-//	5) Diamond dust
-//	6) Newt eye
-//	7) Mammoth poop
-//  8) Kraken ink
-//  9) Mermaid tear
-// 10) Martian mushroom
-// 11) Dragon blood
-// 12) Dodo egg
-// 13) Unicorn blood
-// 14) Troll fat
-// 15) Mordor lava
-
 // enumerations
 // sprite movement direction
 enum {D_up, D_down, D_left, D_right} enum_dir;
@@ -142,7 +123,7 @@ enum {M_linear_X, M_linear_Y, M_linear_XY, M_chaser} enum_mov;
 const TFrm frmMercenary[8] = {
   {g_mercenary_00}, // up step 1
   {g_mercenary_01}, // up step 2
-  {g_mercenary_02}, // dows step 1
+  {g_mercenary_02}, // down step 1
   {g_mercenary_03}, // down step 2
   {g_mercenary_04}, // left step 1
   {g_mercenary_05}, // left step 2
@@ -253,6 +234,10 @@ void PrintFrame(u8 xIni, u8 yIni, u8 xEnd, u8 yEnd) {
 // print the scoreboard
 void InitScoreboard() {
   PrintFrame(0,0,77,24);
+  cpct_drawSpriteMaskedAlignedTable(g_mercenary_03, cpct_getScreenPtr(CPCT_VMEM_START,  3, 4), SPR_W, SPR_H, g_maskTable);
+
+
+	PrintText(mapName, 25, 6, 1); 
 }
 
 
@@ -684,9 +669,9 @@ void changeMap() {
               // unzip the map
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk0_end);
               // screen title
-              lName = "1;1@@SPACESHIP";
-
-              PrintText("MAP0", 5, 10, 0);
+              levelName = "1;1@@SPACESHIP";
+              mapName = "MAP@0";
+             
               break;
             }
             // spaceship #1
@@ -704,9 +689,9 @@ void changeMap() {
               // unzip the map
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk1_end);
               // screen title
-              lName = "1;2@@SPACESHIP";
-
-              PrintText("MAP1", 5, 10, 0);
+              levelName = "1;2@@SPACESHIP";
+              mapName = "MAP@1";
+             
               break;
             }
             // spaceship #2
@@ -717,9 +702,9 @@ void changeMap() {
               // unzip the map
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk2_end);
               // screen title
-              lName = "2;1@SPACESHIP";
-
-              PrintText("MAP2", 5, 10, 0);
+              levelName = "2;1@SPACESHIP";
+              mapName = "MAP@2";
+             
               break;
             }
             // spaceship #3
@@ -730,9 +715,9 @@ void changeMap() {
               // unzip the map
               cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk3_end);
               // screen title
-              lName = "2;2@CEMETERY";
-
-              PrintText("MAP3", 5, 10, 0);
+              levelName = "2;2@CEMETERY";
+              mapName = "MAP@3";
+              
               break;
             }
 
@@ -846,6 +831,9 @@ void InitGame() {
   // initial player 1 data
   spr[0].num = 0; // sprite number
   spr[0].ident = MERCENARY; // identity
+
+  mapName = "MAP@01";
+
   ResetObjData(0);
 
   InitScoreboard();
