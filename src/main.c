@@ -235,11 +235,13 @@ void initInfoBoard() {
   PrintFrame(0,0,77,24);
   cpct_drawSpriteMaskedAlignedTable(g_mercenary_03, cpct_getScreenPtr(CPCT_VMEM_START,  3, 4), SPR_W, SPR_H, g_maskTable);
 
-	PrintText(mapName, 25, 6, 1);
+	PrintText(mapName, 10, 6, 1);
+  PrintText(mapName, 10, 16, 1);
 }
 
 void RefreshInfoBoard() {
-	PrintText(mapName, 25, 6, 1);
+	PrintText(mapName, 10, 6, 1);
+  PrintText(mapName, 10, 16, 1);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
