@@ -31,6 +31,8 @@
 #include "map/mappk1.h"
 #include "map/mappk2.h"
 #include "map/mappk3.h"
+#include "map/mappk4.h"
+#include "map/mappk5.h"
 
 #include "lib/constant.h";
 #include "lib/generic.h";
@@ -555,6 +557,22 @@ void goToMap() {
   else if (nMap == 3 && currentTileNumber == 30) {
     nMap = 1;
   }
+  // Map3 => map 4
+  else if (nMap == 3 && currentTileNumber == 31) {
+    nMap = 4;
+  }
+  // Map4 => map 3
+  else if (nMap == 4 && currentTileNumber == 30) {
+    nMap = 3;
+  }
+  // Map4 => map 5
+  else if (nMap == 4 && currentTileNumber == 31) {
+    nMap = 5;
+  }
+  // Map5 => map 4
+  else if (nMap == 5 && currentTileNumber == 30) {
+    nMap = 4;
+  }
 
   PrintNumber(previousMap, 2, 10, 185, 1);
   PrintNumber(nMap, 2, 15, 185, 1);
@@ -724,6 +742,36 @@ void changeMap() {
               // screen title
               levelName = "2;2@CEMETERY";
               mapName = "MAP@3";
+
+              RefreshInfoBoard();
+
+              break;
+            }
+            // reactor room #4
+    case 4: {
+              if (previousMap == 3) {
+                spr[0].x = spr[0].px = 10;
+                spr[0].y = spr[0].py = 56;
+              }
+              if (previousMap == 5) {
+                spr[0].x = spr[0].px = 66;
+                spr[0].y = spr[0].py = 156;
+              }
+              cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk4_end);
+              levelName = "3;1@@REACTOR";
+              mapName = "MAP@4";
+
+              RefreshInfoBoard();
+
+              break;
+            }
+            // underground bunker #5
+    case 5: {
+              spr[0].x = spr[0].px = 30;
+              spr[0].y = spr[0].py = 56;
+              cpct_zx7b_decrunch_s(UNPACKED_MAP_END, mappk5_end);
+              levelName = "3;2@@BUNKER";
+              mapName = "MAP@5";
 
               RefreshInfoBoard();
 

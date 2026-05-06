@@ -1,0 +1,15 @@
+;; File 'src/map/mappk5.s' generated using cpct_pack
+;; Compresor used:   zx7b
+;; Files compressed: [ 'src/map5.bin' ]
+;; Uncompressed:     1680 bytes
+;; Compressed:       27 bytes
+;; Space saved:      1653 bytes
+;;
+
+;; Data array definition
+_mappk5::
+   .db  0xb0, 0xaa, 0x27, 0xba, 0x82, 0x96, 0x9b, 0x82, 0x27, 0x03, 0x00, 0x68, 0x1d, 0x27, 0x28, 0x00
+   .db  0x45, 0x39, 0x00, 0x14, 0x82, 0x07, 0x39, 0x00, 0xa4, 0x82, 0x38
+;; Address of the latest byte of the compressed array (for unpacking purposes)
+_mappk5_end == . - 1
+
