@@ -48,7 +48,7 @@ u8 lastNMap; // has been a level change?
 u8 *levelName; // text to display on screen for each level
 u8 *mapName; // text to display on screen for each level
 
-u8 currentTileNumber = -1;
+i8 currentTileNumber = -1;
 
 // other global variables
 u8 ctInactivity[2];	// counters to detect inactive players
